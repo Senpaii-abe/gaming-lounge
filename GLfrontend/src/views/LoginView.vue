@@ -9,7 +9,7 @@
                     Look no further - Gaming Lounge is the ultimate one-stop<br> hub for gaming fans. Connect and quest alongside casual and competitive gamers.
                 </p>
                 <p class="font-medium text-xl">
-                already have an account? <a href="#" class="font-semibold active:text-blue_link underline">click here</a> to login!
+                not a user yet? <a href="#" class="font-semibold active:text-blue_link underline">click here</a> to register!
                 </p>
         </div>
         <!-- right part -->
