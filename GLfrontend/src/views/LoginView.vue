@@ -9,7 +9,7 @@
                     Look no further - Gaming Lounge is the ultimate one-stop<br> hub for gaming fans. Connect and quest alongside casual and competitive gamers.
                 </p>
                 <p class="font-medium text-xl">
-                not a user yet? <a href="#" class="font-semibold active:text-blue_link underline">click here</a> to register!
+                not a user yet? <RouterLink to="/Signup" class="font-semibold active:text-blue_link underline">click here</RouterLink> to register!
                 </p>
         </div>
         <!-- right part -->
@@ -22,20 +22,14 @@
                     <!-- username -->
                     <input type="text" placeholder="enter your username" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
                 </div>
-                <div>
-                    <!-- email -->
-                    <input type="email" placeholder="enter your email" class="bg-transparent w-full py-3 px-6 border border-violet1 rounded-full">
-                </div>
+
                 <div>
                     <!-- password -->
                     <input type="password" placeholder="enter your password" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
                 </div>
-                <div>
-                    <!-- confirm password -->
-                    <input type="password" placeholder="confirm password" class="bg-transparent w-full py-3 px-6 border border-violet1 rounded-full">
-                </div>
+
                 <div class="space-y-2">
-                    <button class="active:bg-purple_main tracking-wider bg-[#8250CB] w-full mt-8 py-3 px-6 text-white rounded-full font-semibold">register</button>
+                    <button class="active:bg-purple_main tracking-wider bg-[#8250CB] w-full mt-8 py-3 px-6 text-white rounded-full font-semibold">Log in</button>
 
                     <p class="text-center text-[0.86rem] font-light">by clicking register, you agree to the gaming lounges' 
                         <a class="text-blue_link underline active:text-[#0085FF]" href="#">terms of service</a> and 
