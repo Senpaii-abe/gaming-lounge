@@ -1,6 +1,15 @@
 <template>
+	<!-- 
+        mx-auto: center of the screen 
+        put "grid" or "flex" to assign the display before adding "grid-cols" or "flex-cols"
+        space-(y or x): space for each elements like posts for example
+
+        check tailwind.config.js for more configurations
+        bg-purple_main: color ng header
+        bg-blue_link: color ng links
+    -->  
 	<!-- header start -->
-		<nav class="bg-violet-900 py-5 px-8 border-b border-gray-200">
+		<nav class="bg-purple_main py-5 px-8">
 				<div class="max-w-7xl mx-auto">
 					<div class="flex items-center justify-between">
 						<!-- left menu logo start -->
@@ -34,9 +43,9 @@
 		</nav>
 	<!-- header end -->
 	
-	<!-- signup view -->
-		<main class="flex justify-center items-center flex-wrap px-8 py-6 bg-[url('../assets/img/bg/bg-1.svg')]">
+	<!-- main view-->
+		<main class="flex justify-center items-center flex-wrap px-8 py-6 bg-fixed bg-[url('../assets/img/bg/bg-1.svg')]"> 
 			<RouterView /> 
-			
 		</main>
+	
 </template> 

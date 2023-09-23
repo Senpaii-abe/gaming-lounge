@@ -1,5 +1,6 @@
 <template>
-    <div class="max-w-7xl mx=auto grid grid-cols-2 gap-4">
+    
+    <div class="max-w-7xl mx=auto grid grid-cols-2 gap-4 signup-login-bg">
         <!-- left part -->
         <div class="main-left self-center ">    
                 <h1 class="mb-6 tracking-wide leading-tight font-black text-6xl">
@@ -15,7 +16,7 @@
         <!-- right part -->
         <div class="main-right py-28 justify-self-end">
             <h1 class="mb-14 font-bold tracking-wide text-6xl">
-                Welcome<br>Gamer!
+                Welcome<br>Back!
             </h1>
             <form class="space-y-6 w-96">
                 <div>
@@ -40,4 +41,5 @@
         </div>
 
     </div>
+   
 </template>
