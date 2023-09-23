@@ -28,6 +28,21 @@ const router = createRouter({
       component: FeedView
     },
     {
+      path: '/connect',
+      name: 'connect',
+      component: () => import('../views/connectView.vue')
+    },
+    {
+      path: '/tournaments',
+      name: 'tournaments',
+      component: () => import('../views/TournamentsView.vue')
+    },
+    {
+      path: '/marketplace',
+      name: 'marketplace',
+      component: () => import('../views/MarketplaceView.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

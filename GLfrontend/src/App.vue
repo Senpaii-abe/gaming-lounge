@@ -17,12 +17,12 @@
 									<img src="../assets/img/logo/gl_logo.png" alt="logo"/>
 								</div>
 						<!-- center menu start -->
-								<div class="menu-center flex space-x-12">
-									<a href="#" class="text-black">discussions</a>                         
-									<a href="#" class="text-white">connect</a>
-									<a href="#" class="text-white">marketplace</a>
-									<a href="#" class="text-white">tournaments</a>
-									<a href="#" class="text-white">beta testing</a>
+								<div class="menu-center flex space-x-12 ">
+										<RouterLink to="/feed" class="block py-2 pl-3 md:hover:text-black-700 md:p-0 md:dark:hover:text-black-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700">discussions </RouterLink>                     
+										<RouterLink to="/connect" class="block py-2 pl-3 md:hover:text-black-700 md:p-0 md:dark:hover:text-black-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700" >connect</RouterLink>
+										<RouterLink to="/marketplace" class="block py-2 pl-3 md:hover:text-black-700 md:p-0 md:dark:hover:text-black-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700" >marketplace </RouterLink>
+										<RouterLink to="/tournaments" class= "block py-2 pl-3 md:hover:text-black-700 md:p-0 md:dark:hover:text-black-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700" >tournaments </RouterLink>
+										<RouterLink to="/connect" class="text-gray-400 rounded-t-lg cursor-not-allowed dark:text-white-500">beta testing </RouterLink>
 								</div>
 						<!-- right menu icons start -->
 								<div class="menu-right flex space-x-2">
