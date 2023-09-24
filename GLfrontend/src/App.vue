@@ -44,7 +44,7 @@
 	<!-- header end -->
 	
 	<!-- main view-->
-		<main class="flex justify-center items-center flex-wrap px-8 py-6 bg-fixed bg-[url('../assets/img/bg/bg-1.svg')]"> 
+		<main class="flex justify-center items-center flex-wrap px-8 py-6 bg-fixed md:bg-fixed bg-[url('../assets/img/bg/bg-1.svg')]"> 
 			<RouterView /> 
 		</main>
 	
