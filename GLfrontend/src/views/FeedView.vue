@@ -21,7 +21,7 @@
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
                     <img src="https://i.pravatar.cc/300?img=70" class="w-[80px] rounded-img">
-                    <p class="font-semibold text-lg">TTT Gamer1</p>
+                    <p class="font-semibold text-lg">TT GAMING</p>
                 </div>
                 <!-- charisma points nd posts-->
                 <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-dark_purple rounded-full text-center">
