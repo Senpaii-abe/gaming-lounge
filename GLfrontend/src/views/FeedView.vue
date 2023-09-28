@@ -72,12 +72,12 @@
                 <a href="#" class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</a>
             </div>
             <!-- post -->
-            <div class="p-4 bg-purple_main rounded-full">
+            <div class="p-4 bg-purple_main rounded-full ">
                 <!-- top part ng post-->
                 <div class="mb-4 flex items-center justify-between">
                     <!-- username nd pfp -->
                     <div class="flex items-center space-x-4">
-                        <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-img">
+                        <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-img">
                         <p class="font-medium">Sen Tenz</p>
                     </div>
                     <!-- time posted -->
@@ -116,12 +116,12 @@
                 </div>  
             </div>
             <!-- post 1 -->
-            <div class="p-4 bg-purple_main rounded-full">
+            <div class="p-4 bg-purple_main rounded-full ">
                 <!-- top part ng post-->
                 <div class="mb-4 flex items-center justify-between">
                     <!-- username nd pfp -->
                     <div class="flex items-center space-x-4">
-                        <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-img">
+                        <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-img">
                         <p class="font-medium">Sentense</p>
                     </div>
                     <!-- time posted -->
@@ -165,7 +165,7 @@
                 <div class="mb-4 flex items-center justify-between">
                     <!-- username nd pfp -->
                     <div class="flex items-center space-x-4">
-                        <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-img">
+                        <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-img">
                         <p class="font-medium">TSM ImperialHal</p>
                     </div>
                     <!-- time posted -->

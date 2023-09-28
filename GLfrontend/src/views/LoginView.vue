@@ -1,6 +1,6 @@
 <template>
-    
-    <div class="max-w-7xl mx=auto grid grid-cols-2 gap-4 signup-login-bg">
+   
+    <div class=" max-w-7xl mx-auto grid grid-cols-2 gap-4 signup-login-bg">
         <!-- left part -->
         <div class="main-left self-center ">    
                 <h1 class="mb-6 tracking-wide leading-tight font-black text-6xl">
@@ -12,7 +12,7 @@
                 <p class="font-medium text-xl">
                 not a user yet? <RouterLink to="/Signup" class="font-semibold active:text-blue_link underline">click here</RouterLink> to register!
                 </p>
-        </div>
+        </div>x
         <!-- right part -->
         <div class="main-right py-28 justify-self-end">
             <h1 class="mb-14 font-bold tracking-wide text-6xl">
@@ -39,10 +39,18 @@
                 </div>
             </form>
         </div>
-       <div class="h-32">
+       <!-- <div class="h-28">
 
-       </div>
+       </div> -->
     </div>
-    
+
    
 </template>
+
+<style>
+ /* .bg-image {
+    background-image:  url('../assets/img/bg/bg-1.svg');
+    background-size: cover;
+    height: screen;
+ } */
+</style>
