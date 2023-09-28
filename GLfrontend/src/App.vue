@@ -95,3 +95,13 @@
 		<!-- bg-fixed md:bg-fixed bg-cover bg-[url('../assets/img/bg/bg-1.svg')] -->
 	
 </template> 
+
+<script>
+	import Toast from '@/components/Toast.vue'
+
+	export default {
+		components: {
+			Toast
+		}
+	}
+</script>
