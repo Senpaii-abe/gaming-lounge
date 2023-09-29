@@ -36,7 +36,7 @@
                     </div>
 
                     <template v-if="errors.length > 0">
-                        <div class="bg-red-300 text-white rounded-lg p-6">
+                        <div class="bg-red-400 text-white rounded-lg p-6">
                             <p v-for="error in errors" v-bind:key="error">{{ error }}</p>                        </div>
                     </template>
 
@@ -111,9 +111,9 @@ export default {
                     .then(response => {
                         if (response.data.message === 'success') {
                             this.toastStore.showToast(5000, 'the user is registered. please log in ', 'bg-emerald-500')
-    
-                            this.form.email = ''
+
                             this.form.name = ''
+                            this.form.email = ''                     
                             this.form.password1 = ''
                             this.form.password2 = ''
 

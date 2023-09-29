@@ -8,15 +8,15 @@
         bg-purple_main: color ng header
         bg-blue_link: color ng links
     -->  
-	<!-- header start -->
-		<nav class="bg-purple_main py-5 px-8 fixed w-full z-20 top-0 left-0 border-gray-400">
+	<!-- header start if authenticated-->
+		<nav class="bg-purple_main py-5 px-8 fixed w-full z-20 top-0 left-0" v-if="userStore.user.isAuthenticated">
 					<div class="max-w-7xl mx-auto flex items-center flex-wrap justify-between">
 						<!-- left menu logo start -->
 								<div class="menu-left flex items-center ">
 									<img src="../assets/img/logo/gl_logo.png" alt="logo"/>
 								</div>
 						<!-- center menu start -->
-								<div class="menu-center items-center justify-between hidden w-full md:flex md:w-auto md:order-1 space-x-12 " id="navbar-user">
+								<div class="menu-center items-center justify-between hidden w-full md:flex md:w-auto md:order-1 space-x-12 " id="navbar-user" >
 									<ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0">
 										<li>
 											<RouterLink to="/feed" class="block py-2 pl-3 md:hover:text-black-700 md:p-0 md:dark:hover:text-black-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700">discussions </RouterLink>   
@@ -86,7 +86,7 @@
 		
 		</nav>
 	<!-- header end -->
-	
+
 	<!-- main view-->
 		<main class=" px-8 py-28 bg-fixed md:bg-fixed bg-cover bg-[url('../assets/img/bg/bg-1.svg')]"> 
 			<RouterView /> 

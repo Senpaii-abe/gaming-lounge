@@ -14,20 +14,28 @@
                 </p>
         </div>
         <!-- right part -->
-        <div class="main-right py-28 justify-self-end">
+        <div class="main-right py-32 justify-self-end ">
+                <!-- <div class="mb-16">
+					<img src="/assets/img/logo/gl_logo.png" alt="logo"/>
+				</div> -->
             <h1 class="mb-14 font-bold tracking-wide text-6xl">
                 Welcome<br>Back!
             </h1>
-            <form class="space-y-6 w-96">
+            <form class="space-y-6 w-96" v-on:submit.prevent="submitForm">
                 <div>
-                    <!-- username -->
-                    <input type="text" placeholder="enter your username" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
+                    <!-- email -->
+                    <input type="text" v-model="form.email" placeholder="enter your email" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
                 </div>
 
                 <div>
                     <!-- password -->
-                    <input type="password" placeholder="enter your password" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
+                    <input type="password" v-model="form.password" placeholder="enter your password" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
                 </div>
+
+                <template v-if="errors.length > 0">
+                        <div class="bg-red-400 text-white rounded-lg p-6">
+                            <p v-for="error in errors" v-bind:key="error">{{ error }}</p>                        </div>
+                    </template>
 
                 <div class="space-y-2">
                     <button class="active:bg-purple_main tracking-wider bg-[#8250CB] w-full mt-8 py-3 px-6 text-white rounded-full font-semibold">Log in</button>
@@ -46,11 +54,67 @@
 
    
 </template>
+<script>
+import axios from 'axios'
 
-<style>
- /* .bg-image {
-    background-image:  url('../assets/img/bg/bg-1.svg');
-    background-size: cover;
-    height: screen;
- } */
-</style>
+import { useUserStore } from '@/stores/user'
+
+export default {
+    setup() {
+        const userStore = useUserStore()
+
+        return {
+            userStore
+        }
+    },
+
+    data() {
+        return {
+            form: {
+                email: '', //could be username
+                password: '',
+            },
+            errors: []
+        }
+    },
+    methods: {
+        async submitForm() {
+            this.errors = []
+
+            if (this.form.email === '') {
+                this.errors.push('your e-mail is missing')
+            }
+
+            if (this.form.password === '') {
+                this.errors.push('your password is missing')
+            }
+
+            if (this.errors.length === 0) {
+                await axios
+                    .post('/api/login/', this.form)
+                    .then(response => {
+                        this.userStore.setToken(response.data)
+
+                        console.log(response.data.access)
+
+                        axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access;
+                    })
+                    .catch(error => {
+                        console.log('error', error)
+                    })
+                
+                await axios
+                    .get('/api/me/')
+                    .then(response => {
+                        this.userStore.setUserInfo(response.data)
+
+                        this.$router.push('/feed')
+                    })
+                    .catch(error => {
+                        console.log('error', error)
+                    })
+            }
+        }
+    }
+}
+</script>
