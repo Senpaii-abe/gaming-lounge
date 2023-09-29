@@ -29,8 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
-
+# application definition
 AUTH_USER_MODEL = 'account.User' #to use own
 
 # configure simplejwt
@@ -46,7 +45,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated', #allow to get data from backend
+        'rest_framework.permissions.IsAuthenticated', #u should be authenticated to allow to get data from backend
     )
 }
 

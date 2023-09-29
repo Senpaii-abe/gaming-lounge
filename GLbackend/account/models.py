@@ -5,10 +5,10 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserM
 from django.db import models
 from django.utils import timezone
 
-class CustomUserManager(UserManager):
+class CustomUserManager(UserManager): 
     def _create_user(self, name, email, password, **extra_fields):
         if not email:
-            raise ValueError("You have not provided a valid email address")
+            raise ValueError("you have not provided a valid email address :<")
         
         email = self.normalize_email(email)
         user =self.model(email=email, name=name, **extra_fields)
@@ -28,13 +28,13 @@ class CustomUserManager(UserManager):
         return self._create_user(name, email, password, **extra_fields)
     
 
-class User(AbstractBaseUser, PermissionsMixin):
-    id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable = False)
+class User(AbstractBaseUser, PermissionsMixin): #user model for creating users from models
+    id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable = False) #uses the uuid from the top
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=255, blank = True, default='')
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
 
-    is_active = models.BooleanField(default=True) #checking if the user is active
+    is_active = models.BooleanField(default=True) #checking if the user is active, soon set to false for verification
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 

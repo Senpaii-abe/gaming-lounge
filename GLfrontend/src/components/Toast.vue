@@ -3,8 +3,13 @@ import { useToastStore } from '@/stores/toast'
 
 const store = useToastStore()
 
+// return {
+//     store
+// }
+
 </script>
 
+<!-- alerts -->
 <template>
     <div
         v-if="store.isVisible"
