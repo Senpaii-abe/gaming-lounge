@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import FeedView from '../views/FeedView.vue'
 import MessagesView from '../views/MessagesView.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -48,6 +49,16 @@ const router = createRouter({
       path: '/marketplace',
       name: 'marketplace',
       component: () => import('../views/MarketplaceView.vue')
+    },
+    {
+      path: '/betatesting',
+      name: 'betatesting',
+      component: () => import('../views/BetatestingView.vue')
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('../views/SearchView.vue')
     },
     
     {
