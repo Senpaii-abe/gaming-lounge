@@ -42,6 +42,7 @@
 
                     <div class="space-y-2">
                         <button class="active:bg-purple_main tracking-wider bg-[#8250CB] w-full mt-8 py-3 px-6 text-white rounded-full font-semibold">register</button>
+                        
 
                         <p class="text-center text-[0.86rem] font-light">by clicking register, you agree to the gaming lounges' 
                             <a class="text-blue_link underline active:text-[#0085FF]" href="#">terms of service</a> and 
@@ -87,20 +88,21 @@ export default {
 
             //validation of data
 
-            if (this.form.email === ''){
-                this.errors.push('Your email is missing')
-            }
 
             if (this.form.name === ''){
-                this.errors.push('Your name is missing')
+                this.errors.push('your name is missing')
+            }
+
+            if (this.form.email === ''){
+                this.errors.push('your email is missing')
             }
 
             if (this.form.password1 === ''){
-                this.errors.push('Your password is missing')
+                this.errors.push('your password is missing')
             }
 
             if (this.form.password1 !== this.form.password2){
-                this.errors.push('Your password does not match')
+                this.errors.push('your password does not match')
             }
 
             if (this.errors.length === 0){
@@ -108,7 +110,7 @@ export default {
                     .post('/api/signup/', this.form)
                     .then(response => {
                         if (response.data.message === 'success') {
-                            this.toastStore.showToast(5000, 'The user is registered. Please log in ', 'bg-emerald-500')
+                            this.toastStore.showToast(5000, 'the user is registered. please log in ', 'bg-emerald-500')
     
                             this.form.email = ''
                             this.form.name = ''
@@ -116,7 +118,7 @@ export default {
                             this.form.password2 = ''
 
                         } else {
-                            this.toastStore.showToast(5000, 'Something went wrong. Please try again','bg-red-300')
+                            this.toastStore.showToast(5000, 'something went wrong. please try again','bg-red-300')
                         }
                     })
                     .catch(error => {
