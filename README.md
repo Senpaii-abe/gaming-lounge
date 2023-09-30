@@ -11,6 +11,13 @@
     * pip install djanorestframework
     * pip install djanorestframework-simplejwt
     * pip install pillow
+    * pip install django-cors-headers
+
+
+## migrating database
+* enter glbackend by "cd glbackend"
+* python manage.py migrate
+* python manage.py runserver
 
 ## entering interactive console after regi
 * py manage.py shell
