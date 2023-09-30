@@ -7,17 +7,19 @@
 * active virtual environment "env\Scripts\activate"
 * install dependencies
     * pip install django
-    * commit mo muna sa github repo
-    * pip install djanorestframework
-    * pip install djanorestframework-simplejwt
+    * pip install djangorestframework
+    * pip install djangorestframework-simplejwt
     * pip install pillow
     * pip install django-cors-headers
+    * pip install python-dotenv
 
 
 ## migrating database
 * enter glbackend by "cd glbackend"
 * python manage.py migrate
-* python manage.py runserver
+* npm run dev (outside env - cd glfrontend)
+* python manage.py runserver (inside backend)
+
 
 ## entering interactive console after regi
 * py manage.py shell
