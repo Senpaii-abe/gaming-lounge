@@ -28,3 +28,14 @@
 * user.email
 * user.name
 
+## database main-2023-09-30-9nht4s
+* username = q81cyopsenxaxismckq1
+* password = pscale_pw_aDhH0EGx4qBMBmxmZaBEkUPhru7dcP21SHsnWaj8KIT
+
+* .env: 
+DB_NAME=dbgaminglounge
+DB_USER=q81cyopsenxaxismckq1
+DB_PASSWORD=pscale_pw_aDhH0EGx4qBMBmxmZaBEkUPhru7dcP21SHsnWaj8KIT
+DB_HOST=aws.connect.psdb.cloud
+DB_PORT=3306
+MYSQL_ATTR_SSL_CA=/etc/ssl/certs/ca-certificates.crt
