@@ -9,7 +9,7 @@
         bg-blue_link: color ng links
     -->  
 	<!-- header start if authenticated-->
-		<nav class="bg-purple_main py-5 px-8 fixed w-full z-20 top-0 left-0"> <!--v-if="userStore.user.isAuthenticated" -->
+		<nav class="bg-purple_main py-5 px-8 fixed w-full z-20 top-0 left-0" v-if="userStore.user.isAuthenticated"> 
 					<div class="max-w-7xl mx-auto flex items-center flex-wrap justify-between">
 						<!-- left menu logo start -->
 								<div class="menu-left flex items-center ">

@@ -60,6 +60,16 @@ const router = createRouter({
       name: 'search',
       component: () => import('../views/SearchView.vue')
     },
+    {
+      path: '/verify',
+      name: 'verify',
+      component: () => import('../views/VerificationView.vue')
+    },
+    {
+      path: '/popup',
+      name: 'popup',
+      component: () => import('../views/PopupView.vue')
+    },
     
     {
       path: '/about',

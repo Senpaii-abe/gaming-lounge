@@ -4,7 +4,7 @@
         <!-- left part -->
         <div class="main-left self-center ">    
                 <h1 class="mb-6 tracking-wide leading-tight font-black text-6xl">
-                    DISCOVER YOUR<br>GAMING QUEST.
+                    DISCOVER YOUR<h1 class="text-[#8250CB]">GAMING</h1>QUEST. 
                 </h1>
                 <p class="mb-6 text-lg font-light w-4/5">
                     Look no further - Gaming Lounge is the ultimate one-stop<br> hub for gaming fans. Connect and quest alongside casual and competitive gamers.
