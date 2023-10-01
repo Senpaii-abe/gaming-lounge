@@ -9,7 +9,7 @@
                   pack things you would like to see in your feed
         </p>
         <div class="grid gap-5 grid-cols-3 place-content-center">
-            <label v-for="option in options" :key="option.id" :class="{ 'bg-purple-800 text-white': selectedOptions.includes(option.value) }" class="mx-2 bg-white py-3 px-3 text-black text-center rounded-full">{{ option.label }}
+            <label v-for="option in options" :key="option.id" :class="{ 'bg-violet-800 text-white': selectedOptions.includes(option.value) }" class="mx-2 bg-white py-3 px-3 text-black text-center rounded-full">{{ option.label }}
                 <input type="checkbox" :value="option.value" v-model="selectedOptions" class="hidden"/>
             </label>
         </div>
