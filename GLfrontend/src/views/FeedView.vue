@@ -72,21 +72,22 @@
                 <a href="#" class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</a>
             </div>
             <!-- post -->
-            <div class="p-4 bg-purple_main rounded-full ">
+            
+            <div class="p-4 bg-purple_main rounded-full"
+                    v-for="post in posts" 
+                    v-bind:key="post.id"> <!-- loop ng post -->
                 <!-- top part ng post-->
                 <div class="mb-4 flex items-center justify-between">
                     <!-- username nd pfp -->
                     <div class="flex items-center space-x-4">
                         <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-img">
-                        <p class="font-medium">Sen Tenz</p>
+                        <p class="font-medium">{{ post.created_by.name}}</p>
                     </div>
                     <!-- time posted -->
-                    <p class="text-gray-400 text-xs font-light">18 minutes ago</p> 
+                    <p class="text-gray-400 text-xs font-light">{{ post.created_at_formatted}}</p> 
                 </div>
-                <!-- mid part - posted image/text -->
-                    <!-- <img src="https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2670&amp;q=80" class="w-full rounded-full"> -->
 
-                    <p class="text-base/7 font-light">So I started to walk into the water. I won't lie to you boys, I was terrified. But I pressed on, and as I made my way past the breakers a strange calm came over me. I don't know if it was divine intervention or the kinship of all living things but I tell you Jerry at that moment, I was a marine biologist.</p>
+                    <p class="text-base/7 font-light">{{ post.body }}</p>
                 <!-- lower part ng post -->
                 <div class="mt-6 flex justify-between">
                     <div class="flex space-x-6">
@@ -132,6 +133,7 @@
                     <img src="https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2670&amp;q=80" class="w-full rounded-full">
 
                 <!-- lower part ng post -->
+                
                 <div class="mt-6 flex justify-between">
                     <div class="flex space-x-6">
                         <!-- likes -->
@@ -296,4 +298,39 @@
     </div> 
 </template> 
 
-<!----> 
+
+<script>
+import axios from 'axios'
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
+import Trends from '../components/Trends.vue'
+
+export default {
+    name: 'FeedView',
+    components: {
+        PeopleYouMayKnow,
+        Trends,
+    },
+    data(){
+        return {
+            posts:[]
+        }
+    },
+    mounted(){
+        this.getFeed()
+    },
+    methods: {
+        getFeed(){
+            axios
+                .get('/api/posts/')
+                .then(response => {
+                    console.log('data', response.data)
+
+                    this.posts = response.data
+                })
+                .catch(error => {
+                    console.log('error', error)
+                })
+        }
+    }
+}
+</script>
