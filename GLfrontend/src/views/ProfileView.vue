@@ -9,7 +9,7 @@
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
                     <img src="https://i.pravatar.cc/300?img=70" class="w-[80px] rounded-img">
-                    <p class="font-semibold text-lg">{{ userStore.user.name }}</p>
+                    <p class="font-semibold text-lg">{{ user.name }}</p>
                 </div>
                 <!-- charisma points nd posts-->
                 <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-dark_purple rounded-full text-center">
@@ -55,7 +55,10 @@
                  space-y-4: 6 spaces each post -->
         <div class="px-4 main-center col-span-2 space-y-6">
             <!-- write something -->
-            <div class="rounded-full bg-transparent space-y-1 text-right">
+            <div 
+                class="rounded-full bg-transparent space-y-1 text-right"
+                v-if="userStore.user.id === user.id"
+                >
                 <form 
                     v-on:submit.prevent="submitForm"
                     method="post">
@@ -194,12 +197,18 @@ export default {
     data(){
         return {
             posts:[],
+            user: {},
             body: '',
         }
     }, 
     mounted(){
         this.getFeed()
     },
+    updated() {
+        // this.getFeed()
+        // console.log('updated')
+    },
+
     methods: {
         getFeed(){
             axios
@@ -207,7 +216,8 @@ export default {
                 .then(response => {
                     console.log('data', response.data)
 
-                    this.posts = response.data
+                    this.posts = response.data.posts
+                    this.user = response.data.user
                 })
                 .catch(error => {
                     console.log('error', error)
