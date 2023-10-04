@@ -6,10 +6,10 @@
 		</div>
         <h2 class="mb-6  leading-tight font-black text-black text-3xl text-center">gaming intersets</h2>
         <p class="mb-10 text-black text-40 text-center">
-                  pack things you would like to see in your feed
+                  pick things you would like to see in your feed
         </p>
         <div class="grid gap-5 grid-cols-3 place-content-center">
-            <label v-for="option in options" :key="option.id" :class="{ 'bg-violet-800 text-white': selectedOptions.includes(option.value) }" class="mx-2 bg-white py-3 px-3 text-black text-center rounded-full">{{ option.label }}
+            <label v-for="option in options" :key="option.id" :class="{ 'bg-purple_main text-white':selectedOptions.includes(option.value) }" class="mx-2 bg-white py-3 px-3 text-black text-center rounded-full">{{ option.label }}
                 <input type="checkbox" :value="option.value" v-model="selectedOptions" class="hidden"/>
             </label>
         </div>
@@ -26,7 +26,12 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-const options = ref([
+function handleSubmit() {
+    // Do something with selectedOptions
+    console.log(selectedOptions.value);
+  }
+
+const options = ref<{ id: number; label: string; value: string }[]>([
   { id: 1, label: 'MOBA', value: 'option1' },
   { id: 2, label: 'FPS', value: 'option2' },
   { id: 3, label: 'Real Time Strategy', value: 'option3' },
@@ -44,6 +49,6 @@ const options = ref([
   { id: 15, label: 'rhythm', value: 'option15' },
 ]);
 
-const selectedOptions = ref([]);
+const selectedOptions = ref<string[]>([]);
 
 </script>
