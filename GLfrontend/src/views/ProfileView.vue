@@ -1,23 +1,11 @@
 <template>
-    <!-- 
-        mx-auto: center of the screen 
-        put "grid" or "flex" to assign the display before adding "grid-cols" or "flex-cols"
-        space-(y or x)-number: space for each elements like posts for example
-        
-        check tailwind.config.js for more configurations
-        bg-purple_main: color ng header
-        bg-blue_link: color ng links
-
-        text-base/7 font-light: default class ng texts sa post
-        rounded-full: default class ng borders natin
-    -->    
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
 
         <!-- left side 
              col-span-1: takes 1 of the 4 columns -->
         <div class="main-left col-span-1 space-y-6"> 
             <!-- profile -->
-            <div  class="p-4 bg-purple_main rounded-full">
+            <div class="p-4 bg-purple_main rounded-full">
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
                     <img src="https://i.pravatar.cc/300?img=70" class="w-[80px] rounded-img">
@@ -126,40 +114,7 @@
         
         <!-- right side -->
         <div class="main-right col-span-1 space-y-6">
-            <!-- <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 text-xl">trending topics</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2">
-                                    <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
-                                    
-                                    <p class="text-xs">Code With Stein</p>
-                                </div>
-
-                                <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
-                            </div>
-
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2">
-                                    <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
-                                    
-                                    <p class="text-xs">Code With Stein</p>
-                                </div>
-
-                                <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
-                            </div>
-
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2">
-                                    <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
-                                    
-                                    <p class="text-xs">Code With Stein</p>
-                                </div>
-
-                                <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
-                            </div>
-                        </div>
-            </div> -->
+            
             <div>
                 <input type="text" placeholder="search" class="bg-purple_main w-full py-3 px-6 rounded-large">
             </div>
@@ -222,7 +177,7 @@ import Trends from '../components/Trends.vue'
 import { useUserStore } from '@/stores/user'
 
 export default {
-    name: 'FeedView',
+    name: 'ProfileView',
 
     setup() {
         const userStore = useUserStore()
@@ -231,6 +186,7 @@ export default {
             userStore
         }
     },
+        
     components: {
         PeopleYouMayKnow,
         Trends,
@@ -240,14 +196,14 @@ export default {
             posts:[],
             body: '',
         }
-    },
+    }, 
     mounted(){
         this.getFeed()
     },
     methods: {
         getFeed(){
             axios
-                .get('/api/posts/')
+                .get(`/api/posts/profile/${this.$route.params.id}/`) //using ` for the js
                 .then(response => {
                     console.log('data', response.data)
 

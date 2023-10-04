@@ -4,6 +4,7 @@ import SignupView from '../views/SignupView.vue'
 import LoginView from '../views/LoginView.vue'
 import FeedView from '../views/FeedView.vue'
 import MessagesView from '../views/MessagesView.vue'
+import ProfileView from '../views/ProfileView.vue'
 
 
 const router = createRouter({
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/messages',
       name: 'messages',
       component: MessagesView
+    },
+    {
+      path: '/profile/:id',
+      name: 'profile',
+      component: ProfileView
     },
     
     {
