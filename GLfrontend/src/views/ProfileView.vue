@@ -70,48 +70,8 @@
             <div class="p-4 bg-purple_main rounded-full"
                     v-for="post in posts" 
                     v-bind:key="post.id"> <!-- loop ng post -->
-                <!-- top part ng post-->
-                <div class="mb-4 flex items-center justify-between">
-                    <!-- username nd pfp -->
-                    <div class="flex items-center space-x-4">
-                        <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-img">
-                        <p class="font-medium">{{ post.created_by.name}}</p>
-                    </div>
-                    <!-- time posted -->
-                    <p class="text-gray-400 text-xs font-light">{{ post.created_at_formatted}}</p> 
-                </div>
 
-                    <p class="text-base/7 font-light">{{ post.body }}</p>
-
-                    <!-- if may image <img src="https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2670&amp;q=80" class="w-full rounded-full"> --> 
-
-                <!-- lower part ng post -->
-                <div class="mt-6 flex justify-between">
-                    <div class="flex space-x-6">
-                        <!-- likes -->
-                        <div class="flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
-                            </svg>  
-                            
-                            <span class="text-gray-300 text-xs">82 likes</span>
-                        </div>
-                        <!-- comments -->
-                        <div class="flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"></path>
-                            </svg> 
-
-                            <span class="text-gray-300 text-xs ">0 comments</span>
-                        </div>
-                    </div>
-                    <div> 
-                        <!-- three dots -->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"></path>
-                        </svg>   
-                    </div>   
-                </div>  
+                    <FeedItem v-bind:post="post" />
             </div>
         </div>
         
@@ -122,21 +82,8 @@
                 <input type="text" placeholder="search" class="bg-purple_main w-full py-3 px-6 rounded-large">
             </div>
 
-            <ul class="text-center">
-                <li class="mb-4">
-                    <a href="">                     
-                        <img src="/assets/img/ads-1.png" class="h-auto max-w-full"
-                    alt="logo" />
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <img src="/assets/img/ads-2.png" class="h-auto max-w-full"
-                    alt="logo" />
-                    </a>
-                </li>
-            </ul>
+            <PeopleYouMayKnow />
+            <Trends />
 
             <div class="p-4 bg-purple_main rounded-full">
                 <h3 class="mb-6 text-lg">useful links</h3>
@@ -178,6 +125,7 @@ import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import Trends from '../components/Trends.vue'
 import { useUserStore } from '@/stores/user'
+import FeedItem from '../components/FeedItem.vue'
 
 export default {
     name: 'ProfileView',
@@ -193,6 +141,7 @@ export default {
     components: {
         PeopleYouMayKnow,
         Trends,
+        FeedItem,
     },
     data(){
         return {
@@ -204,10 +153,19 @@ export default {
     mounted(){
         this.getFeed()
     },
-    updated() {
-        // this.getFeed()
-        // console.log('updated')
+    watch: {
+        '$route.params.id': {
+            handler: function() {
+                this.getFeed()
+            },
+            deep: true,
+            immediate: true 
+        }
     },
+    // updated() {
+    //     // this.getFeed()
+    //     // console.log('updated')
+    // },
 
     methods: {
         getFeed(){

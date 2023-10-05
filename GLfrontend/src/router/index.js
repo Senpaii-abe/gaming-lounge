@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import FeedView from '../views/FeedView.vue'
 import MessagesView from '../views/MessagesView.vue'
 import ProfileView from '../views/ProfileView.vue'
+import SearchViewView from '../views/SearchView.vue'
 
 
 const router = createRouter({
