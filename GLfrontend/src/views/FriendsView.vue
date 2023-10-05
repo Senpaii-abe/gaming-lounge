@@ -21,19 +21,11 @@
                         <p class="text-lg/none">120</p>
                         <label class="text-sm">charisma</label>
                     </div>
-                    <div class="font-semibold" >
-                        <p class="text-lg/none">50</p>
-                        <RouterLink :to="{name:'friends', params: {id: user.id} }" class="text-sm">friends</RouterLink>
-                    </div>
                 
                 </div>
                 <!-- about me -->
                 <p class="px-1 text-sm/7 font-extralight">tungkol sakin</p>
                 
-                <!-- send friend request button -->
-                <div class = "mt-6">
-                        <button class = "inline-block py-4 px-6 bg-purple-600 text-xs text-white rounded-lg" @click="sendFriendshipRequest">Send friend request</button>  
-                 </div>
             </div>  
             <!-- trending games -->
             <div class="bg-transparent rounded-full">
@@ -65,24 +57,27 @@
                  space-y-4: 6 spaces each post -->
         <div class="px-4 main-center col-span-2 space-y-6">
             <!-- write something -->
-            <div 
-                class="rounded-full bg-transparent space-y-1 text-right"
-                v-if="userStore.user.id === user.id"
+            <div class="p-4 bg-purple_main border-gray-200 rounded-lg grid grid-cols-4 gap-4" v-if="friends.length">
+                <div 
+                    class="p-4 bg-purple_main border-gray-200 text-center rounded-lg"
+                    v-for="user in friends"
+                    v-bind:key="user.id"
                 >
-                <form 
-                    v-on:submit.prevent="submitForm"
-                    method="post">
-                    <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
-                    <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</button>
-                </form>
-            </div>
-            <!-- post -->     
-            <div class="p-4 bg-purple_main rounded-full"
-                    v-for="post in posts" 
-                    v-bind:key="post.id"> <!-- loop ng post -->
+                    <img src="https://i.pravatar.cc/300?img=70" class="mb-6 rounded-full">
+                        
+                    <p>
+                        <strong>
+                            <RouterLink :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
+                        </strong>
+                    </p>
 
-                    <FeedItem v-bind:post="post" />
-            </div>
+                    <div class="mt-6 flex space-x-8 justify-around">
+                        <p class="text-xs text-gray-500">182 friends</p>
+                        <p class="text-xs text-gray-500">120 posts</p>
+                    </div>
+                </div>
+
+             </div>
         </div>
         
         <!-- right side -->
@@ -138,7 +133,7 @@ import { useUserStore } from '@/stores/user'
 import FeedItem from '../components/FeedItem.vue'
 
 export default {
-    name: 'ProfileView',
+    name: 'FriendsView',
 
     setup() {
         const userStore = useUserStore()
@@ -151,72 +146,30 @@ export default {
     components: {
         PeopleYouMayKnow,
         Trends,
-        FeedItem,
     },
     data(){
         return {
-            posts:[],
             user: {},
-            body: '',
+            friendshipRequests: [],
+            friends: [],
         }
     }, 
-    mounted(){
-        this.getFeed()
+    mounted() {
+        this.getFriends()
     },
-    watch: {
-        '$route.params.id': {
-            handler: function() {
-                this.getFeed()
-            },
-            deep: true,
-            immediate: true 
-        }
-    },
-    // updated() {
-    //     // this.getFeed()
-    //     // console.log('updated')
-    // },
 
     methods: {
-        sendFriendshipRequest() {
+        getFriends(){
             axios
-                .post(`/api/friends/${this.$route.params.id}/request/`) 
-                .then(response => {
-                    console.log('data', response.data)
-                
-                })
-                .catch(error => {
-                    console.log('error', error)
-                })
-        },
-
-        getFeed(){
-            axios
-                .get(`/api/posts/profile/${this.$route.params.id}/`) //using ` for the js
+                .get(`/api/friends/${this.$route.params.id}/`) //using ` for the js
                 .then(response => {
                     console.log('data', response.data)
 
-                    this.posts = response.data.posts
+                    this.friendshipRequests = response.data.requests
+                    this.friends = response.data.friends
                     this.user = response.data.user
                 })
                 .catch(error => {
-                    console.log('error', error)
-                })
-        },
-        submitForm(){
-            console.log('submitForm', this.body) //textarea v-model="body" 
-
-            axios //sending to backend
-                .post('/api/posts/create/', {
-                    'body': this.body
-                })
-                .then(response =>{
-                    console.log('data', response.data)
-
-                    this.posts.unshift(response.data)
-                    this.body = ''
-                })
-                .catch(error =>{
                     console.log('error', error)
                 })
         }
