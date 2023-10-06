@@ -23,7 +23,7 @@
                     </div>
                     <div class="font-semibold" >
                         <p class="text-lg/none">50</p>
-                        <RouterLink :to="{name:'friends', params: {id: user.id} }" class="text-sm">friends</RouterLink>
+                        <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-sm">friends</RouterLink>
                     </div>
                 
                 </div>

@@ -63,5 +63,7 @@ def send_friendship_request(request, pk):
 
     friendship_request = FriendshipRequest(created_for=user, created_by=request.user)
 
+    # friendship_request.save()
+
 
     return JsonResponse({'message': 'friend request created'})

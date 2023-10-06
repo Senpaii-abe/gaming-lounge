@@ -60,8 +60,9 @@ class FriendshipRequest(models.Model):
         (REJECTED, 'Rejected'),
     )
 
+
     id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable = False)
-    created_for = models.ForeignKey(User, related_name='received_friendshiprequests', on_delete=models.CASCADE) #friend request sent to
     created_at = models.DateTimeField(auto_now_add=True) 
+    created_for = models.ForeignKey(User, related_name='received_friendshiprequests', on_delete=models.CASCADE) #friend request sent to
     created_by = models.ForeignKey(User, related_name='created_friendshiprequests', on_delete=models.CASCADE) #who made the friend request
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=SENT)

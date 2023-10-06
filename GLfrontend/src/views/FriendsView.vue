@@ -57,7 +57,9 @@
                  space-y-4: 6 spaces each post -->
         <div class="px-4 main-center col-span-2 space-y-6">
             <!-- write something -->
-            <div class="p-4 bg-purple_main border-gray-200 rounded-lg grid grid-cols-4 gap-4" v-if="friends.length">
+            <div class="p-4 bg-purple_main border-gray-200 rounded-lg grid grid-cols-4 gap-4" 
+            v-if="friends.length"
+            >
                 <div 
                     class="p-4 bg-purple_main border-gray-200 text-center rounded-lg"
                     v-for="user in friends"
@@ -78,6 +80,8 @@
                 </div>
 
              </div>
+
+             <hr>
         </div>
         
         <!-- right side -->
@@ -145,13 +149,13 @@ export default {
         
     components: {
         PeopleYouMayKnow,
-        Trends,
+        Trends
     },
     data(){
         return {
             user: {},
             friendshipRequests: [],
-            friends: [],
+            friends: []
         }
     }, 
     mounted() {
@@ -159,7 +163,7 @@ export default {
     },
 
     methods: {
-        getFriends(){
+        getFriends() {
             axios
                 .get(`/api/friends/${this.$route.params.id}/`) //using ` for the js
                 .then(response => {
