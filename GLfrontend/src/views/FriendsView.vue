@@ -39,6 +39,8 @@
             <div class="text-center space-y-6 rounded-full" 
             v-if="friendshipRequests.length"
             >
+
+                <h2 class="mb-6 text-xl">Friend Requests</h2>
                 <div 
                     class="p-6 bg-purple_main text-center rounded-full "
                     v-for="friendshipRequests in friendshipRequests"
@@ -53,14 +55,39 @@
                         <p class="text-sm text-gray-400">120 posts</p>
                     </div>
                     <div class="mt-6 space-x-4">
-                        <button class="inline-block py-3 px-5 hover:bg-[#28183e] bg-purple-800 text-sm font-medium rounded-img">accept</button>
-                        <button class="inline-block py-3 px-5 hover:bg-[#28183e] bg-dark_purple text-sm font-medium rounded-img">reject</button>
+                        <button class="inline-block py-3 px-5 hover:bg-[#28183e] bg-purple-800 text-sm font-medium rounded-img" @click="handleRequest('accepted', friendshipRequests.created_by.id)">accept</button>
+                        <button class="inline-block py-3 px-5 hover:bg-[#28183e] bg-dark_purple text-sm font-medium rounded-img" @click="handleRequest('rejected', friendshipRequests.created_by.id)">reject</button>
                     </div>
-                </div>
-               
+                </div>               
                 
+            <hr>
+            </div>
+
+
+            <div class="text-center space-y-6 rounded-full" 
+            v-if="friends.length"
+            >
+
+                <h2 class="mb-6 text-xl">Gaming Friends</h2>
+
+                <div 
+                    class="p-6 bg-purple_main text-center rounded-full "
+                    v-for="user in friends"
+                    v-bind:key="user.id"
+                >
+                    <img src="https://i.pravatar.cc/100?img=70" class=" mb-4 mx-auto rounded-img">
+                                 
+                     @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
+                       
+                    <div class="mt-2 mb-2 flex space-x-8 justify-around">
+                        <p class="text-sm text-gray-400">182 friends</p>
+                        <p class="text-sm text-gray-400">120 posts</p>
+                    </div>
+
+                </div>
+                 
              </div>
-             <hr>
+
         </div>
         
         <!-- right side -->
@@ -130,6 +157,21 @@ export default {
                 .catch(error => {
                     console.log('error', error)
                 })
+        },
+
+        handleRequest(status, pk){
+            console.log('handleRequest', status)
+
+            axios
+                .post(`/api/friends/${pk}/${status}/`)
+                .then(response => {
+                    console.log('data', response.data)
+                })
+
+                .catch(error => {
+                    console.log('error', error)
+                })
+
         }
     }
 }
