@@ -2,6 +2,7 @@ import uuid
 
 from django.db import models
 from django.utils.timesince import timesince
+from django.utils import timezone
 
 from account.models import User
 

@@ -3,7 +3,11 @@ import uuid #unique identification for the users
 
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
+from django.utils.timesince import timesince
 from django.utils import timezone
+
+
+
 
 class CustomUserManager(UserManager): 
     def _create_user(self, name, email, password, **extra_fields):
@@ -55,9 +59,9 @@ class FriendshipRequest(models.Model):
     REJECTED = 'rejected'
 
     STATUS_CHOICES = (
-        (SENT, 'Sent'),
-        (ACCEPTED, 'Accepted'),
-        (REJECTED, 'Rejected'),
+        (SENT, 'sent'),
+        (ACCEPTED, 'accepted'),
+        (REJECTED, 'rejected'),
     )
 
 
