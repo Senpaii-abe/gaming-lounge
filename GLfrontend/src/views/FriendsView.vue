@@ -28,28 +28,7 @@
                 
             </div>  
             <!-- trending games -->
-            <div class="bg-transparent rounded-full">
-                <h3 class="mb-2 text-2xl font-semibold text-center">topics</h3>
-                        <div class="space-y-4 text-center">
-                            <div class="flex items-center justify-between">                                               
-                                <a href="#" class="py-2 px-3 text-lg rounded-large w-full border border-gray hover:bg-purple_main">Valorant</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray hover:bg-purple_main py-2 px-3 text-lg rounded-large">Farlight 84</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">League of Legends</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Action</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Phasmaphobia</a>
-                            </div>
-
-                        
-                        </div>
-            </div>
+    
         </div> 
         
         <!-- center -->
@@ -57,30 +36,30 @@
                  space-y-4: 6 spaces each post -->
         <div class="px-4 main-center col-span-2 space-y-6">
             <!-- write something -->
-            <div class="p-4 bg-purple_main border-gray-200 rounded-lg grid grid-cols-4 gap-4" 
-            v-if="friends.length"
+            <div class="text-center space-y-6 rounded-full" 
+            v-if="friendshipRequests.length"
             >
                 <div 
-                    class="p-4 bg-purple_main border-gray-200 text-center rounded-lg"
-                    v-for="user in friends"
-                    v-bind:key="user.id"
+                    class="p-6 bg-purple_main text-center rounded-full "
+                    v-for="friendshipRequests in friendshipRequests"
+                    v-bind:key="friendshipRequests.id"
                 >
-                    <img src="https://i.pravatar.cc/300?img=70" class="mb-6 rounded-full">
-                        
-                    <p>
-                        <strong>
-                            <RouterLink :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
-                        </strong>
-                    </p>
-
-                    <div class="mt-6 flex space-x-8 justify-around">
-                        <p class="text-xs text-gray-500">182 friends</p>
-                        <p class="text-xs text-gray-500">120 posts</p>
+                    <img src="https://i.pravatar.cc/100?img=70" class=" mb-4 mx-auto rounded-img">
+                                 
+                     @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': friendshipRequests.created_by.id}}">{{ friendshipRequests.created_by.name }}</RouterLink>
+                       
+                    <div class="mt-2 mb-2 flex space-x-8 justify-around">
+                        <p class="text-sm text-gray-400">182 friends</p>
+                        <p class="text-sm text-gray-400">120 posts</p>
+                    </div>
+                    <div class="mt-6 space-x-4">
+                        <button class="inline-block py-3 px-5 hover:bg-[#28183e] bg-purple-800 text-sm font-medium rounded-img">accept</button>
+                        <button class="inline-block py-3 px-5 hover:bg-[#28183e] bg-dark_purple text-sm font-medium rounded-img">reject</button>
                     </div>
                 </div>
-
+               
+                
              </div>
-
              <hr>
         </div>
         
@@ -94,34 +73,7 @@
             <PeopleYouMayKnow />
             <Trends />
 
-            <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 text-lg">useful links</h3>
-
-                <p class="text-base/7 font-light mb-6">our instance rules are here and cover the ideals and how we want this community to evolve.</p>
-                <p class="text-base/7 font-light mb-2">where you can download games:</p>
-
-                <ul class="list-inside">
-
-                    <li class="p-1 hover:underline">
-                        <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full"
-                    alt="logo" />riot games</a></li>
-                    
-                    <li class="p-1 hover:underline">
-                        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full"
-                    alt="logo" />steam</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full"
-                    alt="logo"/>epic games</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full"
-                    alt="logo" />battle.net</a></li>
-            
-                </ul>
-                
-
-            </div>
+           
         </div>
 
 
@@ -130,6 +82,7 @@
 
 
 <script>
+
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import Trends from '../components/Trends.vue'
@@ -146,10 +99,11 @@ export default {
             userStore
         }
     },
-        
+         
     components: {
         PeopleYouMayKnow,
-        Trends
+        Trends,
+        FeedItem,
     },
     data(){
         return {

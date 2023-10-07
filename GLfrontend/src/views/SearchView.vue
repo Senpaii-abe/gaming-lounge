@@ -17,7 +17,7 @@
                 v-if="users.length"
             >
                 <div 
-                    class="p-6 bg-purple_main border-gray-200 text-center rounded-full"
+                    class="p-6 bg-purple_main text-center rounded-full"
                     v-for="user in users"
                     v-bind:key="user.id"
                 >

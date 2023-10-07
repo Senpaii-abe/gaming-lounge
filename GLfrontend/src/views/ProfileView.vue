@@ -28,11 +28,11 @@
                 
                 </div>
                 <!-- about me -->
-                <p class="px-1 text-sm/7 font-extralight">tungkol sakin</p>
+                <p class="px-1 text-sm/5 font-extralight text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae velit vel urna viverra pellentesque. Etiam sed neque sit amet nibh ullamcorper tempor. Etiam finibus, felis in semper rutrum, arcu nibh vehicula nulla.</p>
                 
                 <!-- send friend request button -->
                 <div class = "mt-6">
-                        <button class = "inline-block py-4 px-6 bg-purple-600 text-xs text-white rounded-lg" @click="sendFriendshipRequest">Send friend request</button>  
+                        <button class = "inline-block py-3 px-5 hover:bg-[#28183e] bg-dark_purple text-sm font-medium rounded-full" @click="sendFriendshipRequest">add friend</button>  
                  </div>
             </div>  
             <!-- trending games -->

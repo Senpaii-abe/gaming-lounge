@@ -86,51 +86,7 @@
         
         <!-- right side -->
         <div class="main-right col-span-1 space-y-6">
-            <!-- <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 text-xl">trending topics</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2">
-                                    <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
-                                    
-                                    <p class="text-xs">Code With Stein</p>
-                                </div>
-
-                                <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
-                            </div>
-
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2">
-                                    <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
-                                    
-                                    <p class="text-xs">Code With Stein</p>
-                                </div>
-
-                                <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
-                            </div>
-
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2">
-                                    <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
-                                    
-                                    <p class="text-xs">Code With Stein</p>
-                                </div>
-
-                                <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Show</a>
-                            </div>
-                        </div>
-            </div> -->
-            <!-- <div>
-                <input type="text" placeholder="search" class="bg-purple_main w-full py-3 px-6 rounded-large">
-            </div> -->
-            <div class="flex">       
-                    <button @click="search" class="p-3 bg-purple_main w-15 p-2 rounded-tr-large rounded-br-large text-white font-semibold hover:bg-purple1 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
-                        </svg>
-                    </button>
-             </div>
-
+         
 
             <ul class="text-center">
                 <li class="mb-4">

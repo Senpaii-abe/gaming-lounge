@@ -1,6 +1,7 @@
 
 **_NOTES:_**  
-
+gamer2: 426ccad7-c6b1-4d64-a2e0-8c5b018f1b34
+gamer1: 9842445d-c540-4e9f-bb73-5b6219b64c24
 ## to create a virtual environment and install dependencies for backend:
 * open terminal or cmd, "cd path_ng_project_natin_sa_pc_mo"
 * create a virtual environment "python -m venv name_ng_environment_mo"

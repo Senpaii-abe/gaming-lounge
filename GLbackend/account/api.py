@@ -61,7 +61,7 @@ def friends(request, pk):
 def send_friendship_request(request, pk):
     user = User.objects.get(pk=pk)
 
-    friendship_request = FriendshipRequest(created_for=user, created_by=request.user)
+    friendship_request = FriendshipRequest.objects.create(created_for=user, created_by=request.user)
 
     # friendship_request.save()
 
