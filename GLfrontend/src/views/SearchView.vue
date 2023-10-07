@@ -1,40 +1,41 @@
 <template>
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
         <!--Search bar-->
-        <div class="main-left col-span-3 space-y-4">
-            <div class="bg-purple_main border-gray-200 rounded-lg">
-                <form v-on:submit.prevent="submitForm" class="p-4 flex space-x-4">  
-                    <input v-model="query" type="search" class="p-4 w-full text-black bg-gray-100 rounded-lg" placeholder="What are you looking for?">
-                    <button class="inline-block py-4 px-6 bg-purple-600 text-white rounded-lg">Search</button>
+        <div class="main-left col-span-3">
+            
+                <form v-on:submit.prevent="submitForm" class="p-4 flex ">  
+                    <input v-model="query" type="search" class="p-4 w-full text-black rounded-bl-large rounded-tl-large" placeholder="who are you looking for?">
+                    <button class="inline-block py-4 px-6 hover:bg-purple1 bg-purple_main text-white rounded-br-large rounded-tr-large">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+						</svg>
+                    </button>
                 </form>
-            </div>
+          
 
             <div 
-            class="p-4 bg-purple_main border-gray-200 rounded-lg grid grid-cols-4 gap-4"
-            v-if="users.length"
+                class="p-4 grid grid-cols-4 gap-4"
+                v-if="users.length"
             >
                 <div 
-                    class="p-4 bg-purple_main border-gray-200 text-center rounded-lg"
+                    class="p-6 bg-purple_main border-gray-200 text-center rounded-full"
                     v-for="user in users"
                     v-bind:key="user.id"
                 >
-                    <img src="https://i.pravatar.cc/300?img=70" class="mb-6 rounded-full">
+                    <img src="https://i.pravatar.cc/300?img=70" class="mb-4 rounded-img">
                         
-                    <p>
-                        <strong>
-                            <RouterLink :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
-                        </strong>
-                    </p>
+                                      
+                    @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>                      
+                 
 
-                    <div class="mt-6 flex space-x-8 justify-around">
-                        <p class="text-xs text-gray-500">182 friends</p>
-                        <p class="text-xs text-gray-500">120 posts</p>
+                    <div class="mt-2 mb-2 flex space-x-8 justify-around">
+                        <p class="text-sm text-gray-400">182 friends</p>
+                        <p class="text-sm text-gray-400">120 posts</p>
                     </div>
                 </div>
             </div>
 
             <!-- post area -->
-            <div class="p-4 bg-purple_main rounded-full"
+            <div class="p-4 m-4 bg-purple_main rounded-full"
                     v-for="post in posts" 
                     v-bind:key="post.id"> <!-- loop ng post -->
                 
