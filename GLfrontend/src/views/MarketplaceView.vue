@@ -19,7 +19,7 @@
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
                     <img src="https://i.pravatar.cc/300?img=70" class="w-[80px] rounded-img">
-                    <p class="font-medium text-lg">{{ userStore.user.name }}</p>
+                    <p class="font-medium text-lg">Code With Stein</p>
                 </div>
                 <!-- charisma points nd posts-->
                 <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-dark_purple rounded-full text-center">
@@ -34,30 +34,8 @@
                 </div>
                 <!-- about me -->
                 <p class="px-1 text-sm/7 font-extralight">tungkol sakin</p>
-            </div>  
-            <!-- trending games -->
-            <div class="bg-transparent rounded-full">
-                <h3 class="mb-2 text-2xl font-semibold text-center">topics</h3>
-                        <div class="space-y-4 text-center">
-                            <div class="flex items-center justify-between">                                               
-                                <a href="#" class="py-2 px-3 text-lg rounded-large w-full border border-gray hover:bg-purple_main">Valorant</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray hover:bg-purple_main py-2 px-3 text-lg rounded-large">Farlight 84</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">League of Legends</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Action</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Phasmaphobia</a>
-                            </div>
 
-                        
-                        </div>
-            </div>
+            </div>  
         </div> 
         <!-- center -->
             <!-- col-span-2: takes 2 of the 4 columns
@@ -65,32 +43,25 @@
         <div class="px-4 main-center col-span-2 space-y-6">
             <!-- write something -->
             <div class="rounded-full bg-transparent space-y-1 text-right">
-                <form 
-                    v-on:submit.prevent="submitForm"
-                    method="post">
-                    <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
-                    <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</button>
-                </form>
+                <textarea class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
+                <a href="#" class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</a>
             </div>
             <!-- post -->
-            <div class="p-4 bg-purple_main rounded-full"
-                    v-for="post in posts" 
-                    v-bind:key="post.id"> <!-- loop ng post -->
+            <div class="p-4 bg-purple_main rounded-full">
                 <!-- top part ng post-->
                 <div class="mb-4 flex items-center justify-between">
                     <!-- username nd pfp -->
                     <div class="flex items-center space-x-4">
-                        <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-img">
-                        <p class="font-medium">{{ post.created_by.name}}</p>
+                        <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-img">
+                        <p class="font-medium">BBM_SUPOT23</p>
                     </div>
                     <!-- time posted -->
-                    <p class="text-gray-400 text-xs font-light">{{ post.created_at_formatted}}</p> 
+                    <p class="text-gray-400 text-xs font-light">18 minutes ago</p> 
                 </div>
-
-                    <p class="text-base/7 font-light">{{ post.body }}</p>
                 <!-- mid part - posted image/text -->
                     <!-- <img src="https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2670&amp;q=80" class="w-full rounded-full"> -->
 
+                    <p class="text-base/7 font-light">THIS PAGE IS UNDER CONSTRUCTION!!!!!</p>
                 <!-- lower part ng post -->
                 <div class="mt-6 flex justify-between">
                     <div class="flex space-x-6">
@@ -210,108 +181,7 @@
 
         </div>
 
-        <!-- right side -->
-        <div class="main-right col-span-1 space-y-6">
-            
-            <div>
-                <input type="text" placeholder="search" class="bg-purple_main w-full py-3 px-6 rounded-large">
-            </div>
-
-
-            <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 text-lg">useful links</h3>
-
-                <p class="text-base/7 font-light mb-6">our instance rules are here and cover the ideals and how we want this community to evolve.</p>
-                <p class="text-base/7 font-light mb-2">where you can download games:</p>
-
-                <ul class="list-inside">
-
-                    <li class="p-1 hover:underline">
-                        <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full"
-                    alt="logo" />riot games</a></li>
-                    
-                    <li class="p-1 hover:underline">
-                        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full"
-                    alt="logo" />steam</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full"
-                    alt="logo"/>epic games</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full"
-                    alt="logo" />battle.net</a></li>
-            
-                </ul>
-                
-
-            </div>
-        </div>
-
     </div> 
 </template> 
 
 <!----> 
-
-<script>
-import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/Trends.vue'
-import { useUserStore } from '@/stores/user'
-
-export default {
-    name: 'MarketplaceView',
-
-    setup() {
-        const userStore = useUserStore()
-
-        return {
-            userStore
-        }
-    },
-    components: {
-        PeopleYouMayKnow,
-        Trends,
-    },
-    data(){
-        return {
-            posts:[],
-            body: '',
-        }
-    },
-    mounted(){
-        this.getFeed()
-    },
-    methods: {
-        getFeed(){
-            axios
-                .get('/api/posts/')
-                .then(response => {
-                    console.log('data', response.data)
-
-                    this.posts = response.data
-                })
-                .catch(error => {
-                    console.log('error', error)
-                })
-        },
-        submitForm(){
-            console.log('submitForm', this.body) //textarea v-model="body" 
-
-            axios //sending to backend
-                .post('/api/posts/create/', {
-                    'body': this.body
-                })
-                .then(response =>{
-                    console.log('data', response.data)
-
-                    this.posts.unshift(response.data)
-                    this.body = ''
-                })
-                .catch(error =>{
-                    console.log('error', error)
-                })
-        }
-    }
-}
-</script>

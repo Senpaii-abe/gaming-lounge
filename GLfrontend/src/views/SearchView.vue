@@ -28,7 +28,7 @@
                  
 
                     <div class="mt-2 mb-2 flex space-x-8 justify-around">
-                        <p class="text-sm text-gray-400">182 friends</p>
+                        <p class="text-sm text-gray-400">{{ user.friends_count }} </p>
                         <p class="text-sm text-gray-400">120 posts</p>
                     </div>
                 </div>

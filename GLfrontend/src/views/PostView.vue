@@ -45,21 +45,30 @@
             <!-- col-span-2: takes 2 of the 4 columns
                  space-y-4: 6 spaces each post -->
         <div class="px-4 main-center col-span-2 space-y-6">
-            <!-- write something -->
+            
+            <!-- post area -->     
+            <div class="p-4 bg-purple_main rounded-full"
+                    v-if="post.id">
+
+                <FeedItem v-bind:post="post" />
+            </div>
+
+            <div 
+                class=" p-4 ml-6 rounded-full bg-purple_main space-y-1 text-left"
+                v-for="comment in post.comments"
+                v-bind:key="comment.id"
+            >
+                <CommentItem v-bind:comment="comment"/>
+            </div>
+
+            <!-- write something comment -->
             <div class="rounded-full bg-transparent space-y-1 text-right">
                 <form 
                     v-on:submit.prevent="submitForm"
                     method="post">
-                    <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
-                    <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</button>
+                    <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="Say something about this post..."></textarea>
+                    <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">Comment</button>
                 </form>
-            </div>
-            <!-- post area -->     
-            <div class="p-4 bg-purple_main rounded-full"
-                    v-for="post in posts" 
-                    v-bind:key="post.id"> <!-- loop ng post -->
-
-                <FeedItem v-bind:post="post" />
             </div>
         </div>
         
@@ -124,9 +133,10 @@ import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import Trends from '../components/Trends.vue'
 import { useUserStore } from '@/stores/user'
 import FeedItem from '../components/FeedItem.vue'
+import CommentItem from '../components/CommentItem.vue'
 
 export default {
-    name: 'FeedView',
+    name: 'PostView',
 
 
     setup() {
@@ -140,26 +150,31 @@ export default {
         PeopleYouMayKnow,
         Trends,
         FeedItem,
+        CommentItem,
     },
     data(){
         return {
-            posts:[],
-            body: '',
+            post:{
+                id: null,
+                comments: []
+            },
+            body: ''
         }
     },
     mounted(){
-        this.getFeed()
+        this.getPost()
     },
+
     methods: 
     {
-        getFeed()
+        getPost()
         {
             axios
-                .get('/api/posts/')
+                .get(`/api/posts/${this.$route.params.id}/`)
                 .then(response => {
                     console.log('data', response.data)
 
-                    this.posts = response.data
+                    this.post = response.data.post
                 })
                 .catch(error => {
                     console.log('error', error)
@@ -170,14 +185,15 @@ export default {
             console.log('submitForm', this.body) //textarea v-model="body" 
 
             axios //sending to backend
-                .post('/api/posts/create/', 
+                .post(`/api/posts/${this.$route.params.id}/comment/`, 
                 {
                     'body': this.body
                 })
                 .then(response =>{
                     console.log('data', response.data)
 
-                    this.posts.unshift(response.data)
+                    this.posts.comments.push(response.data)
+                    this.posts.comments_count += 1
                     this.body = ''
                 })
                 .catch(error =>{

@@ -51,7 +51,7 @@
                      @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': friendshipRequests.created_by.id}}">{{ friendshipRequests.created_by.name }}</RouterLink>
                        
                     <div class="mt-2 mb-2 flex space-x-8 justify-around">
-                        <p class="text-sm text-gray-400">182 friends</p>
+                        <p class="text-sm text-gray-400">{{ user.friends_count }} friends </p>
                         <p class="text-sm text-gray-400">120 posts</p>
                     </div>
                     <div class="mt-6 space-x-4">
@@ -80,7 +80,7 @@
                      @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
                        
                     <div class="mt-2 mb-2 flex space-x-8 justify-around">
-                        <p class="text-sm text-gray-400">182 friends</p>
+                        <p class="text-sm text-gray-400">{{ user.friends_count }} friends</p>
                         <p class="text-sm text-gray-400">120 posts</p>
                     </div>
 
@@ -92,7 +92,6 @@
         
         <!-- right side -->
         <div class="main-right col-span-1 space-y-6">
-            
             <div>
                 <input type="text" placeholder="search" class="bg-purple_main w-full py-3 px-6 rounded-large">
             </div>
@@ -116,11 +115,13 @@ import Trends from '../components/Trends.vue'
 import { useUserStore } from '@/stores/user'
 import FeedItem from '../components/FeedItem.vue'
 
+
 export default {
     name: 'FriendsView',
 
     setup() {
         const userStore = useUserStore()
+        
 
         return {
             userStore

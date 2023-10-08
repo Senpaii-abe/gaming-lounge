@@ -22,7 +22,7 @@
                         <label class="text-sm">charisma</label>
                     </div>
                     <div class="font-semibold" >
-                        <p class="text-lg/none">50</p>
+                        <p class="text-lg/none">{{ user.friends_count }}</p>
                         <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-sm">friends</RouterLink>
                     </div>
                 
@@ -32,7 +32,21 @@
                 
                 <!-- send friend request button -->
                 <div class = "mt-6">
-                        <button class = "inline-block py-3 px-5 hover:bg-[#28183e] bg-dark_purple text-sm font-medium rounded-full" @click="sendFriendshipRequest">add friend</button>  
+                    <button 
+                        class = "inline-block py-3 px-5 hover:bg-[#28183e] bg-dark_purple text-sm font-medium rounded-full w-full" 
+                        @click="sendFriendshipRequest"
+                        v-if="userStore.user.id !== user.id"
+                        >
+                        add friend
+                    </button> 
+                    <!-- Logout button -->
+                    <button 
+                        class = "inline-block py-3 px-5 hover:bg-red-500 bg-dark_purple  text-sm font-medium rounded-full w-full" 
+                        @click="logout"
+                        v-if="userStore.user.id === user.id"
+                        >
+                        Logout
+                    </button> 
                  </div>
             </div>  
             <!-- trending games -->
@@ -134,17 +148,22 @@
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import Trends from '../components/Trends.vue'
-import { useUserStore } from '@/stores/user'
 import FeedItem from '../components/FeedItem.vue'
+import { useUserStore } from '@/stores/user'
+import { useToastStore } from '@/stores/toast'
+
+
 
 export default {
     name: 'ProfileView',
 
     setup() {
         const userStore = useUserStore()
+        const toastStore = useToastStore()
 
         return {
-            userStore
+            userStore,
+            toastStore
         }
     },
         
@@ -156,7 +175,9 @@ export default {
     data(){
         return {
             posts:[],
-            user: {},
+            user: {
+                id: null
+            },
             body: '',
         }
     }, 
@@ -183,7 +204,14 @@ export default {
                 .post(`/api/friends/${this.$route.params.id}/request/`) 
                 .then(response => {
                     console.log('data', response.data)
-                
+
+                    if (response.data.message == 'request already sent')
+                    {
+                        this.toastStore.showToast(5000, 'The request has already been sent', 'bg-red-300')
+                    }
+                    else{
+                        this.toastStore.showToast(5000, 'The request was sent!', 'bg-emerald-500')
+                    }
                 })
                 .catch(error => {
                     console.log('error', error)
@@ -219,6 +247,12 @@ export default {
                 .catch(error =>{
                     console.log('error', error)
                 })
+        },
+        logout() {
+            console.log('Log out')
+            this.userStore.removeToken()
+
+            this.$router.push('/')
         }
     }
 }
