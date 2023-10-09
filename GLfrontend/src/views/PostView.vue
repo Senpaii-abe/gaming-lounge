@@ -7,7 +7,7 @@
             <!-- trending games -->
           
         </div> 
-        <div class="col-span-2 space-y-4 ">
+        <div class="col-span-2 space-y-2 ">
             <div class="bg-purple_main rounded-tr-full rounded-tl-full">            
                 <!-- post area -->     
                 <div class="p-4 text-lg border-b border-gray-400  rounded-tr-full rounded-tl-full"
