@@ -4,7 +4,7 @@ from rest_framework import serializers
 from account.serializers import UserSerializer
 
 from .models import Post, Comment
-
+ 
 class PostSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True) #read only because when we create post we dont want to mess with the created_by field
     class Meta:

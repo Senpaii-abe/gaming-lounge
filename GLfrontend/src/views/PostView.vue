@@ -1,125 +1,51 @@
 <template>
-    <!-- 
-        mx-auto: center of the screen 
-        put "grid" or "flex" to assign the display before adding "grid-cols" or "flex-cols"
-        space-(y or x)-number: space for each elements like posts for example
-        
-        check tailwind.config.js for more configurations
-        bg-purple_main: color ng header
-        bg-blue_link: color ng links
-
-        text-base/7 font-light: default class ng texts sa post
-        rounded-full: default class ng borders natin
-    -->    
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
 
         <!-- left side 
              col-span-1: takes 1 of the 4 columns -->
         <div class="main-left col-span-1 space-y-6"> 
             <!-- trending games -->
-            <div class="bg-transparent rounded-full">
-                <h3 class="mb-2 text-2xl font-semibold text-center">topics</h3>
-                    <div class="space-y-4 text-center">
-                        <div class="flex items-center justify-between">                                               
-                            <a href="#" class="py-2 px-3 text-lg rounded-large w-full border border-gray hover:bg-purple_main">Valorant</a>
-                         </div>
-                         <div class="flex items-center justify-between ">                                               
-                             <a href="#" class="w-full border border-gray hover:bg-purple_main py-2 px-3 text-lg rounded-large">Farlight 84</a>
-                        </div>
-                        <div class="flex items-center justify-between ">                                               
-                             <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">League of Legends</a>
-                        </div>
-                        <div class="flex items-center justify-between ">                                               
-                            <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Action</a>
-                        </div>
-                        <div class="flex items-center justify-between ">                                               
-                            <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Phasmaphobia</a>
-                        </div>
-
-                        
-                    </div>
-            </div>
+          
         </div> 
-        
-        <!-- center -->
-            <!-- col-span-2: takes 2 of the 4 columns
-                 space-y-4: 6 spaces each post -->
-        <div class="px-4 main-center col-span-2 space-y-6">
-            
-            <!-- post area -->     
-            <div class="p-4 bg-purple_main rounded-full"
-                    v-if="post.id">
+        <div class="col-span-2 space-y-4 ">
+            <div class="bg-purple_main rounded-tr-full rounded-tl-full">            
+                <!-- post area -->     
+                <div class="p-4 text-lg border-b border-gray-400  rounded-tr-full rounded-tl-full"
+                        v-if="post.id">
 
-                <FeedItem v-bind:post="post" />
+                    <FeedItem v-bind:post="post" />             
+                </div>
+
+                
+                <!-- comment area -->
+                <div 
+                    class="py-4 pl-8 pr-4 border-b border-gray-400 "
+                    v-for="comment in post.comments"
+                    v-bind:key="comment.id"
+                >
+                    <CommentItem v-bind:comment="comment"/>
+                </div>   
             </div>
-
-            <div 
-                class=" p-4 ml-6 rounded-full bg-purple_main space-y-1 text-left"
-                v-for="comment in post.comments"
-                v-bind:key="comment.id"
-            >
-                <CommentItem v-bind:comment="comment"/>
-            </div>
-
             <!-- write something comment -->
-            <div class="rounded-full bg-transparent space-y-1 text-right">
-                <form 
-                    v-on:submit.prevent="submitForm"
+             
+                <form v-on:submit.prevent="submitForm"
                     method="post">
-                    <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="Say something about this post..."></textarea>
-                    <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">Comment</button>
+                        <div class="flex items-center px-3 py-2 rounded-br-full rounded-bl-full dark:bg-purple_main">
+                            <textarea v-model="body" rows="2" class="bg-purple_main block mr-2 p-2.5 w-full rounded-br-full rounded-bl-full" placeholder="say something about this post.."></textarea>
+                                <button type="submit" class="inline-flex justify-center p-3 rounded-img cursor-pointer hover:bg-[#28183e]">
+                                <svg class="w-6 h-6 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 18 20">
+                                    <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
+                                </svg>
+                                </button>
+                        </div>
                 </form>
-            </div>
+
+            
         </div>
         
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6">
-         
-
-            <ul class="text-center">
-                <li class="mb-4">
-                    <a href="">                     
-                        <img src="/assets/img/ads-1.png" class="h-auto max-w-full"
-                    alt="logo" />
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <img src="/assets/img/ads-2.png" class="h-auto max-w-full"
-                    alt="logo" />
-                    </a>
-                </li>
-            </ul>
-
-            <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 text-lg">useful links</h3>
-
-                <p class="text-base/7 font-light mb-6">our instance rules are here and cover the ideals and how we want this community to evolve.</p>
-                <p class="text-base/7 font-light mb-2">where you can download games:</p>
-
-                <ul class="list-inside">
-
-                    <li class="p-1 hover:underline">
-                        <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full"
-                    alt="logo" />riot games</a></li>
-                    
-                    <li class="p-1 hover:underline">
-                        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full"
-                    alt="logo" />steam</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full"
-                    alt="logo"/>epic games</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full"
-                    alt="logo" />battle.net</a></li>
-            
-                </ul>
-                
-
-            </div>
+        <div class="main-right col-span-1  space-y-6">
+        
         </div>
 
 
@@ -179,7 +105,7 @@ export default {
                 .catch(error => {
                     console.log('error', error)
                 })
-        },
+        },  
         submitForm()
         {
             console.log('submitForm', this.body) //textarea v-model="body" 
@@ -192,8 +118,8 @@ export default {
                 .then(response =>{
                     console.log('data', response.data)
 
-                    this.posts.comments.push(response.data)
-                    this.posts.comments_count += 1
+                    this.post.comments.push(response.data)
+                    this.post.comments_count += 1
                     this.body = ''
                 })
                 .catch(error =>{

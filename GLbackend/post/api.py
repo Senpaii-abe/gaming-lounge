@@ -70,9 +70,9 @@ def post_like(request, pk):
         post.likes.add(like)
         post.save()
     
-        return JsonResponse({'message': 'Like created'})
+        return JsonResponse({'message': 'like created'})
     else:
-        return JsonResponse({'message': 'posts already like'})
+        return JsonResponse({'message': 'post already like'})
     
 @api_view(['POST'])
 def post_create_comment(request, pk):

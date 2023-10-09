@@ -66,7 +66,7 @@ def send_friendship_request(request, pk):
     check1 = FriendshipRequest.objects.filter(created_for=request.user).filter(created_by=user)
     check2 = FriendshipRequest.objects.filter(created_for=user).filter(created_by=request.user)
     
-    if not check1 and not check2:
+    if not check1 or not check2:
         FriendshipRequest.objects.create(created_for=user, created_by=request.user)
         
         # friendship_request.save()
@@ -75,10 +75,6 @@ def send_friendship_request(request, pk):
         # friendship_request.save()
         return JsonResponse({'message': 'request already sent'})
     
-    
-
-    
-
 
 
 @api_view(['POST']) #handle friend request
@@ -93,7 +89,7 @@ def handle_request(request, pk, status):
     user.friends_count = user.friends_count = 1
     user.save()
     
-    request_user = request_user 
+    request_user = request.user 
     request_user.friends_count = request_user.friends_count + 1
     request_user.save()
     

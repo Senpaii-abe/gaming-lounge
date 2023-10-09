@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from account.models import User
 
-class Like(models.Model):
+class Like(models.Model): #can reuse for liking pages or what (universal)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_by = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

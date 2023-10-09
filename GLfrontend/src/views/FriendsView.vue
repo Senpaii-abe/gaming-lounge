@@ -9,7 +9,7 @@
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
                     <img src="https://i.pravatar.cc/300?img=70" class="w-[80px] rounded-img">
-                    <p class="font-semibold text-lg">{{ user.name }}</p>
+                    <p class="font-semibold text-xl">{{ user.name }}</p>
                 </div>
                 <!-- charisma points nd posts-->
                 <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-dark_purple rounded-full text-center">
@@ -32,21 +32,20 @@
         </div> 
         
         <!-- center -->
-            <!-- col-span-2: takes 2 of the 4 columns
-                 space-y-4: 6 spaces each post -->
-        <div class="px-4 main-center col-span-2 space-y-6">
-            <!-- write something -->
-            <div class="text-center space-y-6 rounded-full" 
+        <div class="p-4 main-center col-span-2 space-y-6 rounded-full bg-purple_main">
+            
+            
+            <div class="rounded-full p-4 space-y-6" 
             v-if="friendshipRequests.length"
             >
 
-                <h2 class="mb-6 text-xl">Friend Requests</h2>
+                <h1 class="mb-2 mx-1 text-lg font-medium">Friend Requests</h1>
                 <div 
-                    class="p-6 bg-purple_main text-center rounded-full "
+                    class="p-6 border border-dark_purple text-center rounded-full "
                     v-for="friendshipRequests in friendshipRequests"
                     v-bind:key="friendshipRequests.id"
                 >
-                    <img src="https://i.pravatar.cc/100?img=70" class=" mb-4 mx-auto rounded-img">
+                    <img src="https://i.pravatar.cc/100?img=70" class=" mb-4 mx-auto rounded-full">
                                  
                      @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': friendshipRequests.created_by.id}}">{{ friendshipRequests.created_by.name }}</RouterLink>
                        
@@ -55,46 +54,41 @@
                         <p class="text-sm text-gray-400">120 posts</p>
                     </div>
                     <div class="mt-6 space-x-4">
-                        <button class="inline-block py-3 px-5 hover:bg-[#28183e] bg-purple-800 text-sm font-medium rounded-img" @click="handleRequest('accepted', friendshipRequests.created_by.id)">accept</button>
+                        <button class="inline-block py-3 px-5 hover:bg-green-500 bg-green-400 text-black text-sm font-semibold rounded-img" @click="handleRequest('accepted', friendshipRequests.created_by.id)">accept</button>
                         <button class="inline-block py-3 px-5 hover:bg-[#28183e] bg-dark_purple text-sm font-medium rounded-img" @click="handleRequest('rejected', friendshipRequests.created_by.id)">reject</button>
                     </div>
                 </div>               
                 
-            <hr>
             </div>
-
-
-            <div class="text-center space-y-6 rounded-full" 
-            v-if="friends.length"
-            >
-
-                <h2 class="mb-6 text-xl">Gaming Friends</h2>
-
+                <!-- friends -->
+            <div class="rounded-full p-4 space-y-6"               
+                v-if="friends.length"> 
+                <h1 class="mb-2 mx-1 text-lg font-medium">Friends</h1>
+                
                 <div 
-                    class="p-6 bg-purple_main text-center rounded-full "
+                    class="p-6 border border-dark_purple text-center rounded-full "
                     v-for="user in friends"
                     v-bind:key="user.id"
                 >
-                    <img src="https://i.pravatar.cc/100?img=70" class=" mb-4 mx-auto rounded-img">
+                    <img src="https://i.pravatar.cc/100?img=70" class=" mb-4 mx-auto rounded-full">
                                  
                      @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
                        
-                    <div class="mt-2 mb-2 flex space-x-8 justify-around">
+                    <div class="mt-1 flex space-x-4 justify-around">
                         <p class="text-sm text-gray-400">{{ user.friends_count }} friends</p>
                         <p class="text-sm text-gray-400">120 posts</p>
                     </div>
 
                 </div>
                  
-             </div>
+             
+            </div>
 
         </div>
         
         <!-- right side -->
         <div class="main-right col-span-1 space-y-6">
-            <div>
-                <input type="text" placeholder="search" class="bg-purple_main w-full py-3 px-6 rounded-large">
-            </div>
+            
 
             <PeopleYouMayKnow />
             <Trends />
@@ -121,10 +115,12 @@ export default {
 
     setup() {
         const userStore = useUserStore()
+       
         
 
         return {
             userStore
+         
         }
     },
          

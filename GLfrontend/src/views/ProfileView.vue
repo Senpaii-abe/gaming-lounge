@@ -9,7 +9,7 @@
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
                     <img src="https://i.pravatar.cc/300?img=70" class="w-[80px] rounded-img">
-                    <p class="font-semibold text-lg">{{ user.name }}</p>
+                    <p class="font-semibold text-xl">{{ user.name }}</p>
                 </div>
                 <!-- charisma points nd posts-->
                 <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-dark_purple rounded-full text-center">
@@ -17,23 +17,20 @@
                         <p class="text-lg/none">182</p>
                         <label class="text-sm">posts</label>
                     </div>
-                     <div class="font-semibold" >
-                        <p class="text-lg/none">120</p>
-                        <label class="text-sm">charisma</label>
-                    </div>
-                    <div class="font-semibold" >
+                  
+                    <div >
                         <p class="text-lg/none">{{ user.friends_count }}</p>
                         <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-sm">friends</RouterLink>
                     </div>
                 
                 </div>
                 <!-- about me -->
-                <p class="px-1 text-sm/5 font-extralight text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae velit vel urna viverra pellentesque. Etiam sed neque sit amet nibh ullamcorper tempor. Etiam finibus, felis in semper rutrum, arcu nibh vehicula nulla.</p>
+                <p class="px-1 text-sm/5 font-light text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae velit vel urna viverra pellentesque. Etiam sed neque sit amet nibh ullamcorper tempor. Etiam finibus, felis in semper rutrum, arcu nibh vehicula nulla.</p>
                 
                 <!-- send friend request button -->
                 <div class = "mt-6">
                     <button 
-                        class = "inline-block py-3 px-5 hover:bg-[#28183e] bg-dark_purple text-sm font-medium rounded-full w-full" 
+                        class = "inline-block py-3 hover:bg-green-500 bg-green-400 text-black font-semibold rounded-full w-full" 
                         @click="sendFriendshipRequest"
                         v-if="userStore.user.id !== user.id"
                         >
@@ -41,36 +38,42 @@
                     </button> 
                     <!-- Logout button -->
                     <button 
-                        class = "inline-block py-3 px-5 hover:bg-red-500 bg-dark_purple  text-sm font-medium rounded-full w-full" 
+                        class = "inline-block py-3 hover:bg-red-400 bg-[#28183e] font-semibold rounded-full w-full" 
                         @click="logout"
                         v-if="userStore.user.id === user.id"
                         >
-                        Logout
+                        logout
                     </button> 
                  </div>
             </div>  
             <!-- trending games -->
-            <div class="bg-transparent rounded-full">
-                <h3 class="mb-2 text-2xl font-semibold text-center">topics</h3>
-                        <div class="space-y-4 text-center">
-                            <div class="flex items-center justify-between">                                               
-                                <a href="#" class="py-2 px-3 text-lg rounded-large w-full border border-gray hover:bg-purple_main">Valorant</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray hover:bg-purple_main py-2 px-3 text-lg rounded-large">Farlight 84</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">League of Legends</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Action</a>
-                            </div>
-                            <div class="flex items-center justify-between ">                                               
-                                <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Phasmaphobia</a>
-                            </div>
+            <div class="p-4 bg-purple_main rounded-full">
+                <h3 class="mb-1 text-lg">useful links</h3>
 
-                        
-                        </div>
+                <p class="text-base/7 font-light mb-6">our instance rules are here and cover the ideals and how we want this community to evolve.</p>
+                <p class="text-base/7 font-light mb-2">where you can download games:</p>
+
+                <ul class="list-inside">
+
+                    <li class="p-1 hover:underline">
+                        <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full"
+                    alt="logo" /></a></li>
+                    
+                    <li class="p-1 hover:underline">
+                        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full"
+                    alt="logo" /></a></li>
+
+                    <li class="p-1 hover:underline">                       
+                        <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full"
+                    alt="logo"/></a></li>
+
+                    <li class="p-1 hover:underline">                       
+                        <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full"
+                    alt="logo" /></a></li>
+            
+                </ul>
+                
+
             </div>
         </div> 
         
@@ -102,41 +105,12 @@
         <!-- right side -->
         <div class="main-right col-span-1 space-y-6">
             
-            <div>
-                <input type="text" placeholder="search" class="bg-purple_main w-full py-3 px-6 rounded-large">
-            </div>
+         
 
             <PeopleYouMayKnow />
             <Trends />
 
-            <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 text-lg">useful links</h3>
 
-                <p class="text-base/7 font-light mb-6">our instance rules are here and cover the ideals and how we want this community to evolve.</p>
-                <p class="text-base/7 font-light mb-2">where you can download games:</p>
-
-                <ul class="list-inside">
-
-                    <li class="p-1 hover:underline">
-                        <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full"
-                    alt="logo" />riot games</a></li>
-                    
-                    <li class="p-1 hover:underline">
-                        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full"
-                    alt="logo" />steam</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full"
-                    alt="logo"/>epic games</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full"
-                    alt="logo" />battle.net</a></li>
-            
-                </ul>
-                
-
-            </div>
         </div>
 
 
@@ -207,7 +181,7 @@ export default {
 
                     if (response.data.message == 'request already sent')
                     {
-                        this.toastStore.showToast(5000, 'The request has already been sent', 'bg-red-300')
+                        this.toastStore.showToast(5000, 'The request has already been sent', 'bg-red-400')
                     }
                     else{
                         this.toastStore.showToast(5000, 'The request was sent!', 'bg-emerald-500')
