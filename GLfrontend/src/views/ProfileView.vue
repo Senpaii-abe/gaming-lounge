@@ -14,11 +14,11 @@
                 <!-- charisma points nd posts-->
                 <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-dark_purple rounded-full text-center">
                     <div>
-                        <p class="text-lg/none">182</p>
+                        <p class="text-lg/none">{{ user.posts_count }}</p>
                         <label class="text-sm">posts</label>
                     </div>
                   
-                    <div >
+                    <div v-if="user.id">
                         <p class="text-lg/none">{{ user.friends_count }}</p>
                         <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-sm">friends</RouterLink>
                     </div>
@@ -30,12 +30,19 @@
                 <!-- send friend request button -->
                 <div class = "mt-6">
                     <button 
-                        class = "inline-block py-3 hover:bg-green-500 bg-green-400 text-black font-semibold rounded-full w-full" 
+                        class = "inline-block py-3 hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
                         @click="sendFriendshipRequest"
                         v-if="userStore.user.id !== user.id"
                         >
                         add friend
-                    </button> 
+                    </button>
+                    <button 
+                        class = "inline-block py-3 mt-4 hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
+                        @click="sendDirectMessage"
+                        v-if="userStore.user.id !== user.id"
+                        >
+                        Send Direct Message
+                    </button>  
                     <!-- Logout button -->
                     <button 
                         class = "inline-block py-3 hover:bg-red-400 bg-[#28183e] font-semibold rounded-full w-full" 
@@ -150,7 +157,7 @@ export default {
         return {
             posts:[],
             user: {
-                id: null
+                id: ''
             },
             body: '',
         }
@@ -173,6 +180,20 @@ export default {
     // },
 
     methods: {
+        sendDirectMessage() {
+            console.log('sendDirectMessage')
+
+            axios
+                .get(`api/chat/${this.$route.params.id}/get-or-create/`)
+                .then(response => {
+                    console.log(response.data)
+
+                    this.$router.push('/chat')
+                })
+                .catch(error => {
+                    console.log('error', error)
+                })
+        },
         sendFriendshipRequest() {
             axios
                 .post(`/api/friends/${this.$route.params.id}/request/`) 

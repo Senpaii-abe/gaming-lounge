@@ -14,7 +14,7 @@
                 <!-- charisma points nd posts-->
                 <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-dark_purple rounded-full text-center">
                     <div>
-                        <p class="text-lg/none">182</p>
+                        <p class="text-lg/none">{{ user.posts_count }}</p>
                         <label class="text-sm">posts</label>
                     </div>
                      <div class="font-semibold" >
@@ -51,7 +51,7 @@
                        
                     <div class="mt-2 mb-2 flex space-x-8 justify-around">
                         <p class="text-sm text-gray-400">{{ user.friends_count }} friends </p>
-                        <p class="text-sm text-gray-400">120 posts</p>
+                        <p class="text-sm text-gray-400">{{ user.posts_count }} posts</p>
                     </div>
                     <div class="mt-6 space-x-4">
                         <button class="inline-block py-3 px-5 hover:bg-green-500 bg-green-400 text-black text-sm font-semibold rounded-img" @click="handleRequest('accepted', friendshipRequests.created_by.id)">accept</button>
@@ -76,7 +76,7 @@
                        
                     <div class="mt-1 flex space-x-4 justify-around">
                         <p class="text-sm text-gray-400">{{ user.friends_count }} friends</p>
-                        <p class="text-sm text-gray-400">120 posts</p>
+                        <p class="text-sm text-gray-400">{{ user.posts_count }} posts</p>
                     </div>
 
                 </div>
