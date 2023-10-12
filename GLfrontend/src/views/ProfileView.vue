@@ -8,7 +8,7 @@
             <div class="p-4 bg-purple_main rounded-full">
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
-                    <img src="https://i.pravatar.cc/300?img=70" class="w-[80px] rounded-img">
+                    <img :src="user.get_avatar" class="w-[80px] rounded-img">
                     <p class="font-semibold text-xl">{{ user.name }}</p>
                 </div>
                 <!-- charisma points nd posts-->
@@ -42,7 +42,17 @@
                         v-if="userStore.user.id !== user.id"
                         >
                         Send Direct Message
-                    </button>  
+                    </button> 
+                    
+                    <!-- edit profile button -->
+                    <RouterLink
+                        class = "inline-block mr-2 py-3 hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
+                        to="/profile/edit"
+                        v-if="userStore.user.id === user.id"
+                        >
+                        Edit Profile
+                    </RouterLink> 
+
                     <!-- Logout button -->
                     <button 
                         class = "inline-block py-3 hover:bg-red-400 bg-[#28183e] font-semibold rounded-full w-full" 
@@ -221,6 +231,7 @@ export default {
 
                     this.posts = response.data.posts
                     this.user = response.data.user
+
                 })
                 .catch(error => {
                     console.log('error', error)

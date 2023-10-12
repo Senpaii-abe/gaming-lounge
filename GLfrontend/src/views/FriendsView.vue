@@ -8,7 +8,7 @@
             <div class="p-4 bg-purple_main rounded-full">
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
-                    <img src="https://i.pravatar.cc/300?img=70" class="w-[80px] rounded-img">
+                    <img :src="user.get_avatar" class="w-[80px] rounded-img">
                     <p class="font-semibold text-xl">{{ user.name }}</p>
                 </div>
                 <!-- charisma points nd posts-->
@@ -45,7 +45,7 @@
                     v-for="friendshipRequests in friendshipRequests"
                     v-bind:key="friendshipRequests.id"
                 >
-                    <img src="https://i.pravatar.cc/100?img=70" class=" mb-4 mx-auto rounded-full">
+                    <img :src="friendshipRequests.created_by.get_avatar" class=" mb-4 mx-auto rounded-full">
                                  
                      @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': friendshipRequests.created_by.id}}">{{ friendshipRequests.created_by.name }}</RouterLink>
                        
@@ -70,7 +70,7 @@
                     v-for="user in friends"
                     v-bind:key="user.id"
                 >
-                    <img src="https://i.pravatar.cc/100?img=70" class=" mb-4 mx-auto rounded-full">
+                    <img :src="user.get_avatar" class=" mb-4 mx-auto rounded-full">
                                  
                      @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
                        

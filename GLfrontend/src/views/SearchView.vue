@@ -21,7 +21,7 @@
                     v-for="user in users"
                     v-bind:key="user.id"
                 >
-                    <img src="https://i.pravatar.cc/300?img=70" class="mb-4 rounded-img">
+                    <img :src="user.get_avatar" class="mb-4 rounded-img">
                         
                                       
                     @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>                      

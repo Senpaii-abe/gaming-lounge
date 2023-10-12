@@ -2,7 +2,7 @@ from django.http import JsonResponse
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
-from .forms import SignupForm
+from .forms import SignupForm, ProfileForm
 from .models import User, FriendshipRequest
 from .serializers import UserSerializer, FriendshipRequestSerializer
 
@@ -12,6 +12,7 @@ def me(request):
         'id': request.user.id,
         'name': request.user.name,
         'email': request.user.email,
+        'avatar': request.user.get_avatar(),
     })
 
 @api_view(['POST'])
@@ -58,6 +59,25 @@ def friends(request, pk):
         'friends': UserSerializer(friends, many=True).data, 
         'requests': requests
     }, safe=False)
+
+
+@api_view(['POST'])
+def editprofile(request):
+    user = request.user
+    email = request.data.get('email')
+
+    if User.objects.exclude(id=user.id).filter(email=email).exists(): #to check if email is already used by other user
+        return JsonResponse({'message': 'email already exists'})
+    else: 
+        print(request.FILES)
+        print(request.POST)
+
+        form = ProfileForm(request.POST, request.FILES, instance=user) #instance - to save it to the user
+
+        if form.is_valid():
+            form.save()
+
+        return JsonResponse({'message': 'information updated'})
 
 @api_view(['POST']) #sending friend request
 def send_friendship_request(request, pk):

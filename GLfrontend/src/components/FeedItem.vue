@@ -3,7 +3,7 @@
     <div class="mb-4 flex items-center justify-between">
         <!-- username nd pfp -->
             <div class="flex items-center space-x-3">
-                <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-img">
+                <img :src="post.created_by.get_avatar" class="w-[45px] rounded-img">
                     <p class="font-medium">
                         <RouterLink :to="{name: 'profile', params:{'id': post.created_by.id}}">{{ post.created_by.name }}</RouterLink>
                     </p>

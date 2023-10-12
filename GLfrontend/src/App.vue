@@ -55,7 +55,7 @@
 											<button type="button" class="flex mr-3 text-sm rounded-img md:mr-0" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
 												<span class="sr-only">open user menu</span>
 												<RouterLink :to="{name: 'profile', params:{'id': userStore.user.id}}" >
-													<img class="w-10 h-10 rounded-img  hover:opacity-80" src="https://i.pravatar.cc/300?img=70" alt="user photo">
+													<img :src="userStore.user.avatar" class="w-10 h-10 rounded-img  hover:opacity-80">
 												</RouterLink> 
 											</button>
 											<!-- Dropdown menu -->
