@@ -1,6 +1,5 @@
 <template>
     <!-- comment-->
-    
     <div class="mb-2 flex items-center justify-between">
         <!-- username nd pfp -->
             <div class="flex items-center space-x-3">
@@ -15,8 +14,6 @@
 
     <p class="text-base/7 font-light">{{ comment.body }}</p>
  
-
-
 </template>
 
 <script>

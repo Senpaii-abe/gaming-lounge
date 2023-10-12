@@ -35,12 +35,12 @@ class Post(models.Model):
     
     attachments = models.ManyToManyField(PostAttachments, blank=True)
     
-    comments = models.ManyToManyField(Comment, blank=True)
-    comments_count = models.IntegerField(default=0)
-    
     likes = models.ManyToManyField(Like, blank=True)
     likes_count = models.IntegerField(default=0)
     
+    comments = models.ManyToManyField(Comment, blank=True)
+    comments_count = models.IntegerField(default=0)
+
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE) #all post will be deleted when this user is deleted
     

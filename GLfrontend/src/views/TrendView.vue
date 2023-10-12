@@ -34,7 +34,7 @@
                         </div>
                         <div class="flex items-center justify-between ">                                               
                             <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Phasmaphobia</a>
-                        </div>  
+                        </div>
                     </div>
             </div>
             <div class="p-4 bg-purple_main rounded-full">
@@ -60,7 +60,6 @@
                     <li class="p-1 hover:underline">                       
                         <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full"
                     alt="logo" />battle.net</a></li>
-            
                 </ul>
             </div>
         </div> 
@@ -69,16 +68,9 @@
             <!-- col-span-2: takes 2 of the 4 columns
                  space-y-4: 6 spaces each post -->
         <div class="px-4 main-center col-span-2 space-y-6">
-            <!-- write something -->
-            <div class="rounded-full bg-transparent space-y-1 text-right">
-                <form 
-                    v-on:submit.prevent="submitForm"
-                    method="post">
-                    <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
-                    <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</button>
-                </form>
-            </div>
-            <!-- post area -->     
+            <div class="p-4 bg-purple_main rounded-full">
+                <h2 class="text-xl">Trends: #{{ $route.params.id }}</h2>
+            </div> 
             <div class="p-4 bg-purple_main rounded-full"
                     v-for="post in posts" 
                     v-bind:key="post.id"> <!-- loop ng post -->
@@ -106,9 +98,9 @@
                     </a>
                 </li>
             </ul>
-            
-            <PeopleYouMayKnow />
-            <Trends />
+
+            <PeopleYouMayKnow/>
+            <Trends/>
         </div>
 
 
@@ -142,18 +134,28 @@ export default {
     data(){
         return {
             posts:[],
-            body: '',
         }
     },
     mounted(){
         this.getFeed()
     },
+
+    watch: {
+        '$route.params.id': {
+            handler: function() {
+                this.getFeed()
+            },
+            deep: true,
+            immediate: true 
+        }
+    },
+
     methods: 
     {
         getFeed()
         {
             axios
-                .get('/api/posts/')
+                .get(`/api/posts/?trend=${this.$route.params.id}`)
                 .then(response => {
                     console.log('data', response.data)
 
@@ -163,25 +165,25 @@ export default {
                     console.log('error', error)
                 })
         },
-        submitForm()
-        {
-            console.log('submitForm', this.body) //textarea v-model="body" 
+        // submitForm()
+        // {
+        //     console.log('submitForm', this.body) //textarea v-model="body" 
 
-            axios //sending to backend
-                .post('/api/posts/create/', 
-                {
-                    'body': this.body
-                })
-                .then(response =>{
-                    console.log('data', response.data)
+        //     axios //sending to backend
+        //         .post('/api/posts/create/', 
+        //         {
+        //             'body': this.body
+        //         })
+        //         .then(response =>{
+        //             console.log('data', response.data)
 
-                    this.posts.unshift(response.data)
-                    this.body = ''
-                })
-                .catch(error =>{
-                    console.log('error', error)
-                })
-        },
+        //             this.posts.unshift(response.data)
+        //             this.body = ''
+        //         })
+        //         .catch(error =>{
+        //             console.log('error', error)
+        //         })
+        // },
         search() 
         {
         // Redirect to the search page with the query as a URL parameter

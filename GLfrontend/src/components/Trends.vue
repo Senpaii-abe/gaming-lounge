@@ -15,7 +15,7 @@
                         </p>
                     </div>
 
-                    <a href="#" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</a>
+                    <RouterLink :to="{name: 'trendview', params: {id: trend.hashtag}}" class="py-2 px-3 bg-purple-600 text-white text-xs rounded-lg">Explore</RouterLink>
                 </div>
          </div>
     </div>
@@ -23,32 +23,30 @@
 
 <script>
 import axios from 'axios'
+import { RouterLink } from 'vue-router'
 
 export default{
     name: 'trends',
-
     data() {
         return {
             trends: []
-        }
+        };
     },
-    mounted(){
-        this.getTrends()
+    mounted() {
+        this.getTrends();
     },
-
     methods: {
         getTrends() {
             axios
                 .get('/api/posts/trends/')
-                .then(response =>{
-                    console.log(response.data)
-
-                    this.trends = response.data
-                })
+                .then(response => {
+                console.log(response.data);
+                this.trends = response.data;
+            })
                 .catch(error => {
-                    console.log('Error: ', error)
-                })
+                console.log('Error: ', error);
+            });
         }
-    }
+    },
 }
 </script>
