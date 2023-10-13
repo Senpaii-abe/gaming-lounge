@@ -9,31 +9,26 @@
                     Look no further - Gaming Lounge is the ultimate one-stop<br> hub for gaming fans. Connect and quest alongside casual and competitive gamers.
                 </p>
 
-                <RouterLink to ="/profile/edit/password" class=underline>
-                    Edit password
-                </RouterLink>
-
-
         </div>
         <!-- right part -->
         <div class="main-right py-28 justify-self-end">
             <h1 class="mb-14 font-bold tracking-wide text-6xl">
-                Edit<br>Profile
+                Edit<br>Password
             </h1>
             <form class="space-y-6 w-96" v-on:submit.prevent="submitForm">
                 <div>
-                    <!-- username -->
-                    <input type="text" v-model="form.name" placeholder="enter your username" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
-                </div>
-                <div>
-                    <!-- email -->
-                    <input type="email" v-model="form.email" placeholder="enter your email" class="bg-transparent w-full py-3 px-6 border font-white border-violet1 rounded-full">
+                    <!--old password -->
+                    <input type="password" v-model="form.old_password" placeholder="enter your old password" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
                 </div>
 
                 <div>
-                    <!-- avatar -->
-                    <label> AVATAR </label><br>
-                    <input type="file" ref="file">
+                    <!--new password -->
+                    <input type="password" v-model="form.new_password1" placeholder="enter your new password" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
+                </div>
+
+                <div>
+                    <!--confirm new password -->
+                    <input type="password" v-model="form.new_password2" placeholder="confirm your new password" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
                 </div>
 
                 <template v-if="errors.length > 0">
@@ -74,8 +69,9 @@ export default {
     data() {
         return {
             form: {
-                name: this.userStore.user.name,
-                email: this.userStore.user.email,        
+                old_password: '',
+                new_password1: '',
+                new_password2: '',
             },
             errors: [],
         }
@@ -87,42 +83,34 @@ export default {
 
             //validation of data
 
-
-            if (this.form.name === ''){
-                this.errors.push('your name is missing')
+            if (this.form.password1 !== this.form.password2){
+                this.errors.push('your password does not match')
             }
 
-            if (this.form.email === ''){
-                this.errors.push('your email is missing')
-            }
             if (this.errors.length === 0) {
-                let formData = new FormData() //avatar
-                formData.append('avatar', this.$refs.file.files[0])
-                formData.append('name', this.form.name)
-                formData.append('email', this.form.email)
+                //information to send to the backend
+                let formData = new FormData()
+                formData.append('old_password', this.form.old_password)
+                formData.append('new_password1', this.form.new_password1)
+                formData.append('new_password2', this.form.new_password2)
 
                 axios
-                    .post('/api/editprofile/', formData, {
+                    .post('/api/editpassword/', formData, {
                         headers: { // to let the backend know that there other content types or info
                             "Content-Type": "multipart/form-data",
                         }
                     })
                     .then(response => {
-                        if (response.data.message === 'information updated') {
+                        if (response.data.message === 'success') {
                             this.toastStore.showToast(5000, 'Profile Information Updated!','bg-emerald-500')
                             
-                            //update the user store in the browser 
-                            this.userStore.setUserInfo({
-                                id: this.userStore.user.id,
-                                name: this.form.name,
-                                email: this.form.email,
-                                avatar: response.data.user.get_avatar
-                            })
-                            
-                            //to go back to profile page after edit profile info
-                            this.$router.back()
+                            this.$router.push(`/profile/${this.userStore.user.id}`) //to go back to profile page after changing password
                         } else {
-                            this.toastStore.showToast(5000, `${response.data.message}. Please try again`, 'bg-red-300')
+                            const data = JSON.parse(response.data.message)
+
+                            for(const key in data){
+                                this.errors.push(data[key][0].message)
+                            }
                         }
                     })
                     .catch(error => {

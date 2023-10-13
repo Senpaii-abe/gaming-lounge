@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import JsonResponse
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -34,9 +35,11 @@ def signup(request):
 
         #send verification email later
     else:
-        message = 'error'
+        message = form.errors.as_json()
+    
+    print(message)
 
-    return JsonResponse({'message': message})
+    return JsonResponse({'message': message}, safe=False)
 
 
 @api_view(['GET']) #receiving friend request
@@ -69,15 +72,29 @@ def editprofile(request):
     if User.objects.exclude(id=user.id).filter(email=email).exists(): #to check if email is already used by other user
         return JsonResponse({'message': 'email already exists'})
     else: 
-        print(request.FILES)
-        print(request.POST)
 
         form = ProfileForm(request.POST, request.FILES, instance=user) #instance - to save it to the user
 
         if form.is_valid():
             form.save()
 
-        return JsonResponse({'message': 'information updated'})
+        serializer = UserSerializer(user) #set avatar in store when changing avatar
+
+        return JsonResponse({'message': 'information updated', 'user': serializer.data})
+
+@api_view(['POST'])
+def editpassword(request):
+    user = request.user #logged in user
+
+    form = PasswordChangeForm(data=request.POST, user=user) #request.POST is from the form data
+
+    if form.is_valid():
+        form.save()
+
+        return JsonResponse({'message': 'success'})
+
+    else:
+        return JsonResponse({'message': form.errors.as_json()}, safe=False)
 
 @api_view(['POST']) #sending friend request
 def send_friendship_request(request, pk):

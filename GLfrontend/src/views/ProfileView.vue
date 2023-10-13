@@ -249,6 +249,7 @@ export default {
 
                     this.posts.unshift(response.data)
                     this.body = ''
+                    this.user.posts_count += 1 //add post count automatically in frontend
                 })
                 .catch(error =>{
                     console.log('error', error)

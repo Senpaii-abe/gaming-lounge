@@ -58,8 +58,14 @@ def post_create(request):
         post = form.save(commit=False) #commit false so it wont go through the backend
         post.created_by = request.user
         post.save()
+
+        #to add in post count when user posts
+        user = request.user
+        user.posts_count = user.posts_count + 1
+        user.save()
         
         serializer = PostSerializer(post)
+
         return JsonResponse(serializer.data, safe=False)
     else:
         return JsonResponse({'error': 'add sumn here later..'})
