@@ -26,7 +26,7 @@ class Notification(models.Model):
     body = models.TextField()
     is_read = models.BooleanField(default=False)
     type_of_notification = models.CharField(max_length=50, choices=CHOICES_TYPE_OF_NOTIFICATION)
-    post = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
     created_by = models.ForeignKey(User, related_name='created_notifications', on_delete=models.CASCADE)
     created_for = models.ForeignKey(User, related_name='received_notifications', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

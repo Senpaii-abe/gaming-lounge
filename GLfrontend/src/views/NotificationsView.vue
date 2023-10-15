@@ -18,9 +18,22 @@
         <!-- post area -->     
         <div class="p-4 bg-purple_main rounded-full"
                 v-for="notification in notifications" 
-                v-bind:key="notification.id"> <!-- loop ng post -->
+                v-bind:key="notification.id"
+                v-if="notifications.length"
+            > <!-- loop ng notifications -->
+            
                 {{ notification.body }}
+
+                <button class="underline" @click="readNotification(notification)">
+                        read more
+                    </button>
         </div>
+
+        <div class="p-4 bg-purple_main rounded-full"
+                v-else
+        >
+            You don't have any unread notifications!
+        </div> 
     
     </div>
 
@@ -55,6 +68,29 @@ export default{
                 .catch(error => {
                     console.log('Error: ', error)
                 })
+        },
+
+        async readNotification(notification){
+            console.log('readNotification', notification.id)
+
+            await axios
+                .post(`/api/notifications/read/${notification.id}/`)
+                .then(response => {
+                    console.log(response.data)
+
+                    if (notification.type_of_notification == 'post_like' || notification.type_of_notification == 'post_comment') {
+                        //redirect user to post page
+                        this.$router.push({name: 'postview', params: {id: notification.post_id}})
+                    }
+                    else{
+                        //redirect to friends page
+                        this.$router.push({name: 'friends', params: {id: notification.created_for_id}})
+                    }
+                })
+                .catch(error => {
+                    console.log('Error: ', error)
+                })
+    
         }
     },
 }
