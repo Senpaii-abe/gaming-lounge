@@ -46,7 +46,7 @@
                     
                     <!-- edit profile button -->
                     <RouterLink
-                        class = "inline-block mr-2 py-3 hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
+                        class = "inline-block py-3 my-4 text-center hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
                         to="/profile/edit"
                         v-if="userStore.user.id === user.id"
                         >
@@ -107,7 +107,18 @@
                     v-on:submit.prevent="submitForm"
                     method="post">
                     <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
-                    <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</button>
+                    <div id="preview" v-if="url">
+                        <img :src="url" class="w-[80px] rounded-xl" />
+                    </div>
+
+                    <div class="p-2 border-t border-black justify-between">
+                        <label class="float-left active:bg-violet1 inline-block text-center w-36 p-2 bg-purple_main text-white rounded-full">
+                            <input type="file" ref="file" @change="onFileChange">
+                            Attach Image
+                        </label>
+                        <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</button>
+                    </div>
+                    
                 </form>
             </div>
             <!-- post -->     
@@ -134,6 +145,17 @@
     </div> 
 </template> 
 
+<style>
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+</style>
 
 <script>
 import axios from 'axios'
@@ -170,6 +192,7 @@ export default {
                 id: ''
             },
             body: '',
+            url: null,
         }
     }, 
     mounted(){
@@ -190,6 +213,11 @@ export default {
     // },
 
     methods: {
+        onFileChange(e){
+            const file = e.target.files[0];
+            this.url = URL.createObjectURL(file);
+        },
+
         sendDirectMessage() {
             console.log('sendDirectMessage')
 
@@ -238,17 +266,25 @@ export default {
                 })
         },
         submitForm(){
-            console.log('submitForm', this.body) //textarea v-model="body" 
+            console.log('submitForm', this.body) //textarea v-model="body"
+            let formData = new FormData() //image attachments
+            formData.append('image', this.$refs.file.files[0])
+            formData.append('body', this.body)
 
             axios //sending to backend
-                .post('/api/posts/create/', {
-                    'body': this.body
+                .post('/api/posts/create/', formData, {
+                    headers: 
+                    { 
+                        "Content-Type": "multipart/form-data",
+                    }
                 })
                 .then(response =>{
                     console.log('data', response.data)
 
                     this.posts.unshift(response.data)
                     this.body = ''
+                    this.$refs.file.value = null
+                    this.url = null
                     this.user.posts_count += 1 //add post count automatically in frontend
                 })
                 .catch(error =>{

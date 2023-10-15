@@ -4,8 +4,9 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 
 from account.models import User
 from account.serializers import UserSerializer
+from notification.utils import create_notification
 
-from .forms import PostForm
+from .forms import PostForm, AttachmentForm
 from .models import Post, Like, Comment, Trend
 from .serializers import PostSerializer, PostDetailSerializer, CommentSerializer, TrendSerializer
 
@@ -52,12 +53,25 @@ def post_list_profile(request, id):
 
 @api_view(['POST'])
 def post_create(request):
-    form = PostForm(request.data)
+    form = PostForm(request.POST)
+    attachment = None
+    attachment_form = AttachmentForm(request.POST, request.FILES)
+    
+    print(request.FILES)
+    
+    if attachment_form.is_valid():
+        attachment = attachment_form.save(commit=False)
+        attachment.created_by = request.user
+        attachment.save()
     
     if form.is_valid():
         post = form.save(commit=False) #commit false so it wont go through the backend
         post.created_by = request.user
         post.save()
+        
+        if attachment:
+            post.attachments.add(attachment)
+        
 
         #to add in post count when user posts
         user = request.user
@@ -80,7 +94,9 @@ def post_like(request, pk):
         post = Post.objects.get(pk=pk)
         post.likes_count = post.likes_count + 1
         post.likes.add(like)
-        post.save()
+        post.save() 
+        
+        notification = create_notification(request, 'post_like', post_id=post.id)
     
         return JsonResponse({'message': 'like created'})
     else:

@@ -59,7 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin): #user model for creating users f
         if self.avatar:
             return 'http://127.0.0.1:8000' + self.avatar.url
         else:
-            return ''
+            return 'https://picsum.photos/200/300'
 
 class FriendshipRequest(models.Model):
     SENT = 'sent'

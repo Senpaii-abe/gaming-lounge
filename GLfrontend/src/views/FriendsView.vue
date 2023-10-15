@@ -70,7 +70,7 @@
                     v-for="user in friends"
                     v-bind:key="user.id"
                 >
-                    <img :src="user.get_avatar" class=" mb-4 mx-auto rounded-full">
+                    <img :src="user.get_avatar" class="w-[80px] rounded-img">
                                  
                      @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
                        

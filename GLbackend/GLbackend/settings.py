@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'chat',
+    'notification',
     'post',
     'search',
     'rest_framework',

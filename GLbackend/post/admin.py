@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, PostAttachments
+from .models import Post, PostAttachment
 
 admin.site.register(Post)
-admin.site.register(PostAttachments)
+admin.site.register(PostAttachment)

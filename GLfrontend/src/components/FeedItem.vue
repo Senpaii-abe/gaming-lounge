@@ -3,7 +3,7 @@
     <div class="mb-4 flex items-center justify-between">
         <!-- username nd pfp -->
             <div class="flex items-center space-x-3">
-                <img :src="post.created_by.get_avatar" class="w-[45px] rounded-img">
+                <img :src="post.created_by.get_avatar" class="h-[40px] w-[40px] rounded-img">
                     <p class="font-medium">
                         <RouterLink :to="{name: 'profile', params:{'id': post.created_by.id}}">{{ post.created_by.name }}</RouterLink>
                     </p>
@@ -12,6 +12,9 @@
                     <p class="text-gray-400 text-xs font-light">{{ post.created_at_formatted}}</p> 
     </div>
 
+                    <template v-if="post.attachments.length">
+                        <img v-for="image in post.attachments" v-bind:key="image.id" :src="image.get_image" class="w-full mb-4 rounded-xl">
+                    </template>
                     <p class="text-base/7 font-light">{{ post.body }}</p>
 
 
