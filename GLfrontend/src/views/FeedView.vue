@@ -71,19 +71,14 @@
         <div class="px-4 main-center col-span-2 space-y-6">
             <!-- write something -->
             <div class="rounded-full bg-transparent space-y-1 text-right">
-                <form 
-                    v-on:submit.prevent="submitForm"
-                    method="post">
-                    <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
-                    <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</button>
-                </form>
+                <FeedForm v-bind:user="null" v-bind:posts="posts"/>
             </div>
             <!-- post area -->     
             <div class="p-4 bg-purple_main rounded-full"
                     v-for="post in posts" 
                     v-bind:key="post.id"> <!-- loop ng post -->
 
-                <FeedItem v-bind:post="post" />
+                <FeedItem v-bind:post="post" v-on:deletePost="deletePost"/>
             </div>
         </div>
         
@@ -122,6 +117,7 @@ import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import Trends from '../components/Trends.vue'
 import { useUserStore } from '@/stores/user'
 import FeedItem from '../components/FeedItem.vue'
+import FeedForm from '../components/FeedForm.vue'
 
 export default {
     name: 'FeedView',
@@ -138,6 +134,7 @@ export default {
         PeopleYouMayKnow,
         Trends,
         FeedItem,
+        FeedForm
     },
     data(){
         return {
@@ -163,29 +160,13 @@ export default {
                     console.log('error', error)
                 })
         },
-        submitForm()
-        {
-            console.log('submitForm', this.body) //textarea v-model="body" 
-
-            axios //sending to backend
-                .post('/api/posts/create/', 
-                {
-                    'body': this.body
-                })
-                .then(response =>{
-                    console.log('data', response.data)
-
-                    this.posts.unshift(response.data)
-                    this.body = ''
-                })
-                .catch(error =>{
-                    console.log('error', error)
-                })
-        },
         search() 
         {
         // Redirect to the search page with the query as a URL parameter
         this.$router.push({ name: 'search', query: { q: this.searchQuery } });
+        },
+        deletePost(id){
+            this.posts = this.posts.filter(post => post.id !== id)
         },
     }
 }

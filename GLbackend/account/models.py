@@ -1,6 +1,7 @@
 from typing import Any
 import uuid #unique identification for the users
 
+from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
 from django.utils.timesince import timesince
@@ -40,6 +41,9 @@ class User(AbstractBaseUser, PermissionsMixin): #user model for creating users f
     friends = models.ManyToManyField('self')
     friends_count = models.IntegerField(default=0)
     
+    
+    people_you_may_know = models.ManyToManyField('self')
+    
     posts_count = models.IntegerField(default=0)
 
     is_active = models.BooleanField(default=True) #checking if the user is active, soon set to false for verification
@@ -57,7 +61,7 @@ class User(AbstractBaseUser, PermissionsMixin): #user model for creating users f
 
     def get_avatar(self):
         if self.avatar:
-            return 'http://127.0.0.1:8000' + self.avatar.url
+            return settings.WEBSITE_URL + self.avatar.url
         else:
             return 'https://picsum.photos/200/300'
 

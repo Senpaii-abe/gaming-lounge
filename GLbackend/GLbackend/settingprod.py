@@ -20,9 +20,9 @@ SECRET_KEY = 'django-insecure-jh+b7d0#gd$i_sd(6$5z8tvq19gonwi4t4uky10=&y0t4yr$w6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api.glounge.com']
 
-WEBSITE_URL = 'http://127.0.0.1:8000'
+WEBSITE_URL = 'http://api.glounge.com'
 
 
 # application definition
@@ -49,11 +49,11 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
+    "http://glounge.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
+    "http://glounge.com",
 ]
 
 INSTALLED_APPS = [

@@ -8,7 +8,7 @@
             <div class="p-4 bg-purple_main rounded-full">
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
-                    <img :src="user.get_avatar" class="w-[80px] rounded-img">
+                    <img :src="user.get_avatar" class="w-[80px] rounded-img"> 
                     <p class="font-semibold text-xl">{{ user.name }}</p>
                 </div>
                 <!-- charisma points nd posts-->
@@ -32,7 +32,7 @@
                     <button 
                         class = "inline-block py-3 hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
                         @click="sendFriendshipRequest"
-                        v-if="userStore.user.id !== user.id"
+                        v-if="userStore.user.id !== user.id && can_send_friendship_request"
                         >
                         add friend
                     </button>
@@ -103,30 +103,14 @@
                 class="rounded-full bg-transparent space-y-1 text-right"
                 v-if="userStore.user.id === user.id"
                 >
-                <form 
-                    v-on:submit.prevent="submitForm"
-                    method="post">
-                    <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
-                    <div id="preview" v-if="url">
-                        <img :src="url" class="w-[80px] rounded-xl" />
-                    </div>
-
-                    <div class="p-2 border-t border-black justify-between">
-                        <label class="float-left active:bg-violet1 inline-block text-center w-36 p-2 bg-purple_main text-white rounded-full">
-                            <input type="file" ref="file" @change="onFileChange">
-                            Attach Image
-                        </label>
-                        <button class="active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">post</button>
-                    </div>
-                    
-                </form>
+                <FeedForm v-bind:user="user" v-bind:posts="posts"/>
             </div>
             <!-- post -->     
             <div class="p-4 bg-purple_main rounded-full"
                     v-for="post in posts" 
                     v-bind:key="post.id"> <!-- loop ng post -->
 
-                    <FeedItem v-bind:post="post" />
+                    <FeedItem v-bind:post="post" v-on:deletePost="deletePost" />
             </div>
         </div>
         
@@ -161,6 +145,7 @@ input[type="file"] {
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import Trends from '../components/Trends.vue'
+import FeedForm from '../components/FeedForm.vue'
 import FeedItem from '../components/FeedItem.vue'
 import { useUserStore } from '@/stores/user'
 import { useToastStore } from '@/stores/toast'
@@ -184,6 +169,7 @@ export default {
         PeopleYouMayKnow,
         Trends,
         FeedItem,
+        FeedForm
     },
     data(){
         return {
@@ -191,8 +177,7 @@ export default {
             user: {
                 id: ''
             },
-            body: '',
-            url: null,
+            can_send_friendship_request: null,
         }
     }, 
     mounted(){
@@ -213,9 +198,8 @@ export default {
     // },
 
     methods: {
-        onFileChange(e){
-            const file = e.target.files[0];
-            this.url = URL.createObjectURL(file);
+        deletePost(id){
+            this.posts = this.posts.filter(post => post.id !== id)
         },
 
         sendDirectMessage() {
@@ -238,6 +222,8 @@ export default {
                 .then(response => {
                     console.log('data', response.data)
 
+                    this.can_send_friendship_request = false
+
                     if (response.data.message == 'request already sent')
                     {
                         this.toastStore.showToast(5000, 'The request has already been sent', 'bg-red-400')
@@ -259,35 +245,10 @@ export default {
 
                     this.posts = response.data.posts
                     this.user = response.data.user
+                    this.can_send_friendship_request = response.data.can_send_friendship_request
 
                 })
                 .catch(error => {
-                    console.log('error', error)
-                })
-        },
-        submitForm(){
-            console.log('submitForm', this.body) //textarea v-model="body"
-            let formData = new FormData() //image attachments
-            formData.append('image', this.$refs.file.files[0])
-            formData.append('body', this.body)
-
-            axios //sending to backend
-                .post('/api/posts/create/', formData, {
-                    headers: 
-                    { 
-                        "Content-Type": "multipart/form-data",
-                    }
-                })
-                .then(response =>{
-                    console.log('data', response.data)
-
-                    this.posts.unshift(response.data)
-                    this.body = ''
-                    this.$refs.file.value = null
-                    this.url = null
-                    this.user.posts_count += 1 //add post count automatically in frontend
-                })
-                .catch(error =>{
                     console.log('error', error)
                 })
         },
