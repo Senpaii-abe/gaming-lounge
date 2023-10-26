@@ -32,8 +32,10 @@
 
                 <div>
                     <!-- avatar -->
-                    <label> AVATAR </label><br>
-                    <input type="file" ref="file">
+                    <label class="float-left active:bg-violet1 inline-block text-center w-36 p-2 bg-purple_main text-white rounded-full">
+                        <input type="file" ref="file" @change="onFileChange">
+                        Upload Image
+                    </label>
                 </div>
 
                 <template v-if="errors.length > 0">
