@@ -8,7 +8,7 @@
             <div class="p-4 bg-purple_main rounded-full">
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
-                    <img :src="user.get_avatar" class="w-[80px] rounded-img"> 
+                    <img :src="user.get_avatar" class="h-[80px] w-[80px] rounded-img"> 
                     <p class="font-semibold text-xl">{{ user.name }}</p>
                 </div>
                 <!-- charisma points nd posts-->
