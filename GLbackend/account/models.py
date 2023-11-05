@@ -16,7 +16,7 @@ class CustomUserManager(UserManager):
             raise ValueError("you have not provided a valid email address :<")
         
         email = self.normalize_email(email)
-        user =self.model(email=email, name=name, **extra_fields)
+        user =self.model(name=name, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
@@ -27,9 +27,10 @@ class CustomUserManager(UserManager):
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(name, email, password, **extra_fields)
     
-    def create_superuser(self, name=None, email=None, password=None, **extra_fields):
+    def create_superuser(self, email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+        name = input("Enter the name for the superuser: ")
         return self._create_user(name, email, password, **extra_fields)
     
 

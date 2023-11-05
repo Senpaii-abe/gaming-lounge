@@ -25,6 +25,14 @@ class Comment(models.Model):
         return timesince(self.created_at)
     
 
+# category can't be deleted if there is an existing post about it
+# class Category(models.Model):
+#     name = models.CharField(max_length=100)
+
+#     def __str__(self):
+#         return self.name
+    
+
 class PostAttachment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     image = models.ImageField(upload_to='post_attachments')
@@ -38,6 +46,9 @@ class PostAttachment(models.Model):
     
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    #user can't make post without category
+    #category = models.ForeginKey(Category, on_delete=models.PROTECT, default = 1)
     body = models.TextField(blank=True, null=True)
     
     attachments = models.ManyToManyField(PostAttachment, blank=True)
