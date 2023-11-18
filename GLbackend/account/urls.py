@@ -5,7 +5,6 @@ from . import api
 
 urlpatterns = [
     path('signup/', api.signup, name='signup'),
-    
-    path('login/', TokenObtainPairView.as_view(), name='token_obtain'), #changed from login/ to just / based on index.js -joey
+    path('/', TokenObtainPairView.as_view(), name='token_obtain'), #changed from login/ to just / based on index.js -joey
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
