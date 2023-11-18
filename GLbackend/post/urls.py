@@ -12,4 +12,7 @@ urlpatterns = [
     path('profile/<uuid:id>/', api.post_list_profile, name='post_list_profile'),
     path('create/', api.post_create, name='post_create'),
     path('trends/', api.get_trends, name='get_trends'),
+    path('get_gametitle/', api.get_gametitle, name='get_gametitle'),
+    # path('delete_post/', api.delete_post, name='delete_post'),
+    path('api/users/<uuid:user_id>/post_count/', api.get_user_post_count, name='user_post_count'),
 ]

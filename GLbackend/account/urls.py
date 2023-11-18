@@ -14,4 +14,8 @@ urlpatterns = [
     path('friends/<uuid:pk>/', api.friends, name='friends'),
     path('friends/<uuid:pk>/request/', api.send_friendship_request, name='send_friendship_request'),
     path('friends/<uuid:pk>/<str:status>/', api.handle_request, name='handle_request'),
+    path('update_user_preferences/<uuid:user_id>/', api.update_user_preferences, name='update_user_preferences'),
+    path('update_user_prefgametitle/<uuid:user_id>/', api.update_user_prefgametitle, name='update_user_prefgametitle'),
+    path('get_game_categories/', api.get_game_categories, name='get_game_categories'),
+    path('get_user/<uuid:user_id>/', api.get_user, name='get_user'),
 ]

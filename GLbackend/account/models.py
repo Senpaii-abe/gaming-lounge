@@ -6,8 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserM
 from django.db import models
 from django.utils.timesince import timesince
 from django.utils import timezone
-
-
+from django.contrib.auth import get_user_model
 
 
 class CustomUserManager(UserManager): 
@@ -41,7 +40,8 @@ class User(AbstractBaseUser, PermissionsMixin): #user model for creating users f
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
     friends = models.ManyToManyField('self')
     friends_count = models.IntegerField(default=0)
-    
+    pref_game_category = models.TextField(blank=True, null=True)
+    pref_game_titles = models.TextField(blank=True, null=True)
     
     people_you_may_know = models.ManyToManyField('self')
     
@@ -64,8 +64,8 @@ class User(AbstractBaseUser, PermissionsMixin): #user model for creating users f
         if self.avatar:
             return settings.WEBSITE_URL + self.avatar.url
         else:
-            return 'https://picsum.photos/200/300'
-
+            default_avatar_path = '/media/avatars/default.jpg'
+        return settings.WEBSITE_URL + default_avatar_path
 class FriendshipRequest(models.Model):
     SENT = 'sent'
     ACCEPTED = 'accepted'

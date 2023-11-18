@@ -12,6 +12,7 @@ import TrendView from '../views/TrendView.vue'
 import EditProfileView from '../views/EditProfileView.vue'
 import EditPasswordView from '../views/EditPasswordView.vue'
 import NotificationsView from '../views/NotificationsView.vue'
+import GamePopupView from '../views/GamePopupView.vue'
 
 
 
@@ -117,11 +118,17 @@ const router = createRouter({
       component: () => import('../views/VerificationView.vue')
     },
     {
+      path: '/gametitle',
+      name: 'gametitle',
+      component: () => import('../views/GamePopupView.vue')
+    },
+    {
       path: '/popup',
       name: 'popup',
       component: () => import('../views/PopupView.vue')
     },
-    
+
+
     {
       path: '/about',
       name: 'about',

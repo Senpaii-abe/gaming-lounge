@@ -10,6 +10,10 @@ from notification.utils import create_notification
 from .forms import SignupForm, ProfileForm
 from .models import User, FriendshipRequest
 from .serializers import UserSerializer, FriendshipRequestSerializer
+from post.models import GameTitle, Category
+import logging
+
+logger = logging.getLogger(__name__)
 
 @api_view(['GET'])
 def me(request):
@@ -18,6 +22,7 @@ def me(request):
         'name': request.user.name,
         'email': request.user.email,
         'avatar': request.user.get_avatar(),
+        'pref_game_category': request.user.pref_game_category
     })
 
 @api_view(['POST'])
@@ -140,19 +145,101 @@ def send_friendship_request(request, pk):
 @api_view(['POST']) #handle friend request
 def handle_request(request, pk, status):
     user = User.objects.get(pk=pk)
+    request_user = request.user
 
-    friendship_request = FriendshipRequest.objects.filter(created_for=request.user).get(created_by=user)
-    friendship_request.status = status
-    friendship_request.save()
+    friendship_request = FriendshipRequest.objects.filter(created_for=request_user, created_by=user).first()
+    if friendship_request:
+        if status == FriendshipRequest.ACCEPTED:
+            # Update friendship request status to 'accepted' and delete the request
+            friendship_request.status = status
+            friendship_request.save()
+            friendship_request.delete()
 
-    user.friends.add(request.user)
-    user.friends_count = user.friends_count = 1
-    user.save()
-    
-    request_user = request.user 
-    request_user.friends_count = request_user.friends_count + 1
-    request_user.save()
+            # Update friends and friends_count for both users
+            user.friends.add(request_user)
+            user.friends_count = user.friends.count()
+            user.save()
+
+            request_user.friends.add(user)
+            request_user.friends_count = request_user.friends.count()
+            request_user.save()
+
+            return JsonResponse({'message': 'Friend request accepted and updated successfully'}, status=200)
+        elif status == FriendshipRequest.REJECTED:
+            # Update friendship request status to 'rejected'
+            friendship_request.status = status
+            friendship_request.save()
+
+            return JsonResponse({'message': 'Friend request rejected'}, status=200)
+        else:
+            return JsonResponse({'error': 'Invalid status provided'}, status=400)
+    else:
+        return JsonResponse({'error': 'Friendship request not found'}, status=404)
 
     notification = create_notification(request, 'accepted_friendrequest', friendrequest_id=friendship_request.id)
+
+@api_view(['POST'])
+def update_user_preferences(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return JsonResponse(status=404)
+
+    selected_category = request.data.get('pref_game_category')
+    print('Received pref_game_category:', selected_category)  # Add this line for logging
     
-    return JsonResponse({'message': 'friend request updated'})
+    user.pref_game_category = selected_category
+    user.save()
+    
+    serializer = UserSerializer(user)
+    return JsonResponse(serializer.data)
+
+@api_view(['POST'])
+def update_user_prefgametitle(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return JsonResponse(status=404)
+
+    selected_titles = request.data.get('pref_game_titles')
+    print('Received pref_game_titles:', selected_titles)  # Add this line for logging
+
+    user.pref_game_titles = selected_titles
+    user.save()
+
+
+    serializer = UserSerializer(user)
+    return JsonResponse(serializer.data)
+
+@api_view(['GET'])
+def get_user(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+        user_data = {
+            'id': user.id,
+            'name': user.name,
+            'pref_game_category': user.pref_game_category,
+            # 'game_titles': []  # Add an empty list for game titles
+        }
+
+        # Get game titles associated with user's selected categories
+        if user.pref_game_category:
+            categories = user.pref_game_category.split(',')
+            game_titles = GameTitle.objects.filter(categories__game_category__in=categories)
+            user_data['game_titles'] = [{'id': title.id, 'title': title.title} for title in game_titles]
+
+        return JsonResponse(user_data)
+    except Exception as e:
+        logger.exception("Error in get_user view")
+        return JsonResponse({'error': str(e)}, status=500)
+
+def get_game_categories(request):
+    try:
+        categories = Category.objects.values('id', 'game_category')
+        return JsonResponse(list(categories), safe=False)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+    
+
+
+    

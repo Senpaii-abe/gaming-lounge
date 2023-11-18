@@ -21,12 +21,10 @@
                     v-for="user in users"
                     v-bind:key="user.id"
                 >
-                    <img :src="user.get_avatar" class="mb-4 rounded-img">
-                        
-                                      
+                    <img :src="user.get_avatar" class="mb-4 rounded-img h-24 w-24 sm:h-30 sm:w-30 object-cover">
+                           
                     @<RouterLink class="font-medium text-lg" :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>                      
                  
-
                     <div class="mt-2 mb-2 flex space-x-8 justify-around">
                         <p class="text-sm text-gray-400">{{ user.friends_count }} friends</p>
                         <p class="text-sm text-gray-400">{{ user.posts_count }} posts</p>

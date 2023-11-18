@@ -18,8 +18,8 @@
                         <label class="text-sm">posts</label>
                     </div>
                      <div class="font-semibold" >
-                        <p class="text-lg/none">120</p>
-                        <label class="text-sm">charisma</label>
+                        <p class="text-lg/none">{{  user.friends_count }}</p>
+                        <label class="text-sm">friends</label>
                     </div>
                 
                 </div>
@@ -142,27 +142,30 @@ export default {
 
     methods: {
         getFriends() {
-            axios
-                .get(`/api/friends/${this.$route.params.id}/`) //using ` for the js
-                .then(response => {
-                    console.log('data', response.data)
+        axios
+            .get(`/api/friends/${this.$route.params.id}/`)
+            .then(response => {
+                console.log('data', response.data)
 
-                    this.friendshipRequests = response.data.requests
-                    this.friends = response.data.friends
-                    this.user = response.data.user
-                })
-                .catch(error => {
-                    console.log('error', error)
-                })
-        },
+                this.friendshipRequests = response.data.requests
+                this.friends = response.data.friends
+                this.user = response.data.user
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
+    },
 
         handleRequest(status, pk){
-            console.log('handleRequest', status)
+            console.log('handleRequest', status);
 
             axios
                 .post(`/api/friends/${pk}/${status}/`)
                 .then(response => {
-                    console.log('data', response.data)
+                    console.log('data', response.data);
+
+                    this.friendshipRequests = this.friendshipRequests.filter(request => request.created_by.id !== pk);
+                    this.getFriends();
                 })
 
                 .catch(error => {

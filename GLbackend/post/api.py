@@ -1,5 +1,7 @@
 from django.db.models import Q
 from django.http import JsonResponse
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
@@ -8,27 +10,51 @@ from account.serializers import UserSerializer
 from notification.utils import create_notification
 
 from .forms import PostForm, AttachmentForm
-from .models import Post, Like, Comment, Trend
+from .models import Post, Like, Comment, Trend, GameTitle, Category
 from .serializers import PostSerializer, PostDetailSerializer, CommentSerializer, TrendSerializer
+from account.models import User
 
 @api_view(['GET'])
 def post_list(request):
+    # Extracting user preferences
+    user_pref_titles = request.user.pref_game_titles.split(',') if request.user.pref_game_titles else []
+    user_pref_titles = [int(title_id.strip('[]')) for title_id in user_pref_titles if title_id.strip('[]')] if user_pref_titles else []
+
+    user_pref_category = request.user.pref_game_category
+
     user_ids = [request.user.id]
-    
+
     for user in request.user.friends.all():
         user_ids.append(user.id)
-        
-    
-    posts = Post.objects.filter(created_by_id__in=list(user_ids))
-    
-    trend = request.GET.get('trend', '')
-    
-    if trend:
-        posts = posts.filter(body__icontains='#' + trend).filter(is_private=False)
-        
-    serializer = PostSerializer(posts, many=True)
 
-    return JsonResponse(serializer.data, safe=False)
+    # Query for posts based on user preferences
+    pref_posts = Post.objects.filter(is_private=False)
+    
+    if user_pref_titles:
+        pref_posts = pref_posts.filter(Q(game_title__id__in=user_pref_titles))
+    elif user_pref_category:
+        categories = user_pref_category.split(',')
+        pref_posts = pref_posts.filter(Q(game_title__categories__game_category__in=categories))
+
+    trend = request.GET.get('trend', '')
+
+    if trend:
+        pref_posts = pref_posts.filter(body__icontains='#' + trend)
+
+    # Query for posts from user's friends
+    friend_posts = Post.objects.filter(created_by_id__in=user_ids, is_private=False)
+
+    trend = request.GET.get('trend', '')
+
+    if trend:
+        friend_posts = friend_posts.filter(body__icontains='#' + trend)
+
+    # Combine the results
+    combined_posts = pref_posts | friend_posts
+
+    serializer = PostSerializer(combined_posts, many=True)
+
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def post_detail(request, pk):
@@ -36,12 +62,14 @@ def post_detail(request, pk):
     
     for user in request.user.friends.all():
         user_ids.append(user.id)
-        
     
-    post = Post.objects.filter(Q(created_by_id__in=list(user_ids))| Q(is_private=False)).get(pk=pk)
+    post = Post.objects.filter(Q(created_by_id__in=user_ids) | Q(is_private=False)).get(pk=pk)
+    
+    serialized_data = PostDetailSerializer(post).data
+    print(serialized_data)  # Check the console for the serialized data
     
     return JsonResponse({
-        'post': PostDetailSerializer(post).data
+        'post': serialized_data
     })
 
 @api_view(['GET'])
@@ -95,6 +123,14 @@ def post_create(request):
         post.created_by = request.user
         post.save()
         
+        # Assuming 'game_title' is a valid field in your Post model
+        game_title_id = request.POST.get('game_title')
+        if game_title_id:
+        # Assuming 'game_title' is a ForeignKey field in the Post model
+            post.game_title_id = game_title_id
+            
+        post.save()
+            
         if attachment:
             post.attachments.add(attachment)
         
@@ -146,10 +182,25 @@ def post_create_comment(request, pk):
 
 @api_view(['DELETE'])
 def post_delete(request, pk):
+    # Retrieve the post to be deleted and its creator
     post = Post.objects.filter(created_by=request.user).get(pk=pk)
-    post.delete()
-    
-    return JsonResponse({'message': 'post deleted'})
+    user = post.created_by
+
+    # Check if the post exists and if the user is the creator
+    if post:
+        if user == request.user:
+            # Delete the post
+            post.delete()
+            
+            # Update the user's post_count by subtracting 1
+            user.posts_count -= 1
+            user.save()
+
+            return JsonResponse({'message': 'Post deleted successfully'})
+        else:
+            return JsonResponse({'error': 'You do not have permission to delete this post'}, status=403)
+    else:
+        return JsonResponse({'error': 'Post not found'}, status=404)
 
 @api_view(['POST'])
 def post_report(request, pk):
@@ -164,4 +215,21 @@ def get_trends(request):
     serializer = TrendSerializer(Trend.objects.all(), many=True)
     
     return JsonResponse(serializer.data, safe=False)
-    
+
+@api_view(['GET'])
+def get_gametitle(request, *args, **kwargs):
+    try:
+        # Remove specific fields from the distinct call
+        game_titles = GameTitle.objects.values('id', 'title').distinct()
+        return JsonResponse(list(game_titles), safe=False)
+    except Exception as e:
+        print(f"Error in get_gametitle view: {str(e)}")
+        return JsonResponse({"error": str(e)}, status=500)
+
+def get_user_post_count(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+        post_count = user.posts_count
+        return JsonResponse({'posts_count': post_count})
+    except User.DoesNotExist:
+        return JsonResponse({'error': 'User not found'}, status=404)

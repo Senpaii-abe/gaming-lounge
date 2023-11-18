@@ -9,8 +9,11 @@
                     Look no further - Gaming Lounge is the ultimate one-stop<br> hub for gaming fans. Connect and quest alongside casual and competitive gamers.
                 </p>
 
-                <RouterLink to ="/profile/edit/password" class=underline>
+                <RouterLink to ="/profile/edit/password" class="underline text-lg">
                     Edit password
+                </RouterLink> <br>
+                <RouterLink to ="/popup" class="underline text-lg">
+                    Edit category & Game Titles
                 </RouterLink>
 
 

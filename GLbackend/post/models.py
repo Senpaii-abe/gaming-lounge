@@ -4,8 +4,10 @@ from django.conf import settings
 from django.db import models
 from django.utils.timesince import timesince
 from django.utils import timezone
-
+from django.apps import apps
 from account.models import User
+from django.contrib.auth import get_user_model
+from django.db import models
 
 class Like(models.Model): #can reuse for liking pages or what (universal)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -44,12 +46,18 @@ class PostAttachment(models.Model):
         else:
             return ''
     
+
+class Category(models.Model):
+    game_category = models.CharField(max_length=255)
+
+class GameTitle(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    categories = models.ManyToManyField(Category)
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
-    #user can't make post without category
-    #category = models.ForeginKey(Category, on_delete=models.PROTECT, default = 1)
     body = models.TextField(blank=True, null=True)
+    
+    game_title = models.ForeignKey(GameTitle, on_delete=models.PROTECT, blank=True, null=True)
     
     attachments = models.ManyToManyField(PostAttachment, blank=True)
     
@@ -75,3 +83,4 @@ class Post(models.Model):
 class Trend(models.Model):
     hashtag = models.CharField(max_length=255)
     occurences = models.IntegerField()
+

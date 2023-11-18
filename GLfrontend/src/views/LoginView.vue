@@ -77,47 +77,57 @@ export default {
             errors: []
         }
     },
+
     methods: {
-        async submitForm() {
-            this.errors = []
+            async submitForm() {
+                this.errors = [];
 
-            if (this.form.email === '') {
-                this.errors.push('your e-mail is missing')
-            }
+                if (this.form.email === '') {
+                this.errors.push('your e-mail is missing');
+                }
 
-            if (this.form.password === '') {
-                this.errors.push('your password is missing')
-            }
-
-            if (this.errors.length === 0) {
-                await axios
-                    .post('/api/login/', this.form)
-                    .then(response => {
-                        this.userStore.setToken(response.data)
-
-                        axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access;
-                    })
-                    .catch(error => {
-                        console.log('error', error)
-
-                        this.errors.push('The email or password is incorrect! Or the user is not activated!')
-                    })
+                if (this.form.password === '') {
+                this.errors.push('your password is missing');
                 }
 
                 if (this.errors.length === 0) {
-                
-                await axios
-                    .get('/api/me/')
-                    .then(response => {
-                        this.userStore.setUserInfo(response.data)
+                try {
+                    const response = await axios.post('/api/login/', this.form);
+                    this.userStore.setToken(response.data);
 
-                        this.$router.push('/feed')
-                    })
-                    .catch(error => {
-                        console.log('error', error)
-                    })
-            }
+                    if (response.data.new_user) {
+                    // New user logic (e.g., redirect to a topic selection page)
+                    this.$router.push('/popup');
+                    } else {
+                    axios.defaults.headers.common['Authorization'] =
+                        'Bearer ' + response.data.access;
+                    }
+                } catch (error) {
+                    console.log('error', error);
+                    this.errors.push(
+                    'The email or password is incorrect! Or the user is not activated!'
+                    );
+                }
+                }
+
+                if (this.errors.length === 0) {
+                try {
+                    const response = await axios.get('/api/me/');
+                    this.userStore.setUserInfo(response.data);
+
+                    // Check if pref_game_category is empty in the login response
+                    if (!response.data.pref_game_category) {
+                        // Redirect to /popup if pref_game_category is empty
+                        this.$router.push('/popup');
+                    } else {
+                        // Redirect to /feed if pref_game_category is not empty
+                        this.$router.push('/feed');
+                    }
+                } catch (error) {
+                    console.log('error', error);
+                }
+                }
+            },
         }
     }
-}
 </script>

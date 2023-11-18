@@ -110,7 +110,7 @@
                     v-for="post in posts" 
                     v-bind:key="post.id"> <!-- loop ng post -->
 
-                    <FeedItem v-bind:post="post" v-on:deletePost="deletePost" />
+                    <FeedItem :post="post" @postDeleted="handlePostDeleted" />
             </div>
         </div>
         
@@ -124,9 +124,7 @@
 
 
         </div>
-
-
-    </div> 
+    </div>
 </template> 
 
 <style>
@@ -180,8 +178,9 @@ export default {
             can_send_friendship_request: null,
         }
     }, 
-    mounted(){
-        this.getFeed()
+    mounted() {
+        this.getFeed();
+        this.getUserPostCount(); // Fetch and update user's post count
     },
     watch: {
         '$route.params.id': {
@@ -198,8 +197,17 @@ export default {
     // },
 
     methods: {
-        deletePost(id){
-            this.posts = this.posts.filter(post => post.id !== id)
+        deletePost(id) {
+            // Filter out the deleted post
+            this.posts = this.posts.filter(post => post.id !== id);
+        },
+
+        handlePostDeleted(deletedPostId) {
+            this.posts = this.posts.filter(post => post.id !== deletedPostId);
+            // Decrement the user's posts count
+            if (this.user) {
+                this.user.posts_count -= 1;
+            }
         },
 
         sendDirectMessage() {
@@ -218,7 +226,7 @@ export default {
         },
         sendFriendshipRequest() {
             axios
-                .post(`/api/friends/${this.$route.params.id}/request/`) 
+            .post(`/api/friends/${this.$route.params.id}/request/`) 
                 .then(response => {
                     console.log('data', response.data)
 
@@ -230,6 +238,11 @@ export default {
                     }
                     else{
                         this.toastStore.showToast(5000, 'The request was sent!', 'bg-emerald-500')
+                         // Update friends count if the request was successful
+                        if (response.data.request_accepted) {
+                             // Update friends count if the request was accepted
+                            this.user.friends_count += 1; // Increment friends count here
+                        }
                     }
                 })
                 .catch(error => {
@@ -251,6 +264,17 @@ export default {
                 .catch(error => {
                     console.log('error', error)
                 })
+        },
+        getUserPostCount() {
+            axios
+                .get(`/api/users/${this.$route.params.id}/post_count/`)
+                .then((response) => {
+                // Update the user's post count in the component state
+                this.user.posts_count = response.data.posts_count;
+                })
+                .catch((error) => {
+                console.error('Error fetching user post count', error);
+                });
         },
         logout() {
             console.log('Log out')
