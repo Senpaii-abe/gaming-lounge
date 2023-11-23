@@ -24,7 +24,7 @@
                 <!-- charisma points nd posts-->
                 <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-dark_purple rounded-full text-center">
                     <div>
-                        <p class="text-lg/none">182</p>
+                        <p class="text-lg/none"></p>
                         <label class="text-sm">posts</label>
                     </div>
                      <div class="font-semibold" >

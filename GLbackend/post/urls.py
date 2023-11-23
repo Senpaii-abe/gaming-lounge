@@ -1,0 +1,19 @@
+from django.urls import path
+
+from . import api
+
+urlpatterns = [
+    path('', api.post_list, name='post_list'),
+    path('<uuid:pk>/', api.post_detail, name='post_detail'),
+    path('<uuid:pk>/like/', api.post_like, name='post_like'),
+    # path('<uuid:pk>/unlike/', api.post_unlike, name='post_unlike'),
+    path('<uuid:pk>/comment/', api.post_create_comment, name='post_create_comment'),
+    path('<uuid:pk>/delete/', api.post_delete, name='post_delete'),
+    path('<uuid:pk>/report/', api.post_report, name='post_report'),
+    path('profile/<uuid:id>/', api.post_list_profile, name='post_list_profile'),
+    path('create/', api.post_create, name='post_create'),
+    path('trends/', api.get_trends, name='get_trends'),
+    path('get_gametitle/', api.get_gametitle, name='get_gametitle'),
+    # path('delete_post/', api.delete_post, name='delete_post'),
+    path('api/users/<uuid:user_id>/post_count/', api.get_user_post_count, name='user_post_count'),
+]

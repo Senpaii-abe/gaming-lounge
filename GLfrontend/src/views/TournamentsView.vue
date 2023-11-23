@@ -61,7 +61,7 @@
                 <!-- mid part - posted image/text -->
                     <!-- <img src="https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2670&amp;q=80" class="w-full rounded-full"> -->
 
-                    <p class="text-base/7 font-light">Alamano moments lods...</p>
+                    <p class="text-base/7 font-light">THIS PAGE IS UNDER CONSTRUCTION!!!!!</p>
                 <!-- lower part ng post -->
                 <div class="mt-6 flex justify-between">
                     <div class="flex space-x-6">
