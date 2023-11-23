@@ -31,9 +31,22 @@
             $('#bootstrapdatatable').DataTable({
                 "aLengthMenu": [[5,10,15,20,-1], [5,10,15,20,"All"]],
                 "iDisplayLength":5
-            })
+            });
+
+            $('#checkall').click(function() {
+                $('.checkthis').prop('checked', this.checked);
+            });
+
+            $('.checkthis').click(function() {
+                if ($('.checkthis:checked').length == $('.checkthis').length) {
+                    $('#checkall').prop('checked', true);
+                } else {
+                    $('#checkall').prop('checked', false);
+                }
+            });
         })
     </script>
+
 </body>
 {% endblock body %}
 

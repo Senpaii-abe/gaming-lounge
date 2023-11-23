@@ -33,7 +33,7 @@
                         </div>
                         <div class="analytic-info">
                             <h4>Discussions</h4>
-                            <h1>--</h1>
+                            <h1>{{ discussion_posts }}</h1>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="analytic-info">
                             <h4>Connect</h4>
-                            <h1>--</h1> 
+                            <h1>{{ connect_posts }}</h1> 
                         </div>
                     </div>
     
@@ -57,7 +57,7 @@
                         </div>
                         <div class="analytic-info">
                             <h4>Marketplace</h4>
-                            <h1>--</h1>
+                            <h1>{{ marketplace_posts }}</h1>
                         </div>
                     </div>
             </section>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="analytic-info">
                             <h4>Tournament</h4>
-                            <h1>--</h1> 
+                            <h1>{{ tournament_posts }}</h1> 
                         </div>
                     </div>
     
@@ -89,7 +89,8 @@
             <div class="table-box">
                 <section>
                     <div class="">
-                        <span><a href="{% url 'add_user' %}" class="btn btn-main btn-span">Add New User</a></span>
+                        <span><a href="{% url 'add_post' %}" class="btn btn-main btn-span">CREATE POST</a></span>
+                        <span><a href="" class="btn btn-main btn-span">DELETE POST</a></span>
                     </div>
                     
                 </section>
@@ -104,11 +105,11 @@
                                     <th>Game Title</th>
                                     <th>Date Posted</th>
                                     <th>Author</th>
-                                    <th>Likes</th>
+                                    <th>No. of Likes</th>
                                     <th>No. of Comments</th>
                                     <th>Privacy</th>
                                     <th>Menu</th>
-                                    <th>Link</th>
+                                    <th>Post Url</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </thead>
@@ -118,16 +119,20 @@
                                         <td><input type="checkbox" class="checkthis" /></td>
                                         <td>{{ post.id }} </td>
                                         <td>{{ post.body }}</td>
-                                        <td>{{ post.game_title }}</td>
+                                        <td>{{ post.game_title.title }}</td>
                                         <td>{{ post.created_at}}</td>
-                                        <td>{{ post.created_by }}</td>
-                                        <td>{{ post.comments_count }}</td>
+                                        <td>{{ post.created_by.name }}</td>
                                         <td>{{ post.likes_count }}</td>
+                                        <td>{{ post.comments_count }}</td>
                                         <td>{% if post.is_private %} Private {% else %} Public {% endif %}</td>
                                         <td>{{ post.menu }}</td>
                                         <td>{{ post.post_url }}</td>
-                                        <td><a href="" class="btn btn-primary">Edit</a></td>
-                                        <td><a href="" class="btn btn-primary">Delete</a></td>
+                                        <td><a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a></td>
+                                        <td><form method="post" action="{% url 'delete_post' post.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

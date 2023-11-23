@@ -303,10 +303,10 @@ main{
 }
 
 .section-head {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: var(--main-text);
-    font-weight: 600;
-    margin-bottom: 1rem;
+    font-weight: 700;
+    margin: 1rem;
 }
 
 .block-grid {
@@ -416,13 +416,12 @@ main{
 
 .table-box {
     box-shadow: var(--shadow);
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     border-radius: 10px;
-    padding-left: 2rem;
 }
 
 .table-data {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .overlay {
@@ -494,4 +493,10 @@ main{
     .header-title p {
         display: none;
     }
+}
+
+/* USERS */
+
+.edit-button {
+    font-size: 30px;
 }
