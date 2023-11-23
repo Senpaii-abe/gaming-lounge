@@ -1,0 +1,25 @@
+
+{% block title %} ADD POST IN GAMING LOUNGE'S FEED {% endblock title %}
+
+{% block content %}
+
+<form method="post" class="add-box">
+    {% csrf_token %}
+    
+    <label for="id_game_title">Game Title:</label><br>
+    <select id="id_game_title" name="game_title">
+        {% for game_title in form.fields.game_title.queryset %}
+            <option value="{{ game_title.id }}">{{ game_title.title }}</option>
+        {% endfor %}
+    </select><br>
+    
+    <label for="id_menu">Menu: {{ form.menu }}</label><br>
+
+    
+    <label for="id_body">Body:</label><br>
+    <textarea id="id_body" name="body" rows="12" cols="100"></textarea><br>
+    
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock content %}
