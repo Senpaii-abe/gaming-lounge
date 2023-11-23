@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}ADD NEW G-LOUNGE USERS{% endblock title %}
+
+{% block content %}
+<div class="add-box">
+    <form method="POST" class="add-form">
+    {% csrf_token %}
+    <div class="add-container">
+        <h3>ENTER USER INFORMATION</h3>
+        <div class="add-form">
+            <label for ="id_name">Name:</label>
+            {{ form.name }}
+        </div>
+        <div class="add-form">
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+        </div>
+        <div class="add-form">
+            <label for="id_password1">Password:</label>
+            {{ form.password1 }}
+        </div>
+        <div class="add-form">
+            <label for="id_password2">Confirm Password:</label>
+            {{ form.password2 }}
+        </div>
+        <div class="add-form">
+            <button type="submit" class="btn btn-main">SUBMIT</button>
+        </div>
+    </div>
+    </form>
+
+</div>
+
+
+{% endblock content %}

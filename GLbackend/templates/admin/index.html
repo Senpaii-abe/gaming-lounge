@@ -1,0 +1,124 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<header>
+    <div class="header-title-wrapper">
+        <label for="menu-toggle">
+            <span class="las la-bars"></span>
+        </label>
+        <div class="header-title">
+            <h1>DASHBOARD <span class="las la-chart-line"></span></h1>               
+        </div>
+    </div>
+    <div class="header-action">
+        <button class="btn btn-main">
+            <span class="las la-video"></span>
+            UPLOAD
+        </button>
+    </div>
+</header>
+
+        <main>
+            <section>
+                <h3 class="section-head">Overview</h3>
+                <div class="analytics">
+                    <div class="analytic">
+                        <div class="analytic-icon">
+                            <span class="las la-eye"></span>
+                        </div>
+                        <div class="analytic-info">
+                            <h4>TOTAL USERS</h4>
+                            <h1>{{ total_users_count }}</h1> 
+                        </div>
+                    </div>
+    
+                    <div class="analytic">
+                        <div class="analytic-icon">
+                            <span class="las la-clock"></span>
+                        </div>
+                        <div class="analytic-info">
+                            <h4>TOTAL POSTS</h4>
+                            <h1>{{ total_posts_count }}</h1>
+                        </div>
+                    </div>
+    
+                    <div class="analytic">
+                        <div class="analytic-icon">
+                            <span class="las la-users"></span>
+                        </div>
+                        <div class="analytic-info">
+                            <h4>SUBSCRIBERS</h4>
+                            <h1>00 <small class="text-success">5%</small></h1>
+                        </div>
+                    </div>
+    
+                    <div class="analytic">
+                        <div class="analytic-icon">
+                            <span class="las la-heart"></span>
+                        </div>
+                        <div class="analytic-info">
+                            <h4>TOTAL LIKES</h4>
+                            <h1>00 <small class="text-danger">5%</small></h1>
+                        </div>
+                    </div>
+    
+                </div>
+
+            </section>
+
+            <section>
+                <div class="block-grid">
+                    <div class="revenue-card">
+                        <h3 class="section-head">Recent</h3>
+                        <div class="rev-content">
+                                <div class="rev-info">
+                                    <h3>POSTS</h3>
+                                    <h1>{{ posts_count_week }} <small>today</small></h1>
+                                </div>
+                                <div class="rev-sum">
+                                    <h4>blank</h4>
+                                    <h2></h2>
+                                </div>
+                        </div>
+                        <div class="rev-content">
+                            <div class="rev-info">
+                                <h3>USERS</h3>
+                                <h1>{{ users_count_week }} <small>today</small></h1>
+                            </div>
+                            <div class="rev-sum">
+                                <h4>blank</h4>
+                                <h2>blank</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="graph-card">
+                        <h3 class="section-head">Graph</h3>
+                        <div class="graph-content">
+                            <div class="graph-head">
+                                <div class="icons-wrapper">
+                                    <div class="icon">
+                                        <span class="las la-eye text-main"></span>
+                                    </div>
+                                    <div class="icon">
+                                        <span class="las la-clock text-success"></span>
+                                    </div>
+                                </div>
+                                <div class="graph-select">
+                                    <select name="" id="">
+                                        <option value="weekly">weekly</option>
+                                        <option value="monthly">Monthly (November)</option>
+                                    </select>
+                                </div>
+                            </div>
+                                <div class="graph-board">
+                                    <canvas id="revenueChart" width="100%" ></canvas>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+{% endblock content %}

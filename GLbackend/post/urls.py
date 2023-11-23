@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import api
+from . import api, views
 
 urlpatterns = [
     path('', api.post_list, name='post_list'),
@@ -16,4 +16,8 @@ urlpatterns = [
     path('get_gametitle/', api.get_gametitle, name='get_gametitle'),
     # path('delete_post/', api.delete_post, name='delete_post'),
     path('api/users/<uuid:user_id>/post_count/', api.get_user_post_count, name='user_post_count'),
+
+    #admin
+    path('gl-posts/', views.admin_posts, name='admin_posts'),
+    path('gl-posts/reported', views.reported_posts, name='reported_posts'),
 ]

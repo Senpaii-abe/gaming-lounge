@@ -3,8 +3,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-
-from account.views import activateemail
+from dashboard import views
+from account import views
 
 
 urlpatterns = [
@@ -13,16 +13,15 @@ urlpatterns = [
     path('api/search/', include('search.urls')),
     path('api/chat/', include('chat.urls')),
     path('api/notifications/', include('notification.urls')),
-    path('activateemail/', activateemail, name='activateemail'),
+    path('activateemail/', views.activateemail, name='activateemail'),
 
     #admin
-    path('admin/', admin.site.urls),
+    path('admin/', include('account.urls')),
+    path('admin/', include('dashboard.urls')),
+    path('admin/', include('post.urls')),
+    # path('getChartData/', views.get_chart_data, name='get_chart_data'),
 
     # if you're intending to use the browsable API you'll probably also want to add REST framework's login and logout views. uncomment the code below to enable this feature
     #   path('api-auth/', include('rest_framework.urls')) 
 ] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-#overriding headers
-admin.site.index_title = "Gaming Lounge"
-admin.site.site_header = "G-Lounge Admin Panel"
-admin.site.site_title = "Admin Panel"

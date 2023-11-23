@@ -1,0 +1,94 @@
+{% load static %}
+
+<input type="checkbox" name="" id="menu-toggle">
+<div class="overlay">
+    <label for="menu-toggle"></label>
+</div>
+
+
+    <div class="sidebar">
+        <div class="sidebar-container">
+            <div class="brand">
+                <h3>
+                    <img src="{% static 'admin/media/logo/gl_logo.png' %}"alt="logo">
+                        GAMING LOUNGE
+                </h3>
+            </div>
+
+            <div class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="{% url 'dashboard' %}" class="">
+                            <span class="las la-adjust"></span>
+                            <span>DASHBOARD</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'admin_users' %}" class="">
+                            <span class="las la-adjust"></span>
+                            <span>USERS</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'admin_posts' %}" class="">
+                            <span class="las la-adjust"></span>
+                            <span>POSTS</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'reported_posts' %}" class="">
+                            <span class="las la-adjust"></span>
+                            <span>REPORTED POSTS</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="">
+                            <span class="las la-adjust"></span>
+                            <span>BETA-TESTING</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="sidebar-avartar">
+                <div>
+                    {% if admin_avatar %}
+                        <img src="{{ admin_avatar.url }}" alt="Admin Avatar">
+                    {% else %}
+                        <!-- If there's no avatar set, display a default placeholder image -->
+                        <img src="{% static 'media/dp.jpg' %}" alt="Default Avatar">
+                    {% endif %}
+                </div>
+                <div class="avartar-info">
+                    <div class="avartar-text">
+                        <h4>{{ admin_name }}</h4>
+                        <small>{{ admin_email }}</small>
+                        <div edit-avartar>
+                            <a href="{% url 'edit_profile' %}">
+                                <span class="la-edit"></span>
+                                <span>Edit Information</span>
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class='logout'>
+                <a href="{% url 'logout' %}">
+                    <span class ="las la-sign-out-alt"></span>
+                    <span>Logout</span>
+                </a>
+            </div>
+            {% comment %} <div class="sidebar-card">
+                <div class="side-card-icon">
+                    <span class="lab la-codiepie"></span>
+                </div>
+                <div>
+                    <h4>ETC ETC</h4>
+                </div>
+                <button class="btn btn-main btn-block">CLICK HERE</button>
+            </div>  {% endcomment %}
+        </div>
+    </div>
+

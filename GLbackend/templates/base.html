@@ -1,0 +1,40 @@
+{% load static %}
+
+{% block html %}
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1">
+    <title>G-LOUNGE ADMIN DASHBOARD</title>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{% static 'admin/css/style.css'%}">
+ </head>
+{% endblock head %}
+
+{% block body %}
+<body>
+    {% include 'admin/includes/sidebar.html' %}
+    <div class = "main-content">
+        {% block content %} {% endblock content %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    
+    {% comment %} DATA TABLE {% endcomment %}
+    <script>
+        $(document).ready(function() {
+            $('#bootstrapdatatable').DataTable({
+                "aLengthMenu": [[5,10,15,20,-1], [5,10,15,20,"All"]],
+                "iDisplayLength":5
+            })
+        })
+    </script>
+</body>
+{% endblock body %}
+
+{% endblock html %}

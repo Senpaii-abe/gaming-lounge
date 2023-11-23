@@ -1,0 +1,40 @@
+<!-- edit_profile.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ profile_form.non_field_errors }}
+
+        <div>
+            {{ profile_form.name.errors }}
+            <label for="id_name">Name:</label>
+            {{ profile_form.name }}
+        </div>
+        <div>
+            {{ profile_form.email.errors }}
+            <label for="id_email">Email:</label>
+            {{ profile_form.email }}
+        </div>
+        <div>
+            {{ profile_form.avatar.errors }}
+            <label for="id_avatar">Avatar:</label>
+            {{ profile_form.avatar }}
+        </div>
+
+        <input type="submit" value="Save Changes">
+    </form>
+
+    <div>
+        <a href="{% url 'change_password' %}">
+            <button>Change Password</button>
+        </a> 
+    </div>
+</body>
+</html>

@@ -27,5 +27,6 @@ coverage
 *.sln
 *.sw?
 __pycache__ /
-
+/node_modules
+node_modules/
 

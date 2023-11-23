@@ -33,7 +33,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 WEBSITE_URL = 'http://127.0.0.1:8000'
-
+LOGIN_URL = 'admin_login'
+LOGOUT_REDIRECT_URL = 'admin_login'
 
 # application definition
 
@@ -78,6 +79,7 @@ INSTALLED_APPS = [
     'notification',
     'post',
     'search',
+    'dashboard',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -188,7 +190,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS =[os.path.join(BASE_DIR, 'static')]
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type

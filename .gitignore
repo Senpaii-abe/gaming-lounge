@@ -1,3 +1,5 @@
 joeyenv/
 alelhyenv/
 mackie_envi/
+__pycache__ /
+/node_modules
