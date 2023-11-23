@@ -9,7 +9,7 @@
                         Look no further - Gaming Lounge is the ultimate one-stop<br> hub for gaming fans. Connect and quest alongside casual and competitive gamers.
                     </p>
                     <p class="font-medium text-xl">
-                    already have an account? <RouterLink to="/Login" class="font-semibold active:text-blue_link underline">click here </RouterLink> to login!
+                    already have an account? <RouterLink to="/" class="font-semibold active:text-blue_link underline">click here </RouterLink> to login!
                     </p>
             </div>
             <!-- right part -->
@@ -24,7 +24,7 @@
                     </div>
                     <div>
                         <!-- email -->
-                        <input type="email" v-model="form.email" placeholder="enter your email" class="bg-transparent w-full py-3 px-6 border border-violet1 rounded-full">
+                        <input type="email" v-model="form.email" placeholder="enter your email" class="bg-transparent w-full py-3 px-6 border font-white border-violet1 rounded-full">
                     </div>
                     <div>
                         <!-- password -->
@@ -36,8 +36,10 @@
                     </div>
 
                     <template v-if="errors.length > 0">
-                        <div class="bg-red-300 text-white rounded-lg p-6">
-                            <p v-for="error in errors" v-bind:key="error">{{ error }}</p>                        </div>
+                        <div class="bg-red-400 text-white rounded-lg p-6">
+                            <p v-for="error in errors" v-bind:key="error">{{ error }}
+                            </p>                        
+                        </div>
                     </template>
 
                     <div class="space-y-2">
@@ -72,8 +74,8 @@ export default {
     data() {
         return {
             form: {
-                email: '',
                 name: '',
+                email: '',            
                 password1: '',
                 password2: '',
             },
@@ -103,20 +105,28 @@ export default {
                 this.errors.push('Your password does not match')
             }
 
-            if (this.errors.length === 0){
+            if (this.errors.length === 0) {
                 axios
                     .post('/api/signup/', this.form)
                     .then(response => {
                         if (response.data.message === 'success') {
-                            this.toastStore.showToast(5000, 'The user is registered. Please log in ', 'bg-emerald-500')
-    
-                            this.form.email = ''
+                            this.toastStore.showToast(5000, 'The user is registered. Please activate your account by clicking your email link','bg-emerald-500')
+                            
+
                             this.form.name = ''
+                            this.form.email = ''
                             this.form.password1 = ''
                             this.form.password2 = ''
 
+                            
                         } else {
-                            this.toastStore.showToast(5000, 'Something went wrong. Please try again','bg-red-300')
+                            // signup error
+                            const data = JSON.parse(response.data.message)
+                            for(const key in data){
+                                this.errors.push(data[key][0].message)
+                            }
+                            
+                            this.toastStore.showToast(5000, 'Something went wrong. Please try again', 'bg-red-300')
                         }
                     })
                     .catch(error => {

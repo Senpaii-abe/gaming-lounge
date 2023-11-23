@@ -15,7 +15,7 @@ export const useToastStore = defineStore({
         showToast(ms, message, classes) {
             this.ms = parseInt(ms)
             this.message = message
-            this.classes = classes.actions
+            this.classes = classes
             this.isVisible = true
 
             setTimeout(() => {
