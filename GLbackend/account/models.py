@@ -66,6 +66,7 @@ class User(AbstractBaseUser, PermissionsMixin): #user model for creating users f
         else:
             default_avatar_path = '/media/avatars/default.jpg'
         return settings.WEBSITE_URL + default_avatar_path
+        
 class FriendshipRequest(models.Model):
     SENT = 'sent'
     ACCEPTED = 'accepted'
@@ -76,7 +77,6 @@ class FriendshipRequest(models.Model):
         (ACCEPTED, 'accepted'),
         (REJECTED, 'rejected'),
     )
-
 
     id = models.UUIDField(primary_key=True, default = uuid.uuid4, editable = False)
     created_at = models.DateTimeField(auto_now_add=True) 
