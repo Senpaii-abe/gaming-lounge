@@ -130,7 +130,8 @@ import FeedForm from '../components/FeedForm.vue'
 export default {
     name: 'FeedView',
 
-
+    emits: ['postDeleted'],
+    
     setup() {
         const userStore = useUserStore()
 

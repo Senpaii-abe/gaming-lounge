@@ -6,10 +6,19 @@
                 <option value="" disabled>Select a game title...</option>
                 <option v-for="title in gameTitles" :key="title.id" :value="title.id">{{ title.title }}</option>
             </select>
+
+            <select v-model="menu" class="mb-2 float-left px-2 w-55 bg-purple_main rounded-full text-white">
+              <option value="" disabled>where to post</option>
+              <option v-for="choice in menuChoices">{{ choice }}</option>
+            </select>
             <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
             <div v-if="gameTitleError" class="text-red-500 mb-2">
               <p>Please select a game title before posting.</p>
             </div>
+
+            
+           
+
             <div v-if="contentError" class="text-red-500 mb-2">
               <p>Please provide a description about your post.</p>
             </div>
@@ -55,6 +64,9 @@ export default {
       url: null,
       game_title: '',
       gameTitles: [],
+      
+      menuChoices: ['Discussions', 'Marketplace', 'Connect', 'Tournament', 'Beta Testing'],
+      menu: '',
       gameTitleError: false, // Added error flag for game title validation
       contentError: false, // New error flag for post content
       error: null, //profcheck
@@ -90,6 +102,7 @@ export default {
       formData.append('body', this.body);
       formData.append('is_private', this.is_private);
       formData.append('game_title', this.game_title);
+      formData.append('menu', this.menu);
 
       axios
         .post('/api/posts/create/', formData, {
@@ -124,7 +137,8 @@ export default {
             this.is_private = false;
             this.$refs.file.value = null;
             this.url = null;
-            this.game_title = null; // Reset to null instead of empty string
+            this.game_title = ''; // Reset to null instead of empty string
+            this.menu = '';
         },
         async fetchGameTitles() {
             try {

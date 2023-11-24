@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from sklearn import logger
 
 from account.models import User, FriendshipRequest
 from account.serializers import UserSerializer
@@ -112,7 +113,8 @@ def post_create(request):
     form = PostForm(request.POST)
     attachment = None
     attachment_form = AttachmentForm(request.POST, request.FILES)
-    body = request.data.get("body") #profcheck
+    body = request.data.get("body") #profcheck\
+    
     
     print(request.FILES)
     
@@ -127,16 +129,16 @@ def post_create(request):
     if form.is_valid():
         post = form.save(commit=False) #commit false so it wont go through the backend
         post.created_by = request.user
+        post.menu = request.data.get('menu')
         post.save()
         
         # Assuming 'game_title' is a valid field in your Post model
         game_title_id = request.POST.get('game_title')
         if game_title_id:
         # Assuming 'game_title' is a ForeignKey field in the Post model
-            post.game_title_id = game_title_id
-            
+            post.game_title_id = game_title_id 
         post.save()
-            
+        
         if attachment:
             post.attachments.add(attachment)
         
@@ -150,7 +152,8 @@ def post_create(request):
 
         return JsonResponse(serializer.data, safe=False)
     else:
-        return JsonResponse({'error': 'add sumn here later..'})
+        print(form.errors)
+        return JsonResponse({'error': 'form not valid'}, status = 400)
     
 @api_view(['POST'])
 def post_like(request, pk):

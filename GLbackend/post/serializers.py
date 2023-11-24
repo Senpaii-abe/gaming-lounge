@@ -15,17 +15,19 @@ class GameTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = GameTitle
         fields = ['title']
+
 class PostSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
     attachments = PostAttachmentSerializer(read_only=True, many=True)
     game_title = GameTitleSerializer(read_only=True)
-    
+    menu = serializers.CharField(read_only=True)
     class Meta:
         model = Post
         fields = (
             'id', 'body', 'is_private', 'likes_count', 'comments_count', 'created_by',
-            'created_at_formatted', 'attachments', 'game_title', 'post_url')
-    
+            'created_at_formatted', 'attachments', 'game_title', 'post_url','menu')
+        
+
     
 class CommentSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)

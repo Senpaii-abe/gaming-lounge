@@ -15,7 +15,9 @@
 
 
     <p class="mb-4 text-base/7 font-bold">{{ post.game_title ? post.game_title.title : 'No Game Title' }}</p>
+    <!--  -->
     <p class="mb-4 text-base/7 font-light">{{ post.body }}</p>
+
     <template v-if="post.attachments && post.attachments.length">
         <img v-for="image in post.attachments" :key="image.id" :src="getCorrectImageUrl(image.get_image)"
             class="w-full mb-4 rounded-xl">
@@ -147,7 +149,7 @@ export default {
         post: Object
     },
 
-    emits: ['deletePost'],
+    emits: ['postDeleted'],
 
     setup() {
         const userStore = useUserStore()

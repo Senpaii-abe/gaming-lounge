@@ -4,14 +4,13 @@ from .models import Post, PostAttachment, GameTitle
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['body', 'game_title', 'menu']
+        fields = ['body', 'game_title']
         
-    menu = forms.ChoiceField(choices=Post.MENU_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
-
+    # menu = forms.ChoiceField(choices=Post.MENU_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
 class EditPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['game_title', 'is_private', 'menu']  # Fields to be edited by admin
+        fields = ['game_title', 'is_private']  # Fields to be edited by admin
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
