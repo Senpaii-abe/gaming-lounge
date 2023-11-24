@@ -15,75 +15,89 @@
 </header>
 
         <main>
-            <section>
-                <h3 class="section-head">Overview</h3>
-                <div class="analytics">
-                    <div class="analytic">
-                        <div class="analytic-icon">
-                            <span class="las la-eye"></span>
+        <div class="block-grid">
+            <div class="">
+                <section>
+                    <h3 class="section-head">Overview</h3>
+                    <div class="analytics-post">
+                        <div class="analytic">
+                            <div class="analytic-icon">
+                                <span class="las la-eye"></span>
+                            </div>
+                            <div class="analytic-info">
+                                <h4>TOTAL POSTS</h4>
+                                <h1>{{ total_posts_count }}</h1> 
+                            </div>
                         </div>
-                        <div class="analytic-info">
-                            <h4>TOTAL POSTS</h4>
-                            <h1>{{ total_posts_count }}</h1> 
+                        <div class="analytic">
+                            <div class="analytic-icon">
+                                <span class="las la-clock"></span>
+                            </div>
+                            <div class="analytic-info">
+                                <h4>Discussions</h4>
+                                <h1>{{ discussion_posts }}</h1>
+                            </div>
                         </div>
                     </div>
-                    <div class="analytic">
-                        <div class="analytic-icon">
-                            <span class="las la-clock"></span>
+                </section>
+
+                <section>
+                    <div class="analytics-post">
+                        <div class="analytic">
+                            <div class="analytic-icon">
+                                <span class="las la-eye"></span>
+                            </div>
+                            <div class="analytic-info">
+                                <h4>Connect</h4>
+                                <h1>{{ connect_posts }}</h1> 
+                            </div>
                         </div>
-                        <div class="analytic-info">
-                            <h4>Discussions</h4>
-                            <h1>{{ discussion_posts }}</h1>
+        
+                        <div class="analytic">
+                            <div class="analytic-icon">
+                                <span class="las la-clock"></span>
+                            </div>
+                            <div class="analytic-info">
+                                <h4>Marketplace</h4>
+                                <h1>{{ marketplace_posts }}</h1>
+                            </div>
+                        </div>
+                </section>
+
+                <section>
+                    <div class="analytics-post">
+                        <div class="analytic">
+                            <div class="analytic-icon">
+                                <span class="las la-eye"></span>
+                            </div>
+                            <div class="analytic-info">
+                                <h4>Tournament</h4>
+                                <h1>{{ tournament_posts }}</h1> 
+                            </div>
+                        </div>
+        
+                        <div class="analytic">
+                            <div class="analytic-icon">
+                                <span class="las la-clock"></span>
+                            </div>
+                            <div class="analytic-info">
+                                <h4>Beta-Testing</h4>
+                                <h1>--</h1>
+                            </div>
+                        </div>
+                </section>
+            </div>
+            <div>
+                <div class="graph-card">
+                    <h3 class="section-head">Posts per Tab</h3>
+                    <div class="graph-content">
+                        <div>     
+                            <canvas id="postsChart"></canvas> 
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <section>
-                <div class="analytics">
-                    <div class="analytic">
-                        <div class="analytic-icon">
-                            <span class="las la-eye"></span>
-                        </div>
-                        <div class="analytic-info">
-                            <h4>Connect</h4>
-                            <h1>{{ connect_posts }}</h1> 
-                        </div>
-                    </div>
-    
-                    <div class="analytic">
-                        <div class="analytic-icon">
-                            <span class="las la-clock"></span>
-                        </div>
-                        <div class="analytic-info">
-                            <h4>Marketplace</h4>
-                            <h1>{{ marketplace_posts }}</h1>
-                        </div>
-                    </div>
-            </section>
-
-            <section>
-                <div class="analytics">
-                    <div class="analytic">
-                        <div class="analytic-icon">
-                            <span class="las la-eye"></span>
-                        </div>
-                        <div class="analytic-info">
-                            <h4>Tournament</h4>
-                            <h1>{{ tournament_posts }}</h1> 
-                        </div>
-                    </div>
-    
-                    <div class="analytic">
-                        <div class="analytic-icon">
-                            <span class="las la-clock"></span>
-                        </div>
-                        <div class="analytic-info">
-                            <h4>Beta-Testing</h4>
-                            <h1>--</h1>
-                        </div>
-                    </div>
-            </section>
+            </div>
+        </div>
             
             <h3 class="section-head">List of Posts</h3>   
             <div class="table-box">
@@ -141,5 +155,56 @@
                     </div>
                 </section>
             </div>
+
+            {% comment %} For ChartJS {% endcomment %}
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            {% comment %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> {% endcomment %}
+
+            {% comment %} Posts per Tab {% endcomment %}
+            <script>
+                const ctx4 = document.getElementById('postsChart').getContext('2d');
+
+                new Chart(ctx4, {
+                type: 'bar',
+                data: {
+                    labels: ['Discussions', 'Connect', 'Marketplace', 'Tournament', 'Beta Testing'],
+                    datasets: [{
+                    label: 'Number of Posts',
+                    data: [120, 80, 122, 140, 70], // Fake Data
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.4)',
+                        'rgba(54, 162, 235, 0.4)',
+                        'rgba(255, 206, 86, 0.4)',
+                        'rgba(75, 192, 192, 0.4)',
+                        'rgba(153, 102, 255, 0.4)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 2,
+                    borderRadius: {
+                        topLeft: 10,
+                        topRight: 10,
+                    }
+                    }]
+                },
+                options: {
+                    scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                    }
+                }
+                });
+            </script>
         </main>
+
+
 {% endblock content %}

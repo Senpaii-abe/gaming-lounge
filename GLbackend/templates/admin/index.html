@@ -107,18 +107,12 @@
                                 </div>
                                 <div class="graph-select">
                                     <select name="" id="">
-                                        <option value="weekly">weekly</option>
                                         <option value="monthly">Monthly (November)</option>
                                     </select>
                                 </div>
                             </div>
                                 <div class="graph-board">
-                                    {% comment %} <canvas id="revenueChart" width="100%" ></canvas> {% endcomment %}
-                                    <div>
-                                        <canvas id="myChart"></canvas>
-                                    </div>
-                 
-   
+                                      <canvas id="myChart" width="100%" ></canvas> 
                                 </div>
                         </div>
                     </div>
@@ -130,8 +124,7 @@
                         <div class="graph-card">
                             <h3 class="section-head">Posts per Tab</h3>
                             <div class="graph-content">
-                                <div>
-                                    
+                                <div>     
                                     <canvas id="postsChart"></canvas> 
                                 </div>
                             </div>
@@ -151,30 +144,32 @@
             </section>
 
             <section class="mt-5">
-                <div class="block-grid">
-                    <div class="graph-card">
-                        <h3 class="section-head">Top 5 Games in GLounge</h3>
-                        <div class="graph-content">
-                            <div>
-                                <canvas id="gamesChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="graph-card">
-                        <h3 class="section-head">User Engagement</h3>
-                        <div class="graph-content">
-                            <div>
-                                <canvas id="engagementChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>    
+              <div class="block-grid">
+                  <div class="graph-card">
+                      <h3 class="section-head">Top 5 Games in GLounge</h3>
+                      <div class="graph-content">
+                          <div>
+                              <canvas id="gamesChart"></canvas>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="graph-card">
+                      <h3 class="section-head">User Engagement</h3>
+                      <div class="graph-content">
+                          <div>
+                              <canvas id="engagementChart"></canvas>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>  
+ 
 
 {% comment %} For ChartJS {% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+{% comment %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> {% endcomment %}
 
 {% comment %} Script for Line Chart {% endcomment %}

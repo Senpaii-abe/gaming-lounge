@@ -236,6 +236,14 @@ main{
     margin-bottom: 1.5rem;
 }
 
+.analytics-post {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+
 .analytic {
     box-shadow: var(--shadow);
     padding: 1.5rem;
@@ -243,6 +251,7 @@ main{
     display: flex;
     padding-left: 2rem;
 }
+
 
 .analytic-info h4 {
     font-weight: 400;
@@ -316,6 +325,7 @@ main{
 }
 
 
+
 .rev-content {
     background: #fff;
     box-shadow: var(--shadow);
@@ -376,6 +386,10 @@ main{
     box-shadow: var(--shadow);
     padding: 1rem;
     height: 500px;
+
+}
+.postchart{
+    width:100%;
 }
 
 .graph-board {

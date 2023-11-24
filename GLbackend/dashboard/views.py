@@ -27,50 +27,27 @@ def dashboard(request):
     # Total posts count
     total_posts_count = Post.objects.count()
 
+    today = timezone.now().date()
+    users_today_count = User.objects.filter(date_joined__date=today).count()
+
+    # Count the number of posts created today
+    posts_today_count = Post.objects.filter(created_at__date=today).count()
+
     # Calculate the date one week ago from today
-    one_week_ago = timezone.now() - timedelta(days=7)
+    # one_week_ago = timezone.now() - timedelta(days=7)
     # Count posts created within the last week
-    posts_count_week = Post.objects.filter(created_at__gte=one_week_ago).count()
-    users_count_week = User.objects.filter(date_joined__gte=one_week_ago).count()
+    # posts_count_week = Post.objects.filter(created_at__gte=one_week_ago).count()
+    # users_count_week = User.objects.filter(date_joined__gte=one_week_ago).count()
 
-
-    
-    #GRAPH - PER MONTH
-
-    # specific_month = 11  # November
-    # specific_year = 2023  # Specify the year as needed
-
-    # # Get the number of days in the specific month
-    # num_days_in_month = 30  # Assuming November has 30 days
-
-    # # Create a list to store the counts for each day in November
-    # user_counts_per_day = []
-    # post_counts_per_day = []
-
-    # # Loop through each day of the month and get counts for users and posts
-    # for day in range(1, num_days_in_month + 1):
-    #     start_date = datetime(specific_year, specific_month, day)
-    #     end_date = start_date + timedelta(days=1)
-
-    #     # Get count of users joined on this day
-    #     users_count = User.objects.filter(date_joined__gte=start_date, date_joined__lt=end_date).count()
-    #     user_counts_per_day.append(users_count)
-
-    #     # Get count of posts created on this day
-    #     posts_count = Post.objects.filter(created_at__gte=start_date, created_at__lt=end_date).count()
-    #     post_counts_per_day.append(posts_count)
-
-    # Combine both sets of data into one context dictionary
     context = {
         'admin_name': admin.name,
         'admin_email': admin.email,
         'admin_avatar' : admin.avatar,
         'total_users_count': total_users_count,
         'total_posts_count': total_posts_count,
-        'posts_count_week': posts_count_week,
-        'users_count_week': users_count_week,
-        # 'user_counts_per_day': user_counts_per_day,
-        # 'post_counts_per_day': post_counts_per_day,
+        'posts_today_count': posts_today_count,
+        'users_today_count': users_today_count,
+
     }
 
     return render(request, 'admin/index.html', context)
