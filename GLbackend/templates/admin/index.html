@@ -67,7 +67,7 @@
 
             </section>
 
-            <section>
+            <section class="mt-5">
                 <div class="block-grid">
                     <div class="revenue-card">
                         <h3 class="section-head">Recent</h3>
@@ -113,12 +113,295 @@
                                 </div>
                             </div>
                                 <div class="graph-board">
-                                    <canvas id="revenueChart" width="100%" ></canvas>
+                                    {% comment %} <canvas id="revenueChart" width="100%" ></canvas> {% endcomment %}
+                                    <div>
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                 
+   
                                 </div>
                         </div>
                     </div>
                 </div>
             </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="graph-card">
+                            <h3 class="section-head">Posts per Tab</h3>
+                            <div class="graph-content">
+                                <div>
+                                    
+                                    <canvas id="postsChart"></canvas> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="graph-card">
+                            <h3 class="section-head">User Visits</h3>
+                            <div class="graph-content">
+                                <div>
+                                    <canvas id="visitsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-5">
+                <div class="block-grid">
+                    <div class="graph-card">
+                        <h3 class="section-head">Top 5 Games in GLounge</h3>
+                        <div class="graph-content">
+                            <div>
+                                <canvas id="gamesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graph-card">
+                        <h3 class="section-head">User Engagement</h3>
+                        <div class="graph-content">
+                            <div>
+                                <canvas id="engagementChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+
+{% comment %} For ChartJS {% endcomment %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> {% endcomment %}
+
+{% comment %} Script for Line Chart {% endcomment %}
+<script>
+  const ctx = document.getElementById('myChart');
+
+  const day = [
+    { x: Date.parse('2023-11-18'), y: 18},
+    { x: Date.parse('2023-11-19'), y: 5},
+    { x: Date.parse('2023-11-20'), y: 9},
+    { x: Date.parse('2023-11-21'), y: 15},
+    { x: Date.parse('2023-11-22'), y: 11},
+    { x: Date.parse('2023-11-23'), y: 8},
+    { x: Date.parse('2023-11-24'), y: 6},
+  ];
+  const users = [
+    { x: Date.parse('2023-11-18'), y: 5},
+    { x: Date.parse('2023-11-19'), y: 8},
+    { x: Date.parse('2023-11-20'), y: 4},
+    { x: Date.parse('2023-11-21'), y: 13},
+    { x: Date.parse('2023-11-22'), y: 12},
+    { x: Date.parse('2023-11-23'), y: 7},
+    { x: Date.parse('2023-11-24'), y: 9},
+  ];
+  new Chart(ctx, {
+    type: 'line', 
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], // need mawala
+      datasets: [
+        {
+          label: 'Number of Posts', 
+          data: day,
+          borderColor: 'rgba(255, 99, 132, 1)', 
+          borderWidth: 2,
+          fill: false, 
+        },
+        {
+          label: 'Number of Users', 
+          data: users,
+          borderColor: 'rgba(54, 162, 235, 1)', 
+          borderWidth: 2,
+          fill: false, 
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
+
+{% comment %} For Top 5 Games {% endcomment %}
+<script>
+    const ctx2 = document.getElementById('gamesChart').getContext('2d');
+
+    new Chart(ctx2, {
+      type: 'pie', // Change the chart type to 'pie'
+      data: {
+        labels: ['Game A', 'Game B', 'Game C', 'Game D', 'Game E'],
+        datasets: [{
+          data: [20, 25, 14, 18, 29], // Fake Data
+          backgroundColor: [
+            'rgba(186, 153, 255, 0.5)',
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+          ],
+          borderColor: [
+            'rgba(186, 153, 255, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+          ],
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          labels: {
+            render: 'percentage',
+            precision: 2
+          }
+        },
+      }
+    });
+</script>
+
+
+{% comment %} Visits {% endcomment %}
+<script>
+    const ctx3 = document.getElementById('visitsChart').getContext('2d');
+
+    new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: ['Discussions', 'Connect', 'Marketplace', 'Tournament', 'Beta Testing'],
+        datasets: [{
+          label: 'Number of Visits',
+          data: [12, 26, 32, 21, 27], // Fake Data
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.4)',
+            'rgba(54, 162, 235, 0.4)',
+            'rgba(255, 206, 86, 0.4)',
+            'rgba(75, 192, 192, 0.4)',
+            'rgba(153, 102, 255, 0.4)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+          ],
+          borderWidth: 2,
+          borderRadius: {
+            topLeft: 10,
+            topRight: 10,
+          }
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>
+
+{% comment %} Posts per Tab {% endcomment %}
+<script>
+    const ctx4 = document.getElementById('postsChart').getContext('2d');
+
+    new Chart(ctx4, {
+      type: 'bar',
+      data: {
+        labels: ['Discussions', 'Connect', 'Marketplace', 'Tournament', 'Beta Testing'],
+        datasets: [{
+          label: 'Number of Posts',
+          data: [120, 80, 122, 140, 70], // Fake Data
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.4)',
+            'rgba(54, 162, 235, 0.4)',
+            'rgba(255, 206, 86, 0.4)',
+            'rgba(75, 192, 192, 0.4)',
+            'rgba(153, 102, 255, 0.4)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+          ],
+          borderWidth: 2,
+          borderRadius: {
+            topLeft: 10,
+            topRight: 10,
+          }
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>
+
+
+{% comment %} Engagement Chart {% endcomment %}
+<script>
+    const ctx5 = document.getElementById('engagementChart').getContext('2d');
+
+    new Chart(ctx5, {
+      type: 'line',
+      data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [{
+          label: 'Number of Comments',
+          data: [15, 44, 18, 43], // Replace with actual data
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 2,
+          fill: false,
+        }, {
+          label: 'Number of Likes',
+          data: [40, 30, 39, 45], // Replace with actual data
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2,
+          fill: false,
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
 
         </main>
 {% endblock content %}
+
+

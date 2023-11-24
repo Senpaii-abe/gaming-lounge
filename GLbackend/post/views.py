@@ -1,11 +1,14 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
 from django.utils import timezone
 from .best_profanity import has_profanity #profcheck
 from .models import Post, GameTitle
 from .forms import PostForm, EditPostForm
 from rest_framework.response import Response #profcheck
 
+
+import uuid
 
 def admin_posts(request):
     admin=request.user
@@ -62,6 +65,23 @@ def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.delete()
     return redirect('admin_posts')  # You can return a response or redirect as needed
+
+def delete_selected_posts(request):
+    if request.method == 'POST':
+        selected_ids = request.POST.getlist('selected_ids[]')  # Retrieve selected IDs
+        
+        # Validate selected IDs as UUIDs
+        try:
+            uuids = [uuid.UUID(id_) for id_ in selected_ids]
+        except ValueError:
+            return JsonResponse({'message': 'Invalid UUID format in selected IDs'}, status=400)
+        
+        # If the IDs are valid UUIDs, proceed with deletion
+        posts_to_delete = Post.objects.filter(id__in=uuids)
+        posts_to_delete.delete()
+        return JsonResponse({'message': 'Selected posts deleted successfully'}, status=200)
+    else:
+        return JsonResponse({'message': 'Invalid request method'}, status=400)
 
 def reported_posts(request):
     admin=request.user

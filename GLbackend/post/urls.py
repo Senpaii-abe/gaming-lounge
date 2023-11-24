@@ -22,5 +22,6 @@ urlpatterns = [
     path('gl-posts/add', views.add_post, name='add_post'),
     path('gl-posts/edit/<uuid:post_id>/', views.edit_post, name='edit_post'),
     path('gl-posts/delete/<uuid:post_id>/', views.delete_post, name='delete_post'),
+    path('gl-posts/delete_selected_posts/', views.delete_selected_posts, name='delete_selected_posts'),
     path('gl-posts/reported', views.reported_posts, name='reported_posts'),
 ]

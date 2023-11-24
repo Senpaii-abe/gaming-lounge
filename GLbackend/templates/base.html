@@ -25,16 +25,33 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     
-    {% comment %} DATA TABLE {% endcomment %}
+    <form id="myForm">
+        {% csrf_token %}
+        <!-- Your table and JavaScript AJAX request code -->
+    </form>
+
     <script>
+    var csrfToken = $('#myForm input[name="csrfmiddlewaretoken"]').val();
         $(document).ready(function() {
             $('#bootstrapdatatable').DataTable({
                 "aLengthMenu": [[5,10,15,20,-1], [5,10,15,20,"All"]],
                 "iDisplayLength":5
             });
 
+            function updateDeleteButtonState() {
+                var checkedCheckboxes = $('.checkthis:checked');
+                var deleteButton = $('#deleteSelected');
+
+                if (checkedCheckboxes.length > 0) {
+                    deleteButton.prop('disabled', false);
+                } else {
+                    deleteButton.prop('disabled', true);
+                }
+            }
+
             $('#checkall').click(function() {
                 $('.checkthis').prop('checked', this.checked);
+                updateDeleteButtonState();
             });
 
             $('.checkthis').click(function() {
@@ -43,8 +60,40 @@
                 } else {
                     $('#checkall').prop('checked', false);
                 }
+                updateDeleteButtonState();
             });
-        })
+
+        $('#deleteSelected').click(function() {
+            // Handle deletion of selected items here
+            var checkedCheckboxes = $('.checkthis:checked');
+            var checkedIds = checkedCheckboxes.map(function() {
+                return $(this).closest('tr').find('td:nth-child(2)').text().trim(); // Assuming ID is in the second column
+            }).get();
+            
+        $.ajax({
+            url: 'delete_selected_posts/',
+            method: 'POST',
+            headers: {
+            'X-CSRFToken': csrfToken
+            },
+            data: {
+               'selected_ids[]': checkedIds
+                },
+            success: function(response) {
+                // Handle success response from the backend
+                console.log(response.message);
+                // Refresh the page
+                location.reload(); // This will reload the current page
+                },
+            error: function(xhr, errmsg, err) {
+                // Handle error response
+                console.log(xhr.status + ": " + xhr.responseText);
+            }
+        });
+
+        });
+
+    });
     </script>
 
 </body>
