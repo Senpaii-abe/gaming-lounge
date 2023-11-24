@@ -74,7 +74,7 @@ class Post(models.Model):
                   ('tournament', 'Tournament'), 
                   ('beta', 'Beta Testing')]
     
-    menu = models.CharField(max_length=20, choices=MENU_CHOICES, default='discussions')
+    menu = models.CharField(max_length=20, choices=MENU_CHOICES, default='Discussions')
     
     class Meta: 
         ordering = ('-created_at',) #order ng post sa feed
