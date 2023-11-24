@@ -18,7 +18,7 @@ current_datetime = datetime.now()
 #Format the datetime as a string (you can adjust the format as needed)
 formatted_datetime = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
 
-csv_file_path = r'C:\Users\Student\Dropbox\My PC (Joey)\Documents\Codes\Git\GLCapstone\gaming-lounge-1\GLbackend\post\data.csv'
+csv_file_path = r'C:\Users\ALEC\Desktop\G-Lounge\GLbackend\post\data.csv'
 
 #Read data from the CSV file and insert into the Django Post model
 with open(csv_file_path, 'r', encoding='utf-8') as csv_file:
@@ -27,7 +27,7 @@ with open(csv_file_path, 'r', encoding='utf-8') as csv_file:
 
     for row in csv_reader:
         # Assuming your CSV file has three columns: column1, column2, column3
-        dataname, dataselftext, datatitle, datasubreddit, dataurl ,datathumbnail, nav_bar= row
+        dataname, dataselftext, datatitle, datasubreddit, dataurl ,datathumbnail, nav_bar = row
         if datasubreddit == 'Eldenring' or datasubreddit == 'ELDEN RING':
             datasubreddit = 9
         elif datasubreddit == 'Genshin_impact'or datasubreddit == 'GENSHIN IMPACT':

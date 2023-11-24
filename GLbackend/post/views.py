@@ -16,10 +16,11 @@ def admin_posts(request):
     posts = Post.objects.all()
 
     total_posts_count = Post.objects.count()
-    discussion_posts = Post.objects.filter(menu=Post.DISCUSSION).count()
-    tournament_posts = Post.objects.filter(menu=Post.TOURNAMENT).count()
-    connect_posts = Post.objects.filter(menu=Post.CONNECT).count()
-    marketplace_posts = Post.objects.filter(menu=Post.MARKETPLACE).count()
+    discussion_posts = Post.objects.filter(menu='Discussions').count()
+    tournament_posts = Post.objects.filter(menu='Tournament').count()
+    connect_posts = Post.objects.filter(menu='Connect').count()
+    marketplace_posts = Post.objects.filter(menu='Marketplace').count()
+    beta_posts = Post.objects.filter(menu='Beta').count()
 
     context = {
         'admin_name': admin.name,
@@ -30,6 +31,7 @@ def admin_posts(request):
         'tournament_posts' : tournament_posts,
         'connect_posts' : connect_posts,
         'marketplace_posts' : marketplace_posts,
+        'beta_posts': beta_posts,
         'posts': posts
     }
     return render(request, 'admin/posts.html', context)
