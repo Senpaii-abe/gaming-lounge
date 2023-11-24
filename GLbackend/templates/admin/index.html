@@ -113,12 +113,188 @@
                                 </div>
                             </div>
                                 <div class="graph-board">
-                                    <canvas id="revenueChart" width="100%" ></canvas>
+                                    {% comment %} <canvas id="revenueChart" width="100%" ></canvas> {% endcomment %}
+                                    <div>
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                 
+   
                                 </div>
                         </div>
                     </div>
                 </div>
             </section>
+            <section>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="graph-card">
+                            <h3 class="section-head">Most Talked About Games</h3>
+                            <div class="graph-content">
+                                <div>
+                                    <canvas id="gamesChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="graph-card">
+                            <h3 class="section-head">User Visits</h3>
+                            <div class="graph-content">
+                                <div>
+                                    <canvas id="visitsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+{% comment %} Script for Line Chart {% endcomment %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  const day = [
+    { x: Date.parse('2023-11-18'), y: 18},
+    { x: Date.parse('2023-11-19'), y: 5},
+    { x: Date.parse('2023-11-20'), y: 9},
+    { x: Date.parse('2023-11-21'), y: 15},
+    { x: Date.parse('2023-11-22'), y: 11},
+    { x: Date.parse('2023-11-23'), y: 8},
+    { x: Date.parse('2023-11-24'), y: 6},
+  ];
+  const users = [
+    { x: Date.parse('2023-11-18'), y: 5},
+    { x: Date.parse('2023-11-19'), y: 8},
+    { x: Date.parse('2023-11-20'), y: 4},
+    { x: Date.parse('2023-11-21'), y: 13},
+    { x: Date.parse('2023-11-22'), y: 12},
+    { x: Date.parse('2023-11-23'), y: 7},
+    { x: Date.parse('2023-11-24'), y: 9},
+  ];
+  new Chart(ctx, {
+    type: 'line', 
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], // need mawala
+      datasets: [
+        {
+          label: 'Number of Posts', 
+          data: day,
+          borderColor: 'rgba(255, 99, 132, 1)', 
+          borderWidth: 2,
+          fill: false, 
+        },
+        {
+          label: 'Number of Users', 
+          data: users,
+          borderColor: 'rgba(54, 162, 235, 1)', 
+          borderWidth: 2,
+          fill: false, 
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+{% comment %} For Most Talked About Games {% endcomment %}
+<script>
+    const ctx2 = document.getElementById('gamesChart').getContext('2d');
+
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Game A', 'Game B', 'Game C', 'Game D', 'Game E'],
+        datasets: [{
+          label: 'Number of Posts',
+          data: [20, 25, 14, 18, 29], // Fake Data
+          backgroundColor: [
+            'rgba(186, 153, 255, 0.5)', 
+          ],
+          borderColor: [
+            'rgba(186, 153, 255, 1)', 
+          ],
+          borderWidth: 2,
+          borderRadius: {
+            topLeft: 10,  
+            topRight: 10, 
+          }
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+{% comment %} Visits {% endcomment %}
+<script>
+    const ctx3 = document.getElementById('visitsChart').getContext('2d');
+
+    new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: ['Discussions', 'Connect', 'Marketplace', 'Tournament', 'Beta Testing'], 
+        datasets: [{
+          label: 'Number of Visits',
+          data: [12, 26, 32, 21, 27], // Fake Data
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.4)',
+            'rgba(54, 162, 235, 0.4)',
+            'rgba(255, 206, 86, 0.4)',
+            'rgba(75, 192, 192, 0.4)',
+            'rgba(153, 102, 255, 0.4)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+          ],
+          borderWidth: 2,
+          borderRadius: {
+            topLeft: 10,  
+            topRight: 10, 
+          }
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </main>
 {% endblock content %}
+
+
