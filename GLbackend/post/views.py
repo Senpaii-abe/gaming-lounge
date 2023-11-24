@@ -1,8 +1,11 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
+from .best_profanity import has_profanity #profcheck
 from .models import Post, GameTitle
 from .forms import PostForm, EditPostForm
+from rest_framework.response import Response #profcheck
+
 
 def admin_posts(request):
     admin=request.user
@@ -69,3 +72,10 @@ def reported_posts(request):
         'admin_avatar' : admin.avatar,
     }
     return render(request, 'admin/reported_posts.html', context)
+
+#profcheck
+def post_create(request):
+    body = request.data.get("body")
+
+    if has_profanity(body):
+        return Response({"error": "Profanity found"}, status=400)

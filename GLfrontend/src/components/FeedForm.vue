@@ -33,9 +33,17 @@
 
 <script>
 import axios from 'axios'
+// profcheck
+import { useToastStore } from '@/stores/toast'
 
 
 export default {
+  setup() { //profcheck
+        const toastStore = useToastStore()
+        return {
+            toastStore
+        }
+    },
   props: {
     user: Object,
     posts: Array
@@ -49,6 +57,7 @@ export default {
       gameTitles: [],
       gameTitleError: false, // Added error flag for game title validation
       contentError: false, // New error flag for post content
+      error: null, //profcheck
     }
   },
 
@@ -82,22 +91,33 @@ export default {
       formData.append('is_private', this.is_private);
       formData.append('game_title', this.game_title);
 
-      axios.post('/api/posts/create/', formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        }
+      axios
+        .post('/api/posts/create/', formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          }
       })
-      .then(response => {
-        console.log('data', response.data);
+        .then(response => {
+        
+        this.toastStore.showToast(5000, 'walang mura ˚ʚ♡ɞ˚ ', 'bg-emerald-600') //profcheck
+
         this.posts.unshift(response.data);
         this.resetForm();
         if (this.user) {
           this.user.posts_count += 1;
         }
       })
-      .catch(error => {
-        console.log('error', error);
-      });
+        .catch(error =>{//profcheck
+          if (error.response.status === 400) {//profcheck
+          const message = error.response.data.error//profcheck
+
+          this.toastStore.showToast(//profcheck
+            5000,  //profcheck
+            'may mura!!!',//profcheck
+            'bg-red-400' //profcheck
+          )//profcheck
+        }//profcheck
+    });
     },
     resetForm() {
             this.body = '';

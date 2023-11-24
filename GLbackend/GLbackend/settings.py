@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'account',
     'chat',
     'notification',
+    'best_profanity', #profcheck
     'post',
     'search',
     'dashboard',

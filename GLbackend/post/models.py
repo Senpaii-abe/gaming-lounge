@@ -2,8 +2,10 @@ import uuid
 
 from django.conf import settings
 from django.db import models
+from django.forms import ValidationError  # profcheck
 from django.utils.timesince import timesince
 from django.utils import timezone
+from .best_profanity import has_profanity  # models.py imports has_profanity from it
 from django.apps import apps
 from account.models import User
 from django.contrib.auth import get_user_model
@@ -98,6 +100,13 @@ class Post(models.Model):
         
     def created_at_formatted(self):
         return timesince(self.created_at)
+    
+    def clean(self):  # profcheck
+        if has_profanity(self.body):  # profcheck
+            raise ValidationError(  # profcheck
+                "Profanity detected"  # profcheck
+            )  # has_profanity() is called in Post.clean() #profcheck
+
     
 class Trend(models.Model):
     hashtag = models.CharField(max_length=255)

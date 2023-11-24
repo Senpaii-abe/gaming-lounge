@@ -9,6 +9,8 @@ from account.models import User, FriendshipRequest
 from account.serializers import UserSerializer
 from notification.utils import create_notification
 
+from .best_profanity import has_profanity #profcheck
+
 from .forms import PostForm, AttachmentForm
 from .models import Post, Like, Comment, Trend, GameTitle, Category
 from .serializers import PostSerializer, PostDetailSerializer, CommentSerializer, TrendSerializer
@@ -110,8 +112,12 @@ def post_create(request):
     form = PostForm(request.POST)
     attachment = None
     attachment_form = AttachmentForm(request.POST, request.FILES)
+    body = request.data.get("body") #profcheck
     
     print(request.FILES)
+    
+    if has_profanity(body):  # profcheck
+        return Response({"error": "Profanity found"}, status=400)  # profcheck
     
     if attachment_form.is_valid():
         attachment = attachment_form.save(commit=False)
