@@ -386,7 +386,6 @@ main{
     box-shadow: var(--shadow);
     padding: 1rem;
     height: 500px;
-
 }
 .postchart{
     width:100%;
