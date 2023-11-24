@@ -23,10 +23,10 @@ formatted_datetime = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
 # Set the necessary parameters
 CLIENT_ID = '2son5pbomhy29mng0zhzduqriouerl'
 CLIENT_SECRET = 'j0djntmdw9mt269ar6ao1b3qfu96h1'
-USER_LOGINS = ['kyedae', 'Dendi', 'ninja']  # Replace with the actual streamer's username
+USER_LOGINS = ['lunacuddles', 'button', 'kioshizumi','kyedae', 'kodopro', 'tmi98', 'xbultx', 'loltyler1', 'Dendi', 'plinkztv', 'christoyfu27' ]  # Replace with the actual streamer's username
 
 # Provide the absolute path to your db.sqlite3 file
-db_path = r'C:\Users\Admin\Documents\Glounge\GLbackend\db.sqlite3'
+db_path = r'D:\Backup\Users\Asus\Dropbox\My PC (LAPTOP-M7MDO82I)\Documents\gaming-lounge\GLbackend\db.sqlite3'
 
 # Connect to the existing SQLite database
 conn = sqlite3.connect(db_path)
@@ -75,6 +75,60 @@ if token_response.status_code == 200:
                             thumbnail_url = video['thumbnail_url']
                             view_count = video['view_count']
                             
+                            
+                            if USER_LOGIN == 'valorant' :
+                                game_title = 9
+                            elif USER_LOGIN == 'lunacuddles':
+                                game_title = 10
+                            elif USER_LOGINS == 'minecraft':
+                                game_title = 11
+                            elif USER_LOGIN == 'button':
+                                game_title = 12
+                            elif USER_LOGIN == 'kioshizumi':
+                                game_title = 13
+                            elif USER_LOGIN == 'kyedae':
+                                game_title = 14
+                            elif USER_LOGIN == 'kodopro':
+                                game_title = 15
+                            elif USER_LOGIN == 'tmi98':
+                                game_title = 16
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 17
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 18
+                            elif USER_LOGIN == 'xbultx':
+                                game_title = 19           
+                            elif USER_LOGIN == 'loltyler1':
+                                game_title = 20
+                            elif USER_LOGIN == 'Dendi':
+                                game_title = 21
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 22
+                            elif USER_LOGIN == 'plinkztv':
+                                game_title = 23
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 24
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 25
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 26
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 27
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 28
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 29
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 30
+                            elif USER_LOGIN == 'christoyfu27':
+                                game_title = 31
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 32
+                            elif USER_LOGIN == 'minecraft':
+                                game_title = 33
+                            else: 
+                                game_title = 34
+                                
                             print(f"Inserted video data for {USER_LOGIN}: {video_title}")
                             user_id = '1cfff9f31d814cb09028c3376871a4bb'
                             user_instance = User.objects.get(id=user_id)

@@ -20,13 +20,13 @@ current_datetime = datetime.now()
 formatted_datetime = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
 
 def get_group_feed(access_token):
-    url = f'https://graph.facebook.com/v18.0/me?fields=groups%7Bname%2Cid%2Cfeed%7Bid%2Cmessage%2Cfull_picture%2Clink%7D%7D&access_token={access_token}'
+    url = f'https://graph.facebook.com/v18.0/me?fields=groups%7Bfeed%7Bid%2Cfull_picture%2Clink%2Cdescription%7D%2Cid%2Cname%7D&access_token={access_token}'
     response = requests.get(url)
     data = response.json()
     return data['groups']['data']
 
 # Provide the absolute path to your db.sqlite3 file
-db_path = r'C:\Users\Admin\Documents\Glounge\GLbackend\db.sqlite3'
+db_path = r'C:\Users\Student\Dropbox\My PC (Joey)\Documents\Codes\Git\GLCapstone\gaming-lounge-1\GLbackend\db.sqlite3'
 
 # Connect to the existing SQLite database
 conn = sqlite3.connect(db_path)
@@ -37,7 +37,7 @@ cursor = conn.cursor()
 
 
 # Use the user access token you obtained
-access_token = 'EAAMFfd1gTr8BO54uqkZBz29DVGzzVLaBAJNDs1wz1ZBN4HOBKDGctHFbzDcEfSLTQCLNkNr3OxDlpH4IfAdE4b6rDbvZA7ZAbMD11oDnT70Szuw3UgyESaB6q3pDbYVEQwcOj6dWGRpkPPkplQsoZB7FZB1ZCixHyuW5sbecQBbbVX3JoWF82NWwjmGSikJoaQGOi2QWuDSz9SqRbZAGD3c4ZCPQ68RWN2Q4eU2X9NcARUXNqlgfNu9Pxf8QPjqfTmAZDZD'
+access_token = 'EAAMFfd1gTr8BOZCMqrXX587qpR5jkXr5ZAi7gxnS5uQE19nEoQ2C36AMME7psZBf2Q9Y4NihPTFMzfwkaRXPZChYsIHAQOhgvPNclUfEZAipuD4BnTCMGOHMKteK6roxTuZBt2JSP8zuLVLYTxs8Ysl5VjarMlFC65ZB4Peks0MLduZADQhBA4qHZCx0ZBMJI5KmmJqakwMZCQZBSuTsMN2tYAZDZD'
 
 # Get the group feed
 group_feed = get_group_feed(access_token)
@@ -49,7 +49,7 @@ for group in group_feed:
     for post in group['feed']['data']:
         post_id = post.get('id', 'N/A')
         if post_id != 'N/A':
-            body = post.get('message', 'No message available')
+            body = post.get('description', 'No message available')
             link = post.get('link', 'No link available')
             full_picture = post.get('full_picture', 'No picture available')
             
