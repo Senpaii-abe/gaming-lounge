@@ -6,7 +6,7 @@
         <div class="main-left col-span-1 space-y-6"> 
 
         </div>
-        <div class="p-4 bg-purple_main rounded-full">
+        <div class="p-4 rounded-full">
             
         </div> 
 

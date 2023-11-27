@@ -19,8 +19,11 @@
     <p class="mb-4 text-base/7 font-light">{{ post.body }}</p>
 
     <template v-if="post.attachments && post.attachments.length">
-        <img v-for="image in post.attachments" :key="image.id" :src="getCorrectImageUrl(image.get_image)"
-            class="w-full mb-4 rounded-xl">
+        <div v-for="image in post.attachments" :key="image.id">
+            <img v-if="image.get_image !== null && image.get_image !== 'self'" :src="getCorrectImageUrl(image.get_image)"
+                class="w-full mb-4 rounded-xl">
+            <!-- Your small icon HTML or any other content goes here, outside the img element -->
+        </div>
     </template>
     <template v-if="post.post_url">
         <p class="text-base/7 font-light">
@@ -206,8 +209,7 @@ export default {
             axios
                 .delete(`/api/posts/${postId}/delete/`)
                 .then(response => {
-                    // Emit an event to inform parent components
-                    this.$emit('postDeleted', postId);
+                   
 
                     // Update the client-side state
                     this.posts = this.posts.filter(post => post.id !== postId);

@@ -17,7 +17,7 @@
              col-span-1: takes 1 of the 4 columns -->
         <div class="main-left col-span-1 space-y-6">
             <!-- trending games -->
-            <div class="bg-transparent rounded-full">
+            <!-- <div class="bg-transparent rounded-full">
                 <h3 class="mb-2 text-2xl font-semibold text-center">topics</h3>
                 <div class="space-y-4 text-center">
                     <div class="flex items-center justify-between">
@@ -43,7 +43,7 @@
                             class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Phasmaphobia</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="p-4 bg-purple_main rounded-full">
                 <h3 class="mb-6 text-lg">useful links</h3>
 
@@ -111,7 +111,7 @@
             </ul>
 
             <PeopleYouMayKnow />
-            <Trends />
+            <!-- <Trends /> -->
         </div>
 
 
@@ -149,6 +149,7 @@ export default {
         return {
             posts: [],
             body: '',
+            trends: []
         }
     },
     mounted() {

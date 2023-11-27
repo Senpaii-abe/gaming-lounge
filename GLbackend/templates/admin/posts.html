@@ -82,7 +82,7 @@
                             </div>
                             <div class="analytic-info">
                                 <h4>Beta-Testing</h4>
-                                <h1>--</h1>
+                                <h1>{{ beta_posts }}</h1>
                             </div>
                         </div>
                 </section>
@@ -156,6 +156,14 @@
                 </section>
             </div>
 
+            <div id="chartData"
+                data-discussion="{{ discussion_posts }}"
+                data-connect="{{ connect_posts }}"
+                data-marketplace="{{ marketplace_posts }}"
+                data-tournament="{{ tournament_posts }}"
+                data-beta="{{ beta_posts }}">
+            </div>
+
             {% comment %} For ChartJS {% endcomment %}
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -165,6 +173,13 @@
 
             {% comment %} Posts per Tab {% endcomment %}
             <script>
+
+                const discussionPosts = document.getElementById('chartData').getAttribute('data-discussion');
+                const connectPosts = document.getElementById('chartData').getAttribute('data-connect');
+                const marketplacePosts = document.getElementById('chartData').getAttribute('data-marketplace');
+                const tournamentPosts = document.getElementById('chartData').getAttribute('data-tournament');
+                const betaPosts = document.getElementById('chartData').getAttribute('data-beta');
+                
                 const ctx4 = document.getElementById('postsChart').getContext('2d');
 
                 new Chart(ctx4, {
@@ -173,7 +188,13 @@
                     labels: ['Discussions', 'Connect', 'Marketplace', 'Tournament', 'Beta Testing'],
                     datasets: [{
                     label: 'Number of Posts',
-                    data: [120, 80, 122, 140, 70], // Fake Data
+                    data: [
+                        discussionPosts,
+                        connectPosts,
+                        marketplacePosts,
+                        tournamentPosts,
+                        betaPosts
+                    ], 
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.4)',
                         'rgba(54, 162, 235, 0.4)',

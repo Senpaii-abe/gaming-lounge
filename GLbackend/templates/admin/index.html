@@ -48,8 +48,8 @@
                             <span class="las la-users"></span>
                         </div>
                         <div class="analytic-info">
-                            <h4>SUBSCRIBERS</h4>
-                            <h1>00 <small class="text-success">5%</small></h1>
+                            <h4>GAMES</h4>
+                            <h1>31</h1>
                         </div>
                     </div>
     
@@ -59,7 +59,7 @@
                         </div>
                         <div class="analytic-info">
                             <h4>TOTAL LIKES</h4>
-                            <h1>00 <small class="text-danger">5%</small></h1>
+                            <h1>48</h1>
                         </div>
                     </div>
     
@@ -73,22 +73,56 @@
                         <h3 class="section-head">Recent</h3>
                         <div class="rev-content">
                                 <div class="rev-info">
-                                    <h3>POSTS</h3>
-                                    <h1>{{ posts_count_week }} <small>today</small></h1>
+                                    <h4 style="font-size: 14px"> POSTS</h4>
+                                    <h4 style="font-size: 14px">{{ posts_today_count }} <small>today</small></h1>
                                 </div>
                                 <div class="rev-sum">
-                                    <h4>blank</h4>
-                                    <h2></h2>
+                                  <table style="border-collapse: collapse; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="border: 1px solid #dddddd; text-align: left; font-size: 12px; padding: 8px;">Description</th>
+                                            <th style="border: 1px solid #dddddd; text-align: left; font-size: 12px; padding: 8px;">Game</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for post in recent_posts %}
+                                        <tr>
+                                            <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 3px;">
+                                                {% if post.body|wordcount > 8 %}
+                                                    {{ post.body|truncatewords:8 }}.
+                                                {% else %}
+                                                    {{ post.body }}
+                                                {% endif %}
+                                            </td>
+                                            <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 3px;">{{ post.game_title.title }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                                 </div>
                         </div>
                         <div class="rev-content">
                             <div class="rev-info">
-                                <h3>USERS</h3>
-                                <h1>{{ users_count_week }} <small>today</small></h1>
+                                <h4 style="font-size: 14px">USERS</h4>
+                                <h4 style="font-size: 14px">{{ users_today_count }} <small>today</small></h1>
                             </div>
                             <div class="rev-sum">
-                                <h4>blank</h4>
-                                <h2>blank</h2>
+                                <table style="border-collapse: collapse; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">Name</th>
+                                            <th style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">Preferred Game Category</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in recent_users %}
+                                        <tr>
+                                            <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">{{ user.name }}</td>
+                                            <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">{{ user.pref_game_category }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -112,13 +146,13 @@
                                 </div>
                             </div>
                                 <div class="graph-board">
-                                      <canvas id="myChart" width="100%" ></canvas> 
+                                      <canvas id="myChart" style= "height:600px" ></canvas> 
                                 </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="mt-5">
+            <!-- <section class="mt-5">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="graph-card">
@@ -141,7 +175,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
 
             <section class="mt-5">
               <div class="block-grid">
@@ -398,5 +432,3 @@
 
         </main>
 {% endblock content %}
-
-

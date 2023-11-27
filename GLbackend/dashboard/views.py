@@ -33,11 +33,8 @@ def dashboard(request):
     # Count the number of posts created today
     posts_today_count = Post.objects.filter(created_at__date=today).count()
 
-    # Calculate the date one week ago from today
-    # one_week_ago = timezone.now() - timedelta(days=7)
-    # Count posts created within the last week
-    # posts_count_week = Post.objects.filter(created_at__gte=one_week_ago).count()
-    # users_count_week = User.objects.filter(date_joined__gte=one_week_ago).count()
+    recent_posts = Post.objects.filter(created_at__date=today)[:3]
+    recent_users = User.objects.filter(date_joined__date=today)[:3]
 
     context = {
         'admin_name': admin.name,
@@ -47,12 +44,11 @@ def dashboard(request):
         'total_posts_count': total_posts_count,
         'posts_today_count': posts_today_count,
         'users_today_count': users_today_count,
-
+        'recent_posts': recent_posts,
+        'recent_users': recent_users,
     }
 
     return render(request, 'admin/index.html', context)
-
-
 def get_chart_data(request):
     chart_type = request.GET.get('chartType', 'weekly')
     print(f"Chart Type: {chart_type}")

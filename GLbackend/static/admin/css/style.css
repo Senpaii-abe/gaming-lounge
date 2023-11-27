@@ -235,14 +235,12 @@ main{
     grid-gap: 1.5rem;
     margin-bottom: 1.5rem;
 }
-
 .analytics-post {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1.2rem;
     margin-bottom: 1.5rem;
 }
-
 
 .analytic {
     box-shadow: var(--shadow);
@@ -385,7 +383,8 @@ main{
     border-radius: 12px;
     box-shadow: var(--shadow);
     padding: 1rem;
-    height: 500px;
+    width: 100%;
+    height: 580px;
 
 }
 .postchart{
@@ -396,8 +395,8 @@ main{
 }
 
 .graph-board {
-    width: 100%;
-    height: 450px;
+    
+    height: 500px;
 }
 
 .graph-head {
@@ -483,7 +482,7 @@ main{
     .analytics {
         grid-template-columns: repeat(2, 1fr);
     }
-
+    
     .block-grid {
         grid-template-columns: 100%;
     }

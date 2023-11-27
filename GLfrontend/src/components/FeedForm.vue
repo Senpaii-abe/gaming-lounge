@@ -2,18 +2,23 @@
     <form 
         v-on:submit.prevent="submitForm"
             method="post">
-            <select v-model="game_title" class="mb-2 float-left px-2 w-55 bg-purple_main rounded-full">
-                <option value="" disabled>Select a game title...</option>
-                <option v-for="title in gameTitles" :key="title.id" :value="title.id">{{ title.title }}</option>
-            </select>
+            <div class="space-x-2">
+              <!-- <select v-model="menu" class="mb-2 p-2 bg-purple_main rounded-full text-white float-left">
+                <option value="" disabled>where to post</option>
+                <option v-for="choice in menuChoices">{{ choice }}</option>
+              </select> -->
+              
+                <select v-model="game_title" class="mb-2 p-2 w-full bg-purple_main rounded-full text-align">
+                  <option value="" disabled>pick your game topic</option>
+                  <option v-for="title in gameTitles" :key="title.id" :value="title.id">{{ title.title }}</option>
+              </select>
 
-            <select v-model="menu" class="mb-2 float-left px-2 w-55 bg-purple_main rounded-full text-white">
-              <option value="" disabled>where to post</option>
-              <option v-for="choice in menuChoices">{{ choice }}</option>
-            </select>
+              
+            </div>
+            
             <textarea v-model="body" class="p-4 w-full bg-purple_main rounded-full" placeholder="let's talk gaming.."></textarea>
             <div v-if="gameTitleError" class="text-red-500 mb-2">
-              <p>Please select a game title before posting.</p>
+              <p>select a game before posting</p>
             </div>
 
             
@@ -23,14 +28,14 @@
               <p>Please provide a description about your post.</p>
             </div>
             <label>
-                <input type="checkbox" v-model="is_private"> Private
+                <input type="checkbox" v-model="is_private"> friends only
             </label>
 
             <div id="preview" v-if="url">
                 <img :src="url" class="w-[80px] rounded-xl" />
             </div>
 
-        <div class="p-2 border-t border-black justify-between">
+        <div class="py-2 border-t border-black justify-between">
                 <label class="float-left active:bg-violet1 inline-block text-center w-36 p-2 bg-purple_main text-white rounded-full">
                     <input type="file" ref="file" @change="onFileChange">
                     Attach Image

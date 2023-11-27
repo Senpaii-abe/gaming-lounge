@@ -3,26 +3,7 @@
 
         <div class="main-left col-span-1 space-y-6"> 
             <!-- trending games -->
-            <div class="bg-transparent rounded-full">
-                <h3 class="mb-2 text-2xl font-semibold text-center">topics</h3>
-                    <div class="space-y-4 text-center">
-                        <div class="flex items-center justify-between">                                               
-                            <a href="#" class="py-2 px-3 text-lg rounded-large w-full border border-gray hover:bg-purple_main">Valorant</a>
-                         </div>
-                         <div class="flex items-center justify-between ">                                               
-                             <a href="#" class="w-full border border-gray hover:bg-purple_main py-2 px-3 text-lg rounded-large">Farlight 84</a>
-                        </div>
-                        <div class="flex items-center justify-between ">                                               
-                             <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">League of Legends</a>
-                        </div>
-                        <div class="flex items-center justify-between ">                                               
-                            <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Action</a>
-                        </div>
-                        <div class="flex items-center justify-between ">                                               
-                            <a href="#" class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Phasmaphobia</a>
-                        </div>  
-                    </div>
-            </div>
+            
             <div class="p-4 bg-purple_main rounded-full">
                 <h3 class="mb-6 text-lg">useful links</h3>
 
@@ -89,7 +70,7 @@
         <!-- right side -->
         <div class="main-right col-span-1  space-y-6">
             <PeopleYouMayKnow />
-            <Trends />
+            <!-- <Trends /> -->
         </div>
 
 
@@ -126,7 +107,8 @@ export default {
         return {
             post:{
                 id: null,
-                comments: []
+                comments: [],
+                trends: []
             },
             body: ''
         }

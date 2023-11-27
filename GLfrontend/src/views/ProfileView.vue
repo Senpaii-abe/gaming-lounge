@@ -120,7 +120,7 @@
          
 
             <PeopleYouMayKnow />
-            <Trends />
+            <!-- <Trends /> -->
 
 
         </div>

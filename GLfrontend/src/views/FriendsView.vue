@@ -91,7 +91,7 @@
             
 
             <PeopleYouMayKnow />
-            <Trends />
+            <!-- <Trends /> -->
 
            
         </div>
