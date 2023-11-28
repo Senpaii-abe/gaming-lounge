@@ -213,9 +213,8 @@ img {
 
 .main-content {
     margin-left: 370px;
-    width: 72%;
+    width: 80%;
     padding: 1rem 1rem;
-    padding-right: 2rem;
     transition: margin-left 300ms;
 }
 
@@ -419,8 +418,13 @@ main{
     border-radius: 12px;
     box-shadow: var(--shadow);
     padding: 1rem;
-    height: 560px;
+    height: 580px;
 }
+
+.graph-board {
+    height: 520px;
+}
+
 
 .bar-content {
     background: #fff;
@@ -443,10 +447,6 @@ main{
 
 .postchart{
     width:100%;
-}
-
-.graph-board {
-    height: 500px;
 }
 
 .graph-head {

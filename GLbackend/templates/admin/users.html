@@ -27,7 +27,7 @@
                     <div class="analytics-post">
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-eye"></span>
+                                <i class="fa-solid fa-users"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>TOTAL USERS</h4>
@@ -37,12 +37,11 @@
         
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-clock"></span>
+                                <i class="fa-solid fa-globe"></i>
                             </div>
                             <div class="analytic-info">
-                                <h4>Active Users</h4>
-                                <h4>(November)</h4>
-                                <h1>{{ active_users_november_count }}</h1>
+                                <h4>BANNED USERS</h4>
+                                <h1>00</h1> 
                             </div>
                         </div>
         
@@ -51,17 +50,18 @@
                     <div class="analytics-post">
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-eye"></span>
+                                <i class="fa-solid fa-user-slash"></i>
                             </div>
                             <div class="analytic-info">
-                                <h4>BANNED USERS</h4>
-                                <h1>00</h1> 
+                                <h4>Active Users</h4>
+                                <h4>(November)</h4>
+                                <h1>{{ active_users_november_count }}</h1>
                             </div>
                         </div>
         
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-clock"></span>
+                                <i class="fa-solid fa-user-plus"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>New Users</h4>
@@ -120,11 +120,11 @@
                                         <td>{{ user.posts_count }}</td>
                                         <td>{% if user.is_active %} Active {% else %} Inactive {% endif %}</td>
                                         <td>{% if user.last_login %} {{ user.last_login }} {% else %} Never Logged In {% endif %}</td>
-                                        <td><div class="edit-button"><a href="{% url 'edit_user' user.id %}"><i class="fa-regular fa-pen-to-square"></i></span></a></div></td>
+                                        <td><div class="edit-button" class="btn-btn-primary"><a href="{% url 'edit_user' user.id %}"><i class="fa-regular fa-pen-to-square"></i></a></div></td>
                                         <td>
                                             <form method="post" action="{% url 'delete_user' user.id %}">
                                             {% csrf_token %}
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger"><i class="fa-regular fa-square-minus"></i></button>
                                             </form>
                                         </td>
                                     </tr>

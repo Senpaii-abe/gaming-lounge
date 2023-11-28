@@ -2,20 +2,20 @@
   
   <div class="main-left col-span-1 space-y-6">
 
-    <div class="p-4 bg-purple_main border-gray-200 rounded-full">
-        <h3 class="mb-6 font-semibold text-xl tracking-wide">most talked about games</h3>
+        <div class="p-4 bg-purple_main border-gray-200 rounded-full">
+            <h3 class="mb-6 font-semibold text-xl tracking-wide">most talked about games</h3>
 
-        <div class="space-y-4 px-4 text-left">
-                <div v-for="game in popularGames" :key="game.id" class="flex items-center justify-between border-b-2">
-                    <a :href="'/games/' + game.id" class="w-full py-2 px-3 hover:bg-purple_main">{{ game.title }}</a>
-                </div>
+            <div class="space-y-4 px-4 text-left">
+                    <div v-for="game in popularGames" :key="game.id" class="flex items-center justify-between border-b-2">
+                        <a :href="'/games/' + game.id" class="w-full py-2 px-3 hover:bg-purple_main">{{ game.title }}</a>
+                    </div>
+            </div>
         </div>
-    </div>
      
             <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 text-lg">useful links</h3>
+                <h3 class="mb-6 text-xl font-semibold">useful links</h3>
 
-                <p class="text-base/7 font-light mb-6">our instance rules are here and cover the ideals and how we want this
+                <p class="text-base/7 t mb-6">our instance rules are here and cover the ideals and how we want this
                     community to evolve.</p>
                 <p class="text-base/7 font-light mb-2">where you can download games:</p>
 

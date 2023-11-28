@@ -117,7 +117,7 @@
                               {% for user in recent_users %}
                               <tr>
                                   <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">{{ user.name }}</td>
-                                  <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">{{ user.pref_game_category }}</td>
+                                  <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">{{ user.pref_game_category}}</td>
                               </tr>
                               {% endfor %}
                           </tbody>
@@ -147,7 +147,7 @@
                           </div>
                       </div>
                           <div class="graph-board">
-                                <canvas id="myChart" height=163></canvas> 
+                                <canvas id="myChart" height=165></canvas> 
                           </div>
                   </div>
                 </div>
@@ -169,7 +169,7 @@
                       <h3 class="section-head">User Engagement</h3>
                       <div class="graph-content">
                           <div>
-                              <canvas id="engagementChart" height=177></canvas>
+                              <canvas id="engagementChart"></canvas>
                           </div>
                       </div>
                   </div>
