@@ -3,95 +3,40 @@
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
         <!-- inbox -->
         <div class="main-left col-span-1 flex flex-col bg-purple_main rounded-full p-4 overflow-auto h-full">
-            <!-- <div class="p-4 bg-purple_main rounded-full">
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-full">
-                            <p class="font-light"><strong>Code With Stein</strong></p>
-                        </div>
-
-                        <span class="text-xs text-gray-400 font-light">18 minutes ago</span>
-                    </div>
-
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-full">
-                            
-                            <p class="font-light"><strong>Code With Stein</strong></p>
-                        </div>
-
-                        <span class="text-xs text-gray-400 font-normal">18 minutes ago</span>
-                    </div>
-
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-full">
-                            
-                            <p class="font-light"><strong>Code With Stein</strong></p>
-                        </div>
-
-                        <span class="text-xs text-gray-400 font-light">18 minutes ago</span>
-                    </div>
-                </div>
-            </div> -->
+            
             <label for="" class="text-center text-xl font-semibold border-b pb-2">chats</label>
             
             <ul class="mt-3">
-                <li class="p-3 transition hover:bg-[#181327] rounded-lg">                  
-                    <a 
-                        class="mt-4 flex justify-between items-center"
-                        v-for="conversation in conversations"
-                        v-bind:key="conversation.id"
-                        v-on:click="setActiveConversation(conversation.id)"
-                    >
-                        <div class="flex items-center space-x-3">
-                            <template
-                                v-for="user in conversation.users"
-                                v-bind:key="user.id"
-                                
-                            >
-                            <img :src="user.get_avatar" class="w-[45px] rounded-full">
-                                <p 
-                                    class="font-semibold text-base justify-self-start"
-                                    v-if="user.id !== userStore.user.id"
-                                    >
-                                    {{ user.name }} 
-                                </p>
-    
-                            </template>
-                        </div>    
-                        <span class="text-xs text-gray-400 font-light ">{{ conversation.modified_at_formatted }}</span>
-                    </a>
+                <li class="p-3 transition hover:bg-[#181327] rounded-lg">       
+                           
+                        <a 
+                            class="mt-4 flex justify-between items-center"
+                            v-for="conversation in conversations"
+                            v-bind:key="conversation.id"
+                            v-on:click="setActiveConversation(conversation.id)"
+                        >
+                            <div class="flex items-center space-x-3">
+                                <template
+                                    v-for="user in conversation.users"
+                                    v-bind:key="user.id"
+                                    
+                                >
+                                <img :src="user.get_avatar" class="w-[45px] rounded-full">
+                                    <p 
+                                        class="font-semibold text-base justify-self-start"
+                                        v-if="user.id !== userStore.user.id"
+                                        >
+                                        {{ user.name }} 
+                                    </p>
+        
+                                </template>
+                            </div>    
+                            <span class="text-xs text-gray-400 font-light ">{{ conversation.modified_at_formatted }}</span>
+                        </a>
+                    
+                 
                 </li>
-                <!-- <li class="p-3 transition hover:bg-[#181327] rounded-lg">                  
-                    <a href="#" class="flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-full">
-                            <h3 class="font-semibold text-base justify-self-start">Akhil Gautam</h3>
-                        </div>    
-                        <span class="text-xs text-gray-400 font-light ">23m ago</span>
-                    </a>
-                </li>
-                <li class="p-3 transition hover:bg-[#181327]  rounded-lg">                  
-                    <a href="#" class="flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-full">
-                            <h3 class="font-semibold text-base justify-self-start">Akhil Gautam</h3>
-                        </div>    
-                        <span class="text-xs text-gray-400 font-light ">23m ago</span>
-                    </a>
-                </li>
-                <li class="p-3 transition hover:bg-[#181327] rounded-lg">                  
-                    <a href="#" class="flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <img src="https://i.pravatar.cc/300?img=70" class="w-[45px] rounded-full">
-                            <h3 class="font-semibold text-base justify-self-start">Akhil Gautam</h3>
-                        </div>    
-                        <span class="text-xs text-gray-400 font-light ">23m ago</span>
-                    </a>
-                </li> -->
-                
+             
              
             </ul>
  
@@ -100,49 +45,46 @@
         <div class="main-center col-span-3 space-y-4">
             <div class="bg-purple_main rounded-full">
                 <div class="flex flex-col flex-grow p-4">
-                    <template 
-                        v-for="message in activeConversation.messages"
-                        v-bind:key="message.id"
-                    >
-                        <div 
-                            class="flex w-full mt-2 space-x-3 max-w-md ml-auto justify-end"
-                            v-if="message.created_by.id == userStore.user.id"
+                    
+                        <template 
+                            v-for="message in activeConversation.messages" 
+                            v-bind:key="message.id"
                         >
-                            <div>
-                                <div class="bg-[#181327] text-white p-3 rounded-l-full rounded-br-full">
-                                    <p class="text-sm">{{ message.body }}</p>
+                            <div 
+                                class="flex w-full mt-2 space-x-3 max-w-md ml-auto justify-end"
+                                v-if="message.created_by.id == userStore.user.id"
+                            >
+                                <div>
+                                    <div class="bg-[#181327] text-white p-3 rounded-l-full rounded-br-full">
+                                        <p class="text-sm">{{ message.body }}</p>
+                                    </div>
+                                    <span class="text-xs text-gray-400 font-light leading-none"> {{ message.created_at_formatted }} ago</span>
                                 </div>
-                                <span class="text-xs text-gray-400 font-light leading-none"> {{ message.created_at_formatted }} ago</span>
-                            </div>
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
-                                <img :src="message.created_by.get_avatar" class="w-[40px] rounded-full">
-                            </div>
-                        </div>
-
-                        <div 
-                            class="flex w-full mt-2 space-x-3 max-w-md"
-                            v-else
-                        >
                                 <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
                                     <img :src="message.created_by.get_avatar" class="w-[40px] rounded-full">
                                 </div>
-                                <div>
-                                    <div class="bg-[#181327] p-3 rounded-r-full rounded-bl-full">
-                                        <p class="text-sm">{{ message.body }}</p>
+                            </div>
+
+                            <div 
+                                class="flex w-full mt-2 space-x-3 max-w-md"
+                                v-else
+                            >
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
+                                        <img :src="message.created_by.get_avatar" class="w-[40px] rounded-full">
                                     </div>
-                                    <span class="text-xs text-gray-400 font-light leading-none">{{ message.created_at_formatted }} ago</span>
-                                </div>
-                        </div>
-                    </template>
+                                    <div>
+                                        <div class="bg-[#181327] p-3 rounded-r-full rounded-bl-full">
+                                            <p class="text-sm">{{ message.body }}</p>
+                                        </div>
+                                        <span class="text-xs text-gray-400 font-light leading-none">{{ message.created_at_formatted }} ago</span>
+                                    </div>
+                            </div>
+                        </template>
+                  
+                 
                 </div>
             </div>
-            <!-- compose message 8454B4 -->
-          
-                 <!-- <div class="text-right">
-                    <textarea class="p-4 w-full bg-purple_main rounded-large" placeholder="what do you want to say?"></textarea>
-            
-                    <a href="#" class="inline-block p-2 active:bg-violet1 inline-block text-center w-24 p-2 bg-purple_main text-white rounded-full">send</a>
-                 </div> -->
+      
                  <form v-on:submit.prevent="submitForm">
                     <label for="chat" class="sr-only">your message</label>
                         <div class="flex items-center px-3 py-2 rounded-large bg-gray-50 dark:bg-purple_main">

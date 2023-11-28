@@ -34,6 +34,11 @@
                 </div>
 
                 <div>
+                    <!-- bio -->
+                    <input type="text" v-model="form.bio" placeholder="enter something about yourself" class="bg-transparent w-full py-3 px-6 border font-white border-violet1 rounded-full">
+                </div>
+
+                <div>
                     <!-- avatar -->
                     <label class="float-left active:bg-violet1 inline-block text-center w-36 p-2 bg-purple_main text-white rounded-full">
                         <input type="file" ref="file" @change="onFileChange">
@@ -81,7 +86,8 @@ export default {
         return {
             form: {
                 name: this.userStore.user.name,
-                email: this.userStore.user.email,        
+                email: this.userStore.user.email, 
+                bio: this.userStore.user.bio,         
             },
             errors: [],
         }
@@ -106,6 +112,7 @@ export default {
                 formData.append('avatar', this.$refs.file.files[0])
                 formData.append('name', this.form.name)
                 formData.append('email', this.form.email)
+                formData.append('bio', this.form.bio)
 
                 axios
                     .post('/api/editprofile/', formData, {
@@ -122,6 +129,7 @@ export default {
                                 id: this.userStore.user.id,
                                 name: this.form.name,
                                 email: this.form.email,
+                                bio: this.form.bio,
                                 avatar: response.data.user.get_avatar
                             })
                             

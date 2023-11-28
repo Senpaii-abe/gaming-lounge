@@ -18,33 +18,27 @@
             <div class="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="{% url 'dashboard' %}" class="">
-                            <span class="las la-adjust"></span>
+                        <a href="{% url 'dashboard' %}" class="active">
+                            <i class="fa-solid fa-chart-simple"></i>
                             <span>DASHBOARD</span>
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'admin_users' %}" class="">
-                            <span class="las la-adjust"></span>
+                            <i class="fa-solid fa-users"></i>
                             <span>USERS</span>
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'admin_posts' %}" class="">
-                            <span class="las la-adjust"></span>
+                            <i class="fa-solid fa-pen-to-square"></i>
                             <span>POSTS</span>
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'reported_posts' %}" class="">
-                            <span class="las la-adjust"></span>
+                            <i class="fa-solid fa-flag"></i>
                             <span>REPORTED POSTS</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" class="">
-                            <span class="las la-adjust"></span>
-                            <span>BETA-TESTING</span>
                         </a>
                     </li>
                 </ul>
@@ -62,33 +56,22 @@
                 </div>
                 <div class="avartar-info">
                     <div class="avartar-text">
-                        <h4>{{ admin_name }}</h4>
+                        <h4>{{ admin_name }}</h4> 
                         <small>{{ admin_email }}</small>
-                        <div edit-avartar>
-                            <a href="{% url 'edit_profile' %}">
-                                <span class="la-edit"></span>
-                                <span>Edit Information</span>
-                            </a> 
-                        </div>
                     </div>
+                </div>
+                <div class="edit-avartar">
+                    <a href="{% url 'edit_profile' %}">
+                    <i class="fa-solid fa-pen-to-square"></i>
                 </div>
             </div>
             
-            <div class='logout'>
+            <div class="logout">
                 <a href="{% url 'logout' %}">
-                    <span class ="las la-sign-out-alt"></span>
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Logout</span>
                 </a>
             </div>
-            {% comment %} <div class="sidebar-card">
-                <div class="side-card-icon">
-                    <span class="lab la-codiepie"></span>
-                </div>
-                <div>
-                    <h4>ETC ETC</h4>
-                </div>
-                <button class="btn btn-main btn-block">CLICK HERE</button>
-            </div>  {% endcomment %}
         </div>
     </div>
 

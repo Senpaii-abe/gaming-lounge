@@ -5,10 +5,10 @@
 <header>
     <div class="header-title-wrapper">
         <label for="menu-toggle">
-            <span class="las la-bars"></span>
+          <i class="fa-solid fa-bars"></i>
         </label>
         <div class="header-title">
-            <h1>DASHBOARD <span class="las la-chart-line"></span></h1>               
+            <h1>DASHBOARD</h1>               
         </div>
     </div>
     <div class="header-action">
@@ -20,12 +20,12 @@
 </header>
 
         <main>
-            <section>
+            <div>
                 <h3 class="section-head">Overview</h3>
                 <div class="analytics">
                     <div class="analytic">
                         <div class="analytic-icon">
-                            <span class="las la-eye"></span>
+                          <i class="fa-solid fa-users"></i>
                         </div>
                         <div class="analytic-info">
                             <h4>TOTAL USERS</h4>
@@ -35,7 +35,7 @@
     
                     <div class="analytic">
                         <div class="analytic-icon">
-                            <span class="las la-clock"></span>
+                          <i class="fa-solid fa-pen-to-square"></i>
                         </div>
                         <div class="analytic-info">
                             <h4>TOTAL POSTS</h4>
@@ -45,143 +45,121 @@
     
                     <div class="analytic">
                         <div class="analytic-icon">
-                            <span class="las la-users"></span>
+                          <i class="fa-solid fa-gamepad"></i>
                         </div>
                         <div class="analytic-info">
                             <h4>GAMES</h4>
-                            <h1>31</h1>
+                            <h1>{{ total_games_count }}</h1>
                         </div>
                     </div>
     
                     <div class="analytic">
                         <div class="analytic-icon">
-                            <span class="las la-heart"></span>
+                          <i class="fa-solid fa-heart"></i>
                         </div>
                         <div class="analytic-info">
                             <h4>TOTAL LIKES</h4>
-                            <h1>48</h1>
+                            <h1>{{ total_likes_count }}</h1>
                         </div>
                     </div>
     
                 </div>
 
-            </section>
+              </div>
 
-            <section class="mt-5">
-                <div class="block-grid">
-                    <div class="revenue-card">
-                        <h3 class="section-head">Recent</h3>
-                        <div class="rev-content">
-                                <div class="rev-info">
-                                    <h4 style="font-size: 14px"> POSTS</h4>
-                                    <h4 style="font-size: 14px">{{ posts_today_count }} <small>today</small></h1>
-                                </div>
-                                <div class="rev-sum">
-                                  <table style="border-collapse: collapse; width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th style="border: 1px solid #dddddd; text-align: left; font-size: 12px; padding: 8px;">Description</th>
-                                            <th style="border: 1px solid #dddddd; text-align: left; font-size: 12px; padding: 8px;">Game</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for post in recent_posts %}
-                                        <tr>
-                                            <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 3px;">
-                                                {% if post.body|wordcount > 8 %}
-                                                    {{ post.body|truncatewords:8 }}.
-                                                {% else %}
-                                                    {{ post.body }}
-                                                {% endif %}
-                                            </td>
-                                            <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 3px;">{{ post.game_title.title }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                                </div>
-                        </div>
-                        <div class="rev-content">
+              <div class="block-grid">
+                  <section>
+                    <h3 class="section-head">Recent</h3>
+                    <div class="rev-content">
                             <div class="rev-info">
-                                <h4 style="font-size: 14px">USERS</h4>
-                                <h4 style="font-size: 14px">{{ users_today_count }} <small>today</small></h1>
+                                <h4 style="font-size: 14px"> POSTS</h4>
+                                <h4 style="font-size: 14px">{{ posts_today_count }} <small>today</small></h1>
                             </div>
                             <div class="rev-sum">
-                                <table style="border-collapse: collapse; width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">Name</th>
-                                            <th style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">Preferred Game Category</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for user in recent_users %}
-                                        <tr>
-                                            <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">{{ user.name }}</td>
-                                            <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">{{ user.pref_game_category }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
+                              <table style="border-collapse: collapse; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid #dddddd; text-align: left; font-size: 12px; padding: 8px;">Description</th>
+                                        <th style="border: 1px solid #dddddd; text-align: left; font-size: 12px; padding: 8px;">Game</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for post in recent_posts %}
+                                    <tr>
+                                        <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 3px;">
+                                            {% if post.body|wordcount > 8 %}
+                                                {{ post.body|truncatewords:8 }}.
+                                            {% else %}
+                                                {{ post.body }}
+                                            {% endif %}
+                                        </td>
+                                        <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 3px;">{{ post.game_title.title }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                             </div>
-                        </div>
                     </div>
-
-                    <div class="graph-card">
-                        <h3 class="section-head">Graph</h3>
-                        <div class="graph-content">
-                            <div class="graph-head">
-                                <div class="icons-wrapper">
-                                    <div class="icon">
-                                        <span class="las la-eye text-main"></span>
-                                    </div>
-                                    <div class="icon">
-                                        <span class="las la-clock text-success"></span>
-                                    </div>
-                                </div>
-                                <div class="graph-select">
-                                    <select name="" id="">
-                                        <option value="monthly">Monthly (November)</option>
-                                    </select>
-                                </div>
-                            </div>
-                                <div class="graph-board">
-                                      <canvas id="myChart" style= "height:600px" ></canvas> 
-                                </div>
+                    <div class="rev-content">
+                        <div class="rev-info">
+                            <h4 style="font-size: 14px">USERS</h4>
+                            <h4 style="font-size: 14px">{{ users_today_count }} <small>today</small></h1>
                         </div>
-                    </div>
+                      <div class="rev-sum">
+                        <table style="border-collapse: collapse; width: 100%;">
+                          <thead>
+                              <tr>
+                                  <th style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">Name</th>
+                                  <th style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">Preferred Game Category</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {% for user in recent_users %}
+                              <tr>
+                                  <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">{{ user.name }}</td>
+                                  <td style="border: 1px solid #dddddd; text-align: left; font-size: 11px; padding: 8px;">{{ user.pref_game_category }}</td>
+                              </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+                      </div>
+             
+                  </section>
+                    
+              <section>
+                <div class="graph-card">
+                <h3 class="section-head">Graph</h3>
+                  <div class="graph-content">
+                      <div class="graph-head">
+                          <div class="icons-wrapper">
+                              <div class="icon">
+                                <i class="fa-solid fa-user-plus"></i>
+                              </div>
+                              <div class="icon">
+                                <i class="fa-solid fa-pen"></i>
+                              </div>
+                          </div>
+                          <div class="graph-select">
+                              <select name="" id="">
+                                  <option value="monthly">Monthly (November)</option>
+                              </select>
+                          </div>
+                      </div>
+                          <div class="graph-board">
+                                <canvas id="myChart" height=163></canvas> 
+                          </div>
+                  </div>
                 </div>
-            </section>
-            <!-- <section class="mt-5">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="graph-card">
-                            <h3 class="section-head">Posts per Tab</h3>
-                            <div class="graph-content">
-                                <div>     
-                                    <canvas id="postsChart"></canvas> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="graph-card">
-                            <h3 class="section-head">User Visits</h3>
-                            <div class="graph-content">
-                                <div>
-                                    <canvas id="visitsChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> -->
+              </section>
+                  
+              </div>
+    
 
-            <section class="mt-5">
               <div class="block-grid">
                   <div class="graph-card">
-                      <h3 class="section-head">Top 5 Games in GLounge</h3>
-                      <div class="graph-content">
+                      <h3 class="section-head">Popular Games</h3>
+                      <div class="pie-content">
                           <div>
                               <canvas id="gamesChart"></canvas>
                           </div>
@@ -191,13 +169,14 @@
                       <h3 class="section-head">User Engagement</h3>
                       <div class="graph-content">
                           <div>
-                              <canvas id="engagementChart"></canvas>
+                              <canvas id="engagementChart" height=177></canvas>
                           </div>
                       </div>
                   </div>
               </div>
-          </section>  
- 
+
+              <div id="data-for-chart" data-chart-data="{{ data_for_chart_json }}"></div>
+              <div id="data-for-engagement" data-engagement-data="{{ json_data_for_engagement }}"></div>
 
 {% comment %} For ChartJS {% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -208,55 +187,66 @@
 
 {% comment %} Script for Line Chart {% endcomment %}
 <script>
-  const ctx = document.getElementById('myChart');
+    const ctx = document.getElementById('myChart');
+    let dataForChart;
 
-  const day = [
-    { x: Date.parse('2023-11-18'), y: 18},
-    { x: Date.parse('2023-11-19'), y: 5},
-    { x: Date.parse('2023-11-20'), y: 9},
-    { x: Date.parse('2023-11-21'), y: 15},
-    { x: Date.parse('2023-11-22'), y: 11},
-    { x: Date.parse('2023-11-23'), y: 8},
-    { x: Date.parse('2023-11-24'), y: 6},
-  ];
-  const users = [
-    { x: Date.parse('2023-11-18'), y: 5},
-    { x: Date.parse('2023-11-19'), y: 8},
-    { x: Date.parse('2023-11-20'), y: 4},
-    { x: Date.parse('2023-11-21'), y: 13},
-    { x: Date.parse('2023-11-22'), y: 12},
-    { x: Date.parse('2023-11-23'), y: 7},
-    { x: Date.parse('2023-11-24'), y: 9},
-  ];
-  new Chart(ctx, {
-    type: 'line', 
-    data: {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], // need mawala
-      datasets: [
-        {
-          label: 'Number of Posts', 
-          data: day,
-          borderColor: 'rgba(255, 99, 132, 1)', 
-          borderWidth: 2,
-          fill: false, 
-        },
-        {
-          label: 'Number of Users', 
-          data: users,
-          borderColor: 'rgba(54, 162, 235, 1)', 
-          borderWidth: 2,
-          fill: false, 
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
+    // Access the data passed from Django views to the template
+    const dataForChartElement = document.getElementById('data-for-chart');
+    const dataForChartString = dataForChartElement.getAttribute('data-chart-data');
+
+    if (dataForChartString) {
+      try {
+        dataForChart = JSON.parse(dataForChartString);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
       }
+    } else {
+      console.error('Empty or null JSON data');
     }
-  });
+
+    if (dataForChart) {
+      const dates = Object.keys(dataForChart);
+
+      const postsData = dates.map(date => ({
+        x: new Date(date).getTime(),
+        y: dataForChart[date].posts
+      }));
+
+      const usersData = dates.map(date => ({
+        x: new Date(date).getTime(),
+        y: dataForChart[date].users
+      }));
+
+      new Chart(ctx, {
+        type: 'line', 
+        data: {
+          labels: dates,
+          datasets: [
+            {
+              label: 'Number of Posts', 
+              data: postsData,
+              borderColor: 'rgba(255, 99, 132, 1)', 
+              borderWidth: 2,
+              fill: false, 
+            },
+            {
+              label: 'Number of Users', 
+              data: usersData,
+              borderColor: 'rgba(54, 162, 235, 1)', 
+              borderWidth: 2,
+              fill: false, 
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
 </script>
 
 
@@ -265,12 +255,16 @@
 <script>
     const ctx2 = document.getElementById('gamesChart').getContext('2d');
 
+    // Assuming you have received the game titles and post counts from the Django backend
+    const topGameTitles = JSON.parse('{{ top_game_titles_json | escapejs }}');
+    const postCounts = JSON.parse('{{ post_counts_json | escapejs }}');
+
     new Chart(ctx2, {
       type: 'pie', // Change the chart type to 'pie'
       data: {
-        labels: ['Game A', 'Game B', 'Game C', 'Game D', 'Game E'],
+        labels: topGameTitles,
         datasets: [{
-          data: [20, 25, 14, 18, 29], // Fake Data
+          data: postCounts,
           backgroundColor: [
             'rgba(186, 153, 255, 0.5)',
             'rgba(255, 99, 132, 0.5)',
@@ -302,133 +296,70 @@
 </script>
 
 
-{% comment %} Visits {% endcomment %}
-<script>
-    const ctx3 = document.getElementById('visitsChart').getContext('2d');
-
-    new Chart(ctx3, {
-      type: 'bar',
-      data: {
-        labels: ['Discussions', 'Connect', 'Marketplace', 'Tournament', 'Beta Testing'],
-        datasets: [{
-          label: 'Number of Visits',
-          data: [12, 26, 32, 21, 27], // Fake Data
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.4)',
-            'rgba(54, 162, 235, 0.4)',
-            'rgba(255, 206, 86, 0.4)',
-            'rgba(75, 192, 192, 0.4)',
-            'rgba(153, 102, 255, 0.4)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-          ],
-          borderWidth: 2,
-          borderRadius: {
-            topLeft: 10,
-            topRight: 10,
-          }
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-</script>
-
-{% comment %} Posts per Tab {% endcomment %}
-<script>
-    const ctx4 = document.getElementById('postsChart').getContext('2d');
-
-    new Chart(ctx4, {
-      type: 'bar',
-      data: {
-        labels: ['Discussions', 'Connect', 'Marketplace', 'Tournament', 'Beta Testing'],
-        datasets: [{
-          label: 'Number of Posts',
-          data: [120, 80, 122, 140, 70], // Fake Data
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.4)',
-            'rgba(54, 162, 235, 0.4)',
-            'rgba(255, 206, 86, 0.4)',
-            'rgba(75, 192, 192, 0.4)',
-            'rgba(153, 102, 255, 0.4)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-          ],
-          borderWidth: 2,
-          borderRadius: {
-            topLeft: 10,
-            topRight: 10,
-          }
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-</script>
-
-
 {% comment %} Engagement Chart {% endcomment %}
 <script>
     const ctx5 = document.getElementById('engagementChart').getContext('2d');
+    let dataForEngagement;
 
-    new Chart(ctx5, {
-      type: 'line',
-      data: {
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-        datasets: [{
-          label: 'Number of Comments',
-          data: [15, 44, 18, 43], // Replace with actual data
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 2,
-          fill: false,
-        }, {
-          label: 'Number of Likes',
-          data: [40, 30, 39, 45], // Replace with actual data
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 2,
-          fill: false,
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+    const dataForEngagementElement = document.getElementById('data-for-engagement');
+    const dataForEngagementString = dataForEngagementElement.getAttribute('data-engagement-data');
+
+    if (dataForEngagementString) {
+      try {
+        dataForEngagement = JSON.parse(dataForEngagementString);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+    } else {
+      console.error('Empty or null JSON data');
+    }
+
+    if (dataForEngagement) {
+      const dates = Object.keys(dataForEngagement);
+
+      const likesData = dates.map(date => ({
+        x: new Date(date).getTime(),
+        y: dataForEngagement[date].likes
+      }));
+
+      const commentsData = dates.map(date => ({
+        x: new Date(date).getTime(),
+        y: dataForEngagement[date].comments
+      }));
+
+      new Chart(ctx5, {
+        type: 'line', 
+        data: {
+          labels: dates,
+          datasets: [
+            {
+              label: 'Number of Likes', 
+              data: likesData,
+              borderColor: 'rgba(255, 99, 132, 1)', 
+              borderWidth: 2,
+              fill: false, 
+            },
+            {
+              label: 'Number of Comments', 
+              data: commentsData,
+              borderColor: 'rgba(54, 162, 235, 1)', 
+              borderWidth: 2,
+              fill: false, 
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
-    });
+      });
+    }
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
         </main>
 {% endblock content %}
+
+

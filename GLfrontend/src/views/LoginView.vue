@@ -38,7 +38,7 @@
                     </template>
 
                 <div class="space-y-2">
-                    <button class="active:bg-purple_main tracking-wider bg-[#8250CB] w-full mt-8 py-3 px-6 text-white rounded-full font-semibold">Log in</button>
+                    <button class="active:bg-purple_main tracking-wider bg-[#8250CB] w-full mt-8 py-3 px-6 text-white rounded-full font-semibold">login</button>
 
                     <p class="text-center text-[0.86rem] font-light">by clicking register, you agree to the gaming lounges' 
                         <a class="text-blue_link underline active:text-[#0085FF]" href="#">terms of service</a> and 

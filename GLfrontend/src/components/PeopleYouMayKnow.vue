@@ -1,6 +1,6 @@
 <template>
     <div class="p-4 bg-purple_main border-gray-200 rounded-full">
-        <h3 class="mb-6 text-xl">People you may know</h3>
+        <h3 class="mb-6 font-semibold text-xl tracking-wide text-center">people you may know</h3>
 
         <div class="space-y-4">
             <div 

@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
+    <div class="max-w-screen px-12 mx-auto grid grid-cols-4 gap-4">
 
         <!-- left side 
              col-span-1: takes 1 of the 4 columns -->
@@ -21,11 +21,13 @@
                     <div v-if="user.id">
                         <p class="text-lg/none">{{ user.friends_count }}</p>
                         <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-sm">friends</RouterLink>
+                        <p class="text-lg/none">{{ user.charisma_score }}</p>
+                        <label class="text-sm">charisma</label>
                     </div>
                 
                 </div>
                 <!-- about me -->
-                <p class="px-1 text-sm/5 font-light text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae velit vel urna viverra pellentesque. Etiam sed neque sit amet nibh ullamcorper tempor. Etiam finibus, felis in semper rutrum, arcu nibh vehicula nulla.</p>
+                <p class="px-1 text-sm/5 font-light text-justify">{{ user.bio }}</p>
                 
                 <!-- send friend request button -->
                 <div class = "mt-6">
@@ -106,7 +108,7 @@
                 <FeedForm v-bind:user="user" v-bind:posts="posts"/>
             </div>
             <!-- post -->     
-            <div class="p-4 bg-purple_main rounded-full"
+            <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400"
                     v-for="post in posts" 
                     v-bind:key="post.id"> <!-- loop ng post -->
 
@@ -120,7 +122,7 @@
          
 
             <PeopleYouMayKnow />
-            <!-- <Trends /> -->
+    
 
 
         </div>
@@ -142,7 +144,7 @@ input[type="file"] {
 <script>
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/Trends.vue'
+
 import FeedForm from '../components/FeedForm.vue'
 import FeedItem from '../components/FeedItem.vue'
 import { useUserStore } from '@/stores/user'
@@ -165,7 +167,7 @@ export default {
         
     components: {
         PeopleYouMayKnow,
-        Trends,
+
         FeedItem,
         FeedForm
     },
@@ -181,6 +183,7 @@ export default {
     mounted() {
         this.getFeed();
         this.getUserPostCount(); // Fetch and update user's post count
+        this.getCharismaScore();
     },
     watch: {
         '$route.params.id': {
@@ -267,13 +270,25 @@ export default {
         },
         getUserPostCount() {
             axios
-                .get(`/api/users/${this.$route.params.id}/post_count/`)
+                .get(`/api/posts/profile/${this.$route.params.id}/post_count/`)
                 .then((response) => {
                 // Update the user's post count in the component state
                 this.user.posts_count = response.data.posts_count;
                 })
                 .catch((error) => {
                 console.error('Error fetching user post count', error);
+                });
+        },
+        getCharismaScore() {
+            axios
+                .get(`/api/posts/profile/${this.$route.params.id}/charisma_score/`)
+                .then((response) => {
+            
+                // Update the user's post count in the component state
+                this.user.charisma_score = response.data.charisma_score_count;
+                })
+                .catch((error) => {
+                console.error('Error fetching user charisma score', error);
                 });
         },
         logout() {

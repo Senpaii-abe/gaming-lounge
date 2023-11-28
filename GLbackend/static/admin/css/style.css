@@ -44,7 +44,7 @@ img {
 
 /* SIDEBAR */
 .sidebar {
-    width: 380px;
+    width: 370px;
     height: 100%;
     position: fixed;
     top: 0;
@@ -97,15 +97,18 @@ img {
     display: flex;
     grid-template-columns: 70px auto;
     align-items: center;
-    border: 2px solid var(--main-accent);
-    padding: 0.7rem 0.7rem;
+    border: 3px solid var(--main-accent);
+    padding: 0.6rem 3rem;
     border-radius: 15px;
-    margin-top:2.8rem;
+    position: absolute;
+    bottom: 6%;
+    left: 50%; 
+    transform: translateX(-50%);
 }
 
 .sidebar-avartar img {
-    width: 95px;
-    height: 80px;
+    width: 70px;
+    height: 55px;
     padding-right: 0.8rem;
 }
 
@@ -116,12 +119,32 @@ img {
 }
 
 .avartar-text h4 {
-    font-weight: 550;
+    margin-bottom: 0;
+    font-size: 17px;
+    font-weight: 600;
+}
+.avartar-text small {
+    margin-top: 0;
+    font-size: 12px;
+}
+
+.edit-avartar {
+    font-size:20px;
+    position: absolute;
+    padding-bottom: 14%;
+    padding-left: 75%;
 }
 
 .logout {
-    margin-top:1rem;
-    margin-left: 7rem;
+    position: absolute;
+    bottom: 3%;
+    left: 50%; 
+    transform: translateX(-50%);
+}
+
+.logout a {
+    color: black;
+    text-decoration: none;
 }
 
 /* SIDEBAR MENU  */
@@ -131,8 +154,12 @@ img {
 
 .sidebar-menu a {
     color: var(--main-text);
-    display: block;
-    padding: .6rem 0rem;
+    padding: 0.7rem;
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: 12% auto;
+    grid-gap: 5px
+
 }
 
 .sidebar-menu a.active {
@@ -141,14 +168,21 @@ img {
     border-radius: 7px;
 }
 
-.sidebar-menu a span:first-child{
+/* .sidebar-menu a span:first-child{
     display: inline-block;
     margin-right: .7rem;
     color: var(--color-main);
+} */
+
+.sidebar-menu a i{
+    padding-top: 4px;
+    font-size: 20px;
 }
 
 .sidebar-menu a span{
-    font-size: 1.1rem;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
 }
 
 .btn {
@@ -235,12 +269,14 @@ main{
     grid-gap: 1.5rem;
     margin-bottom: 1.5rem;
 }
+
 .analytics-post {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1.2rem;
     margin-bottom: 1.5rem;
 }
+
 
 .analytic {
     box-shadow: var(--shadow);
@@ -383,19 +419,33 @@ main{
     border-radius: 12px;
     box-shadow: var(--shadow);
     padding: 1rem;
-    width: 100%;
-    height: 580px;
+    height: 560px;
+}
 
+.bar-content {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    width: 100%;
+    height: 480px;
 }
-.postchart{
-    width:100%;
+
+.pie-content {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    width: 100%;
+    height: 410px;
 }
+
+
 .postchart{
     width:100%;
 }
 
 .graph-board {
-    
     height: 500px;
 }
 
@@ -482,7 +532,7 @@ main{
     .analytics {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .block-grid {
         grid-template-columns: 100%;
     }
@@ -515,4 +565,26 @@ main{
 
 .edit-button {
     font-size: 30px;
+}
+
+
+/* REPORT HTML */
+.reported-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    height: 560px;
+}
+.reported-info {
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    border-radius: 10px;
+    display: grid;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.report-buttons {
+    display: grid;
 }

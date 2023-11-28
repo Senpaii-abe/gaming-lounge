@@ -1,22 +1,27 @@
 <template>
+
+    <div>
     <!-- top part ng post-->
     <div class="mb-4 flex items-center justify-between">
         <!-- username nd pfp -->
         <div class="flex items-center space-x-3">
             <img :src="post.created_by.get_avatar" class="h-[40px] w-[40px] rounded-img">
-            <p class="font-medium">
+            <div>
+                <p class="font-semibold tracking-wide">
                 <RouterLink :to="{ name: 'profile', params: { 'id': post.created_by.id } }">{{ post.created_by.name }}
                 </RouterLink>
-            </p>
+                </p>
+            <!-- time posted -->
+            <p class="text-gray-300 text-xs font-light">{{ post.created_at_formatted }}</p>
+            </div>
         </div>
-        <!-- time posted -->
-        <p class="text-gray-400 text-xs font-light">{{ post.created_at_formatted }}</p>
+        <p class="mb-4 text-base/7 font-bold">{{ post.game_title ? post.game_title.title : 'No Game Title' }}</p>
     </div>
 
 
-    <p class="mb-4 text-base/7 font-bold">{{ post.game_title ? post.game_title.title : 'No Game Title' }}</p>
+    
     <!--  -->
-    <p class="mb-4 text-base/7 font-light">{{ post.body }}</p>
+    <p class="mb-4 text-base/7">{{ post.body }}</p>
 
     <template v-if="post.attachments && post.attachments.length">
         <div v-for="image in post.attachments" :key="image.id">
@@ -26,9 +31,9 @@
         </div>
     </template>
     <template v-if="post.post_url">
-        <p class="text-base/7 font-light">
+        <p class="text-sm">
             SOURCE:
-            <a :href="post.post_url" target="_blank" class="text-blue-600 hover:text-blue-800 break-words">
+            <a :href="post.post_url" target="_blank" class=" italic text-blue-400 hover:text-blue-500 break-words">
                 {{ post.post_url }}
             </a>
         </p>
@@ -115,6 +120,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <style>
@@ -210,7 +216,8 @@ export default {
                 .delete(`/api/posts/${postId}/delete/`)
                 .then(response => {
                    
-
+                    this.$emit('postDeleted', postId);
+                    
                     // Update the client-side state
                     this.posts = this.posts.filter(post => post.id !== postId);
 

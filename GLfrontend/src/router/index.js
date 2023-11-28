@@ -8,7 +8,6 @@ import SearchView from '../views/SearchView.vue'
 import FriendsView from '../views/FriendsView.vue'
 import PostView from '../views/PostView.vue'
 import ChatView from '../views/ChatView.vue'
-import TrendView from '../views/TrendView.vue'
 import EditProfileView from '../views/EditProfileView.vue'
 import EditPasswordView from '../views/EditPasswordView.vue'
 import NotificationsView from '../views/NotificationsView.vue'
@@ -76,11 +75,7 @@ const router = createRouter({
       name: 'friends',
       component: FriendsView
     },
-    {
-      path: '/trends:id/',
-      name: 'trendview',
-      component: TrendView
-    },
+
 
     {
       path: '/connect',

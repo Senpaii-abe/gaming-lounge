@@ -1,100 +1,55 @@
-{% comment %} {% extends "admin/base_site.html" %}
-{% load i18n static %}
-
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static "admin/css/login.css" %}">
-{{ form.media }}
-{% endblock %}
-
-{% block bodyclass %}{{ block.super }} login{% endblock %}
-
-{% block usertools %}{% endblock %}
-
-{% block nav-global %}{% endblock %}
-
-{% block nav-sidebar %}{% endblock %}
-
-{% block content_title %}{% endblock %}
-
-{% block nav-breadcrumbs %}{% endblock %}
-
-{% block content %}
-{% if form.errors and not form.non_field_errors %}
-<p class="errornote">
-{% blocktranslate count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktranslate %}
-</p>
-{% endif %}
-
-{% if form.non_field_errors %}
-{% for error in form.non_field_errors %}
-<p class="errornote">
-    {{ error }}
-</p>
-{% endfor %}
-{% endif %}
-
-<div id="content-main">
-
-{% if user.is_authenticated %}
-<p class="errornote">
-{% blocktranslate trimmed %}
-    You are authenticated as {{ username }}, but are not authorized to
-    access this page. Would you like to login to a different account?
-{% endblocktranslate %}
-</p>
-{% endif %}
-
-<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
-  <div class="form-row">
-    {{ form.username.errors }}
-    {{ form.username.label_tag }} {{ form.username }}
-  </div>
-  <div class="form-row">
-    {{ form.password.errors }}
-    {{ form.password.label_tag }} {{ form.password }}
-    <input type="hidden" name="next" value="{{ next }}">
-  </div>
-  {% url 'admin_password_reset' as password_reset_url %}
-  {% if password_reset_url %}
-  <div class="password-reset-link">
-    <a href="{{ password_reset_url }}">{% translate 'Forgotten your password or username?' %}</a>
-  </div>
-  {% endif %}
-  <div class="submit-row">
-    <input type="submit" value="{% translate 'Log in here' %}">
-  </div>
-</form>
-
-</div>
-{% endblock %} {% endcomment %}
-
-
 <!-- login.html -->
-<!-- login.html -->
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Login</title>
-    <!-- Add your CSS stylesheets or link to external CSS files here -->
-</head>
-<body>
-    <h1>Login</h1>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-danger">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        <label for="id_email">Email:</label>
-        <input type="email" name="email" id="id_email" required><br>
-        <label for="id_password">Password:</label>
-        <input type="password" name="password" id="id_password" required><br>
-        <input type="submit" value="Login">
-    </form>
-    <a href="{% url 'admin_signup' %}"><button>Signup</button></a>
-</body>
+    <link rel="stylesheet" href="{% static 'admin/css/login.css'%}" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, minimum-scale=1" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <form method="post">
+        <h1>LOGIN</h1>
+        {% csrf_token %} {% if messages %} {% for message in messages %}
+        <div class="error-message">{{ message }}</div>
+        {% endfor %} {% endif %}
+
+        <div class="input-box">
+          <input
+            type="email"
+            name="email"
+            id="id_email"
+            placeholder="Email"
+            required
+          />
+          <i class="bx bx-envelope"></i>
+        </div>
+        <div class="input-box">
+          <input
+            type="password"
+            name="password"
+            id="id_password"
+            placeholder="Password"
+            required
+          />
+          <i class="bx bx-lock"></i>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+
+        <div class="register-link">
+          <p>
+            Register as admin? <a href="{% url 'admin_signup' %}">Sign-up</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>

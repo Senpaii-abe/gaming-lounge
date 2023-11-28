@@ -1,21 +1,10 @@
 <template>
-    <!-- 
-        mx-auto: center of the screen 
-        put "grid" or "flex" to assign the display before adding "grid-cols" or "flex-cols"
-        space-(y or x)-number: space for each elements like posts for example
-        
-        check tailwind.config.js for more configurations
-        bg-purple_main: color ng header
-        bg-blue_link: color ng links
 
-        text-base/7 font-light: default class ng texts sa post
-        rounded-full: default class ng borders natin
-    -->
-    <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
+    <div data-te-infinite-scroll-init class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12" id="spinners-and-async-example">
 
         <!-- left side 
              col-span-1: takes 1 of the 4 columns -->
-        <div class="main-left col-span-1 space-y-6">
+            <div class="main-left col-span-1 space-y-6 sticky top-[8rem] h-screen overflow-auto">
             <!-- trending games -->
             <!-- <div class="bg-transparent rounded-full">
                 <h3 class="mb-2 text-2xl font-semibold text-center">topics</h3>
@@ -45,11 +34,11 @@
                 </div>
             </div> -->
             <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 text-lg">useful links</h3>
+                <h3 class="mb-6 font-semibold tracking-wide">useful links</h3>
 
-                <p class="text-base/7 font-light mb-6">our instance rules are here and cover the ideals and how we want this
+                <p class="text-base/7 italic mb-6">our instance rules are here and cover the ideals and how we want this
                     community to evolve.</p>
-                <p class="text-base/7 font-light mb-2">where you can download games:</p>
+                <p class="text-base/7 italic mb-2">where you can download games:</p>
 
                 <ul class="list-inside">
 
@@ -80,86 +69,140 @@
         <!-- center -->
         <!-- col-span-2: takes 2 of the 4 columns
                  space-y-4: 6 spaces each post -->
-        <div class="px-4 main-center col-span-2 space-y-6">
-            <!-- write something -->
-            <div class="rounded-full bg-transparent space-y-1 text-right">
-                <FeedForm v-bind:user="null" v-bind:posts="posts" />
-            </div>
-            <!-- post area -->
-            <div class="p-4 bg-purple_main rounded-full" v-for="post in posts" v-bind:key="post.id"> <!-- loop ng post -->
+        <div class="px-4 main-center col-span-2 space-y-6"> <!--whole feed-->
+            <div class="feed"> <!--modal design-->
+                    <Modal @close="toggleModal" :modalActive="modalActive">
+                        <div class="rounded-full bg-transparent space-y-1 text-right model-content">
+                           
+                            <FeedForm v-bind:user="null" v-bind:posts="posts"/>
+                        </div>
+                    </Modal>
+                <div class="flex items-center justify-between rounded-full space-x-2 py-4">
+                    <img :src="userStore.user.avatar" alt="user.profile" class="w-14 h-14 rounded-img">
+                    <button @click="toggleModal" class="py-4 px-3 w-full bg-[#0A001266] bg-opacity-30 rounded-img text-left transition-colors duration-150 focus:shadow-outline hover:bg-purple-900 hover:bg-opacity-30"> 
+                        <span class="text-gray-400 pl-2 italic">lets talk gaming?</span>
+                    </button>
+                </div>
 
-                <FeedItem :post="post" @postDeleted="handlePostDeleted" />
+            </div>
+       
+            <!-- write something -->
+            <!-- bg-gradient-to-r from-violet-900  -->
+            <!-- post area -->
+                <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400"  v-for="post in posts" v-bind:key="post.id">
+                
+                <!-- loop ng post -->
+
+                <FeedItem :post="post" @postDeleted="handlePostDeleted"/>
             </div>
         </div>
 
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6">
-
-
-            <ul class="text-center">
-                <li class="mb-4">
-                    <a href="">
-                        <img src="/assets/img/ads-1.png" class="h-auto max-w-full" alt="logo" />
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <img src="/assets/img/ads-2.png" class="h-auto max-w-full" alt="logo" />
-                    </a>
-                </li>
-            </ul>
-
+        <div class="main-right col-span-1 space-y-6 sticky top-[8rem] h-screen overflow-auto">
             <PeopleYouMayKnow />
-            <!-- <Trends /> -->
         </div>
-
+        <div
+            id="spinner"
+            class="hidden h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status">
+            <span
+            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+            >Loading...</span
+            >
+  </div>
 
     </div>
 </template> 
 
 
 <script>
-import axios from 'axios'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/Trends.vue'
-import { useUserStore } from '@/stores/user'
-import FeedItem from '../components/FeedItem.vue'
-import FeedForm from '../components/FeedForm.vue'
 
+
+import axios from 'axios'
+import FeedForm from '../components/FeedForm.vue'
+import FeedItem from '../components/FeedItem.vue'
+import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
+import { useUserStore } from '@/stores/user'
+
+import Modal from '@/components/Modal.vue';
+import {ref} from 'vue'
 export default {
     name: 'FeedView',
 
     emits: ['postDeleted'],
-    
+
     setup() {
         const userStore = useUserStore()
 
-        return {
-            userStore
+        const modalActive = ref(false)
+        const toggleModal = () => {
+            modalActive.value = !modalActive.value;
         }
+
+
+      
+        return {
+            userStore,
+            modalActive,
+            toggleModal,
+        }
+        
     },
-    components: {
-        PeopleYouMayKnow,
-        Trends,
-        FeedItem,
-        FeedForm
-    },
+        components: {
+            PeopleYouMayKnow,
+            Modal,
+            FeedItem,
+            FeedForm,
+        },
+        
     data() {
+    
         return {
             posts: [],
             body: '',
-            trends: []
+          
+            currentPage: 1,
+            totalPages: null,
+
         }
     },
     mounted() {
         this.getFeed()
-    },
+        this.userStore.initStore();
+
+        window.onscroll = () => {
+            if(this.currentPage < this.totalPages) {
+            let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
+            if (bottomOfWindow) { 
+                this.currentPage += 1
+                this.getFeed()
+            }
+            }
+        }
+        }, 
     methods:
     {
-        deletePost(id) {
-            // Filter out the deleted post
-            this.posts = this.posts.filter(post => post.id !== id);
+        getFeed() {
+            axios
+                .get(`/api/posts/?page=${this.currentPage}`)
+                // .get('/api/posts')
+                .then(response => {
+                    this.posts = this.posts.concat(response.data) 
+                    this.currentPage = response.data.currentPage
+                    this.totalPages = response.data.totalPages
+
+                    this.hasNext=false
+
+                    if(response.data.next){
+                        this.hasNext = true
+                    }
+                    
+                    console.log(response.data)
+                })
+  
+                .catch(error => {
+                    console.log('error', error)
+                })
         },
 
         handlePostDeleted(deletedPostId) {
@@ -169,17 +212,7 @@ export default {
                 this.user.posts_count -= 1;
             }
         },
-        getFeed() {
-            axios
-                .get('/api/posts/')
-                .then(response => {
-                    console.log('data', response.data)
-                    this.posts = response.data
-                })
-                .catch(error => {
-                    console.log('error', error)
-                })
-        },
+
         search() {
             // Redirect to the search page with the query as a URL parameter
             this.$router.push({ name: 'search', query: { q: this.searchQuery } });
@@ -187,3 +220,7 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

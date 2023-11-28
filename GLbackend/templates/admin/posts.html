@@ -22,7 +22,7 @@
                     <div class="analytics-post">
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-eye"></span>
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>TOTAL POSTS</h4>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-clock"></span>
+                                <i class="fa-regular fa-comments"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>Discussions</h4>
@@ -45,7 +45,7 @@
                     <div class="analytics-post">
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-eye"></span>
+                                <i class="fa-solid fa-link"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>Connect</h4>
@@ -55,7 +55,7 @@
         
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-clock"></span>
+                                <i class="fa-solid fa-store"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>Marketplace</h4>
@@ -68,7 +68,7 @@
                     <div class="analytics-post">
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-eye"></span>
+                                <i class="fa-solid fa-trophy"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>Tournament</h4>
@@ -78,7 +78,7 @@
         
                         <div class="analytic">
                             <div class="analytic-icon">
-                                <span class="las la-clock"></span>
+                                <i class="fa-brands fa-fantasy-flight-games"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>Beta-Testing</h4>
@@ -90,9 +90,9 @@
             <div>
                 <div class="graph-card">
                     <h3 class="section-head">Posts per Tab</h3>
-                    <div class="graph-content">
+                    <div class="bar-content">
                         <div>     
-                            <canvas id="postsChart"></canvas> 
+                            <canvas id="postsChart" height="155"></canvas> 
                         </div>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                                         <td>{% if post.is_private %} Private {% else %} Public {% endif %}</td>
                                         <td>{{ post.menu }}</td>
                                         <td>{{ post.post_url }}</td>
-                                        <td><a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a></td>
+                                        <td><div class="edit_button"><a href="{% url 'edit_post' post.id %}"><i class="fa-regular fa-pen-to-square"></a></div></td>
                                         <td><form method="post" action="{% url 'delete_post' post.id %}">
                                             {% csrf_token %}
                                             <button type="submit" class="btn btn-danger">Delete</button>

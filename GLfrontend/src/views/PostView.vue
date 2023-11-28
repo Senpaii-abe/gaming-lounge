@@ -70,7 +70,7 @@
         <!-- right side -->
         <div class="main-right col-span-1  space-y-6">
             <PeopleYouMayKnow />
-            <!-- <Trends /> -->
+     
         </div>
 
 
@@ -81,7 +81,6 @@
 <script>
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/Trends.vue'
 import { useUserStore } from '@/stores/user'
 import FeedItem from '../components/FeedItem.vue'
 import CommentItem from '../components/CommentItem.vue'
@@ -99,7 +98,7 @@ export default {
     },
     components: {
         PeopleYouMayKnow,
-        Trends,
+   
         FeedItem,
         CommentItem,
     },
@@ -108,7 +107,7 @@ export default {
             post:{
                 id: null,
                 comments: [],
-                trends: []
+          
             },
             body: ''
         }

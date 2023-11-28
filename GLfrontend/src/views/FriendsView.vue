@@ -91,8 +91,7 @@
             
 
             <PeopleYouMayKnow />
-            <!-- <Trends /> -->
-
+          
            
         </div>
 
@@ -105,7 +104,7 @@
 
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-import Trends from '../components/Trends.vue'
+
 import { useUserStore } from '@/stores/user'
 import FeedItem from '../components/FeedItem.vue'
 
@@ -126,7 +125,7 @@ export default {
          
     components: {
         PeopleYouMayKnow,
-        Trends,
+  
         FeedItem,
     },
     data(){

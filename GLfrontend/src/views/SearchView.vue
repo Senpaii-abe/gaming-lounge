@@ -43,7 +43,7 @@
 
         <div class="main-right col-span-1 space-y-4">
            <PeopleYouMayKnow />
-           <!-- <Trends /> -->
+         
         </div>
     </div>
 </template>
@@ -51,14 +51,13 @@
 <script>
 import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue' 
-import Trends from '../components/Trends.vue'
 import FeedItem from '../components/FeedItem.vue'
 
 export default {
     name: 'SearchView',
     components: {
         PeopleYouMayKnow,
-        Trends,
+
         FeedItem,
     },
 

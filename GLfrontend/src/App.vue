@@ -1,4 +1,4 @@
-<template>
+
 	<!-- 
         mx-auto: center of the screen 
         put "grid" or "flex" to assign the display before adding "grid-cols" or "flex-cols"
@@ -9,103 +9,78 @@
         bg-blue_link: color ng links
     -->  
 	<!-- header start if authenticated-->
-		<nav class="bg-purple_main py-5 px-8 fixed w-full z-20 top-0 left-0" v-if="userStore.user.isAuthenticated && userStore.user.id"> 
-					<div class="max-w-7xl mx-auto flex items-center flex-wrap justify-between">
-						<!-- left menu logo start -->
-								<div class="menu-left flex items-center ">
-									<img src="../assets/img/logo/gl_logo.png" alt="logo"/>
-								</div>
+	<template>
+		<nav class="py-6 px-8 fixed w-screen z-20 top-0 left-0 bg-cover bg-[url('../assets/img/navbar/header.png')]" v-if="userStore.user.isAuthenticated && userStore.user.id"> 
+			<div class="max-w-screen mx-auto flex items-center flex-wrap justify-between px-12">
+				<!-- left menu logo start -->		
+					<a href="http://gaminglounge.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+						<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Gaming Lounge.</span>
+					</a>		
+					
+					<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-use">
+								<ul class="flex flex-col font-semibold tracking-wider md:tracking-wider p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0">
+											<li>
+												<RouterLink to="/feed" class="block py-2 pl-3 md:hover:text-violet1 md:p-0 md:dark:hover:text-violet1 dark:text-white dark:hover:text-violet1 dark:hover:text-violet1 md:dark:hover:bg-transparent" >discussions </RouterLink>   
+											</li>
+											<li>
+												<RouterLink to="/marketplace" class="block py-2 pl-3 md:hover:text-violet1 md:p-0 md:dark:hover:text-violet1 dark:text-white dark:hover:text-violet1 dark:hover:text-violet1 md:dark:hover:bg-transparent" >marketplace </RouterLink>
+											</li>
+											<li>
+												<RouterLink to="/connect" class="block py-2 pl-3 md:hover:text-violet1 md:p-0 md:dark:hover:text-violet1 dark:text-white dark:hover:text-violet1 dark:hover:text-violet1 md:dark:hover:bg-transparent " >connect</RouterLink>
+											</li>
+											<li>
+												<RouterLink to="/tournaments" class= "block py-2 pl-3 md:hover:text-violet1 md:p-0 md:dark:hover:text-violet1 dark:text-white dark:hover:text-violet1 dark:hover:text-violet1 md:dark:hover:bg-transparent" >tournaments </RouterLink>
+											</li>
+											<li>
+												<RouterLink to="/betatesting" class="block py-2 pl-3 md:hover:text-violet1 md:p-0 md:dark:hover:text-violet1 dark:text-white dark:hover:text-violet1 dark:hover:text-violet1 md:dark:hover:bg-transparent">beta testing </RouterLink>
+											</li>
+								</ul>
+							</div> 
 						<!-- center menu start -->
-								<div class="menu-center items-center justify-between hidden w-full md:flex md:w-auto md:order-1 space-x-12 " id="navbar-user" >
-									<ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0">
-										<li>
-											<RouterLink to="/feed" class="block py-2 pl-3 md:hover:text-black-700 md:p-0 md:dark:hover:text-black-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700">discussions </RouterLink>   
-										</li>
-										<li>
-											<RouterLink to="/marketplace" class="block py-2 pl-3 md:hover:text-black-700 md:p-0 md:dark:hover:text-black-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700" >marketplace </RouterLink>
-										</li>
-										<li>
-											<RouterLink to="/connect" class="block py-2 pl-3 md:hover:text-black-700 md:p-0 md:dark:hover:text-black-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700" >connect</RouterLink>
-										</li>
-										<li>
-											<RouterLink to="/tournaments" class= "block py-2 pl-3 md:hover:text-black-700 md:p-0 md:dark:hover:text-black-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-black md:dark:hover:bg-transparent dark:border-gray-700" >tournaments </RouterLink>
-										</li>
-										<li>
-											<RouterLink to="/betatesting" class="text-gray-400 rounded-t-lg cursor-not-allowed dark:text-white-500">beta testing </RouterLink>
-										</li>
-									</ul>
-								</div>
-						<!-- right menu icons start -->
-								<div class="menu-right items-center justify-between hidden w-full md:flex md:w-auto md:order-1 space-x-2">
-									<RouterLink to="/search" class="rounded-img p-2 hover:bg-[#28183e] bg-dark_purple">
-										<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M16.3198574,14.9056439 L21.7071068,20.2928932 L20.2928932,21.7071068 L14.9056439,16.3198574 C13.5509601,17.3729184 11.8487115,18 10,18 C5.581722,18 2,14.418278 2,10 C2,5.581722 5.581722,2 10,2 C14.418278,2 18,5.581722 18,10 C18,11.8487115 17.3729184,13.5509601 16.3198574,14.9056439 Z M10,16 C13.3137085,16 16,13.3137085 16,10 C16,6.6862915 13.3137085,4 10,4 C6.6862915,4 4,6.6862915 4,10 C4,13.3137085 6.6862915,16 10,16 Z" fill-rule="evenodd" fill="white"/></svg>
-										
-									</RouterLink>
-									
-									<RouterLink to="/chat" class="rounded-img p-2 hover:bg-[#28183e] bg-dark_purple">
-										<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M21,7.38246601 L21,5 L3,5 L3,7.38199365 L12.0000224,11.8824548 L21,7.38246601 Z M21,9.61853399 L11.9999776,14.1185452 L3,9.61810635 L3,19 L21,19 L21,9.61853399 Z M3,3 L21,3 C22.1045695,3 23,3.8954305 23,5 L23,19 C23,20.1045695 22.1045695,21 21,21 L3,21 C1.8954305,21 1,20.1045695 1,19 L1,5 C1,3.8954305 1.8954305,3 3,3 Z" fill-rule="evenodd" fill="white"/></svg>
+								<div class="items-center justify-between md:flex md:w-auto md:order-1 rtl:space-x-reverse pr-4">
+									<RouterLink to="/search" class="p-2 rounded-img hover:bg-gray-600">
+										<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"><g fill="none" stroke="#f9f9f9" stroke-width="2"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M11 8a3 3 0 0 0-3 3m12 9l-3-3"/></g></svg>
+									</RouterLink>									
+									<RouterLink to="/chat" class="p-2 rounded-img hover:bg-gray-600">
+										<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M0 0h24v24H0z"/><path fill="#f9f9f9" d="M22 7.535V17a3 3 0 0 1-2.824 2.995L19 20H5a3 3 0 0 1-2.995-2.824L2 17V7.535l9.445 6.297l.116.066a1 1 0 0 0 .878 0l.116-.066z"/><path fill="#f9f9f9" d="M19 4c1.08 0 2.027.57 2.555 1.427L12 11.797l-9.555-6.37a2.999 2.999 0 0 1 2.354-1.42L5 4z"/></g></svg>
 									</RouterLink>									     
-									<RouterLink to="/notifications" class="hover:bg-[#28183e] rounded-img p-2 bg-dark_purple">
-										<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M10.1353075,2.27592318 C10.2402118,2.0052531 10.405725,1.75363521 10.6305147,1.54243008 C11.4002733,0.819189975 12.5997267,0.819189975 13.3694853,1.54243008 C13.5947695,1.75409979 13.7605161,2.00636024 13.8653839,2.27770959 C16.7616088,3.1234978 19,5.9408248 19,10 C19,12.6246407 19.5316915,14.1023939 20.5153799,15.1769385 C20.7591805,15.4432571 21.6159553,16.2145106 21.7120353,16.3119441 L22,16.6039656 L22,20.0140878 L15.8743256,20.0140878 C15.6241439,20.9988638 15.0074832,21.861375 14.0878016,22.4226016 C12.8058555,23.2048965 11.1941445,23.2048965 9.91219841,22.4226016 C8.87009269,21.7866669 8.29383594,21.076125 8.08797645,20.0140878 L2,20.0140878 L2,16.6039656 L2.2879647,16.3119441 C2.39205094,16.2070827 3.24384208,15.442761 3.48595854,15.1793313 C4.46898326,14.1097716 5,12.6338939 5,10 C5,5.92919283 7.23535296,3.11802713 10.1353075,2.27592318 Z M10.1786171,20.0140878 C10.3199018,20.276911 10.5607105,20.4753661 10.9540156,20.7153766 C11.596268,21.1073049 12.403732,21.1073049 13.0459844,20.7153766 C13.3433933,20.5338858 13.5757865,20.2937382 13.7367218,20.0140878 L10.1786171,20.0140878 Z M20,17.4519264 C19.701613,17.1774463 19.2506046,16.7572744 19.0401756,16.5274096 C17.7059972,15.0700027 17,13.1077943 17,10 C17,6.23128941 14.6597092,4.01238167 12,4.01238167 C9.33276935,4.01238167 7,6.21989471 7,10 C7,13.1178011 6.29422173,15.0794011 4.95848591,16.5327208 C4.74843403,16.7612633 4.29607181,17.181102 4,17.45237 L4,18.0140878 L20,18.0140878 L20,17.4519264 Z" fill-rule="evenodd" fill="white"/></svg>                    
-									</RouterLink>
-          
-									<!-- user icon -->
-									
-									<div class="flex items-center md:order-2">
-											<button type="button" class="flex mr-3 text-sm rounded-img md:mr-0" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-												<span class="sr-only">open user menu</span>
-												<RouterLink :to="{name: 'profile', params:{'id': userStore.user.id}}" >
-													<img :src="userStore.user.avatar" class="w-10 h-10 rounded-img  hover:opacity-80">
-												</RouterLink> 
-											</button>
-											<!-- Dropdown menu -->
-											<div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-												<div class="px-4 py-3">
-												<span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-												<span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-												</div>
-												<ul class="py-2" aria-labelledby="user-menu-button">
-												<li>
-													<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">profile</a>
-												</li>
-												<li>
-													<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">settings</a>
-												</li>
-
-												<li>
-													<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">logout</a>
-												</li>
-												</ul>
-											</div>
-											<button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
-												<span class="sr-only">open main menu</span>
-												<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-													<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-												</svg>
-											</button>
-										</div>
-								</div>   
+									<RouterLink to="/notifications" class="p-2 rounded-img hover:bg-gray-600">
+										<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"><g fill="none"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092"/><path fill="#f9f9f9" d="M15 19a2 2 0 0 1-1.85 1.995L13 21h-2a2 2 0 0 1-1.995-1.85L9 19zM12 2a7 7 0 0 1 6.996 6.76L19 9v3.764l1.822 3.644a1.1 1.1 0 0 1-.869 1.586l-.115.006H4.162a1.1 1.1 0 0 1-1.03-1.487l.046-.105L5 12.764V9a7 7 0 0 1 7-7"/></g></svg>               
+									</RouterLink>	
+						
+										<RouterLink :to="{name: 'profile', params:{'id': userStore.user.id}}" class="p-2 rounded-img hover:bg-gray-600" >
+											<!-- <img :src="userStore.user.avatar" alt="user.profile"					
+											class="w-10 h-10 rounded-img  hover:opacity-80"> -->
+											<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"><g fill="none"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092"/><path fill="#f9f9f9" d="M12 13c2.396 0 4.575.694 6.178 1.672c.8.488 1.484 1.064 1.978 1.69c.486.615.844 1.351.844 2.138c0 .845-.411 1.511-1.003 1.986c-.56.45-1.299.748-2.084.956c-1.578.417-3.684.558-5.913.558s-4.335-.14-5.913-.558c-.785-.208-1.524-.506-2.084-.956C3.41 20.01 3 19.345 3 18.5c0-.787.358-1.523.844-2.139c.494-.625 1.177-1.2 1.978-1.69C7.425 13.695 9.605 13 12 13m0-11a5 5 0 1 1 0 10a5 5 0 0 1 0-10"/></g></svg>
+										</RouterLink> 	
 								
-					</div>
+								</div>  
+								
+
+						</div>
+					
+							
 		
 		</nav>
 	<!-- header end -->
-
 	<!-- main view-->
-		<main class=" px-8 py-28 bg-fixed md:bg-fixed bg-cover bg-[url('../assets/img/bg/bg-2.png')]"> 
+		<main class=" px-8 py-28 bg-fixed md:bg-fixed"> 
 			<RouterView /> 
 		</main>
-
 		<Toast /> <!--  shows the alert sa frontend -->
-
-		<!-- bg-fixed md:bg-fixed bg-cover bg-[url('../assets/img/bg/bg-1.svg')] -->
+	
+	
 	
 </template> 
 
 <script>
+
 	import axios from 'axios'
     import Toast from '@/components/Toast.vue'
     import { useUserStore } from '@/stores/user'
+	// const isModalActive = ref(null)
+	// const Profile = defineAsyncComponent();
+
 import { RouterLink } from 'vue-router'
 
     export default {
@@ -119,7 +94,7 @@ import { RouterLink } from 'vue-router'
 
         components: {
     Toast,
-    RouterLink
+    RouterLink,
 },
 
         beforeCreate() {
@@ -135,3 +110,6 @@ import { RouterLink } from 'vue-router'
         }
     }
 </script>
+<style>
+
+</style>
