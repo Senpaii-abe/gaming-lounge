@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins.wght@300;400;500;600;700&display=swap');
 
 :root {
-    --color-main: #4b5876;
+    --color-main: #29172D;
     --bg2: #dce5ff;
     --bg: #fbfefd;
     --main-accent:#e9eefd;
-    --main-text: #4b5876;
-    --shadow: #191970 2px 2px 6px;
+    --main-text: #29172D;
+    --shadow: #29172D 2px 2px 6px;
 }
 
 * {
@@ -62,7 +62,7 @@ img {
     width: 100%;
     background:  #fff;
     border-style: solid;
-    border-color: var(--main-text);
+    border-color: #29172D;
     border-radius: 15px;
     border-width: 3px;
     background-color: #ecf2f9;
@@ -147,7 +147,7 @@ img {
     padding-left: 73%;
 }
 .edit-avartar i {
-    color: #4b5876;
+    color: #29172D;
 }
 .logout {
     position: absolute;
@@ -183,7 +183,8 @@ img {
 }
 
 .sidebar-menu a:hover {
-    background-color: #85a3e0;
+    background-color: #29172D;
+    color: #fff;
   }
 
 /* .sidebar-menu a span:first-child{
@@ -209,8 +210,9 @@ img {
     border-radius: 10px;
     display: flex;
     align-items: center;
-    color:var(--main-text)
+    color:var(--main-text);
 }
+
 
 .btn-span {
     font-size:1.2rem;
@@ -224,7 +226,7 @@ img {
 
 }
 .btn-main {
-    background: var(--color-main);
+    background: #29172D;
     color: #fff;
 }
 
@@ -303,7 +305,7 @@ main{
     padding-left: 2rem;
     border-width: 1px; 
     border-radius: 10px;
-    box-shadow: #191970 2px 2px 6px;
+    box-shadow: #29172D 2px 2px 6px;
     border-color: #ebf0fa;
 }
 /* style="border-style: solid; border-width: 1px; border-radius: 10px; border-color: var(--main-text) */

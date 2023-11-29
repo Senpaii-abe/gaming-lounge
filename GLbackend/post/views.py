@@ -16,6 +16,8 @@ def admin_posts(request):
     admin = request.user
 
     posts = Post.objects.all()
+    posts_allowed = Post.objects.filter(is_offensive=False)
+    posts_blocked = Post.objects.filter(is_offensive=True)
 
     total_posts_count = Post.objects.count()
     discussion_posts = Post.objects.filter(menu="Discussions").count()
@@ -35,6 +37,7 @@ def admin_posts(request):
         "marketplace_posts": marketplace_posts,
         "beta_posts": beta_posts,
         "posts": posts,
+        "posts_allowed": posts_allowed,
     }
     return render(request, "admin/posts.html", context)
 

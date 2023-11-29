@@ -1,36 +1,87 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register new user</title>
+    <link rel="stylesheet" href="{% static 'admin/css/login.css' %}" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, minimum-scale=1" />
+  </head>
 
-{% block title %}ADD NEW G-LOUNGE USERS{% endblock title %}
+  <body>
+    <div class="wrapper">
+      <form method="post" class="add-form">
+        {% csrf_token %}
+        <h1>Register New User</h1>
+        <!-- Display non-field errors if any -->
+        {% if form.non_field_errors %}
+        <div class="error-message">
+          <ul>
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %} {% if form.name.errors %}
+        <div class="error-message">{{ form.name.errors }}</div>
+        {% endif %} {% if form.email.errors %}
+        <div class="error-message">{{ form.email.errors }}</div>
+        {% endif %} {% if form.password1.errors %}
+        <div class="error-message">{{ form.password1.errors }}</div>
+        {% endif %} {% if form.password2.errors %}
+        <div class="error-message">{{ form.password2.errors }}</div>
+        {% endif %}
 
-{% block content %}
-<div class="add-box">
-    <form method="POST" class="add-form">
-    {% csrf_token %}
-    <div class="add-container">
-        <h3>ENTER USER INFORMATION</h3>
-        <div class="add-form">
-            <label for ="id_name">Name:</label>
-            {{ form.name }}
+        <div class="input-box">
+          <input
+            type="name"
+            name="name"
+            id="id_name"
+            placeholder="Name"
+            required
+          />
+          <i class="bx bx-user"></i>
         </div>
-        <div class="add-form">
-            <label for="id_email">Email:</label>
-            {{ form.email }}
+        <div class="input-box">
+          <input
+            type="email"
+            name="email"
+            id="id_email"
+            placeholder="Email"
+            required
+          />
+          <i class="bx bx-envelope"></i>
         </div>
-        <div class="add-form">
-            <label for="id_password1">Password:</label>
-            {{ form.password1 }}
+        <div class="input-box">
+          <input
+            type="password"
+            name="password1"
+            id="id_password1"
+            placeholder="Password"
+            required
+          />
+          <i class="bx bx-lock"></i>
         </div>
-        <div class="add-form">
-            <label for="id_password2">Confirm Password:</label>
-            {{ form.password2 }}
+        <div class="input-box">
+          <input
+            type="password"
+            name="password2"
+            id="id_password2"
+            placeholder="Confirm Password"
+            required
+          />
+          <i class="bx bx-lock"></i>
         </div>
-        <div class="add-form">
-            <button type="submit" class="btn btn-main">SUBMIT</button>
-        </div>
+
+        <button type="submit" class="btn">Register</button>
+
+      </form>
     </div>
-    </form>
+  </body>
+</html>
 
-</div>
-
-
-{% endblock content %}
+</html>

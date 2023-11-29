@@ -1,74 +1,97 @@
 <template>
   
-  <div class="main-left space-y-6">
-    <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full ">
+
+    <!-- game links -->
+    <div class="p-6 bg-purple_main border-gray-400 h-fit border-2 rounded-full ">
+
         <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">Useful Links</h3>
         <div class="space-y-4">
-            <div class="game news">  
-                <p class="mb-2 font-semibold">Gaming News:</p>
-                    <ul class="space-y-2 pl-8">
-                        <li class="p-1 hover:underline">
+             
+                <div class="game news">  
+                   
+                    <ul class="menu space-y-2">
+                        <p class="font-semibold">Gaming News:</p>
+                        <li class="hover:underline ">
                           <a href="https://www.gamespot.com/" target="_blank" rel="noopener noreferrer" class="flex items-center">
                                
                                 <span>GameSpot</span>
                         </a>
                         </li>
 
-                        <li class="p-1 hover:underline">
+                        <li class="hover:underline">
                             <a href="https://www.ign.com/news" target="_blank" rel="noopener noreferrer" class="flex items-center">
                                <span>IGN</span></a>
                               </li>
 
-                              <li class="p-1 hover:underline">
+                              <li class="hover:underline">
                                   <a href="https://www.polygon.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Polygon</span></a>
                               </li>
-                          </ul>
+
+                              <li class="hover:underline">
+                                  <a href="https://www.thegamer.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>TheGamer</span></a>
+                              </li>
+                       
+                  </ul>
                 </div>
                 <div class="game gears">  
-                <p class="mb-2 font-semibold">Gaming Gears:</p>
-                    <ul class="space-y-2 pl-8">
-                        <li class="p-1 hover:underline">
+                    <ul class="menu space-y-2">
+                        <p class="font-semibold">Gaming Gears:</p>
+                        <li class="hover:underline">
                           <a href="https://www.razer.com/ap-en" target="_blank" rel="noopener noreferrer" class="flex items-center">
                                
                                 <span>Razer</span>
                         </a>
                         </li>
 
-                        <li class="p-1 hover:underline">
+                        <li class="hover:underline">
                             <a href="https://www.logitechg.com/" target="_blank" rel="noopener noreferrer" class="flex items-center">
                                <span>Logitech</span></a>
                               </li>
 
-                              <li class="p-1 hover:underline">
+                              <li class="hover:underline">
                                   <a href="https://www.sony.com.ph/gaming-gear" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Sony</span></a>
+                              </li>
+                              <li class="hover:underline">
+                                  <a href="https://hyperx.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>HyperX</span></a>
+                              </li>
+                              <li class="hover:underline">
+                                  <a href="https://www.corsair.com/us/en" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Corsair</span></a>
                               </li>
                           </ul>
                 </div>
-              <div class="download games">  
-                      <p class="mb-2 font-semibold">Download Games:</p>
-                          <ul class="space-y-2 pl-8">
-                              <li class="p-1 hover:underline">
+               
+
+
+                <div class="download games">  
+                      
+                          <ul class="menu">
+                            <p class="font-semibold">Download Games:</p>
+                            <div class="space-y-2">
+                                <li class="hover:underline">
                                   <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" class="flex items-center">
                                       <img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full" alt="logo" />
                                       <span>Riot Games</span>
                                   </a>
                               </li>
 
-                              <li class="p-1 hover:underline">
+                              <li class="hover:underline">
                                   <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
                                           src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full" alt="logo" /><span>Steam Games</span></a>
                               </li>
-
-                              <li class="p-1 hover:underline">
+                          
+                            
+                                <li class="hover:underline">
                                   <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
                                           src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full" alt="logo" /><span>Epic Games</span></a>
                               </li>
 
-                              <li class="p-1 hover:underline">
+                              <li class="hover:underline">
                                   <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
                                           src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full" alt="logo" /><span>Battle.net</span></a>
                               </li>
+                            </div>
 
+                     
                           </ul>
                 </div>
                 
@@ -76,12 +99,13 @@
             
         
     </div>
-        <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full">
+    <!-- rules -->        
+    <div class="p-6 bg-purple_main border-gray-400  border-2 rounded-full h-fit">
             <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">get your game on at gaming lounge!</h3>
             
-            <div class="flex items-center justify-between"> 
+                <div class="flex items-center justify-between overflow-y-auto"> 
                                              
-                        <p class="text-justify lowercase">Welcome to your ultimate gamer destination, designed for gamers by gamers! Our platforms allow you to connect through forums, tournaments, marketplace and more - all centered around gaming.<br><br>
+                        <p class="text-justify lowercase overflow-y-auto">Welcome to your ultimate gamer destination, designed for gamers by gamers! Our platforms allow you to connect through forums, tournaments, marketplace and more - all centered around gaming.<br><br>
 
                             We encourage open and passionate discussion while fostering a positive community. Our Offensive Language Sheriff system automatically detects and discourages negative behavior. Users gain points for engagement like making connections, commenting, and participating, keeping conversations uplifting.<br><br>
 
@@ -94,34 +118,27 @@
             </div>
 
     </div>
-     
-            
-</div>
+       
+
 </template>
 <style>
 
 img{
     margin-right: 10px;
 }
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    display: inline-block;
+    margin-right: 10px;
+ 
+}
 </style>
 <script>
-    import axios from 'axios';
 
-    export default {    
-  
-
-        data() {
-            return {
-            
-            };
-        },
-
-        mounted() {
-        
-        },
-        
-        methods: {
-
-        },
-    };
 </script>

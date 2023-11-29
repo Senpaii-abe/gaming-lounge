@@ -174,13 +174,12 @@ export default {
         }
     },
     mounted() {
-        console.log('Post Data:', this.post);
-        console.log('Post Attachments:', this.post.attachments);
+
     },
 
     methods: {
         getCorrectImageUrl(imageSource) {
-            // Simply return the imageSource provided by the backend
+       
             return imageSource;
         },
    

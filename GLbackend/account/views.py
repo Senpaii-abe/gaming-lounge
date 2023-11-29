@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponse, JsonResponse
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect, get_object_or_404
@@ -176,7 +176,14 @@ def admin_users(request):
     beta_visits = UserVisit.objects.filter(visited_page__contains="/beta_posts").count()
 
     # table
-    users = User.objects.all()
+    exclude_ids = [
+        "3e9fe50b-5c31-439f-9fb6-8208a5c3dba9",
+        "1cfff9f3-1d81-4cb0-9028-c3376871a4bb",
+        "675a5aad-3287-452b-ba57-b5aec4f60cc8",
+    ]  # Replace these IDs with actual IDs
+
+    # Query to filter out users with specified IDs
+    users = User.objects.exclude(Q(id__in=exclude_ids))
 
     context = {
         "admin_name": admin.name,

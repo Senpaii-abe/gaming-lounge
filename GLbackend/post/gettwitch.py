@@ -69,7 +69,7 @@ if token_response.status_code == 200:
                 user_id = user_data["data"][0]["id"]
                 params = {
                     "user_id": user_id,
-                    "first": 5,  # Retrieve the first 5 videos, adjust as needed
+                    "first": 3,  # Retrieve the first 5 videos, adjust as needed
                     "sort": "time",  # Sort the videos by time
                 }
 
@@ -154,7 +154,7 @@ if token_response.status_code == 200:
                                 created_at=formatted_datetime,
                                 created_by_id=user_instance.id,
                                 is_private=False,
-                                game_title_id=9,
+                                game_title_id=game_title,
                                 post_url=video_url,
                                 outside_id=post_id,
                             )

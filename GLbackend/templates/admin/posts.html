@@ -111,6 +111,7 @@
                 <section>
                     <div class="table-data">
                         <div class="table-responsive">
+
                             <table id="bootstrapdatatable" class="table table-striped table-bordered">
                                 <thead>
                                     <th><input type ="checkbox" id="checkall"></th>
@@ -128,7 +129,7 @@
                                     <th>Delete</th>
                                 </thead>
                                 </tbody>
-                                {% for post in posts %}
+                                {% for post in posts_allowed %}
                                     <tr>
                                         <td><input type="checkbox" class="checkthis" /></td>
                                         <td>{{ post.id }} </td>
@@ -167,14 +168,13 @@
                 data-tournament="{{ tournament_posts }}"
                 data-beta="{{ beta_posts }}">
             </div>
-
+            {% block scripts %}
             {% comment %} For ChartJS {% endcomment %}
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
             {% comment %}
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
             <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> {% endcomment %}
-
             {% comment %} Posts per Tab {% endcomment %}
             <script>
 
@@ -183,7 +183,7 @@
                 const marketplacePosts = document.getElementById('chartData').getAttribute('data-marketplace');
                 const tournamentPosts = document.getElementById('chartData').getAttribute('data-tournament');
                 const betaPosts = document.getElementById('chartData').getAttribute('data-beta');
-                
+
                 const ctx4 = document.getElementById('postsChart').getContext('2d');
 
                 new Chart(ctx4, {
@@ -229,6 +229,8 @@
                 }
                 });
             </script>
+
+            {% endblock scripts %}
         </main>
 
 

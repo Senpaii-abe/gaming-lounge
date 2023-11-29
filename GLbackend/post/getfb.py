@@ -40,7 +40,7 @@ cursor = conn.cursor()
 
 
 # Use the user access token you obtained
-access_token = "EAAMFfd1gTr8BO8aoUYje8x6obAs0M5WeLvDsb3pIBqKfc74z144YvNOjRTCHH2KLjqrishEJZCiy0h4ZBQCM4vkS2MUiCfZBb8qE9mfoYKZC1Qu1iZAvZCFX6qZCZBv47BskBnOW8qNHZBZC0xIcr953oADZC0YFmyAOBhuZCqYytIMGaUQbToUCnZBUhDaw8imWqyemZAkuSfrYW5gQvE9doJZAbEXeFpnqghB3Y20NUqQYsVQOlOgknyjsDoJcD73hTAIpJkZD"
+access_token = "EAAMFfd1gTr8BOxr76N3azkLbkY3dlcC7J7tubL0mkWd8yOoZBTZCK8wJKG5csGBYZBwvW8gzunSsstsugZB1SswOnIIR0C9ZA4EQiTEtPdMiUQKZBI1gLZA9ZBgl3kq3A63bHiN8c26ul2fAelDhKDwZBpZCsbZAOLLPgJpF4FOakZAe1vUDHxY1ReFcH3iHZB2pqZC0B5gUgqZBgjQE4BZAeEZCo1x3ypIbTFkXRmxllHzKj8DxrBSIf6fUDy8jTdt2Al2pf5AZDZD"
 
 # Get the group feed
 group_feed = get_group_feed(access_token)
@@ -108,7 +108,7 @@ for group in group_feed:
                     game_name, nav_bar = 34, "Beta Testing"
                 elif game_title == "MOBILE LEGENDS":
                     game_name = 31
-                elif game_title == "NBA2K":
+                elif game_title == "NBA 2K":
                     game_name = 32
                 elif game_title == "FORZA HORIZON 5":
                     game_name = 33

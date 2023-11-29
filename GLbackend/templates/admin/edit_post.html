@@ -13,13 +13,13 @@
   </head>
 
   <body>
-    <div class="wrapper" style="text-align: center">
+    <div class="wrapper-edit">
       <h1>Edit Post Information</h1>
       <!-- New Section for Post Body Preview -->
       <div class="preview">
-        <label for="id_body"
-          ><i class="bx bx-message-square-detail"></i> Post Description</label
-        ><br />
+        <h3 for="id_body">
+          <i class="bx bx-message-square-detail"></i> Post Description
+        </h3>
         <p>{{ post.body }}</p>
         <!-- Display the current body of the post -->
       </div>
@@ -40,21 +40,20 @@
         <div class="error-message">{{ form.menu.errors }}</div>
         {% endif %}
 
-        <div class="input-box">
-          <label for="id_game_title"
-            ><i class="bx bx-game"></i> Game Title:</label
-          ><br />
+        <div class="edit-box">
+          <h3 for="id_game_title">Game Title:</h3>
           {{ form.game_title }}<br />
         </div>
 
-        <div class="wo-input-box">
-          <label for="id_is_private"><i class="bx bx-lock"></i> Privacy:</label>
-          {{ form.is_private }}
+        <div class="edit-box">
+          <h3 for="id_menu">Where to post:</h3>
+          <p>{{ form.menu }}</p>
         </div>
 
-        <div class="input-box">
-          <label for="id_menu"></i>Menu:</label>
-          {{ form.menu }}
+        <div class="edit-box">
+          <h3 for="id_is_private">
+            <i class="bx bx-lock"></i> Privacy: {{ form.is_private }}
+          </h3>
         </div>
 
         <button type="submit" class="btn">Save Changes</button>
@@ -65,4 +64,3 @@
     </div>
   </body>
 </html>
-

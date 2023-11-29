@@ -75,17 +75,21 @@ def discussion_posts(request):
         menu="Discussions",
         is_offensive=False,
     )
+    # Combine the results and sort them
+    combined_posts = (
+        (pref_posts | friend_posts | own_posts).distinct().order_by("-likes_count")
+    )
+    sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
+    # Apply pagination
+    paginator = PageNumberPagination()
+    paginator.page_size = 3  # Number of posts per page
+    paginated_post = paginator.paginate_queryset(sorted_posts, request)
 
-    # Combine the results
-    combined_posts = (pref_posts | friend_posts | own_posts).distinct()
-    # paginator = PageNumberPagination()
-    # paginator.page_size = 3
-    # paginated_post = paginator.paginate_queryset(combined_posts, request)
+    # Serialize paginated posts
+    serializer = PostSerializer(paginated_post, many=True)
 
-    combined_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
-
-    serializer = PostSerializer(combined_posts, many=True)
-    return Response(serializer.data)
+    # Return paginated response
+    return paginator.get_paginated_response(serializer.data)
 
 
 @api_view(["GET"])
@@ -131,18 +135,44 @@ def marketplace_posts(request):
 
     # Query for posts from user's friends
     friend_posts = Post.objects.filter(
-        created_by_id__in=user_ids, is_private=False, menu="Marketplace"
+        created_by_id__in=user_ids,
+        is_private=False,
+        is_offensive=False,
+        menu="Marketplace",
     )
 
     own_posts = Post.objects.filter(
-        created_by=request.user, is_private=False, menu="Marketplace"
+        created_by=request.user,
+        is_private=False,
+        is_offensive=False,
+        menu="Marketplace",
     )
 
-    # Combine the results
-    combined_posts = (pref_posts | friend_posts | own_posts).distinct()
-    serializer = PostSerializer(combined_posts, many=True)
+    # # Combine the results
+    # combined_posts = (pref_posts | friend_posts | own_posts).distinct()
+    # sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
 
-    return Response(serializer.data)
+    # paginator = PageNumberPagination()
+    # paginator.page_size = 3
+    # paginated_post = paginator.paginate_queryset(sorted_posts, request)
+
+    # serializer = PostSerializer(paginated_post, many=True)
+    # return Response(serializer.data)
+    # Combine the results and sort them
+    combined_posts = (
+        (pref_posts | friend_posts | own_posts).distinct().order_by("-likes_count")
+    )
+    sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
+    # Apply pagination
+    paginator = PageNumberPagination()
+    paginator.page_size = 3  # Number of posts per page
+    paginated_post = paginator.paginate_queryset(sorted_posts, request)
+
+    # Serialize paginated posts
+    serializer = PostSerializer(paginated_post, many=True)
+
+    # Return paginated response
+    return paginator.get_paginated_response(serializer.data)
 
 
 @api_view(["GET"])
@@ -188,19 +218,30 @@ def connect_posts(request):
 
     # Query for posts from user's friends
     friend_posts = Post.objects.filter(
-        created_by_id__in=user_ids, is_private=False, menu="Connect"
+        created_by_id__in=user_ids, is_private=False, is_offensive=False, menu="Connect"
     )
 
     own_posts = Post.objects.filter(
-        created_by=request.user, is_private=False, menu="Connect"
+        created_by=request.user,
+        is_private=False,
+        menu="Connect",
+        is_offensive=False,
     )
+    # Combine the results and sort them
+    combined_posts = (
+        (pref_posts | friend_posts | own_posts).distinct().order_by("-likes_count")
+    )
+    sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
+    # Apply pagination
+    paginator = PageNumberPagination()
+    paginator.page_size = 3  # Number of posts per page
+    paginated_post = paginator.paginate_queryset(sorted_posts, request)
 
-    # Combine the results
-    combined_posts = (pref_posts | friend_posts | own_posts).distinct()
+    # Serialize paginated posts
+    serializer = PostSerializer(paginated_post, many=True)
 
-    serializer = PostSerializer(combined_posts, many=True)
-
-    return Response(serializer.data)
+    # Return paginated response
+    return paginator.get_paginated_response(serializer.data)
 
 
 @api_view(["GET"])
@@ -246,78 +287,67 @@ def tournament_posts(request):
 
     # Query for posts from user's friends
     friend_posts = Post.objects.filter(
-        created_by_id__in=user_ids, is_private=False, menu="Tournament"
+        created_by_id__in=user_ids,
+        is_private=False,
+        is_offensive=False,
+        menu="Tournament",
     )
 
     own_posts = Post.objects.filter(
-        created_by=request.user, is_private=False, menu="Tournament"
+        created_by=request.user, is_private=False, is_offensive=False, menu="Tournament"
     )
 
-    # Combine the results
-    combined_posts = (pref_posts | friend_posts | own_posts).distinct()
+    # Combine the results and sort them
+    combined_posts = (
+        (pref_posts | friend_posts | own_posts).distinct().order_by("-likes_count")
+    )
+    sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
+    # Apply pagination
+    paginator = PageNumberPagination()
+    paginator.page_size = 3  # Number of posts per page
+    paginated_post = paginator.paginate_queryset(sorted_posts, request)
 
-    # Combine the results
-    combined_posts = pref_posts | friend_posts
+    # Serialize paginated posts
+    serializer = PostSerializer(paginated_post, many=True)
 
-    serializer = PostSerializer(combined_posts, many=True)
-
-    return Response(serializer.data)
+    # Return paginated response
+    return paginator.get_paginated_response(serializer.data)
 
 
 @api_view(["GET"])
 def beta_posts(request):
-    # # Extracting user preferences
-    # user_pref_titles = (
-    #     request.user.pref_game_titles.split(",")
-    #     if request.user.pref_game_titles
-    #     else []
-    # )
-    # user_pref_titles = (
-    #     [
-    #         int(title_id.strip("[]"))
-    #         for title_id in user_pref_titles
-    #         if title_id.strip("[]")
-    #     ]
-    #     if user_pref_titles
-    #     else []
-    # )
-
-    # user_pref_category = request.user.pref_game_category
-
     user_ids = [request.user.id]
 
     for user in request.user.friends.all():
         user_ids.append(user.id)
 
     # Query for posts based on user preferences and menu = beta testing
-    pref_posts = Post.objects.filter(
-        is_private=False, menu="Beta Testing"
-    )  # Filter by menu field here
+    pref_posts = Post.objects.filter(is_private=False, menu="Beta Testing")
 
-    # if user_pref_titles:
-    #     pref_posts = pref_posts.filter(Q(game_title__id__in=user_pref_titles))
-    # elif user_pref_category:
-    #     categories = user_pref_category.split(",")
-    #     pref_posts = pref_posts.filter(
-    #         Q(game_title__categories__game_category__in=categories)
-    #     )
-
-    # Annotate with the count of likes and order by the number of likes (descending order)
-    # pref_posts = pref_posts.annotate(num_likes=Count("likes")).order_by("-num_likes")
-
-    # Query for posts from user's friends
     friend_posts = Post.objects.filter(
-        created_by_id__in=user_ids, is_private=False, menu="Beta Testing"
+        created_by_id__in=user_ids,
+        is_private=False,
+        is_offensive=False,
+        menu="Beta Testing",
     )
 
-    # own_posts = Post.objects.filter(
-    #     created_by=request.user, is_private=False, menu="Beta Testing"
-    # )
+    own_posts = Post.objects.filter(
+        created_by=request.user,
+        is_private=False,
+        is_offensive=False,
+        menu="Beta Testing",
+    )
 
     # Combine the results
     combined_posts = pref_posts | friend_posts
 
-    serializer = PostSerializer(combined_posts, many=True)
+    # Combine the results and sort them
+    combined_posts = (
+        (pref_posts | friend_posts | own_posts).distinct().order_by("-likes_count")
+    )
+    sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
+
+    serializer = PostSerializer(sorted_posts, many=True)
 
     return Response(serializer.data)
 

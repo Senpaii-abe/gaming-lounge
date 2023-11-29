@@ -266,12 +266,26 @@ export default {
                 id: ''
             },
             can_send_friendship_request: null,
+            // currentPage: 1,
+            // totalPages: null,
+            // perPage: 5, // Set this to whatever your page size is
+            // hasNext: false, // Flag to indicate if there is a next page
         }
     }, 
     mounted() {
         this.getFeed();
         this.getUserPostCount(); // Fetch and update user's post count
         this.getCharismaScore();
+        // this.userStore.initStore();
+
+        // window.onscroll = () => {
+        //     let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+        //     if (bottomOfWindow && this.hasNext) {
+        //         this.currentPage += 1;
+        //         this.getFeed();
+        //     }
+        // };
+
     },
     watch: {
         '$route.params.id': {
@@ -352,6 +366,26 @@ export default {
                     console.log('error', error)
                 })
         },
+        // getFeed() {
+        //     axios
+        //         .get(`/api/posts/profile/${this.$route.params.id}/?page=${this.currentPage}`)
+        //         .then(response => {
+        //             // Assuming the response structure includes 'results' for posts,
+        //             // and pagination information like 'next' and 'totalPages'.
+        //             this.posts = this.posts.concat(response.data.results);
+        //             this.totalPages = Math.ceil(response.data.count / this.perPage);
+        //             this.can_send_friendship_request = response.data.can_send_friendship_request
+
+        //             // Check if there is a next page
+        //             this.hasNext = !!response.data.next;
+
+        //             console.log(response.data);
+        //         })
+        //         .catch(error => {
+        //             console.log('error', error);
+        //         });
+        // },
+
         getUserPostCount() {
             axios
                 .get(`/api/posts/profile/${this.$route.params.id}/post_count/`)
