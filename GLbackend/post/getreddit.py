@@ -92,7 +92,7 @@ with open(csv_file_path, "r", encoding="utf-8") as csv_file:
         else:
             datasubreddit = 34
 
-        body_text = f"**{datatitle}**  \n{dataselftext}"
+        body_text = f"{datatitle}\n{dataselftext}"
 
         # Assuming you have the user's ID or another way to identify the user
         user_id = "3e9fe50b5c31439f9fb68208a5c3dba9"

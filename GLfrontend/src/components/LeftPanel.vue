@@ -100,7 +100,7 @@
         
     </div>
     <!-- rules -->        
-    <div class="p-6 bg-purple_main border-gray-400  border-2 rounded-full h-fit">
+    <div class="p-6 bg-purple_main border-gray-400  border-2 rounded-full h-30">
             <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">get your game on at gaming lounge!</h3>
             
                 <div class="flex items-center justify-between overflow-y-auto"> 

@@ -38,7 +38,7 @@ USER_LOGINS = [
 ]  # Replace with the actual streamer's username
 
 # Provide the absolute path to your db.sqlite3 file
-db_path = r"D:\For coding\Glounge\gaming-lounge\GLbackend\db.sqlite3"
+db_path = r"E:\Codes\Capstone\gaming-lounge\GLbackend\db.sqlite3"
 
 # Connect to the existing SQLite database
 conn = sqlite3.connect(db_path)
@@ -69,7 +69,7 @@ if token_response.status_code == 200:
                 user_id = user_data["data"][0]["id"]
                 params = {
                     "user_id": user_id,
-                    "first": 3,  # Retrieve the first 5 videos, adjust as needed
+                    "first": 5,  # Retrieve the first 5 videos, adjust as needed
                     "sort": "time",  # Sort the videos by time
                 }
 

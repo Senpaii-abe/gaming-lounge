@@ -18,7 +18,7 @@
         </div>
 
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6 sticky h-screen overflow-auto">
+        <div class="main-right col-span-1 space-y-6 sticky h-screen">
 
             <PeopleYouMayKnow />
 

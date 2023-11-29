@@ -6,41 +6,40 @@
             
             <label for="" class="text-center text-xl font-semibold border-b pb-4">messages</label>
             
-            <ul class="mt-3">
-                <li class="p-3 transition hover:bg-[#181327] rounded-lg">       
-                           
+            <ul class="">
+                <li class="transition">               
                         <a 
-                            class="mt-4 flex justify-between items-center"
+                            class="mt-4 flex justify-between items-center" 
                             v-for="conversation in conversations"
                             v-bind:key="conversation.id"
                            
                             v-on:click="setActiveConversation(conversation.id)"
                         >
-                            <div class="flex items-center space-x-3">
-                                <template
+                            <div class="flex  p-2 ">
+                                <div
                                     v-for="user in conversation.users"
                                     v-bind:key="user.id"
-                                    
+                                    class=""
                                 >
-                                <img :src="user.get_avatar" class="w-[45px] rounded-full">
-                                    <p 
-                                        class="font-semibold text-base justify-self-start"
-                                        v-if="user.id !== userStore.user.id"
-                                        >
-                                        {{ user.name }} 
-                                    </p>
-                         
-                                </template>
+                                    <div class="flex flex-row items-center">
+                                        <img :src="user.get_avatar" class="w-[45px] rounded-img">
+
+                                        <p 
+                                            class="font-semibold text-base"
+                                            v-if="user.id !== userStore.user.id"
+                                            >
+                                            {{ user.name }} 
+                                        </p>
+                                    </div>
+                                
+                                </div>
                             </div>    
-                            <span class="text-xs text-gray-400 font-light ">{{ conversation.modified_at_formatted }}</span>
+                            <span class="text-xs text-white font-light ">{{ conversation.modified_at_formatted }}</span>
                             
                         </a>
-                        
-                    
-                 
+ 
                 </li>
-                        
-             
+        
             </ul>
  
         </div>
@@ -110,7 +109,14 @@
 
 </template>
 
+<style>
 
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+</style>
 <script>
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'

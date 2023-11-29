@@ -5,7 +5,7 @@ from django.db.models import Count
 from django.utils import timezone
 from .best_profanity import has_profanity  # profcheck
 from .models import Post, GameTitle
-from .forms import PostForm, EditPostForm
+from .forms import PostForm, AddPostForm, EditPostForm
 from rest_framework.response import Response  # profcheck
 
 
@@ -44,17 +44,14 @@ def admin_posts(request):
 
 def add_post(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = AddPostForm(request.POST)
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.created_by = request.user
             new_post.save()
             return redirect("admin_posts")
     else:
-        form = PostForm()
-        form.fields[
-            "game_title"
-        ].queryset = GameTitle.objects.all()  # Set the queryset for game_title field
+        form = AddPostForm()
 
     return render(request, "admin/add_post.html", {"form": form})
 

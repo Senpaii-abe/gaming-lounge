@@ -9,7 +9,7 @@
 
         <!-- center -->
 
-        <div class="px-4 main-center col-span-2 space-y-6">
+        <div class="px-4 main-center col-span-2 space-y-6 sticky top-[8rem] h-screen ">
             
             <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400" v-for="post in posts" v-bind:key="post.id"> <!-- loop ng post -->
                 <FeedItem :post="post" @postDeleted="handlePostDeleted" />
@@ -17,7 +17,7 @@
         </div>
 
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6 sticky h-screen overflow-auto">
+        <div class="main-right col-span-1 space-y-6 sticky top-[8rem] h-screen ">
 
                 <PeopleYouMayKnow />
 

@@ -38,9 +38,8 @@ conn = sqlite3.connect(db_path)
 # Create a cursor object to execute SQL commands
 cursor = conn.cursor()
 
-
 # Use the user access token you obtained
-access_token = "EAAMFfd1gTr8BOxr76N3azkLbkY3dlcC7J7tubL0mkWd8yOoZBTZCK8wJKG5csGBYZBwvW8gzunSsstsugZB1SswOnIIR0C9ZA4EQiTEtPdMiUQKZBI1gLZA9ZBgl3kq3A63bHiN8c26ul2fAelDhKDwZBpZCsbZAOLLPgJpF4FOakZAe1vUDHxY1ReFcH3iHZB2pqZC0B5gUgqZBgjQE4BZAeEZCo1x3ypIbTFkXRmxllHzKj8DxrBSIf6fUDy8jTdt2Al2pf5AZDZD"
+access_token = "EAAMFfd1gTr8BO6ZBKjNAnA2rtsIO4HvLVFGXOJ03xZAMt6hCblw4FySSI7yvVpK4Rh7gGdKWUPVZAgH8YWF2Es71SenRoAmz0fd73VpJFrRNlyClwkalpTAbZBo93e6VGZAZBpQ2XHGbPzvN9sVX84WPEqryYZBtUZCGbPFTuyboUcQDpvYWMvtFMGn7i8hUamL3L8PN7LNe939N9JGV1QuaiFt6GUUXOtRXjTKq1to9MLqQe8Usn2xZARrrzt4N4YwZDZD"
 
 # Get the group feed
 group_feed = get_group_feed(access_token)

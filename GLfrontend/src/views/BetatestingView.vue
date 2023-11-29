@@ -3,7 +3,7 @@
     <div data-te-infinite-scroll-init class ="max-w-screen pt-4 mx-auto grid grid-cols-4 gap-4 px-12">
 
         <!-- left side -->
-        <div class="main-left space-y-6 sticky h-screen "> 
+        <div class="main-left space-y-6 sticky top-[8rem] h-screen "> 
             <LeftPanel />    
         </div>
        
@@ -15,7 +15,7 @@
         </div>
 
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6 sticky h-screen overflow-auto">
+        <div class="main-right col-span-1 space-y-6 sticky top-[8rem] h-screen ">
 
             <PeopleYouMayKnow />
 

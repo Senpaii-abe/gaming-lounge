@@ -23,9 +23,10 @@ urlpatterns = (
             name="activate",
         ),
         # admin
-        path("admin/", include("account.urls")),
-        path("admin/", include("dashboard.urls")),
-        path("admin/", include("post.urls")),
+        path("", views.admin_login, name="admin_login"),
+        path("", include("account.urls")),
+        path("", include("dashboard.urls")),
+        path("", include("post.urls")),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

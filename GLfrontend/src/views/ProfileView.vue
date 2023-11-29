@@ -3,7 +3,7 @@
 
         <!-- left side 
              col-span-1: takes 1 of the 4 columns -->
-        <div class="main-left col-span-1 space-y-6"> 
+        <div class="main-left col-span-1 space-y-6 sticky top-[8rem] h-screen "> 
             <!-- profile -->
             <div class="p-6 bg-purple_main rounded-full border border-2 border-gray-400">
                 <!-- profile picture -->
@@ -37,11 +37,7 @@
                         class = "inline-block py-3 hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
                         @click="sendFriendshipRequest"
                         v-if="userStore.user.id !== user.id 
-                        && can_send_friendship_request
-                        && user.id == '3e9fe50b5c31439f9fb68208a5c3dba9' //reddit
-                        && user.id == '675a5aad3287452bba57b5aec4f60cc8' //fb
-                        && user.id == '675a5aad3287452bba57b5aec4f60cc8' //twitch
-                        "
+                        && can_send_friendship_request"
                         >
                         add friend
                     </button>
@@ -49,9 +45,6 @@
                         class = "inline-block py-3 mt-4 hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
                         @click="sendDirectMessage"
                         v-if="userStore.user.id !== user.id
-                        && user.id == '3e9fe50b5c31439f9fb68208a5c3dba9' //reddit
-                        && user.id == '675a5aad3287452bba57b5aec4f60cc8' //fb
-                        && user.id == '675a5aad3287452bba57b5aec4f60cc8' //twitch
                         "
                         >
                         send message
@@ -127,7 +120,7 @@
         </div>
         
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6">
+        <div class="main-right col-span-1 space-y-6 sticky top-[8rem] h-screen ">
             
             <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full ">
                 <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">Useful Links</h3>

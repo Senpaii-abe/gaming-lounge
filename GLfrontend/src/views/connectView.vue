@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-screen px-12 pt-4 mx-auto grid grid-cols-4 gap-4">
 
-        <div class="main-left space-y-6 sticky h-screen "> 
+        <div class="main-left space-y-6 sticky top-[8rem] h-screen "> 
             <LeftPanel />    
         </div>
 
@@ -14,7 +14,7 @@
         </div>
 
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6 sticky h-screen overflow-auto">
+        <div class="main-right col-span-1 space-y-6 sticky top-[8rem] h-screen ">
             <PeopleYouMayKnow />     
         </div>
 

@@ -39,7 +39,6 @@ urlpatterns = [
     path("get_user/<uuid:user_id>/", api.get_user, name="get_user"),
     path("leaderboard/", api.leaderboard_endpoint, name="leaderboard_endpoint"),
     # admin
-    path("", views.admin_login, name="admin_login"),
     path("register/", views.admin_signup, name="admin_signup"),
     path("gl-users/", views.admin_users, name="admin_users"),
     path("gl-users/add/", views.add_user, name="add_user"),

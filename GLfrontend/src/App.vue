@@ -1,7 +1,7 @@
 
 
 	<template>
-		<nav class="py-6 sticky w-screen z-20 top-0 left-0 bg-cover bg-[url('../assets/img/navbar/header.png')]" v-if="userStore.user.isAuthenticated && userStore.user.id"> 
+		<nav class="py-6 sticky max-w-screen z-20 top-0 left-0 bg-cover bg-[url('../assets/img/navbar/header.png')]" v-if="userStore.user.isAuthenticated && userStore.user.id"> 
 			<div class="max-w-screen mx-auto flex items-center flex-wrap justify-between px-12">
 				<!-- left menu logo start -->		
 					<a href="http://gaminglounge.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -56,7 +56,7 @@
 		</nav>
 	<!-- header end -->
 	<!-- main view-->
-		<main class="pt-2 bg-cover md:bg-cover"> 
+		<main class="pt-2 bg-cover md:bg-cover "> 
 			<RouterView /> 
 		</main>
 		<Toast /> <!--  shows the alert sa frontend -->
@@ -64,7 +64,8 @@
 	
 	
 </template> 
-
+<style>
+</style>
 <script>
 
 	import axios from 'axios'
