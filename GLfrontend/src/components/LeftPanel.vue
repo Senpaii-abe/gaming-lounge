@@ -96,8 +96,6 @@
                 </div>
                 
         </div>
-            
-        
     </div>
     <!-- rules -->        
     <div class="p-6 bg-purple_main border-gray-400  border-2 rounded-full h-30">

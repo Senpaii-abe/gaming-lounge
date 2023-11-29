@@ -22,9 +22,20 @@ ALLOWED_HOSTS = ["api.gaminglounge.com"]
 
 WEBSITE_URL = "http://api.gaminglounge.com"
 
+LOGIN_URL = "admin_login"
+LOGOUT_REDIRECT_URL = "admin_login"
+
 # application definition
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_FROM = "gamingglounge@gmail.com"
+EMAIL_HOST_USER = "gamingglounge@gmail.com"
+EMAIL_HOST_PASSWORD = "giciwtownjcylhtj"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 14400
 
 AUTH_USER_MODEL = "account.User"  # to use own
 
@@ -45,6 +56,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",  # u should be authenticated to allow to get data from backend
     ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
 }
 
 CORS_ALLOWED_ORIGINS = [
@@ -81,6 +94,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "post.middleware.UserVisitMiddleware"
 ]
 
 ROOT_URLCONF = "GLbackend.urls"
@@ -88,7 +102,7 @@ ROOT_URLCONF = "GLbackend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates/")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -104,26 +118,18 @@ TEMPLATES = [
 WSGI_APPLICATION = "GLbackend.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "gaminglounge",
+        "USER": "gluser",
+        "PASSWORD": "adminadmin02",
+        "HOST": "localhost",
+        "PORT": "",
     }
 }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": "gaminglounge",
-#         "USER": "gloungeuser",
-#         "PASSWORD": "adminadmin02",
-#         "HOST": "localhost",
-#         "PORT": "",
-#     }
-# }
 
 
 # Password validation
@@ -150,7 +156,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Manila"
 
 USE_I18N = True
 
@@ -161,6 +167,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 

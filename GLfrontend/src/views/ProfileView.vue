@@ -122,78 +122,101 @@
         <!-- right side -->
         <div class="main-right col-span-1 space-y-6 sticky top-[8rem] h-screen ">
             
-            <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full ">
-                <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">Useful Links</h3>
-        <div class="space-y-4">
-            <div class="game news">  
-                <p class="mb-2 font-semibold">Gaming News:</p>
-                    <ul class="space-y-2 pl-8">
-                        <li class="p-1 hover:underline">
-                          <a href="https://www.gamespot.com/" target="_blank" rel="noopener noreferrer" class="flex items-center">
-                               
-                                <span>GameSpot</span>
-                        </a>
-                        </li>
+            <div class="p-6 bg-purple_main border-gray-400 h-fit border-2 rounded-full ">
 
-                        <li class="p-1 hover:underline">
-                            <a href="https://www.ign.com/news" target="_blank" rel="noopener noreferrer" class="flex items-center">
-                               <span>IGN</span></a>
-                              </li>
+<h3 class="mb-4 font-semibold text-xl tracking-wide text-center">Useful Links</h3>
+<div class="space-y-4">
+     
+        <div class="game news">  
+           
+            <ul class="menu space-y-2">
+                <p class="font-semibold">Gaming News:</p>
+                <li class="hover:underline ">
+                  <a href="https://www.gamespot.com/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                       
+                        <span>GameSpot</span>
+                </a>
+                </li>
 
-                              <li class="p-1 hover:underline">
-                                  <a href="https://www.polygon.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Polygon</span></a>
-                              </li>
-                          </ul>
-                </div>
-                <div class="game gears">  
-                <p class="mb-2 font-semibold">Gaming Gears:</p>
-                    <ul class="space-y-2 pl-8">
-                        <li class="p-1 hover:underline">
-                          <a href="https://www.razer.com/ap-en" target="_blank" rel="noopener noreferrer" class="flex items-center">
-                               
-                                <span>Razer</span>
-                        </a>
-                        </li>
+                <li class="hover:underline">
+                    <a href="https://www.ign.com/news" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                       <span>IGN</span></a>
+                      </li>
 
-                        <li class="p-1 hover:underline">
-                            <a href="https://www.logitechg.com/" target="_blank" rel="noopener noreferrer" class="flex items-center">
-                               <span>Logitech</span></a>
-                              </li>
+                      <li class="hover:underline">
+                          <a href="https://www.polygon.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Polygon</span></a>
+                      </li>
 
-                              <li class="p-1 hover:underline">
-                                  <a href="https://www.sony.com.ph/gaming-gear" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Sony</span></a>
-                              </li>
-                          </ul>
-                </div>
-              <div class="download games">  
-                      <p class="mb-2 font-semibold">Download Games:</p>
-                          <ul class="space-y-2 pl-8">
-                              <li class="p-1 hover:underline">
-                                  <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" class="flex items-center">
-                                      <img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full" alt="logo" />
-                                      <span>Riot Games</span>
-                                  </a>
-                              </li>
-
-                              <li class="p-1 hover:underline">
-                                  <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
-                                          src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full" alt="logo" /><span>Steam Games</span></a>
-                              </li>
-
-                              <li class="p-1 hover:underline">
-                                  <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
-                                          src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full" alt="logo" /><span>Epic Games</span></a>
-                              </li>
-
-                              <li class="p-1 hover:underline">
-                                  <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
-                                          src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full" alt="logo" /><span>Battle.net</span></a>
-                              </li>
-
-                          </ul>
-                </div>
-                
+                      <li class="hover:underline">
+                          <a href="https://www.thegamer.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>TheGamer</span></a>
+                      </li>
+               
+          </ul>
         </div>
+        <div class="game gears">  
+            <ul class="menu space-y-2">
+                <p class="font-semibold">Gaming Gears:</p>
+                <li class="hover:underline">
+                  <a href="https://www.razer.com/ap-en" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                       
+                        <span>Razer</span>
+                </a>
+                </li>
+
+                <li class="hover:underline">
+                    <a href="https://www.logitechg.com/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                       <span>Logitech</span></a>
+                      </li>
+
+                      <li class="hover:underline">
+                          <a href="https://www.sony.com.ph/gaming-gear" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Sony</span></a>
+                      </li>
+                      <li class="hover:underline">
+                          <a href="https://hyperx.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>HyperX</span></a>
+                      </li>
+                      <li class="hover:underline">
+                          <a href="https://www.corsair.com/us/en" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Corsair</span></a>
+                      </li>
+                  </ul>
+        </div>
+       
+
+
+        <div class="download games">  
+              
+                  <ul class="menu">
+                    <p class="font-semibold">Download Games:</p>
+                    <div class="space-y-2">
+                        <li class="hover:underline">
+                          <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                              <img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full" alt="logo" />
+                              <span>Riot Games</span>
+                          </a>
+                      </li>
+
+                      <li class="hover:underline">
+                          <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
+                                  src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full" alt="logo" /><span>Steam Games</span></a>
+                      </li>
+                  
+                    
+                        <li class="hover:underline">
+                          <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
+                                  src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full" alt="logo" /><span>Epic Games</span></a>
+                      </li>
+
+                      <li class="hover:underline">
+                          <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
+                                  src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full" alt="logo" /><span>Battle.net</span></a>
+                      </li>
+                    </div>
+
+             
+                  </ul>
+        </div>
+        
+</div>
+</div>
             
         
             </div>
@@ -201,7 +224,7 @@
             
     
         </div>
-    </div>
+
 </template> 
 
 <style>
@@ -359,26 +382,6 @@ export default {
                     console.log('error', error)
                 })
         },
-        // getFeed() {
-        //     axios
-        //         .get(`/api/posts/profile/${this.$route.params.id}/?page=${this.currentPage}`)
-        //         .then(response => {
-        //             // Assuming the response structure includes 'results' for posts,
-        //             // and pagination information like 'next' and 'totalPages'.
-        //             this.posts = this.posts.concat(response.data.results);
-        //             this.totalPages = Math.ceil(response.data.count / this.perPage);
-        //             this.can_send_friendship_request = response.data.can_send_friendship_request
-
-        //             // Check if there is a next page
-        //             this.hasNext = !!response.data.next;
-
-        //             console.log(response.data);
-        //         })
-        //         .catch(error => {
-        //             console.log('error', error);
-        //         });
-        // },
-
         getUserPostCount() {
             axios
                 .get(`/api/posts/profile/${this.$route.params.id}/post_count/`)
@@ -403,7 +406,7 @@ export default {
                 });
         },
         logout() {
-            console.log('Log out')
+        
             this.userStore.removeToken()
 
             this.$router.push('/')

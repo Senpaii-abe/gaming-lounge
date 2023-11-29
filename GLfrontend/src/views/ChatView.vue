@@ -5,9 +5,7 @@
         <div class="main-left col-span-1 flex flex-col bg-purple_main rounded-full p-6 overflow-auto h-full">
             
             <label for="" class="text-center text-xl font-semibold border-b pb-4">messages</label>
-            
-            <ul class="">
-                <li class="transition">               
+
                         <a 
                             class="mt-4 flex justify-between items-center" 
                             v-for="conversation in conversations"
@@ -22,10 +20,10 @@
                                     class=""
                                 >
                                     <div class="flex flex-row items-center">
-                                        <img :src="user.get_avatar" class="w-[45px] rounded-img">
+                                        <img :src="user.get_avatar" class="w-[45px] rounded-img ">
 
                                         <p 
-                                            class="font-semibold text-base"
+                                            class="font-semibold text-base pr-8"
                                             v-if="user.id !== userStore.user.id"
                                             >
                                             {{ user.name }} 
@@ -37,11 +35,7 @@
                             <span class="text-xs text-white font-light ">{{ conversation.modified_at_formatted }}</span>
                             
                         </a>
- 
-                </li>
-        
-            </ul>
- 
+
         </div>
         <!-- messages -->
         <div class="main-center col-span-3 space-y-4">

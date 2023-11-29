@@ -44,10 +44,19 @@
 
                     <div class="space-y-2">
                         <button class="active:bg-purple_main tracking-wider bg-[#8250CB] w-full mt-8 py-3 px-6 text-white rounded-full font-semibold">register</button>
-
+                        <Modal @close="toggleTerms" :modalActive="modalActive">
+                        <!-- <div class="rounded-full bg-transparent space-y-1 text-right model-content"> -->
+                            <Terms />
+                        <!-- </div> -->
+               
+                        <!-- <div class="rounded-full bg-transparent space-y-1 text-right model-content"> -->
+                            <DataPrivacy />
+                        <!-- </div> -->
+                        </Modal>   
+                
                         <p class="text-center text-[0.86rem] font-light">by clicking register, you agree to the gaming lounges' 
-                            <a class="text-blue_link underline active:text-[#0085FF]" href="#">terms of service</a> and 
-                            <a class="text-blue_link underline active:text-[#0085FF]" href="#">privacy policy</a>
+                            <button @click="toggleTerms" type="button" class="text-blue_link hover:underline active:text-[#0085FF]" >terms of service || data privacy</button> 
+                 
                         </p>
                     </div>
                 </form>
@@ -61,13 +70,36 @@
 import axios from 'axios'
 
 import { useToastStore } from '@/stores/toast'
+import Modal from '@/components/Modal.vue';
+import Terms from '@/components/Terms.vue';
+import DataPrivacy from '@/components/DataPrivacy.vue';
+
+import {ref} from 'vue'
+
 
 export default {
+    components: {
+ 
+    Modal,
+   
+    Terms,
+    DataPrivacy,
+    },
     setup() {
         const toastStore = useToastStore()
+        const modalActive = ref(false)
+        const toggleTerms = () => {
+            modalActive.value = !modalActive.value;
+        }
+ 
 
         return {
-            toastStore
+            toastStore,
+            modalActive,
+            toggleTerms,
+          
+            
+            
         }
     },
 
@@ -111,14 +143,10 @@ export default {
                     .then(response => {
                         if (response.data.message === 'success') {
                             this.toastStore.showToast(5000, 'The user is registered. Please activate your account by clicking your email link','bg-emerald-700')
-                            
-
                             this.form.name = ''
                             this.form.email = ''
                             this.form.password1 = ''
                             this.form.password2 = ''
-
-                            
                         } else {
                             // signup error
                             const data = JSON.parse(response.data.message)

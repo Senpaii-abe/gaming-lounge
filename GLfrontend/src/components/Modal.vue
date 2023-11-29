@@ -56,8 +56,8 @@ export default {
     transform:scale(0.8);
   }
   .modal{
+   
     backdrop-filter: blur(12px);
-  
     display: flex;
     justify-content: center;
     align-content: center;
@@ -70,6 +70,7 @@ export default {
    
 
     .modal-inner {
+     
       position: relative;
       display: flex;
       justify-content: center;

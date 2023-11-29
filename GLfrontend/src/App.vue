@@ -2,14 +2,14 @@
 
 	<template>
 		<nav class="py-6 sticky max-w-screen z-20 top-0 left-0 bg-cover bg-[url('../assets/img/navbar/header.png')]" v-if="userStore.user.isAuthenticated && userStore.user.id"> 
-			<div class="max-w-screen mx-auto flex items-center flex-wrap justify-between px-12">
+			<div class=" mx-auto flex items-center flex-wrap justify-between px-12">
 				<!-- left menu logo start -->		
 					<a href="http://gaminglounge.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
 						<!-- <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Gaming Lounge.</span> -->
 					
-						<img src="/assets/img/logo/gl_logo.png" alt="logo" class="w-24"/></a>		
+						<img src="/assets/img/logo/gl_logo.png" alt="logo" class="object-none w-25 mr-4"/></a>		
 					
-					<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-use">
+					<div class="justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-use">
 								<ul class="flex flex-col font-semibold tracking-wider md:tracking-wider p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0">
 											<li>
 												<RouterLink to="/feed" class="block py-2 pl-3 md:hover:text-violet1 md:p-0 md:dark:hover:text-violet1 dark:text-white dark:hover:text-violet1 dark:hover:text-violet1 md:dark:hover:bg-transparent" >discussions </RouterLink>   
@@ -29,7 +29,7 @@
 								</ul>
 							</div> 
 						<!-- center menu start -->
-								<div class="items-center justify-between md:flex md:w-auto md:order-1 rtl:space-x-reverse pr-4">
+								<div class="items-center justify-between md:flex md:w-auto md:order-1 rtl:space-x-reverse">
 									<RouterLink to="/search" class="p-2 rounded-img hover:bg-gray-600">
 										<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"><g fill="none" stroke="#f9f9f9" stroke-width="2"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M11 8a3 3 0 0 0-3 3m12 9l-3-3"/></g></svg>
 									</RouterLink>									
@@ -56,7 +56,8 @@
 		</nav>
 	<!-- header end -->
 	<!-- main view-->
-		<main class="pt-2 bg-cover md:bg-cover "> 
+	<Toast /> <!--  shows the alert sa frontend -->
+		<main class="pt-2"> 
 			<RouterView /> 
 		</main>
 		<Toast /> <!--  shows the alert sa frontend -->
