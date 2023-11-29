@@ -41,33 +41,30 @@ def activate(request, uidb64, token):
         user = User.objects.get(pk=uid)
     except User.DoesNotExist:
         user = None
-        messages.error(request, "Activation link is invalid!!!")
-        return redirect("signup")
+        return JsonResponse({"message": "An unexpected error occurred."}, status=500)
     except Exception as e:
         # Log this exception for debugging purposes
         user = None
-        messages.error(request, "An unexpected error occurred.")
-        return redirect("signup")
+        return JsonResponse({"message": "An unexpected error occurred."}, status=500)
 
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
 
-        messages.success(
-            request,
-            "Thank you for your email confirmation. Now you can login to your account.",
+        return JsonResponse(
+            {
+                "message": "Thank you for your email confirmation. Now you can login to your account."
+            }
         )
-        return redirect("login")
     else:
-        messages.error(request, "Activation link is invalid!!!")
-        return redirect("signup")
+        return JsonResponse({"message": "Activation link is invalid!!!"}, status=400)
 
 
 def activateemail(request, user, to_email):
     mail_subject = "Activate your user account."
     print("User name:", user.name)
     message = render_to_string(
-        "template_activate_account.html",
+        "template_activation_account.html",
         {
             "user": user.name,
             "domain": get_current_site(request).domain,

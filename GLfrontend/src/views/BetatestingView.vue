@@ -11,11 +11,11 @@
         text-base/7 font-light: default class ng texts sa post
         rounded-full: default class ng borders natin
     -->
-    <div class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12">
+    <div class="max-w-screen pt-4 mx-auto grid grid-cols-4 gap-4 px-12">
 
         <!-- left side 
              col-span-1: takes 1 of the 4 columns -->
-            <div class="main-left col-span-1 space-y-6 sticky top-[8rem] h-screen overflow-auto">
+            <div class="main-left col-span-1 space-y-6 sticky top-[8rem] h-screen ">
             <!-- trending games -->
             <LeftPanel />
         </div>

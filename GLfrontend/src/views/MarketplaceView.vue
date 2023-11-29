@@ -11,7 +11,7 @@
         text-base/7 font-light: default class ng texts sa post
         rounded-full: default class ng borders natin
     -->
-    <div class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12">
+    <div class="max-w-screen mx-auto grid grid-cols-4 gap-4 pt-4 px-12">
             
         <LeftPanel />
        

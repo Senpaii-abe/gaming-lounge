@@ -17,7 +17,7 @@ export const useToastStore = defineStore({
             this.message = message
             this.classes = classes
             this.isVisible = true
-
+            // this.classes = 'transition-opacity duration-300 origin-top-right'
             setTimeout(() => {
                 this.classes += ' -translate-y-28'
             }, 10)
@@ -29,6 +29,7 @@ export const useToastStore = defineStore({
             setTimeout(() => {
                 this.isVisible = false
             }, this.ms)
-        }
+        },
+        
     }
 })

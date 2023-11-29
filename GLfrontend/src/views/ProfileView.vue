@@ -1,33 +1,35 @@
 <template>
-    <div class="max-w-screen px-12 mx-auto grid grid-cols-4 gap-4">
+    <div class="max-w-screen px-12 pt-4 mx-auto grid grid-cols-4 gap-4">
 
         <!-- left side 
              col-span-1: takes 1 of the 4 columns -->
         <div class="main-left col-span-1 space-y-6"> 
             <!-- profile -->
-            <div class="p-4 bg-purple_main rounded-full">
+            <div class="p-6 bg-purple_main rounded-full border border-2 border-gray-400">
                 <!-- profile picture -->
                 <div class="flex items-center space-x-4">
                     <img :src="user.get_avatar" class="h-[80px] w-[80px] rounded-img"> 
                     <p class="font-semibold text-xl">{{ user.name }}</p>
                 </div>
                 <!-- charisma points nd posts-->
-                <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-dark_purple rounded-full text-center">
+                <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-transparent border-y-2 border-gray-400 text-center">
                     <div>
                         <p class="text-lg/none">{{ user.posts_count }}</p>
                         <label class="text-sm">posts</label>
                     </div>
-                  
-                    <div v-if="shouldDisplayCharismaScore">
-                        <p class="text-lg/none">{{ user.friends_count }}</p>
-                        <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-sm">friends</RouterLink>
+                    <div>
                         <p class="text-lg/none">{{ user.charisma_score }}</p>
                         <label class="text-sm">charisma</label>
                     </div>
+                    <div>
+                        <p class="text-lg/none">{{ user.friends_count }}</p>
+                        <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-sm">friends</RouterLink>
+                    </div>
+                    
                 
                 </div>
                 <!-- about me -->
-                <p class="px-1 text-sm/5 font-light text-justify">{{ user.bio }}</p>
+                <p class="px-1 text-justify">{{ user.bio }}</p>
                 
                 <!-- send friend request button -->
                 <div class = "mt-6">
@@ -52,16 +54,16 @@
                         && user.id == '675a5aad3287452bba57b5aec4f60cc8' //twitch
                         "
                         >
-                        Send Direct Message
+                        send message
                     </button> 
                     
                     <!-- edit profile button -->
                     <RouterLink
-                        class = "inline-block py-3 my-4 text-center hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
+                        class = "inline-block py-3 my-4 text-center hover:bg-[#120719] bg-[#28183e] font-semibold rounded-full w-full" 
                         to="/profile/edit"
                         v-if="userStore.user.id === user.id"
                         >
-                        Edit Profile
+                        edit profile
                     </RouterLink> 
 
                     <!-- Logout button -->
@@ -74,8 +76,61 @@
                     </button> 
                  </div>
             </div>  
+            
+            <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full">
+                <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">get your game on at gaming lounge!</h3>
+            
+            <div class="flex items-center justify-between"> 
+                                             
+                        <p class="text-justify lowercase">Welcome to your ultimate gamer destination, designed for gamers by gamers! Our platforms allow you to connect through forums, tournaments, marketplace and more - all centered around gaming.<br><br>
+
+                            We encourage open and passionate discussion while fostering a positive community. Our Offensive Language Sheriff system automatically detects and discourages negative behavior. Users gain points for engagement like making connections, commenting, and participating, keeping conversations uplifting.<br><br>
+
+                            At Gaming Lounge you can share wisdom, find squads, and talk games to your heart's content in an inclusive space. Just bring your A-game attitude and get involved in our community - the positivity you spread will continue to shape this space for all gamers.<br><br>
+
+                            So get your game on with us and experience gaming's finest digital playground! Join passionate, like-minded gamers where you direct the vibe. We can't wait for you to plug into our supportive community and make it even better.
+                        </p>
+              
+
+            </div>
+
+            </div>
+        </div> 
+        
+        <!-- center -->
+            <!-- col-span-2: takes 2 of the 4 columns
+                 space-y-4: 6 spaces each post -->
+        <div class="px-4 main-center col-span-2 space-y-6">
+            <!-- write something -->
+            <div class="feed"> <!--modal design-->
+                    <Modal @close="toggleModal" :modalActive="modalActive">
+                        <div class="rounded-full bg-transparent space-y-1 text-right model-content">
+                           
+                            <FeedForm v-bind:user="null" v-bind:posts="posts"/>
+                        </div>
+                    </Modal>
+                <div class="flex items-center justify-between bg-purple_main border-2 border-gray-400 rounded-full space-x-2 p-4">
+                    <img :src="userStore.user.avatar" alt="user.profile" class="w-14 h-14 rounded-img">
+                    <button @click="toggleModal" class="py-4 px-3 w-full  bg-[#28183e] bg-opacity-100 rounded-img text-left transition-colors duration-150 focus:shadow-outline hover:bg-[#120719]"> 
+                        <span class="text-gray-400 pl-2 ">lets talk gaming?</span>
+                    </button>
+                </div>
+
+            </div>
+            <!-- post -->     
+            <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400"
+                    v-for="post in posts" 
+                    v-bind:key="post.id"> <!-- loop ng post -->
+
+                    <FeedItem :post="post" @postDeleted="handlePostDeleted" />
+            </div>
+        </div>
+        
+        <!-- right side -->
+        <div class="main-right col-span-1 space-y-6">
+            
             <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full ">
-        <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">Useful Links</h3>
+                <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">Useful Links</h3>
         <div class="space-y-4">
             <div class="game news">  
                 <p class="mb-2 font-semibold">Gaming News:</p>
@@ -148,52 +203,9 @@
         </div>
             
         
-    </div>
-        </div> 
-        
-        <!-- center -->
-            <!-- col-span-2: takes 2 of the 4 columns
-                 space-y-4: 6 spaces each post -->
-        <div class="px-4 main-center col-span-2 space-y-6">
-            <!-- write something -->
-            <div 
-                class="rounded-full bg-transparent space-y-1 text-right"
-                v-if="userStore.user.id === user.id"
-                >
-                <FeedForm v-bind:user="user" v-bind:posts="posts"/>
             </div>
-            <!-- post -->     
-            <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400"
-                    v-for="post in posts" 
-                    v-bind:key="post.id"> <!-- loop ng post -->
 
-                    <FeedItem :post="post" @postDeleted="handlePostDeleted" />
-            </div>
-        </div>
-        
-        <!-- right side -->
-        <div class="main-right col-span-1 space-y-6">
             
-         
-
-            <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full">
-            <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">get your game on at gaming lounge!</h3>
-            
-            <div class="flex items-center justify-between"> 
-                                             
-                        <p class="text-justify lowercase">Welcome to your ultimate gamer destination, designed for gamers by gamers! Our platforms allow you to connect through forums, tournaments, marketplace and more - all centered around gaming.<br><br>
-
-                            We encourage open and passionate discussion while fostering a positive community. Our Offensive Language Sheriff system automatically detects and discourages negative behavior. Users gain points for engagement like making connections, commenting, and participating, keeping conversations uplifting.<br><br>
-
-                            At Gaming Lounge you can share wisdom, find squads, and talk games to your heart's content in an inclusive space. Just bring your A-game attitude and get involved in our community - the positivity you spread will continue to shape this space for all gamers.<br><br>
-
-                            So get your game on with us and experience gaming's finest digital playground! Join passionate, like-minded gamers where you direct the vibe. We can't wait for you to plug into our supportive community and make it even better.
-                        </p>
-              
-
-            </div>
-
-    </div>
     
         </div>
     </div>
@@ -215,32 +227,35 @@ input[type="file"] {
 import axios from 'axios'
 import { computed } from 'vue'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
-
+import Modal from '@/components/Modal.vue';
 import FeedForm from '../components/FeedForm.vue'
 import FeedItem from '@/components/FeedItem.vue'
 import { useUserStore } from '@/stores/user'
 import { useToastStore } from '@/stores/toast'
 
-
+import {ref} from 'vue'
 
 export default {
     name: 'ProfileView',
 
-    
-
     setup() {
         const userStore = useUserStore()
         const toastStore = useToastStore()
-
+        const modalActive = ref(false)
+        const toggleModal = () => {
+            modalActive.value = !modalActive.value;
+        }
         return {
             userStore,
             toastStore,
+            modalActive,
+            toggleModal,
         }
     },
         
     components: {
         PeopleYouMayKnow,
-
+        Modal,
         FeedItem,
         FeedForm
     },
@@ -267,16 +282,7 @@ export default {
             immediate: true 
         }
     },
-    // updated() {
-    //     // this.getFeed()
-    //     // console.log('updated')
-    // },
-    computed: {
-        shouldDisplayCharismaScore() {
-            const excludedUserIds = ['e9fe50b5c31439f9fb68208a5c3dba9', '1cfff9f31d814cb09028c3376871a4bb', '675a5aad3287452bba57b5aec4f60cc8']; // Replace with actual excluded user IDs
-            return !excludedUserIds.includes(this.user.id);
-        }
-    },
+ 
     methods: {
         deletePost(id) {
             // Filter out the deleted post

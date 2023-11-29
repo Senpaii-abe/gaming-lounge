@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins.wght@300;400;500;600;700&display=swap');
 
 :root {
-    --color-main: purple;
+    --color-main: #4b5876;
     --bg2: #dce5ff;
     --bg: #fbfefd;
     --main-accent:#e9eefd;
     --main-text: #4b5876;
-    --shadow: #191970 4px 4px 16px;
+    --shadow: #191970 2px 2px 6px;
 }
 
 * {
@@ -61,11 +61,11 @@ img {
     height: 100%;
     width: 100%;
     background:  #fff;
-    border-style: outset;
-    border-color: #5865F2;
+    border-style: solid;
+    border-color: var(--main-text);
     border-radius: 15px;
     border-width: 3px;
-    background-color: #ebf0fa;
+    background-color: #ecf2f9;
     padding: 0.8rem; 
     overflow-y: auto;
 }
@@ -92,7 +92,7 @@ img {
     font-weight: 1000;
     text-align: center;
     letter-spacing: 1.8px;
-    color: #191970;
+    color: var(--main-text);
     margin-bottom: 2rem;
 }
 
@@ -107,7 +107,9 @@ img {
 .sidebar-avartar {
     display: flex;
     align-items: center;
-    border: 3px solid var(--main-accent);
+    border-style: outset;
+    border-color: #5865F2;
+    border-width: 1px;
     padding: 0.6rem 3rem;
     border-radius: 15px;
     position: absolute;
@@ -142,9 +144,11 @@ img {
     font-size:20px;
     position: absolute;
     padding-bottom: 14%;
-    padding-left: 75%;
+    padding-left: 73%;
 }
-
+.edit-avartar i {
+    color: #4b5876;
+}
 .logout {
     position: absolute;
     bottom: 3%;
@@ -173,10 +177,14 @@ img {
 }
 
 .sidebar-menu a.active {
-    background: var(--main-accent);
+    background: #c2d1f0;
     padding: 1rem;
     border-radius: 7px;
 }
+
+.sidebar-menu a:hover {
+    background-color: #85a3e0;
+  }
 
 /* .sidebar-menu a span:first-child{
     display: inline-block;
@@ -201,6 +209,7 @@ img {
     border-radius: 10px;
     display: flex;
     align-items: center;
+    color:var(--main-text)
 }
 
 .btn-span {
@@ -240,7 +249,7 @@ header {
 
 .header-title-wrapper label {
     display: inline-block;
-    color: var(--color-main);
+    color: var(--main-text);
     margin-right: 1rem;
     font-size: 1.8rem;
 }
@@ -288,13 +297,16 @@ main{
 
 
 .analytic {
-    box-shadow: var(--shadow);
     padding: 1.5rem;
     border-radius: 10px;
     display: flex;
     padding-left: 2rem;
+    border-width: 1px; 
+    border-radius: 10px;
+    box-shadow: #191970 2px 2px 6px;
+    border-color: #ebf0fa;
 }
-
+/* style="border-style: solid; border-width: 1px; border-radius: 10px; border-color: var(--main-text) */
 
 .analytic-info h4 {
     font-weight: 400;
@@ -371,22 +383,18 @@ main{
 
 .rev-content {
     background: #fff;
-    box-shadow: var(--shadow);
-    border-radius: 15px;
     padding: 1rem 2rem;
     margin-bottom: 20px;
     text-align: center;
+    border-radius: 10px;
+    box-shadow: #191970 1px 1px 4px;
+    border-color: #ebf0fa;
 }
 
 
-
-.rev-content img {
-    width: 180px;
-    margin: 2rem 0rem;
-}
 
 .rev-info {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .rev-info h3, 
@@ -396,18 +404,21 @@ main{
 
 .rev-info h1 {
     font-weight: 600;
-    margin-top: .2rem;
+    font-size: 1rem;
+    color: var(--main-text);
+    margin: -1px;
 }
 
-.rev-info h1 {
-    font-weight: 600;
-    font-size: 1rem;
-    color: #555;
+.rev-info h1 small{
+    font-weight: 300;
+    font-size: 4px;
+    color: var(--main-text);
+    margin: -1px;
 }
 
 .rev-sum {
-    background: var(--main-accent);
-    border: 1px solid var(--color-main);
+    background: #ecf2f9;
+    border: 1px solid var(--main-text);
     padding: 1rem;
     border-radius: 10px;
 }
@@ -425,10 +436,11 @@ main{
 
 .graph-content {
     background: #fff;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
     padding: 1rem;
     height: 580px;
+    border-radius: 10px;
+    box-shadow: #191970 1px 1px 4px;
+    border-color: #ebf0fa;
 }
 
 .graph-board {
@@ -438,22 +450,22 @@ main{
 
 .bar-content {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: var(--shadow);
     padding: 1rem;
     width: 100%;
-    height: 480px;
 }
 
 .pie-content {
     background: #fff;
     border-radius: 12px;
-    box-shadow: var(--shadow);
-    padding: 1rem;
+    box-shadow: #191970 1px 1px 4px;
+    padding-top:75px;
     width: 100%;
-    height: 410px;
+    justify-content: center;
+    align-items: center;
+    height: 91%;
 }
-
 
 .postchart{
     width:100%;
@@ -593,6 +605,7 @@ main{
     display: grid;
     padding-left: 2rem;
     margin-bottom: 1rem;
+    position: relative;
 }
 
 .report-buttons {

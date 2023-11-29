@@ -18,7 +18,7 @@ urlpatterns = (
         path("api/notifications/", include("notification.urls")),
         # path("activateemail/", views.activateemail, name="activateemail"),
         path(
-            "activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/",
+            "activateemail/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/",
             views.activate,
             name="activate",
         ),

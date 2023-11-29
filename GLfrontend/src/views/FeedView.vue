@@ -1,65 +1,15 @@
 <template>
 
-    <div data-te-infinite-scroll-init class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12">
+    <div data-te-infinite-scroll-init class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12 pt-4">
 
-        <!-- left side 
-             col-span-1: takes 1 of the 4 columns -->
-            <div class="main-left col-span-1 space-y-6 sticky top-[8rem] h-screen overflow-auto">
-          
-            <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 font-semibold tracking-wide">useful links</h3>
-
-                <p class="text-base/7 italic mb-6">our instance rules are here and cover the ideals and how we want this
-                    community to evolve.</p>
-                <p class="text-base/7 italic mb-2">where you can download games:</p>
-
-                <ul class="list-inside">
-
-                    <li class="p-1 hover:underline">
-                        <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer"><img
-                                src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full" alt="logo" />riot games</a>
-                    </li>
-
-                    <li class="p-1 hover:underline">
-                        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer"><img
-                                src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full" alt="logo" />steam</a>
-                    </li>
-
-                    <li class="p-1 hover:underline">
-                        <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer"><img
-                                src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full" alt="logo" />epic games</a>
-                    </li>
-
-                    <li class="p-1 hover:underline">
-                        <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer"><img
-                                src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full" alt="logo" />battle.net</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
+        <LeftPanel />
 
         <!-- center -->
         <!-- col-span-2: takes 2 of the 4 columns
                  space-y-4: 6 spaces each post -->
         <div class="px-4 main-center col-span-2 space-y-6"> <!--whole feed-->
-            <div class="feed"> <!--modal design-->
-                    <Modal @close="toggleModal" :modalActive="modalActive">
-                        <div class="rounded-full bg-transparent space-y-1 text-right model-content">
-                           
-                            <FeedForm v-bind:user="null" v-bind:posts="posts"/>
-                        </div>
-                    </Modal>
-                <div class="flex items-center justify-between rounded-full space-x-2 py-4">
-                    <img :src="userStore.user.avatar" alt="user.profile" class="w-14 h-14 rounded-img">
-                    <button @click="toggleModal" class="py-4 px-3 w-full bg-[#0A001266] bg-opacity-30 rounded-img text-left transition-colors duration-150 focus:shadow-outline hover:bg-purple-900 hover:bg-opacity-30"> 
-                        <span class="text-gray-400 pl-2 italic">lets talk gaming?</span>
-                    </button>
-                </div>
 
-            </div>
-       
-            <!-- write something -->
+      
             <!-- bg-gradient-to-r from-violet-900  -->
             <!-- post area -->
                 <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400"  v-for="post in posts" v-bind:key="post.id">
@@ -96,9 +46,10 @@ import FeedForm from '../components/FeedForm.vue'
 import FeedItem from '../components/FeedItem.vue'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import { useUserStore } from '@/stores/user'
+import LeftPanel from '@/components/LeftPanel.vue'
 
-import Modal from '@/components/Modal.vue';
-import {ref} from 'vue'
+
+
 export default {
     name: 'FeedView',
 
@@ -107,25 +58,19 @@ export default {
     setup() {
         const userStore = useUserStore()
 
-        const modalActive = ref(false)
-        const toggleModal = () => {
-            modalActive.value = !modalActive.value;
-        }
-
-
-      
         return {
             userStore,
-            modalActive,
-            toggleModal,
+
         }
         
     },
         components: {
             PeopleYouMayKnow,
-            Modal,
+            
+            LeftPanel,
             FeedItem,
             FeedForm,
+            Modal,
         },
         
     data() {

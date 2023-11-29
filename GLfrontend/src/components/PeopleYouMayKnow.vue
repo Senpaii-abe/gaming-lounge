@@ -3,10 +3,10 @@
         <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full">
             <h3 class="mb-2 font-semibold text-xl tracking-wide text-center">Leaderboards</h3>
 
-            <div class="space-y-4 text-left">
+            <div class="text-left">
                     <div v-for="user in leaderboard" :key="user.id" class="flex items-center justify-between border-b-2 font-medium">
 
-                        <div class="justify-self-start flex py-2">
+                        <div class="justify-self-start flex py-4">
                             <img :src="user.avatar" alt="avatar" class="h-12 rounded-img" width="50" height="50">
                             <div class="flex flex-col">
                                 <span class="font-semibold">{{ user.name }}</span>

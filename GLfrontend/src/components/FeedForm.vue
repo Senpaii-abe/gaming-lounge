@@ -1,6 +1,6 @@
 <template>
 
-    <div class="bg-purple_main rounded-full p-4 border-2">
+    <div class="bg-[#120719] rounded-full p-4 border-2">
       
       <form 
         v-on:submit.prevent="submitForm"
@@ -142,6 +142,7 @@ export default {
       if (this.gameTitleError || this.contentError) {
         return;
       }
+
       let formData = new FormData();
       formData.append('image', this.$refs.file.files[0]);
       formData.append('body', this.body);
@@ -157,7 +158,7 @@ export default {
       })
         .then(response => {
         
-        this.toastStore.showToast(5000, 'walang mura ˚ʚ♡ɞ˚ ', 'bg-emerald-600') //profcheck
+        this.toastStore.showToast(5000, 'critical hit! your post landed cleanly thanks for sharing your wisdom with the community! ˚ʚ♡ɞ˚ ', 'bg-emerald-700') //profcheck
 
         this.posts.unshift(response.data);
         this.resetForm();
@@ -171,7 +172,7 @@ export default {
 
           this.toastStore.showToast(//profcheck
             5000,  //profcheck
-            'may mura!!!',//profcheck
+            'easy there partner! our foul word sheriff caught some offensive language. rework your post and giddy up again.  ✧˖°. ',//profcheck
             'bg-red-400' //profcheck
           )//profcheck
         }//profcheck

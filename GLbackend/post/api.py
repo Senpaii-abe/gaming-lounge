@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db.models import Q, Count
 from django.http import JsonResponse
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
@@ -62,20 +63,28 @@ def post_list(request):
 
     # Query for posts from user's friends
     friend_posts = Post.objects.filter(
-        created_by_id__in=user_ids, is_private=False, menu="Discussions"
+        created_by_id__in=user_ids,
+        is_private=False,
+        menu="Discussions",
+        is_offensive=False,
     )
 
     own_posts = Post.objects.filter(
-        created_by=request.user, is_private=False, menu="Discussions"
+        created_by=request.user,
+        is_private=False,
+        menu="Discussions",
+        is_offensive=False,
     )
 
     # Combine the results
     combined_posts = (pref_posts | friend_posts | own_posts).distinct()
-    paginator = PageNumberPagination()
-    paginator.page_size = 3
-    paginated_post = paginator.paginate_queryset(combined_posts, request)
+    # paginator = PageNumberPagination()
+    # paginator.page_size = 3
+    # paginated_post = paginator.paginate_queryset(combined_posts, request)
 
-    serializer = PostSerializer(paginated_post, many=True)
+    combined_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
+
+    serializer = PostSerializer(combined_posts, many=True)
     return Response(serializer.data)
 
 
@@ -335,7 +344,7 @@ def post_list_profile(request, id):
     user = User.objects.get(pk=id)  # change later to feed only
     posts = Post.objects.filter(created_by_id=id)
     if not request.user in user.friends.all():
-        posts = posts.filter(is_private=False)
+        posts = posts.filter(is_private=False, is_offensive=False)
 
     post_serializer = PostSerializer(posts, many=True)
     user_serializer = UserSerializer(user)
@@ -395,14 +404,20 @@ def post_create(request):
 
         if attachment:
             post.attachments.add(attachment)
-
-        # if has_profanity(body):
-        #     post.is_offensive = True
+            post.save()
 
         # to add in post count when user posts
         user = request.user
         user.posts_count = user.posts_count + 1
         user.save()
+
+        if has_profanity(body):
+            post.is_offensive = True
+            post.save()
+
+            return Response(
+                {"error": "profanity detectedss"}, status=status.HTTP_400_BAD_REQUEST
+            )
 
         serializer = PostSerializer(post)
 

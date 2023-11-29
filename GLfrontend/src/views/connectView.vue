@@ -11,7 +11,7 @@
         text-base/7 font-light: default class ng texts sa post
         rounded-full: default class ng borders natin
     -->
-    <div class="max-w-screen px-12 mx-auto grid grid-cols-4 gap-4">
+    <div class="max-w-screen px-12 mx-auto grid grid-cols-4 gap-4 pt-4">
 
         <!-- left side 
              col-span-1: takes 1 of the 4 columns -->

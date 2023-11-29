@@ -1,10 +1,10 @@
 <template>
     <!-- scroll: h-full overflow-y-scroll -->
-    <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
+    <div class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12 pt-4">
         <!-- inbox -->
-        <div class="main-left col-span-1 flex flex-col bg-purple_main rounded-full p-4 overflow-auto h-full">
+        <div class="main-left col-span-1 flex flex-col bg-purple_main rounded-full p-6 overflow-auto h-full">
             
-            <label for="" class="text-center text-xl font-semibold border-b pb-2">chats</label>
+            <label for="" class="text-center text-xl font-semibold border-b pb-4">messages</label>
             
             <ul class="mt-3">
                 <li class="p-3 transition hover:bg-[#181327] rounded-lg">       
@@ -13,6 +13,7 @@
                             class="mt-4 flex justify-between items-center"
                             v-for="conversation in conversations"
                             v-bind:key="conversation.id"
+                           
                             v-on:click="setActiveConversation(conversation.id)"
                         >
                             <div class="flex items-center space-x-3">
@@ -28,15 +29,17 @@
                                         >
                                         {{ user.name }} 
                                     </p>
-        
+                         
                                 </template>
                             </div>    
                             <span class="text-xs text-gray-400 font-light ">{{ conversation.modified_at_formatted }}</span>
+                            
                         </a>
+                        
                     
                  
                 </li>
-             
+                        
              
             </ul>
  
@@ -44,7 +47,7 @@
         <!-- messages -->
         <div class="main-center col-span-3 space-y-4">
             <div class="bg-purple_main rounded-full">
-                <div class="flex flex-col flex-grow p-4">
+                <div class="flex flex-col flex-grow p-6">
                     
                         <template 
                             v-for="message in activeConversation.messages" 
@@ -80,23 +83,19 @@
                                     </div>
                             </div>
                         </template>
-                  
+                        
                  
                 </div>
             </div>
       
                  <form v-on:submit.prevent="submitForm">
-                    <label for="chat" class="sr-only">your message</label>
-                        <div class="flex items-center px-3 py-2 rounded-large bg-gray-50 dark:bg-purple_main">
-                            <button type="button" class="p-2 text-gray-500 rounded-large cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.408 7.5h.01m-6.876 0h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM4.6 11a5.5 5.5 0 0 0 10.81 0H4.6Z"/>
-                                </svg>
-                                <span class="sr-only">Add emoji</span>
-                            </button>
-                            <textarea v-model="body" id="chat" rows="1" class="block mx-2 p-2.5 w-full text-sm rounded-large dark:bg-[#181327]" placeholder="your message.."></textarea>
-                            <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
-                                <svg class="w-5 h-5 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 18 20">
+                    <label for="chat" class="sr-only ">your message</label>
+                        <div class="flex items-center p-4 rounded-large bg-gray-50 dark:bg-purple_main">
+                 
+                            <textarea v-model="body" id="chat" rows="1" class="block mx-2 p-4 w-full rounded-img dark:bg-transparent" placeholder="your message.."></textarea>
+                            <button type="submit" class="inline-flex justify-center p-3 text-blue-600 rounded-img cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-purple-900">
+
+                                <svg class="w-8 h-8 rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 18 20">
                                     <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
                                 </svg>
                                 <span class="sr-only">send message</span>

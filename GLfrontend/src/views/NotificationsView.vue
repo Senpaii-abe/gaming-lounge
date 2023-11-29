@@ -1,10 +1,9 @@
 <template>
-<div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
+<div class="max-w-screen mx-auto grid grid-cols-4 gap-4 pt-4">
 
         <!-- left side 
         col-span-1: takes 1 of the 4 columns -->
         <div class="main-left col-span-1 space-y-6"> 
-            <LeftPanel />
         </div>
     <!-- center -->
         <!-- col-span-2: takes 2 of the 4 columns
@@ -25,10 +24,10 @@
                     </button>
         </div>
 
-        <div class="p-4 bg-purple_main rounded-full"
+        <div class="p-6 bg-purple_main rounded-full"
                 v-else
         >
-            You don't have any unread notifications!
+            you don't have any unread notifications!
         </div> 
     
     </div>
@@ -39,14 +38,12 @@
 
 <script>
 import axios from 'axios'
-import LeftPanel from '@/components/LeftPanel.vue'
-import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 
 export default{
     name: 'notifications', 
     components: {
-        PeopleYouMayKnow,
-        LeftPanel,
+ 
+
     },
     data(){
         return {

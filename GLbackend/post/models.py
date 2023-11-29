@@ -103,8 +103,8 @@ class Post(models.Model):
     def created_at_formatted(self):
         return timesince(self.created_at)
 
-    def clean(self):  # profcheck
-        if has_profanity(self.body):  # profcheck
-            raise ValidationError(  # profcheck
-                "Profanity detected"  # profcheck
-            )  # has_profanity() is called in Post.clean() #profcheck
+    # def clean(self):  # profcheck
+    #     if has_profanity(self.body):
+    #         self.save()  # profcheck
+    #         raise ValidationError("Profanity detected")  # profcheck  # profcheck
+    #         # has_profanity() is called in Post.clean() #profcheck
