@@ -443,6 +443,7 @@ def post_create(request):
 
         if has_profanity(body):
             post.is_offensive = True
+            user.charisma_score = user.charisma_score - 1
             post.save()
 
             return Response(

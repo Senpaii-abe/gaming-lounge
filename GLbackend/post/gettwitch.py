@@ -5,6 +5,11 @@ import os
 import django
 import sys
 from django.db.models import F
+import sys
+import io
+
+# Change the standard output encoding to 'utf-8'
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GLbackend.settings")
