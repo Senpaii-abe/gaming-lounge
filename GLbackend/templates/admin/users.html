@@ -25,7 +25,7 @@
             <section>
                     <h3 class="section-head">Overview</h3>
                     <div class="analytics-post">
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple">
                             <div class="analytic-icon">
                                 <i class="fa-solid fa-users"></i>
                             </div>
@@ -35,9 +35,9 @@
                             </div>
                         </div>
         
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple">
                             <div class="analytic-icon">
-                                <i class="fa-solid fa-globe"></i>
+                                <i class="fa-solid fa-user-slash"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>BANNED USERS</h4>
@@ -48,9 +48,9 @@
                     </div>
 
                     <div class="analytics-post">
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple">
                             <div class="analytic-icon">
-                                <i class="fa-solid fa-user-slash"></i>
+                                <i class="fa-solid fa-globe"></i>
                             </div>
                             <div class="analytic-info">
                                 <h4>Active Users</h4>
@@ -59,7 +59,7 @@
                             </div>
                         </div>
         
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple">
                             <div class="analytic-icon">
                                 <i class="fa-solid fa-user-plus"></i>
                             </div>
@@ -72,12 +72,12 @@
             </section>
             <section>
                 <div class="graph-card">
-                        <h3 class="section-head">User Visits</h3>
-                        <div class="bar-content">
-                            <div>
-                                <canvas id="visitsChart" height="155"></canvas>
-                            </div>
+                    <h3 class="section-head">User Visits</h3>
+                    <div class="bar-content" style="max-height: 400px;">
+                        <div>
+                            <canvas id="visitsChart" style="max-height: 350px; overflow: hidden;"></canvas>
                         </div>
+                    </div>
                 </div>
             </section>
                 
@@ -115,16 +115,20 @@
                                         <td>{{ user.id }} </td>
                                         <td>{{ user.name }}</td>
                                         <td>{{ user.email }}</td>
-                                        <td><img src="{{ user.get_avatar }}" alt="Avatar" width="45" height="45" /></td>
+                                        <td><img src="{{ user.get_avatar }}" alt="Avatar" width="96" height="96" style="width: 0.5in; height: 0.5in;"></td>
                                         <td>{{ user.friends_count }}</td>
                                         <td>{{ user.posts_count }}</td>
                                         <td>{% if user.is_active %} Active {% else %} Inactive {% endif %}</td>
                                         <td>{% if user.last_login %} {{ user.last_login }} {% else %} Never Logged In {% endif %}</td>
-                                        <td><div class="edit-button" class="btn-btn-primary"><a href="{% url 'edit_user' user.id %}"><i class="fa-regular fa-pen-to-square"></i></a></div></td>
+                                        <td><div class="edit-button" class="btn-outline-primary" style="display: flex; justify-content: center; align-items: center;" ><a href="{% url 'edit_user' user.id %}"><i class="fa-solid fa-pen-to-square"></i></a></div></td>
                                         <td>
                                             <form method="post" action="{% url 'delete_user' user.id %}">
                                             {% csrf_token %}
-                                            <button type="submit" class="btn btn-danger"><i class="fa-regular fa-square-minus"></i></button>
+                                            <div style="padding-top: 4px; display: flex; justify-content: center; align-items: center;">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa-solid fa-square-minus"></i>
+                                                </button>
+                                            </div>
                                             </form>
                                         </td>
                                     </tr>

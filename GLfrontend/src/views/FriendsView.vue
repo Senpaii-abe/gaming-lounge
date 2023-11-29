@@ -24,7 +24,7 @@
                 
                 </div>
                 <!-- about me -->
-                <p class="px-1 text-sm/7 font-extralight">tungkol sakin</p>
+            
                 
             </div>  
             <!-- trending games -->
@@ -125,7 +125,7 @@ export default {
          
     components: {
         PeopleYouMayKnow,
-  
+
         FeedItem,
     },
     data(){

@@ -8,6 +8,7 @@ from rest_framework.decorators import (
     authentication_classes,
     permission_classes,
 )
+from .views import activateemail
 
 from notification.utils import create_notification
 
@@ -33,6 +34,45 @@ def me(request):
     )
 
 
+# @api_view(["POST"])
+# @authentication_classes([])
+# @permission_classes([])
+# def signup(request):
+#     data = request.data
+#     message = "success"
+
+#     form = SignupForm(
+#         {
+#             "name": data.get("name"),
+#             "email": data.get("email"),
+#             "password1": data.get("password1"),
+#             "password2": data.get("password2"),
+#         }
+#     )
+
+#     if form.is_valid():
+#         user = form.save()
+#         user.is_active = False
+#         user.save()
+
+#         url = f"{settings.WEBSITE_URL}/activateemail/?email={user.email}&id={user.id}"
+
+#         # send verification email later
+#         send_mail(
+#             "Please verify your email",
+#             f"The url for activating your account is: {url}",
+#             "gloungenoreply@gmail.com",
+#             [user.email],
+#             fail_silently=False,
+#         )
+#     else:
+#         message = form.errors.as_json()
+
+#     print(message)
+
+#     return JsonResponse({"message": message}, safe=False)
+
+
 @api_view(["POST"])
 @authentication_classes([])
 @permission_classes([])
@@ -48,24 +88,23 @@ def signup(request):
             "password2": data.get("password2"),
         }
     )
+    if request.method == "POST":
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            activateemail(request, user, form.cleaned_data.get("email"))
 
-    if form.is_valid():
-        user = form.save()
-        user.is_active = False
-        user.save()
-
-        url = f"{settings.WEBSITE_URL}/activateemail/?email={user.email}&id={user.id}"
-
-        # send verification email later
-        send_mail(
-            "Please verify your email",
-            f"The url for activating your account is: {url}",
-            "gloungenoreply@gmail.com",
-            [user.email],
-            fail_silently=False,
-        )
-    else:
-        message = form.errors.as_json()
+            # send verification email later
+            # send_mail(
+            #     "Please verify your email",
+            #     f"The url for activating your account is: {url}",
+            #     "gloungenoreply@gmail.com",
+            #     [user.email],
+            #     fail_silently=False,
+            # )
+        else:
+            message = form.errors.as_json()
 
     print(message)
 
@@ -289,3 +328,36 @@ def get_game_categories(request):
         return JsonResponse(list(categories), safe=False)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+
+def get_leaderboard():
+    excluded_user_ids = [
+        "3e9fe50b5c31439f9fb68208a5c3dba9",  # reddit
+        "1cfff9f31d814cb09028c3376871a4bb",  # twitch
+        "675a5aad3287452bba57b5aec4f60cc8",  # facebook
+    ]
+    top_users = (
+        User.objects.filter(charisma_score__gt=0)
+        .exclude(id__in=excluded_user_ids)
+        .order_by("-charisma_score")[:5]
+        .values("id", "name", "charisma_score")
+    )
+
+    # Get the avatar URL for each user and include it in the response
+    users_leaderboard = list(top_users)
+    for user in users_leaderboard:
+        user_instance = User.objects.get(pk=user["id"])
+        avatar_url = user_instance.get_avatar()
+
+        if avatar_url:
+            user["avatar"] = avatar_url  # Add 'avatar' field to each user dictionary
+        else:
+            user["avatar"] = None  # Or handle cases where the avatar is not available
+
+    return users_leaderboard
+
+
+def leaderboard_endpoint(request):
+    users_leaderboard = get_leaderboard()
+
+    return JsonResponse(users_leaderboard, safe=False)

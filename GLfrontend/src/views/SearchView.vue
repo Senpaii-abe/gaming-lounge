@@ -53,11 +53,12 @@ import axios from 'axios'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue' 
 import FeedItem from '../components/FeedItem.vue'
 
+
 export default {
     name: 'SearchView',
     components: {
         PeopleYouMayKnow,
-
+     
         FeedItem,
     },
 

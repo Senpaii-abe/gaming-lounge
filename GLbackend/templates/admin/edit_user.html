@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Admin Signup</title>
+    <title>Update User Information</title>
     <link rel="stylesheet" href="{% static 'admin/css/login.css' %}" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -15,7 +15,7 @@
 
   <body>
     <div class="wrapper">
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h1>Update User Information</h1>
         {% if profile_form.non_field_errors %}
@@ -57,36 +57,32 @@
           />
           <i class="bx bx-envelope"></i>
         </div>
-        
+
         <div class="wo-input-box">
-        Active Status: 
-        <input
-          type="checkbox"
-          class="form-check-input"
-          name="is_active"
-          id="id_is_active"
-          {%
-          if
-          user.is_active
-          %}
-          checked
-          {%
-          endif
-          %}
-        />
-        <div>
-        
-        <div class="avatar-box">
+          Active Status:
+          <input
+            type="checkbox"
+            class="form-check-input"
+            name="is_active"
+            id="id_is_active"
+            {%
+            if
+            user.is_active
+            %}
+            checked
+            {%
+            endif
+            %}
+          />
+        </div>
+
         Avatar:
-        <input type="file" name="avatar" id="id_avatar" />
-        <i class="fa-regular fa-image"></i>
+        <input type="file" name="avatar" id="id_avatar" /><br />
 
         <button type="submit" class="btn">UPDATE</button>
         <a href="{% url 'admin_users' %}"
           ><button class="btn">Cancel</button></a
         >
-
-        <div>
       </form>
     </div>
   </body>

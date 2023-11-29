@@ -5,7 +5,7 @@
         <img src="/assets/img/logo/gl_logo.png" alt="logo" class="mx-auto"/>
       </div>
 
-      <h2 class="mb-6 leading-tight font-black text-black text-3xl text-center">gaming intersets</h2>
+      <h2 class="mb-6 leading-tight font-black text-black text-3xl text-center">gaming interests</h2>
         <p class="mb-10 text-black text-40 text-center">
           pick things you would like to see in your feed
         </p>

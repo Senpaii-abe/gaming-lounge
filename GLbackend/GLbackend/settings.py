@@ -38,7 +38,19 @@ LOGOUT_REDIRECT_URL = "admin_login"
 
 # application definition
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# emailing settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_FROM = "gamingglounge@gmail.com"
+EMAIL_HOST_USER = "gamingglounge@gmail.com"
+EMAIL_HOST_PASSWORD = "giciwtownjcylhtj"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 14400
+
+
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 AUTH_USER_MODEL = "account.User"  # to use own
 
@@ -161,7 +173,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Manila"
 
 USE_I18N = True
 
@@ -176,6 +188,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

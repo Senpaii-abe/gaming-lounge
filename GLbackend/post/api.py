@@ -516,14 +516,17 @@ def get_charisma_score(request, user_id):
 
 
 def get_popular_games():
-    popular_games = GameTitle.objects.annotate(num_posts=Count("post")).order_by(
-        "-num_posts"
-    )[:5]
+    # Aggregate and annotate the count of related posts for each GameTitle
+    popular_games = (
+        GameTitle.objects.annotate(num_posts=Count("post"))
+        .order_by("-num_posts")
+        .values("title", "num_posts")[:5]  # Fetch top 5 GameTitles by post count
+    )
     return popular_games
 
 
 @api_view(["GET"])
 def popular_games_endpoint(request):
     popular_games = get_popular_games()
-    serialized_games = GameTitleSerializer(popular_games, many=True)
-    return Response(serialized_games.data)
+    serialized_games = list(popular_games)
+    return JsonResponse(serialized_games, safe=False)

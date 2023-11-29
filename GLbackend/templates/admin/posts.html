@@ -5,10 +5,10 @@
 <header>
     <div class="header-title-wrapper">
         <label for="menu-toggle">
-            <span class="las la-bars"></span>
+            <i class="fa-solid fa-bars"></i>
         </label>
         <div class="header-title">
-            <h1>POSTS<span class="las la-chart-line"></span></h1>
+            <h1>POSTS <span class="las la-users"></span></h1>
             </p>                    
         </div>
     </div>
@@ -20,16 +20,16 @@
                 <section>
                     <h3 class="section-head">Overview</h3>
                     <div class="analytics-post">
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple">
                             <div class="analytic-icon">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </div>
                             <div class="analytic-info">
-                                <h4>TOTAL POSTS</h4>
+                                <h4>Total</h4>
                                 <h1>{{ total_posts_count }}</h1> 
                             </div>
                         </div>
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple">
                             <div class="analytic-icon">
                                 <i class="fa-regular fa-comments"></i>
                             </div>
@@ -43,7 +43,7 @@
 
                 <section>
                     <div class="analytics-post">
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple">
                             <div class="analytic-icon">
                                 <i class="fa-solid fa-link"></i>
                             </div>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
         
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple">
                             <div class="analytic-icon">
                                 <i class="fa-solid fa-store"></i>
                             </div>
@@ -66,7 +66,7 @@
 
                 <section>
                     <div class="analytics-post">
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple">
                             <div class="analytic-icon">
                                 <i class="fa-solid fa-trophy"></i>
                             </div>
@@ -76,7 +76,7 @@
                             </div>
                         </div>
         
-                        <div class="analytic">
+                        <div class="analytic" style="border-style: solid; border-radius: 10px; border-color: purple"> 
                             <div class="analytic-icon">
                                 <i class="fa-brands fa-fantasy-flight-games"></i>
                             </div>
@@ -90,16 +90,16 @@
             <div>
                 <div class="graph-card">
                     <h3 class="section-head">Posts per Tab</h3>
-                    <div class="bar-content">
+                    <div class="bar-content"style="max-height: 500px;">
                         <div>     
-                            <canvas id="postsChart" height="155"></canvas> 
+                            <canvas id="postsChart" style="max-height: 350px; overflow: hidden;"></canvas> 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
             
-            <h3 class="section-head">List of Posts</h3>   
+            <h3 class="section-head" style="margin-top: 80px;">List of Posts</h3>   
             <div class="table-box">
                 <section>
                     <div class="">
@@ -111,7 +111,7 @@
                 <section>
                     <div class="table-data">
                         <div class="table-responsive">
-                            <table id="bootstrapdatatable" class="table table-striped table-bordered" width="1000px">
+                            <table id="bootstrapdatatable" class="table table-striped table-bordered">
                                 <thead>
                                     <th><input type ="checkbox" id="checkall"></th>
                                     <th>ID</th>
@@ -141,10 +141,14 @@
                                         <td>{% if post.is_private %} Private {% else %} Public {% endif %}</td>
                                         <td>{{ post.menu }}</td>
                                         <td>{{ post.post_url }}</td>
-                                        <td><div class="edit_button"><a href="{% url 'edit_post' post.id %}"><i class="fa-regular fa-pen-to-square"></a></div></td>
+                                         <td><div class="edit-button" class="btn-outline-primary" style="display: flex; justify-content: center; align-items: center;" ><a href="{% url 'edit_post' post.id %}"><i class="fa-solid fa-pen-to-square fa-xs"></i></a></div></td>
                                         <td><form method="post" action="{% url 'delete_post' post.id %}">
                                             {% csrf_token %}
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <div style="padding-top: 4px; display: flex; justify-content: center; align-items: center;">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa-solid fa-square-minus"></i>
+                                                </button>
+                                            </div>
                                             </form>
                                         </td>
                                     </tr>

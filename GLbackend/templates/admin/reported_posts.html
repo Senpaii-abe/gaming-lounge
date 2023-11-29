@@ -2,7 +2,7 @@
 <header>
   <div class="header-title-wrapper">
     <label for="menu-toggle">
-      <span class="las la-bars"></span>
+      <i class="fa-solid fa-bars"></i>
     </label>
     <div class="header-title">
       <h1>REPORTED POSTS</h1>
@@ -17,7 +17,10 @@
 <main>
   <h3 class="section-head">Overview</h3>
   <div class="analytics">
-    <div class="analytic">
+    <div
+      class="analytic"
+      style="border-style: solid; border-radius: 10px; border-color: purple"
+    >
       <div class="analytic-icon">
         <span class="las la-eye"></span>
       </div>
@@ -27,7 +30,10 @@
       </div>
     </div>
 
-    <div class="analytic">
+    <div
+      class="analytic"
+      style="border-style: solid; border-radius: 10px; border-color: purple"
+    >
       <div class="analytic-icon">
         <span class="las la-clock"></span>
       </div>
@@ -40,7 +46,15 @@
 
   <div class="reported_box">
     {% for post in reported_posts %}
-    <div class="reported-info">
+    <div
+      class="reported-info"
+      style="
+        position: relative;
+        border-style: solid;
+        border-radius: 10px;
+        border-color: purple;
+      "
+    >
       <h4>Reported by: {{ post.reported_by_users.all|length }}</h4>
       <p>Post ID: {{ post.id }}</p>
       <p>Game Title: {{ post.game_title.title }}</p>
@@ -48,18 +62,28 @@
       <p>Menu: {{ post.menu }}</p>
 
       <!-- Delete Post Form -->
-      <div class="report-buttons">
-        <form method="POST" action="{% url 'delete_reported_post' post.id %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-main">Delete Post</button>
-        </form>
+      <form method="POST" action="{% url 'delete_reported_post' post.id %}">
+        {% csrf_token %}
+        <button
+          type="submit"
+          class="btn btn-main"
+          style="position: absolute; bottom: 10px; right: 15px"
+        >
+          Delete Post
+        </button>
+      </form>
 
-        <!-- Remove Reports Form -->
-        <form method="POST" action="{% url 'remove_reports' post.id %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-main">Remove Reports</button>
-        </form>
-      </div>
+      <!-- Remove Reports Form -->
+      <form method="POST" action="{% url 'remove_reports' post.id %}">
+        {% csrf_token %}
+        <button
+          type="submit"
+          class="btn btn-main"
+          style="position: absolute; bottom: 10px; right: 150px"
+        >
+          Remove Reports
+        </button>
+      </form>
     </div>
     {% endfor %}
   </div>

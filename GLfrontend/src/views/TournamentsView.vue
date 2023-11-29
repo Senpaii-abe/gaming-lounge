@@ -11,7 +11,7 @@
         text-base/7 font-light: default class ng texts sa post
         rounded-full: default class ng borders natin
     -->
-    <div class="max-w-screen px-12 mx-auto grid grid-cols-4 gap-4">
+    <div class="max-w-screen px-12 pt-4 mx-auto grid grid-cols-4 gap-4">
 
         <!-- left side  -->
         <LeftPanel />
@@ -29,21 +29,6 @@
 
         <!-- right side -->
         <div class="main-right col-span-1 space-y-6">
-
-
-            <!-- <ul class="text-center">
-                <li class="mb-4">
-                    <a href="">
-                        <img src="/assets/img/ads-1.png" class="h-auto max-w-full" alt="logo" />
-                    </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <img src="/assets/img/ads-2.png" class="h-auto max-w-full" alt="logo" />
-                    </a>
-                </li>
-            </ul> -->
 
             <PeopleYouMayKnow />
 

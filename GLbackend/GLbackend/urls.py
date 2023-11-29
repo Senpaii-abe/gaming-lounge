@@ -16,7 +16,12 @@ urlpatterns = (
         path("api/search/", include("search.urls")),
         path("api/chat/", include("chat.urls")),
         path("api/notifications/", include("notification.urls")),
-        path("activateemail/", views.activateemail, name="activateemail"),
+        # path("activateemail/", views.activateemail, name="activateemail"),
+        path(
+            "activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/",
+            views.activate,
+            name="activate",
+        ),
         # admin
         path("admin/", include("account.urls")),
         path("admin/", include("dashboard.urls")),

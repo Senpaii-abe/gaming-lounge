@@ -6,7 +6,7 @@
     --bg: #fbfefd;
     --main-accent:#e9eefd;
     --main-text: #4b5876;
-    --shadow: rgba(17, 17, 26, 0.1) 2px 2px 16px;
+    --shadow: #191970 4px 4px 16px;
 }
 
 * {
@@ -54,12 +54,18 @@ img {
     transition: left 300ms;
 }
 
+
+/* style="background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #7094ff 100%); */
 .sidebar-container {
     height: 100%;
     width: 100%;
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
+    background:  #fff;
+    border-style: outset;
+    border-color: #5865F2;
+    border-radius: 15px;
+    border-width: 3px;
+    background-color: #ebf0fa;
     padding: 0.8rem; 
     overflow-y: auto;
 }
@@ -81,21 +87,25 @@ img {
   }
 
 .brand h3 {
-    color: purple;
-    margin: 2.2rem;
+    font-family: poppins; 
+    font-size: 19px;
+    font-weight: 1000;
+    text-align: center;
+    letter-spacing: 1.8px;
+    color: #191970;
+    margin-bottom: 2rem;
 }
 
 .brand h3 img{
     height: 5.7rem;
     width: 10rem;
-    margin-left: 2.8rem;
-    margin-bottom: 0.8rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.2rem;
 }
 
 /* AVATAR IN SIDEBAR */
 .sidebar-avartar {
     display: flex;
-    grid-template-columns: 70px auto;
     align-items: center;
     border: 3px solid var(--main-accent);
     padding: 0.6rem 3rem;

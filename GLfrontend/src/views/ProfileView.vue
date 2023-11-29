@@ -18,7 +18,7 @@
                         <label class="text-sm">posts</label>
                     </div>
                   
-                    <div v-if="user.id">
+                    <div v-if="shouldDisplayCharismaScore">
                         <p class="text-lg/none">{{ user.friends_count }}</p>
                         <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-sm">friends</RouterLink>
                         <p class="text-lg/none">{{ user.charisma_score }}</p>
@@ -34,14 +34,23 @@
                     <button 
                         class = "inline-block py-3 hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
                         @click="sendFriendshipRequest"
-                        v-if="userStore.user.id !== user.id && can_send_friendship_request"
+                        v-if="userStore.user.id !== user.id 
+                        && can_send_friendship_request
+                        && user.id == '3e9fe50b5c31439f9fb68208a5c3dba9' //reddit
+                        && user.id == '675a5aad3287452bba57b5aec4f60cc8' //fb
+                        && user.id == '675a5aad3287452bba57b5aec4f60cc8' //twitch
+                        "
                         >
                         add friend
                     </button>
                     <button 
                         class = "inline-block py-3 mt-4 hover:bg-purple-600 bg-[#28183e] font-semibold rounded-full w-full" 
                         @click="sendDirectMessage"
-                        v-if="userStore.user.id !== user.id"
+                        v-if="userStore.user.id !== user.id
+                        && user.id == '3e9fe50b5c31439f9fb68208a5c3dba9' //reddit
+                        && user.id == '675a5aad3287452bba57b5aec4f60cc8' //fb
+                        && user.id == '675a5aad3287452bba57b5aec4f60cc8' //twitch
+                        "
                         >
                         Send Direct Message
                     </button> 
@@ -65,35 +74,81 @@
                     </button> 
                  </div>
             </div>  
-            <!-- trending games -->
-            <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-1 text-lg">useful links</h3>
+            <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full ">
+        <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">Useful Links</h3>
+        <div class="space-y-4">
+            <div class="game news">  
+                <p class="mb-2 font-semibold">Gaming News:</p>
+                    <ul class="space-y-2 pl-8">
+                        <li class="p-1 hover:underline">
+                          <a href="https://www.gamespot.com/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                               
+                                <span>GameSpot</span>
+                        </a>
+                        </li>
 
-                <p class="text-base/7 font-light mb-6">our instance rules are here and cover the ideals and how we want this community to evolve.</p>
-                <p class="text-base/7 font-light mb-2">where you can download games:</p>
+                        <li class="p-1 hover:underline">
+                            <a href="https://www.ign.com/news" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                               <span>IGN</span></a>
+                              </li>
 
-                <ul class="list-inside">
+                              <li class="p-1 hover:underline">
+                                  <a href="https://www.polygon.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Polygon</span></a>
+                              </li>
+                          </ul>
+                </div>
+                <div class="game gears">  
+                <p class="mb-2 font-semibold">Gaming Gears:</p>
+                    <ul class="space-y-2 pl-8">
+                        <li class="p-1 hover:underline">
+                          <a href="https://www.razer.com/ap-en" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                               
+                                <span>Razer</span>
+                        </a>
+                        </li>
 
-                    <li class="p-1 hover:underline">
-                        <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full"
-                    alt="logo" /></a></li>
-                    
-                    <li class="p-1 hover:underline">
-                        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full"
-                    alt="logo" /></a></li>
+                        <li class="p-1 hover:underline">
+                            <a href="https://www.logitechg.com/" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                               <span>Logitech</span></a>
+                              </li>
 
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full"
-                    alt="logo"/></a></li>
+                              <li class="p-1 hover:underline">
+                                  <a href="https://www.sony.com.ph/gaming-gear" target="_blank" rel="noopener noreferrer" class="flex items-center"><span>Sony</span></a>
+                              </li>
+                          </ul>
+                </div>
+              <div class="download games">  
+                      <p class="mb-2 font-semibold">Download Games:</p>
+                          <ul class="space-y-2 pl-8">
+                              <li class="p-1 hover:underline">
+                                  <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                                      <img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full" alt="logo" />
+                                      <span>Riot Games</span>
+                                  </a>
+                              </li>
 
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full"
-                    alt="logo" /></a></li>
-            
-                </ul>
+                              <li class="p-1 hover:underline">
+                                  <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
+                                          src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full" alt="logo" /><span>Steam Games</span></a>
+                              </li>
+
+                              <li class="p-1 hover:underline">
+                                  <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
+                                          src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full" alt="logo" /><span>Epic Games</span></a>
+                              </li>
+
+                              <li class="p-1 hover:underline">
+                                  <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer" class="flex items-center"><img
+                                          src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full" alt="logo" /><span>Battle.net</span></a>
+                              </li>
+
+                          </ul>
+                </div>
                 
-
-            </div>
+        </div>
+            
+        
+    </div>
         </div> 
         
         <!-- center -->
@@ -121,10 +176,25 @@
             
          
 
-            <PeopleYouMayKnow />
+            <div class="p-6 bg-purple_main border-gray-400 border-2 rounded-full">
+            <h3 class="mb-4 font-semibold text-xl tracking-wide text-center">get your game on at gaming lounge!</h3>
+            
+            <div class="flex items-center justify-between"> 
+                                             
+                        <p class="text-justify lowercase">Welcome to your ultimate gamer destination, designed for gamers by gamers! Our platforms allow you to connect through forums, tournaments, marketplace and more - all centered around gaming.<br><br>
+
+                            We encourage open and passionate discussion while fostering a positive community. Our Offensive Language Sheriff system automatically detects and discourages negative behavior. Users gain points for engagement like making connections, commenting, and participating, keeping conversations uplifting.<br><br>
+
+                            At Gaming Lounge you can share wisdom, find squads, and talk games to your heart's content in an inclusive space. Just bring your A-game attitude and get involved in our community - the positivity you spread will continue to shape this space for all gamers.<br><br>
+
+                            So get your game on with us and experience gaming's finest digital playground! Join passionate, like-minded gamers where you direct the vibe. We can't wait for you to plug into our supportive community and make it even better.
+                        </p>
+              
+
+            </div>
+
+    </div>
     
-
-
         </div>
     </div>
 </template> 
@@ -143,10 +213,11 @@ input[type="file"] {
 
 <script>
 import axios from 'axios'
+import { computed } from 'vue'
 import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 
 import FeedForm from '../components/FeedForm.vue'
-import FeedItem from '../components/FeedItem.vue'
+import FeedItem from '@/components/FeedItem.vue'
 import { useUserStore } from '@/stores/user'
 import { useToastStore } from '@/stores/toast'
 
@@ -155,13 +226,15 @@ import { useToastStore } from '@/stores/toast'
 export default {
     name: 'ProfileView',
 
+    
+
     setup() {
         const userStore = useUserStore()
         const toastStore = useToastStore()
 
         return {
             userStore,
-            toastStore
+            toastStore,
         }
     },
         
@@ -198,7 +271,12 @@ export default {
     //     // this.getFeed()
     //     // console.log('updated')
     // },
-
+    computed: {
+        shouldDisplayCharismaScore() {
+            const excludedUserIds = ['e9fe50b5c31439f9fb68208a5c3dba9', '1cfff9f31d814cb09028c3376871a4bb', '675a5aad3287452bba57b5aec4f60cc8']; // Replace with actual excluded user IDs
+            return !excludedUserIds.includes(this.user.id);
+        }
+    },
     methods: {
         deletePost(id) {
             // Filter out the deleted post

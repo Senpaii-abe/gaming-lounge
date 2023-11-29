@@ -1,3 +1,7 @@
 {
-    "figma.autocompleteBlocks": true
+    "figma.autocompleteBlocks": true,
+    "cSpell.words": [
+        "axios",
+        "leaderboard"
+    ]
 }

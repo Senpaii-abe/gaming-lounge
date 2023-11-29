@@ -3,33 +3,7 @@
 
         <div class="main-left col-span-1 space-y-6"> 
             <!-- trending games -->
-            
-            <div class="p-4 bg-purple_main rounded-full">
-                <h3 class="mb-6 text-lg">useful links</h3>
-
-                <p class="text-base/7 font-light mb-6">our instance rules are here and cover the ideals and how we want this community to evolve.</p>
-                <p class="text-base/7 font-light mb-2">where you can download games:</p>
-
-                <ul class="list-inside">
-
-                    <li class="p-1 hover:underline">
-                        <a href="https://www.riotgames.com/en" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/riot_logo.png" class="h-auto max-w-full"
-                    alt="logo" />riot games</a></li>
-                    
-                    <li class="p-1 hover:underline">
-                        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" ><img src="/assets/img/logo/steam_logo.png" class="h-auto max-w-full"
-                    alt="logo" />steam</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://store.epicgames.com/en-US/" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/epic_logo.png" class="h-auto max-w-full"
-                    alt="logo"/>epic games</a></li>
-
-                    <li class="p-1 hover:underline">                       
-                        <a href="https://us.shop.battle.net/en-us" target="_blank" rel="noopener noreferrer"><img src="/assets/img/logo/battle_logo.png" class="h-auto max-w-full"
-                    alt="logo" />battle.net</a></li>
-            
-                </ul>
-            </div>
+            <LeftPanel />
         </div> 
         <div class="col-span-2 space-y-2 ">
             <div class="bg-purple_main rounded-tr-full rounded-tl-full">            
@@ -84,7 +58,7 @@ import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
 import { useUserStore } from '@/stores/user'
 import FeedItem from '../components/FeedItem.vue'
 import CommentItem from '../components/CommentItem.vue'
-
+import LeftPanel from '@/components/LeftPanel.vue'
 export default {
     name: 'PostView',
 
@@ -98,7 +72,7 @@ export default {
     },
     components: {
         PeopleYouMayKnow,
-   
+        LeftPanel,
         FeedItem,
         CommentItem,
     },

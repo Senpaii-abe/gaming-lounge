@@ -1,38 +1,11 @@
 <template>
 
-    <div data-te-infinite-scroll-init class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12" id="spinners-and-async-example">
+    <div data-te-infinite-scroll-init class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12">
 
         <!-- left side 
              col-span-1: takes 1 of the 4 columns -->
             <div class="main-left col-span-1 space-y-6 sticky top-[8rem] h-screen overflow-auto">
-            <!-- trending games -->
-            <!-- <div class="bg-transparent rounded-full">
-                <h3 class="mb-2 text-2xl font-semibold text-center">topics</h3>
-                <div class="space-y-4 text-center">
-                    <div class="flex items-center justify-between">
-                        <a href="#"
-                            class="py-2 px-3 text-lg rounded-large w-full border border-gray hover:bg-purple_main">Valorant</a>
-                    </div>
-                    <div class="flex items-center justify-between ">
-                        <a href="#"
-                            class="w-full border border-gray hover:bg-purple_main py-2 px-3 text-lg rounded-large">Farlight
-                            84</a>
-                    </div>
-                    <div class="flex items-center justify-between ">
-                        <a href="#"
-                            class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">League
-                            of Legends</a>
-                    </div>
-                    <div class="flex items-center justify-between ">
-                        <a href="#"
-                            class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Action</a>
-                    </div>
-                    <div class="flex items-center justify-between ">
-                        <a href="#"
-                            class="w-full border border-gray py-2 px-3 text-lg rounded-large hover:bg-purple_main ">Phasmaphobia</a>
-                    </div>
-                </div>
-            </div> -->
+          
             <div class="p-4 bg-purple_main rounded-full">
                 <h3 class="mb-6 font-semibold tracking-wide">useful links</h3>
 

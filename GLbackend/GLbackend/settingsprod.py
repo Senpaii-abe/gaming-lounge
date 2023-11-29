@@ -22,7 +22,6 @@ ALLOWED_HOSTS = ["api.gaminglounge.com"]
 
 WEBSITE_URL = "http://api.gaminglounge.com"
 
-
 # application definition
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
