@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
+from django.db.models import Count
 from django.utils import timezone
 from .best_profanity import has_profanity  # profcheck
 from .models import Post, GameTitle
@@ -99,18 +100,39 @@ def delete_selected_posts(request):
         return JsonResponse({"message": "Invalid request method"}, status=400)
 
 
+# def reported_posts(request):
+#     admin = request.user
+
+#     reported_posts = Post.objects.filter(reported_by_users__isnull=False)
+#     reported_posts_count = Post.objects.filter(reported_by_users__isnull=False).count()
+
+#     context = {
+#         "admin_name": admin.name,
+#         "admin_email": admin.email,
+#         "admin_avatar": admin.avatar,
+#         "reported_posts": reported_posts,
+#         "reported_posts_count": reported_posts_count,
+#     }
+#     return render(request, "admin/reported_posts.html", context)
+
+
 def reported_posts(request):
     admin = request.user
 
-    reported_posts = Post.objects.filter(reported_by_users__isnull=False)
-    reported_posts_count = Post.objects.filter(reported_by_users__isnull=False).count()
+    # Annotate each post with the count of unique reports
+    reported_posts = Post.objects.filter(reported_by_users__isnull=False).annotate(
+        report_count=Count("reported_by_users", distinct=True)
+    )
 
     context = {
         "admin_name": admin.name,
         "admin_email": admin.email,
         "admin_avatar": admin.avatar,
         "reported_posts": reported_posts,
-        "reported_posts_count": reported_posts_count,
+        # If you want to keep a total count of unique reports across all posts, update this:
+        "reported_posts_count": reported_posts.aggregate(
+            total_reports=Count("reported_by_users", distinct=True)
+        )["total_reports"],
     }
     return render(request, "admin/reported_posts.html", context)
 

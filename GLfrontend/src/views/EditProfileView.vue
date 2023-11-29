@@ -1,45 +1,56 @@
 <template>
-    <div class="max-w-7xl mx-auto grid grid-cols-2 gap-4">
-        <!-- left part -->
-        <div class="main-left self-center ">    
-               
+    <div class="max-w-7xl  mx-auto grid pt-16">
 
-                <RouterLink to ="/profile/edit/password" class="underline text-lg">
-                    Edit password
-                </RouterLink> <br>
-                <RouterLink to ="/popup" class="underline text-lg">
-                    Edit category & Game Titles
-                </RouterLink>
-
-
-        </div>
-        <!-- right part -->
-        <div class="main-right py-28 justify-self-end">
+        <div class="main-center justify-self-center">
             <h1 class="mb-14 font-bold tracking-wide text-6xl">
                 Edit<br>Profile
             </h1>
-            <form class="space-y-6 w-96" v-on:submit.prevent="submitForm">
-                <div>
-                    <!-- username -->
-                    <input type="text" v-model="form.name" placeholder="enter your username" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-full">
+            <form class="space-y-6 w-96 " v-on:submit.prevent="submitForm">
+                <!-- username -->
+                <div>    
+                    <input type="text" v-model="form.name" placeholder="enter your username" class="bg-transparent w-full py-3 px-6 border border-purple1 rounded-img">
                 </div>
+                <!-- email -->
                 <div>
-                    <!-- email -->
-                    <input type="email" v-model="form.email" placeholder="enter your email" class="bg-transparent w-full py-3 px-6 border font-white border-violet1 rounded-full">
+                    <input type="email" v-model="form.email" placeholder="enter your email" class="bg-transparent w-full py-3 px-6 border font-white border-violet1 rounded-img">
+                </div>
+                <!-- bio -->
+                <div>
+                    
+                    <input type="text" v-model="form.bio" placeholder="enter something about yourself" class="bg-transparent w-full py-3 px-6 border font-white border-violet1 rounded-img">
+                </div>
+                <!-- avatar -->
+                <div class="flex flex-col space-y-4">  
+                    <div class="flex-col flex">
+                        <label class=" active:bg-[8250CB] hover:bg-violet1 inline-block text-center w-42 py-3 px-6 bg-purple_main text-white rounded-img ">
+                            <input type="file" ref="file" @change="onFileChange">
+                        change avatar
+                        
+                         </label>
+                        
+                            <div class="grid text-center text-sm space-y-2 italic p-2">
+                                <div v-if="fileName">
+                                {{ fileName }}
+                                </div>
+                                <img v-if="url" :src="url" class="md:object-contain justify-self-center object-contain rounded-img w-14 h-14 ">
+                            </div>
+
+                    </div>   
+
+                    <div>
+                    <RouterLink to ="/profile/edit/password" class="underline">
+                        change password
+                    </RouterLink> <br>
+                    <RouterLink to ="/popup" class="underline">
+                    change category & game titles
+                    </RouterLink>
+    
+
+                    </div>
                 </div>
 
-                <div>
-                    <!-- bio -->
-                    <input type="text" v-model="form.bio" placeholder="enter something about yourself" class="bg-transparent w-full py-3 px-6 border font-white border-violet1 rounded-full">
-                </div>
 
-                <div>
-                    <!-- avatar -->
-                    <label class="float-left active:bg-violet1 inline-block text-center w-36 p-2 bg-purple_main text-white rounded-full">
-                        <input type="file" ref="file" @change="onFileChange">
-                        Upload Image
-                    </label>
-                </div>
+
 
                 <template v-if="errors.length > 0">
                     <div class="bg-red-400 text-white rounded-lg p-6">
@@ -49,7 +60,7 @@
                 </template>
 
                 <div class="space-y-2">
-                    <button class="active:bg-purple_main tracking-wider bg-[#8250CB] w-full mt-8 py-3 px-6 text-white rounded-full font-semibold">save changes</button>
+                    <button class="hover:bg-violet1 tracking-wider bg-[#8250CB] w-full mt-8 py-3 px-6 text-white rounded-img font-semibold">save changes</button>
                     
                 </div>
             </form>
@@ -73,7 +84,9 @@ export default {
 
         return {
             toastStore,
-            userStore
+            userStore,
+            fileName: null,
+             url: null,
         }
     },
 
@@ -89,6 +102,23 @@ export default {
     },
 
     methods: {
+                onFileChange(e) {
+            const file = e.target.files[0];
+            
+            this.fileName = file.name;
+
+            const reader = new FileReader();
+            reader.onload = e => {
+                this.url = e.target.result;  
+            };
+            
+            reader.readAsDataURL(file); 
+        
+            },
+            removeFile() {
+            this.fileName = null;
+            this.url = null; 
+            },
         submitForm() {
             this.errors = []
 

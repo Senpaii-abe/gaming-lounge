@@ -14,10 +14,17 @@
 
   <body>
     <div class="wrapper" style="text-align: center">
+      <h1>Edit Post Information</h1>
+      <!-- New Section for Post Body Preview -->
+      <div class="preview">
+        <label for="id_body"
+          ><i class="bx bx-message-square-detail"></i> Post Description</label
+        ><br />
+        <p>{{ post.body }}</p>
+        <!-- Display the current body of the post -->
+      </div>
       <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h1>Edit Post Information</h1>
-        {% if form.non_field_errors %}
+        {% csrf_token %} {% if form.non_field_errors %}
         <div class="error-message">
           <ul>
             {% for error in form.non_field_errors %}
@@ -34,21 +41,20 @@
         {% endif %}
 
         <div class="input-box">
-          <label for="id_game_title">Game Title:</label><br />
+          <label for="id_game_title"
+            ><i class="bx bx-game"></i> Game Title:</label
+          ><br />
           {{ form.game_title }}<br />
-          <i class="bx bx-game"></i>
         </div>
 
         <div class="wo-input-box">
-          <label for="id_is_private">Privacy:</label>
+          <label for="id_is_private"><i class="bx bx-lock"></i> Privacy:</label>
           {{ form.is_private }}
-          <i class="bx bx-lock"></i>
         </div>
 
         <div class="input-box">
-          <label for="id_menu">Menu:</label>
+          <label for="id_menu"></i>Menu:</label>
           {{ form.menu }}
-          <i class="bx bx-menu"></i>
         </div>
 
         <button type="submit" class="btn">Save Changes</button>
@@ -59,3 +65,4 @@
     </div>
   </body>
 </html>
+

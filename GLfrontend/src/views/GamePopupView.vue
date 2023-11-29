@@ -1,24 +1,24 @@
 <template>
-  <div class="flex justify-center items-center h-screen">
-    <form @submit.prevent="handleSubmit" class="p-6 bg-[#c4b6e1] max-w-2xl rounded-full">
+  <div class="flex justify-center items-center p-2">
+    <form @submit.prevent="handleSubmit" class="p-6 bg-purple_main max-w-2xl rounded-full">
       <div class="mb-6">
         <img src="/assets/img/logo/gl_logo.png" alt="logo" class="mx-auto" />
       </div>
 
-      <h2 class="mb-6 leading-tight font-black text-black text-3xl text-center">Gaming Interests</h2>
-      <p class="mb-10 text-black text-40 text-center">
-        Select the game titles you'd like to see in your feed.
+      <h2 class="mb-6 tracking-wide font-black text-white text-3xl text-center">Gaming Interests</h2>
+      <p class="mb-10 text-white text-center">
+        select the game titles you'd like to see in your feed.
       </p>
 
       <div class="grid gap-5 grid-cols-3 place-content-center">
-        <div v-for="title in gameTitles" :key="title.id" :class="{'bg-purple_main text-white': selectedGameTitles.includes(title.id)}" class="mx-2 bg-[#8250CB] py-3 px-3 text-black text-center rounded-full">
+        <div v-for="title in gameTitles" :key="title.id" :class="{'bg-purple_main text-white': selectedGameTitles.includes(title.id)}" class="p-2 bg-[#8250CB] hover:bg-purple_main text-white text-center rounded-img">
           <label>
             <input type="checkbox" :value="title.id" v-model="selectedGameTitles" class="hidden" /> {{ title.title }}
           </label>
         </div>
       </div>
 
-      <div class="my-7 w-full text-center">
+      <div class="mt-12 mx-12  text-center">
         <button type="submit" class="text-center active:bg-purple_main inline-block w-full p-2 bg-[#8250CB] text-white rounded-full">Continue</button>
       </div>
     </form>
@@ -62,6 +62,8 @@ onMounted(async () => {
           }
         }
 
+        // Sort the titles alphabetically
+        uniqueTitles.sort((a, b) => a.title.localeCompare(b.title));
         gameTitles.value = uniqueTitles;
         console.log('Game Titles:', gameTitles.value);
       } else {

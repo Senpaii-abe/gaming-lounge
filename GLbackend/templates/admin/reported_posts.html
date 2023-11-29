@@ -41,7 +41,7 @@
   <div class="reported_box">
     {% for post in reported_posts %}
     <div class="reported-info">
-      <h4>Reported by: {{ post.reported_by_users.all|length }}</h4>
+      <h4>Reported by: {{ post.report_count }} user(s)</h4>
       <p>Post ID: {{ post.id }}</p>
       <p>Game Title: {{ post.game_title.title }}</p>
       <p>Body: {{ post.body }}</p>

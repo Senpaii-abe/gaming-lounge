@@ -91,7 +91,7 @@ export default {
       game_title: '',
       gameTitles: [],
       
-      menuChoices: ['discussions', 'marketplace', 'connect', 'tournament', 'beta testing'],
+      menuChoices: ['Discussions', 'Marketplace', 'Connect', 'Tournament', 'Beta Testing'],
       menu: '',
       gameTitleError: false, // Added error flag for game title validation
       contentError: false, // New error flag for post content
@@ -189,7 +189,7 @@ export default {
         async fetchGameTitles() {
             try {
                 const response = await axios.get(`/api/posts/get_gametitle/`);
-                this.gameTitles = response.data;
+                this.gameTitles = response.data.sort((a, b) => a.title.localeCompare(b.title));
                 console.log('Game Titles:', this.gameTitles);
             } catch (error) {
                 console.error('Error fetching game titles:', error);

@@ -102,7 +102,7 @@ export default {
     {
         getFeed() {
             axios
-                .get(`/api/posts/?page=${this.currentPage}`)
+                .get(`/api/posts/discussion_posts/`)
                 // .get('/api/posts')
                 .then(response => {
                     this.posts = this.posts.concat(response.data) 

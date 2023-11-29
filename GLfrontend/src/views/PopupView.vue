@@ -1,33 +1,36 @@
 <template>
-  <div class="flex justify-center items-center h-screen">
-    <form @submit.prevent="handleSubmit" class="p-6 bg-[#c4b6e1] max-w-2xl rounded-full"> 
-      <div class="mb-6">
-        <img src="/assets/img/logo/gl_logo.png" alt="logo" class="mx-auto"/>
-      </div>
+      <div class="flex justify-center items-center p-20">
+        <form @submit.prevent="handleSubmit" class=" bg-purple_main max-w-2xl rounded-full"> 
+          <div class="p-8">
+            <div class="mb-6">
+            <img src="/assets/img/logo/gl_logo.png" alt="logo" class="mx-auto"/>
+          </div>
 
-      <h2 class="mb-6 leading-tight font-black text-black text-3xl text-center">gaming interests</h2>
-        <p class="mb-10 text-black text-40 text-center">
-          pick things you would like to see in your feed
-        </p>
+          <h2 class="mb-6 tracking-wide font-black text-white text-3xl text-center">Gaming Interests</h2>
+            <p class="mb-10 text-white text-center">
+              pick things you would like to see in your feed.
+            </p>
 
-        <div class="grid gap-5 grid-cols-3 place-content-center">
-          <div
-            v-for="option in options"
-            :key="option.id"
-            :class="{'bg-purple_main text-white': selectedOptions.includes(option.value)}"
-            class="mx-2 bg-[#8250CB] py-3 px-3 text-black text-center rounded-full"
-          >
-            <label>
-              <input type="checkbox" :value="option.value" v-model="selectedOptions" class="hidden" /> {{ option.label }}
-            </label>
-        </div>
-        
+            <div class="grid gap-5 grid-cols-3 place-content-center">
+              <div
+                v-for="option in options"
+                :key="option.id"
+                :class="{'bg-purple_main text-white': selectedOptions.includes(option.value)}"
+                class="p-2 bg-[#8250CB] hover:bg-purple_main text-white text-center rounded-img"
+              >
+                <label>
+                  <input type="checkbox" :value="option.value" v-model="selectedOptions" class="hidden" /> {{ option.label }}
+                </label>
+            </div>
+            
+          </div>
+          <div class="mt-12 mx-12  text-center">
+              <button type="submit" class="text-center active:bg-purple_main inline-block w-full p-2 bg-[#8250CB] text-white rounded-full">Continue</button>
+            </div>
+          </div>
+
+        </form>
       </div>
-      <div class="my-7 mx-4w-4/5 text-center">
-          <button type="submit" class=" text-center active:bg-purple_main inline-block w-full p-2 bg-[#8250CB] text-white rounded-full">Continue</button>
-        </div>
-    </form>
-  </div>
 </template>
 
 <script setup>
@@ -46,11 +49,16 @@ onMounted(async () => {
   try {
     // Fetch game categories from the backend
     const response = await axios.get('/api/get_game_categories/');
-    options.value = response.data.map(category => ({
+    let categories = response.data.map(category => ({
       id: category.id,
       label: category.game_category,
       value: category.game_category,
     }));
+
+    // Sort the categories alphabetically based on their label
+    categories.sort((a, b) => a.label.localeCompare(b.label));
+
+    options.value = categories;
   } catch (error) {
     console.error('Error fetching game categories', error);
   }

@@ -12,18 +12,46 @@ class UserVisitMiddleware:
         # Get the path of the visited page
         visited_path = request.path
 
-        # Check if the visited path is one of the pages you want to track
-        if visited_path in [
-            "/",
-            "/marketplace_posts/",
-            "/connect_posts/",
-            "/tournament_posts/",
-        ]:
-            # Check if the user is authenticated
-            if request.user.is_authenticated:
-                # Get or create a UserVisit object for the user and visited page
-                user_visit, created = UserVisit.objects.get_or_create(
-                    user=request.user, visited_page=visited_path
-                )
+        current_date = date.today()
+
+        if visited_path == "/api/posts/discussion_posts":
+            # Log the user visit to the discussion page in your database
+            if not UserVisit.objects.filter(
+                user=request.user,
+                visited_page=visited_path,
+                visit_datetime__date=current_date,
+            ).exists():
+                UserVisit.objects.create(user=request.user, visited_page=visited_path)
+        if visited_path == "/api/posts/marketplace_posts/":
+            if not UserVisit.objects.filter(
+                user=request.user,
+                visited_page=visited_path,
+                visit_datetime__date=current_date,
+            ).exists():
+                UserVisit.objects.create(user=request.user, visited_page=visited_path)
+
+        if visited_path == "/api/posts/connect_posts/":
+            if not UserVisit.objects.filter(
+                user=request.user,
+                visited_page=visited_path,
+                visit_datetime__date=current_date,
+            ).exists():
+                UserVisit.objects.create(user=request.user, visited_page=visited_path)
+
+        if visited_path == "/api/posts/tournament_posts/":
+            if not UserVisit.objects.filter(
+                user=request.user,
+                visited_page=visited_path,
+                visit_datetime__date=current_date,
+            ).exists():
+                UserVisit.objects.create(user=request.user, visited_page=visited_path)
+
+        if visited_path == "/api/posts/beta_posts/":
+            if not UserVisit.objects.filter(
+                user=request.user,
+                visited_page=visited_path,
+                visit_datetime__date=current_date,
+            ).exists():
+                UserVisit.objects.create(user=request.user, visited_page=visited_path)
 
         return response

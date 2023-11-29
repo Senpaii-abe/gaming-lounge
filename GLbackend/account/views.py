@@ -162,20 +162,18 @@ def admin_users(request):
     # BAR GRAPH - USER VISITS
     # Query and count unique visits for each page
     discussion_visits = UserVisit.objects.filter(
-        visited_page__contains="post_list"
+        visited_page__contains="/posts/"
     ).count()
     connect_visits = UserVisit.objects.filter(
-        visited_page__contains="connect_posts"
+        visited_page__contains="/connect_posts"
     ).count()
     marketplace_visits = UserVisit.objects.filter(
-        visited_page__contains="marketplace_posts"
+        visited_page__contains="/marketplace_posts"
     ).count()
     tournament_visits = UserVisit.objects.filter(
-        visited_page__contains="tournament_posts"
+        visited_page__contains="/tournament_posts"
     ).count()
-    beta_testing_visits = UserVisit.objects.filter(
-        visited_page__contains="beta_posts"
-    ).count()
+    beta_visits = UserVisit.objects.filter(visited_page__contains="/beta_posts").count()
 
     # table
     users = User.objects.all()
@@ -192,7 +190,7 @@ def admin_users(request):
         "connect_visits": connect_visits,
         "marketplace_visits": marketplace_visits,
         "tournament_visits": tournament_visits,
-        "beta_testing_visits": beta_testing_visits,
+        "beta_visits": beta_visits,
     }
     return render(request, "admin/users.html", context)
 

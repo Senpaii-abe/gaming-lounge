@@ -1,30 +1,13 @@
 <template>
-    <!-- 
-        mx-auto: center of the screen 
-        put "grid" or "flex" to assign the display before adding "grid-cols" or "flex-cols"
-        space-(y or x)-number: space for each elements like posts for example
-        
-        check tailwind.config.js for more configurations
-        bg-purple_main: color ng header
-        bg-blue_link: color ng links
-
-        text-base/7 font-light: default class ng texts sa post
-        rounded-full: default class ng borders natin
-    -->
     <div class="max-w-screen px-12 mx-auto grid grid-cols-4 gap-4 pt-4">
 
-        <!-- left side 
-             col-span-1: takes 1 of the 4 columns -->
-        <div class="main-left col-span-1 space-y-6">
-            <!-- trending games -->
+        <div class="main-left col-span-1 space-y-6 sticky top-[8rem] h-screen">
             <LeftPanel />
         </div>
 
         <!-- center -->
-        <!-- col-span-2: takes 2 of the 4 columns
-                 space-y-4: 6 spaces each post -->
-        <div class="px-4 main-center col-span-2 space-y-6">
-            <!-- post area -->
+        <div class="px-4 main-center col-span-2 space-y-6 ">
+
             <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400" v-for="post in posts" v-bind:key="post.id"> <!-- loop ng post -->
                 <FeedItem :post="post" @postDeleted="handlePostDeleted" />
             </div>
@@ -32,12 +15,7 @@
 
         <!-- right side -->
         <div class="main-right col-span-1 space-y-6">
-
-
-        
-
-            <PeopleYouMayKnow />
-        
+            <PeopleYouMayKnow />     
         </div>
 
 

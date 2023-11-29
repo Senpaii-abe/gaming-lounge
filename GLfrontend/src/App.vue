@@ -1,21 +1,13 @@
 
-	<!-- 
-        mx-auto: center of the screen 
-        put "grid" or "flex" to assign the display before adding "grid-cols" or "flex-cols"
-        space-(y or x): space for each elements like posts for example
 
-        check tailwind.config.js for more configurations
-        bg-purple_main: color ng header
-        bg-blue_link: color ng links
-    -->  
-	<!-- header start if authenticated-->
 	<template>
 		<nav class="py-6 px-8 fixed w-screen z-20 top-0 left-0 bg-cover bg-[url('../assets/img/navbar/header.png')]" v-if="userStore.user.isAuthenticated && userStore.user.id"> 
 			<div class="max-w-screen mx-auto flex items-center flex-wrap justify-between px-12">
 				<!-- left menu logo start -->		
 					<a href="http://gaminglounge.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-						<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Gaming Lounge.</span>
-					</a>		
+						<!-- <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Gaming Lounge.</span> -->
+					
+						<img src="/assets/img/logo/gl_logo.png" alt="logo" class="w-24"/></a>		
 					
 					<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-use">
 								<ul class="flex flex-col font-semibold tracking-wider md:tracking-wider p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0">
@@ -64,7 +56,7 @@
 		</nav>
 	<!-- header end -->
 	<!-- main view-->
-		<main class=" px-8 py-28 bg-fixed md:bg-fixed"> 
+		<main class="px-8 pt-28 bg-fixed md:bg-fixed"> 
 			<RouterView /> 
 		</main>
 		<Toast /> <!--  shows the alert sa frontend -->

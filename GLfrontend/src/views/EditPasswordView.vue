@@ -1,17 +1,9 @@
 <template>
-    <div class="max-w-7xl mx-auto grid grid-cols-2 gap-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 gap-4">
         <!-- left part -->
-        <div class="main-left self-center ">    
-                <h1 class="mb-6 tracking-wide leading-tight font-black text-6xl">
-                    DISCOVER YOUR<br>GAMING QUEST.
-                </h1>
-                <p class="mb-6 text-lg font-light w-4/5">
-                    Look no further - Gaming Lounge is the ultimate one-stop<br> hub for gaming fans. Connect and quest alongside casual and competitive gamers.
-                </p>
 
-        </div>
         <!-- right part -->
-        <div class="main-right py-28 justify-self-end">
+        <div class="main-right py-28 justify-self-center">
             <h1 class="mb-14 font-bold tracking-wide text-6xl">
                 Edit<br>Password
             </h1>

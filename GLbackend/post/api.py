@@ -25,7 +25,7 @@ from account.models import User
 
 
 @api_view(["GET"])
-def post_list(request):
+def discussion_posts(request):
     # Extracting user preferences
     user_pref_titles = (
         request.user.pref_game_titles.split(",")
