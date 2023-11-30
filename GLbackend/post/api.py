@@ -82,7 +82,7 @@ def discussion_posts(request):
     sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
     # Apply pagination
     paginator = PageNumberPagination()
-    paginator.page_size = 3  # Number of posts per page
+    paginator.page_size = 5  # Number of posts per page
     paginated_post = paginator.paginate_queryset(sorted_posts, request)
 
     # Serialize paginated posts
@@ -165,7 +165,7 @@ def marketplace_posts(request):
     sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
     # Apply pagination
     paginator = PageNumberPagination()
-    paginator.page_size = 3  # Number of posts per page
+    paginator.page_size = 5  # Number of posts per page
     paginated_post = paginator.paginate_queryset(sorted_posts, request)
 
     # Serialize paginated posts
@@ -234,7 +234,7 @@ def connect_posts(request):
     sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
     # Apply pagination
     paginator = PageNumberPagination()
-    paginator.page_size = 3  # Number of posts per page
+    paginator.page_size = 5 # Number of posts per page
     paginated_post = paginator.paginate_queryset(sorted_posts, request)
 
     # Serialize paginated posts
@@ -246,7 +246,7 @@ def connect_posts(request):
 
 @api_view(["GET"])
 def tournament_posts(request):
-    # Extracting user preferences
+     # Extracting user preferences
     user_pref_titles = (
         request.user.pref_game_titles.split(",")
         if request.user.pref_game_titles
@@ -287,16 +287,15 @@ def tournament_posts(request):
 
     # Query for posts from user's friends
     friend_posts = Post.objects.filter(
-        created_by_id__in=user_ids,
-        is_private=False,
-        is_offensive=False,
-        menu="Tournament",
+        created_by_id__in=user_ids, is_private=False, is_offensive=False, menu="Tournament"
     )
 
     own_posts = Post.objects.filter(
-        created_by=request.user, is_private=False, is_offensive=False, menu="Tournament"
+        created_by=request.user,
+        is_private=False,
+        menu="Tournament",
+        is_offensive=False,
     )
-
     # Combine the results and sort them
     combined_posts = (
         (pref_posts | friend_posts | own_posts).distinct().order_by("-likes_count")
@@ -304,7 +303,7 @@ def tournament_posts(request):
     sorted_posts = sorted(combined_posts, key=lambda x: x.likes_count, reverse=True)
     # Apply pagination
     paginator = PageNumberPagination()
-    paginator.page_size = 3  # Number of posts per page
+    paginator.page_size = 5  # Number of posts per page
     paginated_post = paginator.paginate_queryset(sorted_posts, request)
 
     # Serialize paginated posts
@@ -394,11 +393,14 @@ def post_list_profile(request, id):
     if check1 or check2:
         can_send_friendship_request = False
 
+    is_close_to_ban = user.calculate_charisma_score() <= -3 
+
     return JsonResponse(
         {
             "posts": post_serializer.data,
             "user": user_serializer.data,
             "can_send_friendship_request": can_send_friendship_request,
+             "is_close_to_ban": is_close_to_ban,  # Include is_close_to_ban in the response
         },
         safe=False,
     )
@@ -443,7 +445,6 @@ def post_create(request):
 
         if has_profanity(body):
             post.is_offensive = True
-            user.charisma_score = user.charisma_score - 1
             post.save()
 
             return Response(
@@ -554,6 +555,7 @@ def get_charisma_score(request, user_id):
 
         # Calculate the charisma score for the user
         charisma_score_count = user.calculate_charisma_score()
+        user.ban_user()
 
         # Return JSON response with the charisma score
         return JsonResponse({"charisma_score_count": charisma_score_count})

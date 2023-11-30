@@ -1,13 +1,12 @@
 <template>
 
-    <div class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12 pt-4">
-        <div class="main-left space-y-6 sticky top-[8rem] h-screen "> 
+    <div data-te-infinite-scroll-init class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12 pt-4">
+        <div class="main-left space-y-6 sticky h-screen "> 
             <LeftPanel />    
         </div>
        
         <!-- center -->
-        <!-- col-span-2: takes 2 of the 4 columns
-                 space-y-4: 6 spaces each post -->
+        <!-- col-span-2: takes 2 of the 4 columnsspace-y-4: 6 spaces each post -->
         <div class="px-4 main-center col-span-2 space-y-6 "> <!--whole feed-->
             <!-- bg-gradient-to-r from-violet-900  -->
             <!-- post area -->
@@ -20,7 +19,7 @@
         </div>
 
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6 sticky top-[8rem] h-screen">
+        <div class="main-right col-span-1 space-y-6 sticky h-screen">
             <PeopleYouMayKnow />
         </div>
         <!-- <div

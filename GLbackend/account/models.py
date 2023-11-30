@@ -68,6 +68,21 @@ class User(
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    def is_close_to_ban(self):
+        ban_threshold = -5
+        close_threshold = -3
+
+        if self.charisma_score <= close_threshold and self.charisma_score > ban_threshold:
+            return True
+        return False
+
+    def ban_user(self):
+            if self.charisma_score <= -5:
+                self.is_active = False
+            else:
+                self.is_active = True
+            self.save(update_fields=["is_active"])
+
     def calculate_charisma_score(self):
         # Calculate charisma based on the number of likes on the user's posts
         total_likes_received = sum(post.likes_count for post in self.posts.all())
@@ -78,11 +93,17 @@ class User(
         # Calculate charisma based on the number of friends
         total_friends = self.friends_count
 
+        total_posts = self.posts.count()
+
+        offensive_posts_count = self.posts.filter(is_offensive=True).count()
+            
         # Calculate the charisma score
         charisma_score = (
             (total_likes_received * 5)
             + (total_comments_received * 3)
             + (total_friends * 2)
+            # + (total_posts * 1)
+            - (offensive_posts_count * 1)
         )
 
         self.charisma_score = charisma_score

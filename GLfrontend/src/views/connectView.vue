@@ -1,20 +1,19 @@
 <template>
-    <div class="max-w-screen px-12 pt-4 mx-auto grid grid-cols-4 gap-4">
 
-        <div class="main-left space-y-6 sticky top-[8rem] h-screen "> 
+    <div data-te-infinite-scroll-init class="max-w-screen mx-auto grid grid-cols-4 gap-4 px-12 pt-4">
+        <div class="main-left space-y-6 sticky h-screen "> 
             <LeftPanel />    
         </div>
 
         <!-- center -->
-        <div data-te-infinite-scroll-init class="px-4 main-center col-span-2 space-y-6 ">
-
-            <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400" v-for="post in posts" v-bind:key="post.id"> <!-- loop ng post -->
+        <div class="px-4 main-center col-span-2 space-y-6 ">
+        <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400" v-for="post in posts" v-bind:key="post.id"> <!-- loop ng post -->
                 <FeedItem :post="post" @postDeleted="handlePostDeleted" />
             </div>
         </div>
 
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6 sticky top-[8rem] h-screen ">
+        <div class="main-right col-span-1 space-y-6 sticky h-screen ">
             <PeopleYouMayKnow />     
         </div>
 
@@ -97,7 +96,8 @@ export default {
             axios
                 .get(`/api/posts/connect_posts/?page=${this.currentPage}`)
                 .then(response => {
-
+                    // Assuming the response structure includes 'results' for posts,
+                    // and pagination information like 'next' and 'totalPages'.
                     this.posts = this.posts.concat(response.data.results);
                     this.totalPages = Math.ceil(response.data.count / this.perPage);
 

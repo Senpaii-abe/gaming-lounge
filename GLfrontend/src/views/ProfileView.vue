@@ -10,6 +10,10 @@
                 <div class="flex items-center space-x-4">
                     <img :src="user.get_avatar" class="h-[80px] w-[80px] rounded-img"> 
                     <p class="font-semibold text-xl">{{ user.name }}</p>
+                    <!-- Conditionally display the warning -->
+                    <div v-if="isCloseToBan" class="p-6 bg-red-400 rounded-full border border-2 border-gray-400">
+                        Account Ban Warning
+                    </div>
                 </div>
                 <!-- charisma points nd posts-->
                 <div class="my-5 px-12 py-4 flex flex-row justify-between items-center bg-transparent border-y-2 border-gray-400 text-center">
@@ -277,6 +281,7 @@ export default {
     },
     data(){
         return {
+            isCloseToBan: false,
             posts:[],
             user: {
                 id: ''
@@ -376,7 +381,7 @@ export default {
                     this.posts = response.data.posts
                     this.user = response.data.user
                     this.can_send_friendship_request = response.data.can_send_friendship_request
-
+                    this.isCloseToBan = response.data.is_close_to_ban || false;
                 })
                 .catch(error => {
                     console.log('error', error)

@@ -1,27 +1,26 @@
 <template>
-
     <div class="max-w-screen px-12 pt-4 mx-auto grid grid-cols-4 gap-4">
 
         <!-- left side  -->
-        <div class="main-left space-y-6 sticky h-screen "> 
-            <LeftPanel />    
+        <div class="main-left space-y-6 sticky h-screen ">
+            <LeftPanel />
         </div>
 
         <!-- center -->
 
-        <div class="px-4 main-center col-span-2 space-y-6 sticky top-[8rem] h-screen ">
-            
-            <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400" v-for="post in posts" v-bind:key="post.id"> <!-- loop ng post -->
+        <div data-te-infinite-scroll-init class="ppx-4 main-center col-span-2 space-y-6">
+
+            <div class="p-5 bg-purple_main rounded-full border-2 border-gray-400" v-for="post in posts" v-bind:key="post.id">
+
                 <FeedItem :post="post" @postDeleted="handlePostDeleted" />
             </div>
         </div>
 
         <!-- right side -->
-        <div class="main-right col-span-1 space-y-6 sticky top-[8rem] h-screen ">
+        <div class="main-right col-span-1 space-y-6 sticky h-screen ">
+            <PeopleYouMayKnow />
 
-                <PeopleYouMayKnow />
-
-                </div>
+        </div>
     </div>
 </template> 
 
