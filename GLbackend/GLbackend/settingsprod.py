@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-jh+b7d0#gd$i_sd(6$5z8tvq19gonwi4t4uky10=&y0t4yr$w6"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["api.gaminglounge.com"]
 
@@ -122,14 +122,24 @@ WSGI_APPLICATION = "GLbackend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "gaminglounge",
-        "USER": "gluser",
-        "PASSWORD": "adminadmin02",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME":  BASE_DIR / "db.sqlite3",
         "HOST": "localhost",
         "PORT": "",
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'gaminglounge',
+#         'USER': 'gluser',
+#         'PASSWORD': 'adminadmin02',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 
 # Password validation
@@ -167,10 +177,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media"
+
+STATICFILES_DIRS = ['/webapps/gamingloung/GLbackend/static/']
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
